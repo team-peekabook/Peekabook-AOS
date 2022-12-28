@@ -31,14 +31,11 @@ jobs:
     - name: Create Local Properties
       run: touch local.properties
 
-    - name: Access Local Properties
+    - name: Access BASE_URI
       env:
         HOST_URI: ${{ secrets.BASE_URI }}
       run: |
         echo BASE_URI=\"$BASE_URI\" >> local.properties
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
