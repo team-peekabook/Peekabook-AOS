@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,11 +12,26 @@
         android:layout_height="match_parent"
         tools:context=".presentation.main.MainActivity">
 
-        <TextView
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_main"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="hello world" />
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bnv_main"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_main" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="20dp"
+            app:itemIconTint="@drawable/selector_bottom_item"
+            app:itemTextColor="@drawable/selector_bottom_item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_bottom_nav" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

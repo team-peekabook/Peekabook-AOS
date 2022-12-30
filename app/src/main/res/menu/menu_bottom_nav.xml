@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bookshelfFragment"
+        android:icon="@drawable/ic_bottom_bookshelf"
+        android:title="@string/bottom_bookshelf" />
+
+    <item
+        android:id="@+id/recommendFragment"
+        android:icon="@drawable/ic_bottom_bookshelf"
+        android:title="@string/bottom_recommend" />
+
+    <item
+        android:id="@+id/myPageFragment"
+        android:icon="@drawable/ic_bottom_my_page"
+        android:title="@string/bottom_my_page" />
+</menu>
