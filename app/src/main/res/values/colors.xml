@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="peeka_red">#902B21</color>
-    <color name="peeka_gray">#A4A4A4</color>
+    <color name="peeka_beige">#edebdf</color>
+    <color name="peeka_g_1">#a4a4a4</color>
+    <color name="peeka_red">#902b21</color>
 </resources>
