@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/recommendFragment"
-        android:icon="@drawable/ic_bottom_bookshelf"
+        android:icon="@drawable/ic_bottom_recommend"
         android:title="@string/bottom_recommend" />
 
     <item
