@@ -10,4 +10,13 @@
     <string name="bottom_bookshelf">책장</string>
     <string name="bottom_recommend">추천</string>
     <string name="bottom_my_page">마이페이지</string>
+
+    <!-- Register Book -->
+    <string name="register_book_title">책 등록하기</string>
+    <string name="register_book_comment">한 마디</string>
+    <string name="register_book_memo">메모</string>
+    <string name="register_book_comment_hint">한 마디를 남겨주세요.</string>
+    <string name="register_book_memo_hint">메모를 남겨주세요.</string>
+    <string name="register_book_comment_count">%d/200</string>
+    <string name="register_book_memo_count">%d/50</string>
 </resources>
