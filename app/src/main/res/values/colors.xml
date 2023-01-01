@@ -6,4 +6,10 @@
     <color name="peeka_beige">#edebdf</color>
     <color name="peeka_g_1">#a4a4a4</color>
     <color name="peeka_red">#902b21</color>
+    <color name="peeka_g_2_60">#998e8e8e</color>
+    <color name="peeka_g_2">#8e8e8e</color>
+    <color name="peeka_red_60">#99902b21</color>
+    <color name="peeka_white_60">#99ffffff</color>
+    <color name="peeka_white">#ffffff</color>
+    <color name="peeka_light_beige">#fefdfa</color>
 </resources>
