@@ -15,5 +15,19 @@ class RegisterBookActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = registerBookViewModel
+        initCloseBtnOnClickListener()
+        initSaveBtnOnClickListener()
+    }
+
+    private fun initCloseBtnOnClickListener() {
+        binding.btnRegisterBookClose.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun initSaveBtnOnClickListener() {
+        binding.btnRegisterBookSave.setOnClickListener {
+            /* 추후 서버 연결 시에 추가 예정 */
+        }
     }
 }
