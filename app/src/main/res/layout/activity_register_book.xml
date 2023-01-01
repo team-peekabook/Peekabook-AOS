@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.registerBook.RegisterBookViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
