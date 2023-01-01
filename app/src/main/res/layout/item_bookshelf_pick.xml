@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.sopt.peekabookaos.data.entity.bookshelf.PickData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_red_line_0_rect">
+
+        <TextView
+            android:id="@+id/tv_item_bookshelf_pick_idx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/peeka_red"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:text="@{data.idx}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tv_item_bookshelf_pick_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:layout_marginStart="6dp"
+            android:ellipsize="end"
+            android:text="@{data.title}"
+            android:textColor="@color/peeka_red"
+            android:theme="@style/Bd"
+            app:layout_constraintBottom_toTopOf="@id/fl_item_bookshelf_pick"
+            app:layout_constraintStart_toEndOf="@id/tv_item_bookshelf_pick_idx"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="하둘셋넷다여일" />
+
+        <FrameLayout
+            android:id="@+id/fl_item_bookshelf_pick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_red_line_0_rect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_bookshelf_pick_idx">
+
+            <ImageView
+                android:id="@+id/iv_item_bookshelf_pick"
+                setImage="@{data.image}"
+                android:layout_width="120dp"
+                android:layout_height="190dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="9dp"
+                tools:src="@color/peeka_beige" />
+
+            <TextView
+                android:id="@+id/tv_item_bookshelf_pick_comment"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shape_red_line_0_rect"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingHorizontal="11dp"
+                android:paddingTop="11dp"
+                android:text="@{data.comment}"
+                android:textColor="@color/peeka_red"
+                android:theme="@style/CBd" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

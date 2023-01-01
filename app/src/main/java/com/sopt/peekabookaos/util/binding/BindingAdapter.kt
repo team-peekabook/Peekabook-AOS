@@ -14,4 +14,15 @@ object BindingAdapter {
                 .into(this)
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("setCircleImage")
+    fun ImageView.setCircleImage(imgUrl: String?) {
+        this.let {
+            Glide.with(context)
+                .load(imgUrl)
+                .circleCrop()
+                .into(this)
+        }
+    }
 }
