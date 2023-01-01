@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.R
 
-class BookshelfShelfAdapterDeco(val context: Context) : RecyclerView.ItemDecoration() {
+class BookshelfShelfDecoration(val context: Context) : RecyclerView.ItemDecoration() {
 
     private var sizeOutSide = 50
     private var sizeInSide = 40

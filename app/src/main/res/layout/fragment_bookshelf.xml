@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.bookshelf.BookShelfViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,6 +81,7 @@
 
                 <ImageView
                     android:id="@+id/iv_bookshelf_user_profile"
+                    setCircleImage="@{vm.userData.profile}"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
@@ -90,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="사용자"
+                    android:text="@{vm.userData.name}"
                     android:textColor="@color/peeka_red"
                     android:theme="@style/S1Bd"
                     app:layout_constraintEnd_toEndOf="@id/iv_bookshelf_user_profile"
@@ -148,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="사용자"
+                    android:text="@{vm.userData.name}"
                     android:textColor="@color/peeka_red"
                     android:theme="@style/NameBd"
                     app:layout_constraintBottom_toBottomOf="@id/iv_bookshelf_self_intro"
@@ -162,7 +167,7 @@
                     android:layout_marginStart="97dp"
                     android:layout_marginEnd="43dp"
                     android:maxLines="2"
-                    android:text="안녕하세요, 여기는 한 줄 소개란입니다! 제 책장을 둘러보세요."
+                    android:text="@{vm.userData.comment}"
                     android:textColor="@color/peeka_red"
                     android:theme="@style/H2Md"
                     app:layout_constraintBottom_toBottomOf="@id/iv_bookshelf_self_intro"

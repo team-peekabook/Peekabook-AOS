@@ -2,6 +2,8 @@ package com.sopt.peekabookaos.presentation.bookshelf
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.bookshelf.FriendProfileData
 import com.sopt.peekabookaos.data.entity.bookshelf.PickData
@@ -15,12 +17,15 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private lateinit var myShelfAdapter: BookShelfShelfAdapter
     private lateinit var pickAdapter: BookShelfPickAdapter
     private lateinit var friendAdapter: BookShelfFriendAdapter
+    private lateinit var itemDeco: BookshelfShelfDecoration
+    private val viewModel by viewModels<BookShelfViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = viewModel
         initAdapter()
-        val itemDeco = BookshelfShelfAdapterDeco(requireContext())
-        binding.rvBookshelfBottomViewShelf.addItemDecoration(itemDeco)
+        textViewObserve()
+        initItemDecoration()
     }
 
     private fun initAdapter() {
@@ -35,6 +40,34 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         friendAdapter = BookShelfFriendAdapter()
         binding.rvBookshelfFriendList.adapter = friendAdapter
         friendAdapter.submitList(mocFriendList)
+    }
+
+    private fun textViewObserve() {
+        viewModel.friendData.observe(
+            viewLifecycleOwner,
+            Observer {
+            }
+        )
+        viewModel.pickData.observe(
+            viewLifecycleOwner,
+            Observer {
+            }
+        )
+        viewModel.shelfData.observe(
+            viewLifecycleOwner,
+            Observer {
+            }
+        )
+        viewModel.userData.observe(
+            viewLifecycleOwner,
+            Observer {
+            }
+        )
+    }
+
+    private fun initItemDecoration() {
+        itemDeco = BookshelfShelfDecoration(requireContext())
+        binding.rvBookshelfBottomViewShelf.addItemDecoration(itemDeco)
     }
 
     companion object {
