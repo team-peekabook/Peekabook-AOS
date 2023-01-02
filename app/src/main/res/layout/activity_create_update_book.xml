@@ -39,6 +39,20 @@
             app:layout_constraintStart_toEndOf="@id/btn_create_update_book_close"
             app:layout_constraintTop_toTopOf="@id/btn_create_update_book_close" />
 
+        <TextView
+            android:id="@+id/tv_create_update_book_update_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/createUpdate_book_update_title"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isUpdate == true ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/btn_create_update_book_close"
+            app:layout_constraintEnd_toStartOf="@id/btn_create_update_book_save"
+            app:layout_constraintStart_toEndOf="@id/btn_create_update_book_close"
+            app:layout_constraintTop_toTopOf="@id/btn_create_update_book_close"
+            tools:visibility="invisible" />
+
         <ImageButton
             android:id="@+id/btn_create_update_book_save"
             android:layout_width="wrap_content"
