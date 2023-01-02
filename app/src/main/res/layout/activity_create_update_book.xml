@@ -28,11 +28,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_create_update_book_activity_title"
+            android:id="@+id/tv_create_update_book_create_title"
             style="@style/H3Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/createUpdate_book_title"
+            android:text="@string/createUpdate_book_create_title"
             android:textColor="@color/peeka_red"
             app:layout_constraintBottom_toBottomOf="@id/btn_create_update_book_close"
             app:layout_constraintEnd_toStartOf="@id/btn_create_update_book_save"
@@ -60,13 +60,13 @@
             android:layout_marginEnd="4dp"
             android:background="@null"
             android:src="@drawable/ic_create_update_book_save"
-            app:layout_constraintBottom_toBottomOf="@id/tv_create_update_book_activity_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_create_update_book_create_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_create_update_book_activity_title" />
+            app:layout_constraintTop_toTopOf="@id/tv_create_update_book_create_title" />
 
         <ImageView
             android:id="@+id/iv_create_update_book_image"
-            setImage="@{vm.createUpdateBookData.img}"
+            setImage="@{vm.createUpdateBookData.bookImage}"
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:layout_marginTop="27dp"
@@ -74,7 +74,7 @@
             android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_activity_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_create_title"
             tools:src="@color/peeka_g_1" />
 
         <TextView
@@ -83,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@{vm.createUpdateBookData.title}"
+            android:text="@{vm.createUpdateBookData.bookTitle}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/iv_create_update_book_image"
             app:layout_constraintStart_toStartOf="@id/iv_create_update_book_image"
