@@ -32,7 +32,9 @@ class CreateUpdateBookActivity :
     }
 
     companion object {
-        const val UPDATE = "UPDATE"
-        const val CREATE = "CREATE"
+        const val LOCATION = "location"
+        const val UPDATE = "update"
+        const val CREATE = "create"
+
     }
 }
