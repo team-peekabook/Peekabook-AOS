@@ -12,7 +12,7 @@
     <string name="bottom_my_page">마이페이지</string>
 
     <!-- Create Update Book -->
-    <string name="createUpdate_book_title">책 등록하기</string>
+    <string name="createUpdate_book_create_title">책 등록하기</string>
     <string name="createUpdate_book_comment">한 마디</string>
     <string name="createUpdate_book_memo">메모</string>
     <string name="createUpdate_book_comment_hint">한 마디를 남겨주세요.</string>
