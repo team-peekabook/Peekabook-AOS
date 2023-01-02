@@ -1,21 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.bookshelf.BookShelfViewModel" />
+
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.bookshelf">
+        android:background="@color/peeka_beige">
 
-        <TextView
+        <ImageView
+            android:id="@+id/iv_bookshelf_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/ic_bookshelf_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_bookshelf_friend_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_bookshelf_friend_plus"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_bookshelf_notification"
+            app:layout_constraintEnd_toStartOf="@+id/btn_bookshelf_notification"
+            app:layout_constraintTop_toTopOf="@+id/btn_bookshelf_notification" />
+
+        <ImageButton
+            android:id="@+id/btn_bookshelf_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="5dp"
+            android:background="@null"
+            android:src="@drawable/ic_bookshelf_notification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.sothree.slidinguppanel.SlidingUpPanelLayout
+            android:id="@+id/sliding_up_panel_bookshelf"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Bookshelf" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_bookshelf_logo"
+            app:umanoDragView="@id/cl_bookshelf_bottom_view"
+            app:umanoFadeColor="@android:color/transparent"
+            app:umanoOverlay="true"
+            app:umanoPanelHeight="132dp"
+            app:umanoParallaxOffset="0dp"
+            app:umanoScrollableView="@id/rv_bookshelf_bottom_view_shelf"
+            app:umanoShadowHeight="0dp">
 
-    </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_bookshelf_top_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/view_bookshelf_friend_list_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_bookshelf_user_profile"
+                    setCircleImage="@{vm.userData.profile}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@color/peeka_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_bookshelf_friend_list_top" />
+
+                <TextView
+                    android:id="@+id/tv_bookshelf_user_profile_name"
+                    style="@style/S1Bd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@{vm.userData.name}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="@id/iv_bookshelf_user_profile"
+                    app:layout_constraintStart_toStartOf="@id/iv_bookshelf_user_profile"
+                    app:layout_constraintTop_toBottomOf="@id/iv_bookshelf_user_profile" />
+
+                <View
+                    android:id="@+id/view_bookshelf_friend_list_vertical"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="11dp"
+                    android:background="@color/peeka_red"
+                    app:layout_constraintBottom_toTopOf="@id/view_bookshelf_friend_list_bottom"
+                    app:layout_constraintStart_toEndOf="@id/iv_bookshelf_user_profile"
+                    app:layout_constraintTop_toBottomOf="@id/view_bookshelf_friend_list_top" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_bookshelf_friend_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/view_bookshelf_friend_list_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/view_bookshelf_friend_list_top"
+                    tools:listitem="@layout/item_bookshelf_friend_profile" />
+
+                <View
+                    android:id="@+id/view_bookshelf_friend_list_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bookshelf_user_profile_name" />
+
+                <LinearLayout
+                    android:id="@+id/ll_bookshelf_self_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/shape_white_redlines_0_rect"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/view_bookshelf_friend_list_bottom">
+
+                    <TextView
+                        android:id="@+id/tv_bookshelf_self_intro_name"
+                        style="@style/NameBd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="11dp"
+                        android:layout_marginStart="16dp"
+                        android:maxEms="2"
+                        android:maxLines="2"
+                        android:minEms="2"
+                        android:text="@{vm.userData.name}"
+                        android:textAlignment="center"
+                        android:textColor="@color/peeka_red"
+                        tools:text="수빈은문수빈" />
+
+                    <TextView
+                        android:id="@+id/tv_bookshelf_self_intro_name_comment"
+                        style="@style/H2Md"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="11dp"
+                        android:layout_marginStart="16dp"
+                        android:maxEms="11"
+                        android:maxLines="2"
+                        android:minEms="11"
+                        android:text="@{vm.userData.comment}"
+                        android:textColor="@color/peeka_red"
+                        tools:text="안녕하세요, 저는 한줄소개 입니다!" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btn_bookshelf_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_bookshelf_more"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ll_bookshelf_self_intro" />
+
+                <TextView
+                    android:id="@+id/tv_bookshelf_pick"
+                    style="@style/EngSb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="23dp"
+                    android:text="@string/bookshelf_pick"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_bookshelf_pick_plus"
+                    style="@style/CBd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/shape_red_line_0_rect"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingHorizontal="9dp"
+                    android:paddingVertical="5dp"
+                    android:text="@string/bookshelf_modify_pick"
+                    android:textColor="@color/peeka_red"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_bookshelf_recommend"
+                    style="@style/CBd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/shape_red_line_0_rect"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingHorizontal="9dp"
+                    android:paddingVertical="5dp"
+                    android:text="@string/bookshelf_recommend_book"
+                    android:textColor="@color/peeka_red"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_bookshelf_pick"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="4dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bookshelf_pick"
+                    tools:listitem="@layout/item_bookshelf_pick" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_bookshelf_bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_light_beige_fill_top15_rect">
+
+                <TextView
+                    android:id="@+id/tv_bookshelf_bottom_view_title"
+                    style="@style/EngSb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="26dp"
+                    android:text="@{@string/bookshelf_myshelf_title(vm.bookCount)}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/iv_bookshelf_add_book"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_bookshelf_add_book"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_bookshelf_bottom_view_shelf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="150dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bookshelf_bottom_view_title"
+                    app:spanCount="3"
+                    tools:listitem="@layout/item_bookshelf_shelf" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
