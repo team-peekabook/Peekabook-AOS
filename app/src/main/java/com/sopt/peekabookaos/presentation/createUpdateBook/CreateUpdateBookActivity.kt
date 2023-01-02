@@ -25,9 +25,6 @@ class CreateUpdateBookActivity :
         }
     }
 
-    private fun initSaveBtnOnClickListener() {
-        binding.btnCreateUpdateBookSave.setOnClickListener {
-            /* 추후 서버 연결 시에 추가 예정 */
         }
     }
 
