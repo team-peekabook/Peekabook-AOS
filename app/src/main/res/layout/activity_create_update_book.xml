@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="com.sopt.peekabookaos.presentation.registerBook.RegisterBookViewModel" />
+            type="com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige"
-        tools:context=".presentation.registerBook.RegisterBookActivity">
+        tools:context=".presentation.createUpdateBook.CreateUpdateBookActivity">
 
         <ImageButton
             android:id="@+id/btn_register_book_close"
@@ -54,7 +54,7 @@
             android:id="@+id/iv_register_book_image"
             setImage="@{vm.registerBookData.img}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="160dp"
             android:layout_marginTop="27dp"
             android:background="@color/peeka_beige"
             android:elevation="4dp"
