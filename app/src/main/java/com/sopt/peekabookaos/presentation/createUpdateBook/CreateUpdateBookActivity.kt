@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.getParcelable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
