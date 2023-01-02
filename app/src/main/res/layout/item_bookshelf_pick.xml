@@ -18,68 +18,71 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/shape_red_line_0_rect">
 
-        <TextView
-            android:id="@+id/tv_item_bookshelf_pick_idx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/peeka_red"
-            android:gravity="center"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="6dp"
-            android:text="@{data.idx}"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="1" />
-
-        <TextView
-            android:id="@+id/tv_item_bookshelf_pick_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
-            android:layout_marginStart="6dp"
-            android:ellipsize="end"
-            android:text="@{data.title}"
-            android:textColor="@color/peeka_red"
-            android:theme="@style/Bd"
-            app:layout_constraintBottom_toTopOf="@id/fl_item_bookshelf_pick"
-            app:layout_constraintStart_toEndOf="@id/tv_item_bookshelf_pick_idx"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="하둘셋넷다여일" />
-
-        <FrameLayout
-            android:id="@+id/fl_item_bookshelf_pick"
+        <LinearLayout
+            android:id="@+id/ll_item_bookshelf_pick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_red_line_0_rect"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_bookshelf_pick_idx">
-
-            <ImageView
-                android:id="@+id/iv_item_bookshelf_pick"
-                setImage="@{data.image}"
-                android:layout_width="120dp"
-                android:layout_height="190dp"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginVertical="9dp"
-                tools:src="@color/peeka_beige" />
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_item_bookshelf_pick_comment"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/shape_red_line_0_rect"
+                android:id="@+id/tv_item_bookshelf_pick_idx"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/peeka_red"
+                android:gravity="center"
+                android:paddingHorizontal="10dp"
+                android:text="@{data.idx}"
+                android:textColor="@color/white"
+                tools:text="1" />
+
+            <TextView
+                android:id="@+id/tv_item_bookshelf_pick_title"
+                style="@style/Bd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="3"
-                android:paddingHorizontal="11dp"
-                android:paddingTop="11dp"
-                android:text="@{data.comment}"
+                android:maxEms="7"
+                android:maxLines="1"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="5dp"
+                android:text="@{data.title}"
                 android:textColor="@color/peeka_red"
-                android:theme="@style/CBd" />
-        </FrameLayout>
+                tools:text="하둘셋넷다여일곱여덟" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_item_bookshelf_pick"
+            setImage="@{data.image}"
+            android:layout_width="120dp"
+            android:layout_height="190dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="9dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_item_bookshelf_pick"
+            tools:src="@color/peeka_beige" />
+
+        <TextView
+            android:id="@+id/tv_item_bookshelf_pick_comment"
+            style="@style/CBd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_red_line_0_rect"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:minLines="3"
+            android:padding="11dp"
+            android:text="@{data.comment}"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="코멘트" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

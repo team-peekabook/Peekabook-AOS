@@ -29,6 +29,7 @@
 
         <TextView
             android:id="@+id/tv_item_bookshelf_friend_profile"
+            style="@style/S2Md"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -37,7 +38,6 @@
             android:text="@{data.name}"
             android:textAlignment="center"
             android:textColor="@color/peeka_red"
-            android:theme="@style/S2Md"
             app:layout_constraintEnd_toEndOf="@id/iv_item_bookshelf_friend_profile"
             app:layout_constraintStart_toStartOf="@id/iv_item_bookshelf_friend_profile"
             app:layout_constraintTop_toBottomOf="@+id/iv_item_bookshelf_friend_profile" />

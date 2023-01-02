@@ -59,7 +59,7 @@
             app:umanoDragView="@id/cl_bookshelf_bottom_view"
             app:umanoFadeColor="@android:color/transparent"
             app:umanoOverlay="true"
-            app:umanoPanelHeight="100dp"
+            app:umanoPanelHeight="132dp"
             app:umanoParallaxOffset="0dp"
             app:umanoScrollableView="@id/rv_bookshelf_bottom_view_shelf"
             app:umanoShadowHeight="0dp">
@@ -92,12 +92,12 @@
 
                 <TextView
                     android:id="@+id/tv_bookshelf_user_profile_name"
+                    style="@style/S1Bd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="@{vm.userData.name}"
                     android:textColor="@color/peeka_red"
-                    android:theme="@style/S1Bd"
                     app:layout_constraintEnd_toEndOf="@id/iv_bookshelf_user_profile"
                     app:layout_constraintStart_toStartOf="@id/iv_bookshelf_user_profile"
                     app:layout_constraintTop_toBottomOf="@id/iv_bookshelf_user_profile" />
@@ -105,10 +105,11 @@
                 <View
                     android:id="@+id/view_bookshelf_friend_list_vertical"
                     android:layout_width="1dp"
-                    android:layout_height="62dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="10dp"
                     android:layout_marginStart="11dp"
-                    android:layout_marginTop="10dp"
                     android:background="@color/peeka_red"
+                    app:layout_constraintBottom_toTopOf="@id/view_bookshelf_friend_list_bottom"
                     app:layout_constraintStart_toEndOf="@id/iv_bookshelf_user_profile"
                     app:layout_constraintTop_toBottomOf="@id/view_bookshelf_friend_list_top" />
 
@@ -137,57 +138,76 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_bookshelf_user_profile_name" />
 
-                <ImageView
-                    android:id="@+id/iv_bookshelf_self_intro"
+                <LinearLayout
+                    android:id="@+id/ll_bookshelf_self_intro"
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="22dp"
                     android:background="@drawable/shape_white_redlines_0_rect"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view_bookshelf_friend_list_bottom" />
+                    app:layout_constraintTop_toTopOf="@id/view_bookshelf_friend_list_bottom">
 
-                <TextView
-                    android:id="@+id/tv_bookshelf_self_intro_name"
+                    <TextView
+                        android:id="@+id/tv_bookshelf_self_intro_name"
+                        style="@style/NameBd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="11dp"
+                        android:layout_marginStart="16dp"
+                        android:maxEms="2"
+                        android:maxLines="2"
+                        android:minEms="2"
+                        android:text="@{vm.userData.name}"
+                        android:textAlignment="center"
+                        android:textColor="@color/peeka_red"
+                        tools:text="수빈은문수빈" />
+
+                    <TextView
+                        android:id="@+id/tv_bookshelf_self_intro_name_comment"
+                        style="@style/H2Md"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="11dp"
+                        android:layout_marginStart="16dp"
+                        android:maxEms="11"
+                        android:maxLines="2"
+                        android:minEms="11"
+                        android:text="@{vm.userData.comment}"
+                        android:textColor="@color/peeka_red"
+                        tools:text="안녕하세요, 저는 한줄소개 입니다!" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btn_bookshelf_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@{vm.userData.name}"
-                    android:textColor="@color/peeka_red"
-                    android:theme="@style/NameBd"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_bookshelf_self_intro"
-                    app:layout_constraintStart_toStartOf="@+id/iv_bookshelf_self_intro"
-                    app:layout_constraintTop_toTopOf="@+id/iv_bookshelf_self_intro" />
-
-                <TextView
-                    android:id="@+id/tv_bookshelf_self_intro_name_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="97dp"
-                    android:layout_marginEnd="43dp"
-                    android:maxLines="2"
-                    android:text="@{vm.userData.comment}"
-                    android:textColor="@color/peeka_red"
-                    android:theme="@style/H2Md"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_bookshelf_self_intro"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/iv_bookshelf_self_intro" />
+                    android:layout_marginEnd="8dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_bookshelf_more"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ll_bookshelf_self_intro" />
 
                 <TextView
                     android:id="@+id/tv_bookshelf_pick"
+                    style="@style/EngSb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="23dp"
                     android:text="@string/bookshelf_pick"
                     android:textColor="@color/peeka_red"
-                    android:theme="@style/EngSb"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_bookshelf_self_intro" />
+                    app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_bookshelf_pick_plus"
+                    style="@style/CBd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
@@ -199,9 +219,27 @@
                     android:paddingVertical="5dp"
                     android:text="@string/bookshelf_modify_pick"
                     android:textColor="@color/peeka_red"
-                    android:theme="@style/CBd"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_bookshelf_self_intro" />
+                    app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_bookshelf_recommend"
+                    style="@style/CBd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/shape_red_line_0_rect"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingHorizontal="9dp"
+                    android:paddingVertical="5dp"
+                    android:text="@string/bookshelf_recommend_book"
+                    android:textColor="@color/peeka_red"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_bookshelf_pick"
@@ -227,13 +265,13 @@
 
                 <TextView
                     android:id="@+id/tv_bookshelf_bottom_view_title"
+                    style="@style/EngSb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="26dp"
-                    android:text="@string/bookshelf_myshelf_title"
+                    android:text="@{@string/bookshelf_myshelf_title(vm.bookCount)}"
                     android:textColor="@color/peeka_red"
-                    android:theme="@style/EngSb"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -245,6 +283,7 @@
                     android:layout_marginEnd="5dp"
                     android:background="@null"
                     android:src="@drawable/ic_bookshelf_add_book"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -264,7 +303,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.sothree.slidinguppanel.SlidingUpPanelLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
