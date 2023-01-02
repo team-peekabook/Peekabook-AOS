@@ -3,6 +3,7 @@ package com.sopt.peekabookaos.presentation.createUpdateBook
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sopt.peekabookaos.data.entity.CreateUpdateBook
 import timber.log.Timber
 
 class CreateUpdateBookViewModel : ViewModel() {
@@ -28,5 +29,9 @@ class CreateUpdateBookViewModel : ViewModel() {
         }
     }
 
+    fun initCreateUpdateBookData(bookData: CreateUpdateBook) {
+        _createUpdateBookData.value = bookData
+        comment.value = _createUpdateBookData.value?.description
+        memo.value = _createUpdateBookData.value?.memo
     }
 }
