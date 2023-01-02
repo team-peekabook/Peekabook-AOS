@@ -3,7 +3,6 @@ package com.sopt.peekabookaos.presentation.createUpdateBook
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sopt.peekabookaos.data.entity.BookRegister
 
 class CreateUpdateBookViewModel : ViewModel() {
     private val _createUpdateBookData = MutableLiveData<CreateUpdateBook>()
