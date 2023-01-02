@@ -30,4 +30,9 @@ class CreateUpdateBookActivity :
             /* 추후 서버 연결 시에 추가 예정 */
         }
     }
+
+    companion object {
+        const val UPDATE = "UPDATE"
+        const val CREATE = "CREATE"
+    }
 }
