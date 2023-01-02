@@ -10,11 +10,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CreateUpdateBookActivity :
     BindingActivity<ActivityCreateUpdateBookBinding>(R.layout.activity_create_update_book) {
-    private val registerBookViewModel: CreateUpdateBookViewModel by viewModels()
+    private val createUpdateBookViewModel: CreateUpdateBookViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = registerBookViewModel
+        binding.vm = createUpdateBookViewModel
         initCloseBtnOnClickListener()
         initSaveBtnOnClickListener()
     }
