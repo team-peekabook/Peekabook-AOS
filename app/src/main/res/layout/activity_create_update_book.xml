@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookViewModel" />
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/createUpdate_book_create_title"
             android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isUpdate == true ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/btn_create_update_book_close"
             app:layout_constraintEnd_toStartOf="@id/btn_create_update_book_save"
             app:layout_constraintStart_toEndOf="@id/btn_create_update_book_close"
@@ -59,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:background="@null"
+            android:onClick="@{() -> vm.initSaveClickListener()}"
             android:src="@drawable/ic_create_update_book_save"
             app:layout_constraintBottom_toBottomOf="@id/tv_create_update_book_create_title"
             app:layout_constraintEnd_toEndOf="parent"
