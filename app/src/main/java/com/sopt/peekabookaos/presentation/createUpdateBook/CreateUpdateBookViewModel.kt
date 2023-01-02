@@ -7,8 +7,8 @@ import com.sopt.peekabookaos.data.entity.CreateUpdateBook
 import timber.log.Timber
 
 class CreateUpdateBookViewModel : ViewModel() {
-    private val _createUpdateBookData = MutableLiveData<CreateUpdateBook>()
-    val createUpdateBookData: LiveData<CreateUpdateBook> = _createUpdateBookData
+    private val _bookData = MutableLiveData<CreateUpdateBook>()
+    val bookData: LiveData<CreateUpdateBook> = _bookData
 
     private val _isUpdate = MutableLiveData<Boolean>()
     val isUpdate: LiveData<Boolean> = _isUpdate
@@ -30,8 +30,8 @@ class CreateUpdateBookViewModel : ViewModel() {
     }
 
     fun initCreateUpdateBookData(bookData: CreateUpdateBook) {
-        _createUpdateBookData.value = bookData
-        comment.value = _createUpdateBookData.value?.description
-        memo.value = _createUpdateBookData.value?.memo
+        _bookData.value = bookData
+        comment.value = _bookData.value?.description
+        memo.value = _bookData.value?.memo
     }
 }

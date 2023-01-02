@@ -70,7 +70,7 @@
 
         <ImageView
             android:id="@+id/iv_create_update_book_image"
-            setImage="@{vm.createUpdateBookData.bookImage}"
+            setImage="@{vm.bookData.bookImage}"
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:layout_marginTop="27dp"
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@{vm.createUpdateBookData.bookTitle}"
+            android:text="@{vm.bookData.bookTitle}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/iv_create_update_book_image"
             app:layout_constraintStart_toStartOf="@id/iv_create_update_book_image"
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{vm.createUpdateBookData.author}"
+            android:text="@{vm.bookData.author}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_title"
             app:layout_constraintStart_toStartOf="@id/tv_create_update_book_title"
