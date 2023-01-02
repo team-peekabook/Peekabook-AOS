@@ -15,9 +15,23 @@ class CreateUpdateBookActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = createUpdateBookViewModel
+        initView()
         initCloseBtnOnClickListener()
     }
 
+    private fun initView() {
+        when (intent.getStringExtra(LOCATION)) {
+            UPDATE -> {
+                createUpdateBookViewModel.initIsUpdate(true)
+                createUpdateBookViewModel.initCreateUpdateBookData(
+                    intent.getParcelable(UPDATE, CreateUpdateBook::class.java)!!
+                )
+            }
+            else -> {
+                createUpdateBookViewModel.initIsUpdate(false)
+                /* 추후 bookData 대신 intent.getParcelable(CREATE, CreateUpdateBook::class.java)!! */
+                createUpdateBookViewModel.initCreateUpdateBookData(bookData)
+            }
         }
     }
 
