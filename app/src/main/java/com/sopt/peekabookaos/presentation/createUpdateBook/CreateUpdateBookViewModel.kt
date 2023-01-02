@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.sopt.peekabookaos.data.entity.BookRegister
 
 class CreateUpdateBookViewModel : ViewModel() {
-    private val _createUpdateBookData = MutableLiveData<BookRegister>()
-    val createUpdateBookData: LiveData<BookRegister> = _createUpdateBookData
+    private val _createUpdateBookData = MutableLiveData<CreateUpdateBook>()
+    val createUpdateBookData: LiveData<CreateUpdateBook> = _createUpdateBookData
+
 
     val comment = MutableLiveData("")
 
