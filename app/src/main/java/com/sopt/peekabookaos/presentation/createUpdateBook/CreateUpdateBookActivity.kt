@@ -20,13 +20,13 @@ class CreateUpdateBookActivity :
     }
 
     private fun initCloseBtnOnClickListener() {
-        binding.btnRegisterBookClose.setOnClickListener {
+        binding.btnCreateUpdateBookClose.setOnClickListener {
             finish()
         }
     }
 
     private fun initSaveBtnOnClickListener() {
-        binding.btnRegisterBookSave.setOnClickListener {
+        binding.btnCreateUpdateBookSave.setOnClickListener {
             /* 추후 서버 연결 시에 추가 예정 */
         }
     }
