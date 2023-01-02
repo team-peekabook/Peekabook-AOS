@@ -25,6 +25,9 @@ class CreateUpdateBookActivity :
         }
     }
 
+    private fun initCloseBtnOnClickListener() {
+        binding.btnCreateUpdateBookClose.setOnClickListener {
+            finish()
         }
     }
 
