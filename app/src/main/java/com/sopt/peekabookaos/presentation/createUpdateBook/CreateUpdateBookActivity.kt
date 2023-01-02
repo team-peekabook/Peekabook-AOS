@@ -3,6 +3,7 @@ package com.sopt.peekabookaos.presentation.createUpdateBook
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
+import com.sopt.peekabookaos.data.entity.CreateUpdateBook
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
@@ -47,5 +48,13 @@ class CreateUpdateBookActivity :
         const val UPDATE = "update"
         const val CREATE = "create"
 
+        /* 추후 제거 예정*/
+        private val bookData = CreateUpdateBook(
+            bookImage = "http://image.yes24.com/goods/90365124/XL",
+            bookTitle = "아무튼, 여름",
+            author = "김신회",
+            description = "",
+            memo = "asdf"
+        )
     }
 }
