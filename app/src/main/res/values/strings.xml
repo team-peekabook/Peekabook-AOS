@@ -19,6 +19,7 @@
     <string name="createUpdate_book_memo_hint">메모를 남겨주세요.</string>
     <string name="createUpdate_book_comment_count">%d/200</string>
     <string name="createUpdate_book_memo_count">%d/50</string>
+    <string name="createUpdate_book_update_title">책 수정하기</string>
 
     <!-- BookShelf-->
     <string name="bookshelf_pick">PICK!</string>
