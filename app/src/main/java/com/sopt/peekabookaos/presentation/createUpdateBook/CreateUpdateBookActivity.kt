@@ -16,12 +16,8 @@ class CreateUpdateBookActivity :
         super.onCreate(savedInstanceState)
         binding.vm = createUpdateBookViewModel
         initCloseBtnOnClickListener()
-        initSaveBtnOnClickListener()
     }
 
-    private fun initCloseBtnOnClickListener() {
-        binding.btnCreateUpdateBookClose.setOnClickListener {
-            finish()
         }
     }
 
