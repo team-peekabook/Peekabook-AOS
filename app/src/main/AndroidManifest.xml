@@ -22,7 +22,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.registerBook.RegisterBookActivity"
+            android:name=".presentation.createUpdateBook.CreateUpdateBookActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

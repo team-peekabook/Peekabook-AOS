@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.bookshelf.FriendProfileData" />
+            type="com.sopt.peekabookaos.data.entity.FriendProfile" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
