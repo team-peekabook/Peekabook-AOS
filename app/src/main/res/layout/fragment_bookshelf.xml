@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="22dp"
-            android:src="@drawable/ic_bookshelf_logo"
+            android:src="@drawable/ic_peekabook_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
