@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.bookshelf.ShelfData" />
+            type="com.sopt.peekabookaos.data.entity.Shelf" />
     </data>
 
     <FrameLayout

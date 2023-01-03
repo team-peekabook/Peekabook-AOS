@@ -1,6 +1,6 @@
-package com.sopt.peekabookaos.data.entity.bookshelf
+package com.sopt.peekabookaos.data.entity
 
-data class UserData(
+data class User(
     val name: String,
     val profile: String,
     val comment: String

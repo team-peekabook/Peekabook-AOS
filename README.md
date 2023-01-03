@@ -4,7 +4,6 @@
 친구의 책장을 구경하거나 친구에게 책을 추천할 수 있는 책장 공유 서비스
 <br/><br/>
 
-![image](https://user-images.githubusercontent.com/84129098/210230854-dc29e6c3-e8a3-4baa-b11e-31df81a12ffb.png)
 ![readme_f](https://user-images.githubusercontent.com/91793891/210329951-b1222740-1e1e-4dcf-9cb9-7ed48f1c5a55.jpg)
 
 
