@@ -24,13 +24,13 @@ class CreateUpdateBookActivity :
     private fun initView() {
         when (intent.getStringExtra(LOCATION)) {
             UPDATE -> {
-                createUpdateBookViewModel.initIsUpdate(true)
+                createUpdateBookViewModel.initIsUpdateView(true)
                 createUpdateBookViewModel.initCreateUpdateBookData(
                     intent.getParcelable(UPDATE, CreateUpdateBook::class.java)!!
                 )
             }
             else -> {
-                createUpdateBookViewModel.initIsUpdate(false)
+                createUpdateBookViewModel.initIsUpdateView(false)
                 /* 추후 bookData 대신 intent.getParcelable(CREATE, CreateUpdateBook::class.java)!! */
                 createUpdateBookViewModel.initCreateUpdateBookData(bookData)
             }
