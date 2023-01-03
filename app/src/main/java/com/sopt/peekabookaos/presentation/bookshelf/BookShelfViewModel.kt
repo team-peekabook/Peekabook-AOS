@@ -3,72 +3,84 @@ package com.sopt.peekabookaos.presentation.bookshelf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sopt.peekabookaos.data.entity.FriendProfile
 import com.sopt.peekabookaos.data.entity.Pick
 import com.sopt.peekabookaos.data.entity.Shelf
 import com.sopt.peekabookaos.data.entity.User
 
 class BookShelfViewModel : ViewModel() {
-    private val _friendData: MutableLiveData<List<FriendProfile>> = MutableLiveData()
-    val friendData: LiveData<List<FriendProfile>> = _friendData
-
     private val _pickData: MutableLiveData<List<Pick>> = MutableLiveData()
     val pickData: LiveData<List<Pick>> = _pickData
 
     private val _shelfData: MutableLiveData<List<Shelf>> = MutableLiveData()
     val shelfData: LiveData<List<Shelf>> = _shelfData
 
-    private val _userData: MutableLiveData<User> = MutableLiveData()
-    val userData: LiveData<User> = _userData
+    private val _userData: MutableLiveData<List<User>> = MutableLiveData()
+    val userData: LiveData<List<User>> = _userData
     var bookCount: Int = 0
+
+    private val _friendShelf: MutableLiveData<Boolean> = MutableLiveData()
+    var friendShelf: LiveData<Boolean> = _friendShelf
+
+    private val _userId: MutableLiveData<Int> = MutableLiveData(0)
+    var userId: LiveData<Int> = _userId
 
     init {
         initUserData()
-        initFriendData()
         initShelfData()
         initPickData()
         initBookCount()
+    }
+
+    fun updateShelfState(state: Boolean) {
+        _friendShelf.value = state
     }
 
     private fun initBookCount() {
         bookCount = shelfData.value?.size ?: 0
     }
 
-    private fun initUserData() {
-        _userData.value = User(
-            profile = "https://play-lh.googleusercontent.com/R8-LD7m5rwQwIdAit3PwUG8QgYoDecAZBSaEuPAjhTpsG6mkqo130b-RKm9RrXBj-kI",
-            name = "문수빈",
-            comment = "안녕하세요, 저는 한줄소개입니다! 제 책장을 둘러보세요."
-        )
+    fun updateUserId(position: Int) {
+        _userId.value = position + 1
     }
 
-    private fun initFriendData() {
-        _friendData.value = listOf(
-            FriendProfile(
-                "이영주이빵주6글자",
-                "https://blog.kakaocdn.net/dn/cnCXEQ/btqO7jbSdwy/TDPQ03fpqWkRLr1bhNjQm1/img.jpg"
+    private fun initUserData() {
+        _userData.value = listOf(
+            User(
+                "수빈은문수빈",
+                "https://play-lh.googleusercontent.com/R8-LD7m5rwQwIdAit3PwUG8QgYoDecAZBSaEuPAjhTpsG6mkqo130b-RKm9RrXBj-kI",
+                "안녕하세요, 문수빈의 책장입니다. \n선배들 구경 할람할 말람말 편한대로 하셔"
             ),
-            FriendProfile(
+            User(
+                "이빵주",
+                "https://cdn.imweb.me/thumbnail/20190126/5c4c28d2bc320.jpg",
+                "안녕하세요, 이빵주의 책장입니다."
+            ),
+            User(
                 "김하정",
-                "https://blog.kakaocdn.net/dn/cnCXEQ/btqO7jbSdwy/TDPQ03fpqWkRLr1bhNjQm1/img.jpg"
+                "https://cdn.pixabay.com/photo/2021/03/27/05/16/chicken-6127516_960_720.png",
+                "안녕하세요, 김하정의 책장입니다."
             ),
-            FriendProfile("박강희", "https://cdn.rnx.kr/news/photo/201902/79734_72030_2437.jpg"),
-            FriendProfile(
-                "이현우",
-                "http://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2017/01/13/iW4xELQwGuw1636198924766594933.jpg"
+            User(
+                "박강희",
+                "https://img.freepik.com/premium-vector/vector-illustration-of-killer-whale_25420-22.jpg",
+                "안녕하세요, 박강희의 책장입니다."
             ),
-            FriendProfile(
-                "박현정",
-                "https://biz.chosun.com/resizer/y4pry-0SHJzZOl1Ua0ywZgkchLg=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/7DYW3QZRCWRA23AZ4AWUIM5SJ4.jpg"
+            User(
+                "조예슬",
+                "https://www.urbanbrush.net/web/wp-content/uploads/edd/2018/10/urbanbrush-20181004162920232431.png",
+                "안녕하세요, 조예슬의 책장입니다. 예수리 마수리 얍!"
             ),
-            FriendProfile(
-                "박현정",
-                "https://biz.chosun.com/resizer/y4pry-0SHJzZOl1Ua0ywZgkchLg=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/7DYW3QZRCWRA23AZ4AWUIM5SJ4.jpg"
+            User(
+                "문새연",
+                "https://img.lovepik.com/free-png/20211216/lovepik-corgi-dog-png-image_401706065_wh1200.png",
+                "안녕하세요, 문새연의 책장입니다. 뿍X탱X쥬 최강 디자이너"
             ),
-            FriendProfile(
-                "박현정",
-                "https://biz.chosun.com/resizer/y4pry-0SHJzZOl1Ua0ywZgkchLg=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/7DYW3QZRCWRA23AZ4AWUIM5SJ4.jpg"
+            User(
+                "윤수빈",
+                "https://mblogthumb-phinf.pstatic.net/20120821_2/prod03_13455331040414pYgp_JPEG/%C5%AC%B7%CE%B9%F6.jpg?type=w2",
+                "안녕하세요, 윤수빈의 책장입니다. \n수빈은 윤수빈"
             )
+
         )
     }
 

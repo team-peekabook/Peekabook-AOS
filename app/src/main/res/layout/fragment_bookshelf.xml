@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.bookshelf.BookShelfViewModel" />
@@ -81,7 +83,7 @@
 
                 <ImageView
                     android:id="@+id/iv_bookshelf_user_profile"
-                    setCircleImage="@{vm.userData.profile}"
+                    setCircleImage="@{vm.userData[0].profile}"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="27dp"
@@ -96,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@{vm.userData.name}"
+                    android:text="@{vm.userData[0].name}"
                     android:textColor="@color/peeka_red"
                     app:layout_constraintEnd_toEndOf="@id/iv_bookshelf_user_profile"
                     app:layout_constraintStart_toStartOf="@id/iv_bookshelf_user_profile"
@@ -161,7 +163,7 @@
                         android:maxEms="2"
                         android:maxLines="2"
                         android:minEms="2"
-                        android:text="@{vm.userData.name}"
+                        android:text="@{vm.userData[vm.getUserId()].name}"
                         android:textAlignment="center"
                         android:textColor="@color/peeka_red"
                         tools:text="수빈은문수빈" />
@@ -175,7 +177,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="23dp"
                         android:maxLines="2"
-                        android:text="@{vm.userData.comment}"
+                        android:text="@{vm.userData[vm.getUserId()].comment}"
                         android:textColor="@color/peeka_red"
                         tools:text="안녕하세요, 저는 한줄소개 입니다! 제 책장을 둘러보세요! marginEnd 23dp" />
 
@@ -188,7 +190,7 @@
                     android:layout_marginEnd="8dp"
                     android:background="@null"
                     android:src="@drawable/ic_bookshelf_more"
-                    android:visibility="invisible"
+                    android:visibility="@{vm.friendShelf == true ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/ll_bookshelf_self_intro" />
 
@@ -218,7 +220,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/bookshelf_modify_pick"
                     android:textColor="@color/peeka_red"
-                    android:visibility="visible"
+                    android:visibility="@{vm.friendShelf == true ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
 
@@ -236,7 +238,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/bookshelf_recommend_book"
                     android:textColor="@color/peeka_red"
-                    android:visibility="invisible"
+                    android:visibility="@{vm.friendShelf == true ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
 
@@ -275,14 +277,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/iv_bookshelf_add_book"
+                    android:id="@+id/btn_bookshelf_add_book"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="5dp"
                     android:background="@null"
                     android:src="@drawable/ic_bookshelf_add_book"
-                    android:visibility="visible"
+                    android:visibility="@{vm.friendShelf == true ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -290,7 +292,6 @@
                     android:id="@+id/rv_bookshelf_bottom_view_shelf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:orientation="vertical"
                     android:paddingBottom="150dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
