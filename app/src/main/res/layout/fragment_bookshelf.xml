@@ -145,7 +145,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="22dp"
                     android:background="@drawable/shape_white_redlines_0_rect"
-                    android:gravity="center"
+                    android:gravity="center|start"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -173,12 +173,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="11dp"
                         android:layout_marginStart="16dp"
-                        android:maxEms="11"
+                        android:layout_marginEnd="23dp"
                         android:maxLines="2"
-                        android:minEms="11"
                         android:text="@{vm.userData.comment}"
                         android:textColor="@color/peeka_red"
-                        tools:text="안녕하세요, 저는 한줄소개 입니다!" />
+                        tools:text="안녕하세요, 저는 한줄소개 입니다! 제 책장을 둘러보세요! marginEnd 23dp" />
 
                 </LinearLayout>
 
