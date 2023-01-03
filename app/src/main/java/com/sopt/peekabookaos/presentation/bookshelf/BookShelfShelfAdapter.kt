@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.bookshelf.ShelfData
+import com.sopt.peekabookaos.data.entity.Shelf
 import com.sopt.peekabookaos.databinding.ItemBookshelfShelfBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookShelfShelfAdapter :
-    ListAdapter<ShelfData, BookShelfShelfAdapter.MyShelfViewHolder>(myShelfDiffUtil) {
+    ListAdapter<Shelf, BookShelfShelfAdapter.MyShelfViewHolder>(myShelfDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyShelfViewHolder {
         val itemBookshelfMyShelfBinding =
@@ -23,13 +23,13 @@ class BookShelfShelfAdapter :
 
     class MyShelfViewHolder(private val binding: ItemBookshelfShelfBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ShelfData) {
+        fun onBind(data: Shelf) {
             binding.data = data
         }
     }
 
     companion object {
-        val myShelfDiffUtil = ItemDiffCallback<ShelfData>(
+        val myShelfDiffUtil = ItemDiffCallback<Shelf>(
             onItemsTheSame = { old, new -> old.book == new.book },
             onContentsTheSame = { old, new -> old == new }
         )
