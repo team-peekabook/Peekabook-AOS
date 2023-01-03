@@ -1,6 +1,6 @@
 package com.sopt.peekabookaos.data.entity
 
-data class RecommendData(
+data class Recommend(
     val title: String,
     val author: String,
     val bookImage: String,
