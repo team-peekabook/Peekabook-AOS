@@ -1,6 +1,6 @@
-package com.sopt.peekabookaos.data.entity.bookshelf
+package com.sopt.peekabookaos.data.entity
 
-data class PickData(
+data class Pick(
     val idx: String,
     val title: String,
     val image: String,
