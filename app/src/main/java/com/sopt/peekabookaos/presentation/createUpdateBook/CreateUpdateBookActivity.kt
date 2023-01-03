@@ -3,7 +3,7 @@ package com.sopt.peekabookaos.presentation.createUpdateBook
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.CreateUpdateBook
+import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
@@ -26,7 +26,7 @@ class CreateUpdateBookActivity :
             UPDATE -> {
                 createUpdateBookViewModel.initIsUpdateView(true)
                 createUpdateBookViewModel.initCreateUpdateBookData(
-                    intent.getParcelable(UPDATE, CreateUpdateBook::class.java)!!
+                    intent.getParcelable(UPDATE, Book::class.java)!!
                 )
             }
             else -> {
@@ -49,7 +49,7 @@ class CreateUpdateBookActivity :
         const val CREATE = "create"
 
         /* 추후 제거 예정*/
-        private val bookData = CreateUpdateBook(
+        private val bookData = Book(
             bookImage = "http://image.yes24.com/goods/90365124/XL",
             bookTitle = "아무튼, 여름",
             author = "김신회",

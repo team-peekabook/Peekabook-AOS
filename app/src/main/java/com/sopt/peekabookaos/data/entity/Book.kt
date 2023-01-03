@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CreateUpdateBook(
+data class Book(
     val bookImage: String,
     val bookTitle: String,
     val author: String,
