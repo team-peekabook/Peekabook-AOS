@@ -29,11 +29,6 @@
     <!-- BookRecommend-->
     <string name="recommend_recommended">추천받은 책</string>
     <string name="recommend_recommending">추천한 책</string>
-    <string name="recommend_item_title">아무튼, 여름</string>
-    <string name="recommend_item_author">김신회</string>
-    <string name="recommend_item_name">문새연</string>
-    <string name="recommend_item_date">2022/12/21</string>
-    <string name="recommend_item_content">추천사</string>
     <string name="recommend_item_peek">%s님의 책장 보러가기 →</string>
 
 </resources>

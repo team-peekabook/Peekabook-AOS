@@ -11,17 +11,17 @@
         android:background="@color/peeka_beige">
 
         <ImageView
-            android:id="@+id/iv_logo"
+            android:id="@+id/iv_recommend_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
             android:layout_marginTop="46dp"
-            android:src="@drawable/ic_recommend_logo"
+            android:src="@drawable/ic_peekabook_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/v_recommend_line"
+            android:id="@+id/view_recommend_line"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginHorizontal="20dp"
@@ -29,7 +29,7 @@
             android:background="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_recommend_logo" />
 
         <TextView
             android:id="@+id/tv_recommend_recommended"
@@ -41,7 +41,7 @@
             android:text="@string/recommend_recommended"
             android:textColor="@drawable/selector_recommend_textview"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_recommend_line" />
+            app:layout_constraintTop_toBottomOf="@id/view_recommend_line" />
 
         <TextView
             android:id="@+id/tv_recommend_recommending"
@@ -53,19 +53,20 @@
             android:text="@string/recommend_recommending"
             android:textColor="@drawable/selector_recommend_textview"
             app:layout_constraintStart_toEndOf="@id/tv_recommend_recommended"
-            app:layout_constraintTop_toBottomOf="@id/v_recommend_line" />
+            app:layout_constraintTop_toBottomOf="@id/view_recommend_line" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recommended"
+            android:id="@+id/rv_recommend"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_recommend_recommended"
-            tools:listitem="@layout/item_recommend_recommended" />
+            tools:listitem="@layout/item_recommend" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
