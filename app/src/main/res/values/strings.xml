@@ -6,6 +6,9 @@
     <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르시면 종료됩니다.</string>
     <string name="null_point_exception">NullPointException occurs..</string>
 
+    <!-- Barcode -->
+    <string name="barcode_permission">Please Accept all the permissions</string>
+
     <!-- Bottom Navigation -->
     <string name="bottom_bookshelf">책장</string>
     <string name="bottom_recommend">추천</string>
