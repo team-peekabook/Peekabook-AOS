@@ -117,5 +117,13 @@ class BarcodeScannerActivity :
         }, ContextCompat.getMainExecutor(this))
     }
 
+    private fun requestAllPermissions() {
+        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+    }
+
     }
 }
