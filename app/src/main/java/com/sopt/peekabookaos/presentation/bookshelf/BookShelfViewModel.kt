@@ -80,34 +80,23 @@ class BookShelfViewModel : ViewModel() {
 
     private fun initShelfData() {
         _shelfData.value = listOf(
-            Shelf("http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
-            Shelf("https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
+            Shelf("https://image.yes24.com/goods/76106687/XL", false),
+            Shelf("https://image.yes24.com/goods/114671132/XL", true),
             Shelf(
-                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
-                true
+                "https://image.yes24.com/goods/97255028/XL",
+                false
             ),
-            Shelf("https://image.yes24.com/goods/74261416/XL", false),
-            Shelf("http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
-            Shelf("https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
+            Shelf("https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
+            Shelf("https://image.yes24.com/goods/72127217/XL", false),
             Shelf(
-                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
-                true
+                "https://image.yes24.com/goods/91159773/XL",
+                false
             ),
-            Shelf("https://image.yes24.com/goods/74261416/XL", false),
-            Shelf("http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
-            Shelf("https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
             Shelf(
-                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
-                true
+                "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png",
+                false
             ),
-            Shelf("https://image.yes24.com/goods/74261416/XL", false),
-            Shelf("http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
-            Shelf("https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
-            Shelf(
-                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
-                true
-            ),
-            Shelf("https://image.yes24.com/goods/74261416/XL", false)
+            Shelf("https://image.yes24.com/goods/72310907/XL", true)
         )
     }
 
@@ -121,15 +110,15 @@ class BookShelfViewModel : ViewModel() {
             ),
             Pick(
                 "2",
-                "홀로서기 심리학",
-                "https://image.aladin.co.kr/product/25517/79/cover500/e422537751_1.jpg",
-                "당신을 괴롭히는 문제의 90%는 당신 힘으로 바꿀 수 없는 것들이다.\n" + "그것을 인정하고 나에게 집중하는 것이 홀로서기의 시작이다!"
+                "바로의 여행",
+                "https://image.yes24.com/goods/114671132/XL",
+                "『아빠 셋 꽃다발 셋』 『엄마 셋 도시락 셋』 등으로 부모와 아이 사이의 지극한 마음을 따뜻하게 그려 온 작가 국지승의 새 그림책이 출간되었다."
             ),
             Pick(
                 "3",
-                "홀로서기 심리학",
-                "https://image.aladin.co.kr/product/25517/79/cover500/e422537751_1.jpg",
-                "당신을 괴롭히는 문제의 90%는 당신 힘으로 바꿀 수 없는 것들이다.\n" + "그것을 인정하고 나에게 집중하는 것이 홀로서기의 시작이다!"
+                "모순",
+                "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png",
+                "내 삶의 부피는 너무 얇다. 겨자씨 한 알 심을 만한 깊이도 없다. 이렇게 살아도 되는 것일까."
             )
         )
     }
