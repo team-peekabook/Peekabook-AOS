@@ -63,5 +63,17 @@ class BarcodeScannerActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initPermissionCallBack()
+    private fun initPermissionCallBack() {
+        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
+        if (allPermissionsGranted()) {
+            binding.pvBarcode.post {
+                startCamera()
+            }
+        } else {
+            requestAllPermissions()
+        }
+    }
+
     }
 }
