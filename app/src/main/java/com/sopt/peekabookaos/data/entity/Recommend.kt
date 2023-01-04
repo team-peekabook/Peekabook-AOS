@@ -1,11 +1,13 @@
 package com.sopt.peekabookaos.data.entity
 
 data class Recommend(
-    val title: String,
+    val recommendId: Int,
+    val recommendDesc: String?,
+    val recommendBy: Int,
+    val recommendTo: Int,
+    val createdAt: String,
+    val bookId: Int,
+    val bookTitle: String,
     val author: String,
-    val bookImage: String,
-    val proflieImage: String,
-    val name: String,
-    val date: String,
-    val content: String
+    val image: String
 )
