@@ -11,6 +11,11 @@ class BarcodeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(false)
     val uiState: StateFlow<Boolean> = _uiState.asStateFlow()
 
+    fun initBarcode(barcodeString: String) {
+        barcode.value = barcodeString
+        postBarcode()
+    }
+
     private fun postBarcode() {
         /* 서버 통신 시 구현 예정*/
         _uiState.value = true
