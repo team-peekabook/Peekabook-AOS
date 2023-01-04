@@ -137,5 +137,13 @@ class BarcodeScannerActivity :
         }
     }
 
+    companion object {
+        private val bookData = Book(
+            bookImage = "http://image.yes24.com/goods/90365124/XL",
+            bookTitle = "아무튼, 여름",
+            author = "김신회",
+            description = "",
+            memo = ""
+        )
     }
 }
