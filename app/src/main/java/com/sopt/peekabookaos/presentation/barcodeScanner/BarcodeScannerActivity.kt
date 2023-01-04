@@ -47,6 +47,11 @@ class BarcodeScannerActivity :
     BindingActivity<ActivityBarcodeScannerBinding>(R.layout.activity_barcode_scanner) {
     private val barcodeViewModel: BarcodeViewModel by viewModels()
 
+    private var processingBarcode = AtomicBoolean(false)
+    private lateinit var cameraInfo: CameraInfo
+    private lateinit var cameraControl: CameraControl
+    private val executor by lazy { Executors.newSingleThreadExecutor() }
+
     private val multiPermissionCallback =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
             if (map.entries.isEmpty()) {
