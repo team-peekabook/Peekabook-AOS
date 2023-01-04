@@ -47,6 +47,20 @@ class BarcodeScannerActivity :
     BindingActivity<ActivityBarcodeScannerBinding>(R.layout.activity_barcode_scanner) {
     private val barcodeViewModel: BarcodeViewModel by viewModels()
 
+    private val multiPermissionCallback =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
+            if (map.entries.isEmpty()) {
+                ToastMessageUtil.showToast(
+                    this@BarcodeScannerActivity,
+                    getString(R.string.barcode_permission)
+                )
+            } else {
+                binding.pvBarcode.post {
+                    startCamera()
+                }
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
