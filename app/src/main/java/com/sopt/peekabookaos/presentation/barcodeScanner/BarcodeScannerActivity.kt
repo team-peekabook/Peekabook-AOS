@@ -64,6 +64,7 @@ class BarcodeScannerActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initPermissionCallBack()
+        initUiStateObserve()
         initCloseBtnClickListener()
     }
 
@@ -138,6 +139,18 @@ class BarcodeScannerActivity :
         binding.btnBarcodeClose.setOnClickListener {
             finish()
         }
+    }
+
+    private fun initUiStateObserve() {
+        barcodeViewModel.uiState.flowWithLifecycle(lifecycle).onEach { detected ->
+            if (detected) {
+                val toCreateBook = Intent(this, CreateUpdateBookActivity::class.java)
+                toCreateBook.putExtra(CREATE, bookData)
+                toCreateBook.putExtra(LOCATION, CREATE)
+                startActivity(toCreateBook)
+                finish()
+            }
+        }.launchIn(lifecycleScope)
     }
 
     companion object {
