@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/tv_recommend_recommended"
-            style="@style/NameBd"
+            style="@style/H4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
