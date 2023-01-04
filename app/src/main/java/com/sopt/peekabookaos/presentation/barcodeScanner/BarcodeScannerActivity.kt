@@ -64,6 +64,9 @@ class BarcodeScannerActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initPermissionCallBack()
+        initCloseBtnClickListener()
+    }
+
     private fun initPermissionCallBack() {
         multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
         if (allPermissionsGranted()) {
