@@ -131,5 +131,11 @@ class BarcodeScannerActivity :
         }
     }
 
+    private fun initCloseBtnClickListener() {
+        binding.btnBarcodeClose.setOnClickListener {
+            finish()
+        }
+    }
+
     }
 }
