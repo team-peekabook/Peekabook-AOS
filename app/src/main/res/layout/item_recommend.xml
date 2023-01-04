@@ -143,6 +143,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="12dp"
+                android:layout_marginBottom="8dp"
                 android:maxLength="200"
                 android:text="@{data.content}"
                 android:textColor="@color/peeka_red"
