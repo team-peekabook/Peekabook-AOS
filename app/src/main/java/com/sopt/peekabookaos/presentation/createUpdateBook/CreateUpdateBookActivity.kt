@@ -31,8 +31,9 @@ class CreateUpdateBookActivity :
             }
             else -> {
                 createUpdateBookViewModel.initIsUpdateView(false)
-                /* 추후 bookData 대신 intent.getParcelable(CREATE, CreateUpdateBook::class.java)!! */
-                createUpdateBookViewModel.initCreateUpdateBookData(bookData)
+                createUpdateBookViewModel.initCreateUpdateBookData(
+                    intent.getParcelable(CREATE, Book::class.java)!!
+                )
             }
         }
     }
