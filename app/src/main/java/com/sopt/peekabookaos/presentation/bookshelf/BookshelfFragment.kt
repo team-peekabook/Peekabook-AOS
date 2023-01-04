@@ -17,8 +17,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private lateinit var friendAdapter: BookShelfFriendAdapter
     private lateinit var itemDeco: BookshelfShelfDecoration
     private val viewModel by viewModels<BookShelfViewModel>()
-    private val FRIEND = true
-    private val USER = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +39,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         friendAdapter = BookShelfFriendAdapter(
             object : ItemClickListener<User> {
                 override fun onClick(pos: Int, item: User) {
-                    viewModel.updateShelfState(FRIEND)
+                    viewModel.updateShelfState(Companion.FRIEND)
                     viewModel.updateUserId(pos)
                 }
             }
@@ -77,5 +75,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             viewLifecycleOwner,
             Observer { }
         )
+    }
+
+    companion object {
+        const val FRIEND = true
+        const val USER = false
     }
 }

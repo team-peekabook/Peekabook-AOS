@@ -127,7 +127,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/view_bookshelf_friend_list_vertical"
                     app:layout_constraintTop_toBottomOf="@+id/view_bookshelf_friend_list_top"
-                    tools:listitem="@layout/item_bookshelf_friend_profile" />
+                    tools:listitem="@layout/item_bookshelf_user_profile" />
 
                 <View
                     android:id="@+id/view_bookshelf_friend_list_bottom"
@@ -271,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="26dp"
-                    android:text="@{@string/bookshelf_myshelf_title(vm.bookCount)}"
+                    android:text="@{@string/bookshelf_myshelf_title(vm.shelfData.size)}"
                     android:textColor="@color/peeka_red"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

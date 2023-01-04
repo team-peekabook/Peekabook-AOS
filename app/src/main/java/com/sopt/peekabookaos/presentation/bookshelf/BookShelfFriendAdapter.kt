@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.data.entity.User
-import com.sopt.peekabookaos.databinding.ItemBookshelfFriendProfileBinding
+import com.sopt.peekabookaos.databinding.ItemBookshelfUserProfileBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookShelfFriendAdapter(
@@ -13,11 +13,11 @@ class BookShelfFriendAdapter(
 ) :
     ListAdapter<User, BookShelfFriendAdapter.FriendProfileViewHolder>(friendDiffUtil) {
 
-    private lateinit var itemBookshelfFriendBinding: ItemBookshelfFriendProfileBinding
+    private lateinit var itemBookshelfFriendBinding: ItemBookshelfUserProfileBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendProfileViewHolder {
         itemBookshelfFriendBinding =
-            ItemBookshelfFriendProfileBinding.inflate(
+            ItemBookshelfUserProfileBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -29,10 +29,11 @@ class BookShelfFriendAdapter(
         holder.onBind(getItem(position))
         itemBookshelfFriendBinding.root.setOnClickListener {
             clickListener.onClick(position, getItem(position))
+
         }
     }
 
-    class FriendProfileViewHolder(private val binding: ItemBookshelfFriendProfileBinding) :
+    class FriendProfileViewHolder(private val binding: ItemBookshelfUserProfileBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: User) {
             binding.data = data

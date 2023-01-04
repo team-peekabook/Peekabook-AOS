@@ -21,11 +21,23 @@
             android:id="@+id/iv_item_bookshelf_friend_profile"
             setCircleImage="@{data.profile}"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/peeka_red" />
+            tools:src="@color/peeka_light_beige" />
+
+        <ImageView
+            android:id="@+id/iv_item_bookshelf_friend_profile_redline"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/shape_red_line_0_circle" />
 
         <TextView
             android:id="@+id/tv_item_bookshelf_friend_profile"

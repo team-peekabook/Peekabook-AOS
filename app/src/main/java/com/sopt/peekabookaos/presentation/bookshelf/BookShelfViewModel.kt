@@ -16,7 +16,6 @@ class BookShelfViewModel : ViewModel() {
 
     private val _userData: MutableLiveData<List<User>> = MutableLiveData()
     val userData: LiveData<List<User>> = _userData
-    var bookCount: Int = 0
 
     private val _friendShelf: MutableLiveData<Boolean> = MutableLiveData()
     var friendShelf: LiveData<Boolean> = _friendShelf
@@ -28,15 +27,10 @@ class BookShelfViewModel : ViewModel() {
         initUserData()
         initShelfData()
         initPickData()
-        initBookCount()
     }
 
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
-    }
-
-    private fun initBookCount() {
-        bookCount = shelfData.value?.size ?: 0
     }
 
     fun updateUserId(position: Int) {
