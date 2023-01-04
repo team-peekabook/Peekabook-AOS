@@ -134,6 +134,21 @@ class BarcodeScannerActivity :
         ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
 
+    private fun initAnalyzer(screenAspectRatio: Int, rotation: Int): UseCase {
+        return ImageAnalysis.Builder().setTargetAspectRatio(screenAspectRatio)
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .setTargetRotation(rotation).build().also {
+                it.setAnalyzer(
+                    executor,
+                    BarcodeAnalyser { barcode ->
+                        if (processingBarcode.compareAndSet(false, false)) {
+                            onBarcodeDetected(barcode)
+                        }
+                    }
+                )
+            }
+    }
+
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
         if (barcodes.isNotEmpty()) {
             barcodeViewModel.initBarcode(barcodes[0].rawValue!!)
