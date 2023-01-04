@@ -12,5 +12,16 @@
         android:layout_height="match_parent"
         tools:context=".presentation.barcodeScanner.BarcodeScannerActivity">
 
+        <ImageButton
+            android:id="@+id/btn_barcode_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@null"
+            android:src="@drawable/ic_barcode_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
