@@ -75,5 +75,47 @@ class BarcodeScannerActivity :
         }
     }
 
+    private fun startCamera() {
+        @Suppress("DEPRECATION")
+        val metrics =
+            DisplayMetrics().also { binding.pvBarcode.display.getRealMetrics(it) }
+        val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
+        val rotation = binding.pvBarcode.display.rotation
+
+        // Bind the CameraProvider to the LifeCycleOwner
+        val cameraSelector =
+            CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        cameraProviderFuture.addListener({
+            // CameraProvider
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+
+            // Preview
+            val preview = Preview.Builder().setTargetAspectRatio(screenAspectRatio)
+                // Set initial target rotation
+                .setTargetRotation(rotation).build()
+
+            preview.setSurfaceProvider(binding.pvBarcode.surfaceProvider)
+
+            // ImageAnalysis
+            val textBarcodeAnalyzer = initAnalyzer(screenAspectRatio, rotation)
+            cameraProvider.unbindAll()
+
+            try {
+                val camera = cameraProvider.bindToLifecycle(
+                    this,
+                    cameraSelector,
+                    preview,
+                    textBarcodeAnalyzer
+                )
+                cameraControl = camera.cameraControl
+                cameraInfo = camera.cameraInfo
+                cameraControl.setLinearZoom(0.5f)
+            } catch (exc: Exception) {
+                exc.printStackTrace()
+            }
+        }, ContextCompat.getMainExecutor(this))
+    }
+
     }
 }
