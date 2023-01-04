@@ -125,5 +125,11 @@ class BarcodeScannerActivity :
         ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
 
+    private fun onBarcodeDetected(barcodes: List<Barcode>) {
+        if (barcodes.isNotEmpty()) {
+            barcodeViewModel.initBarcode(barcodes[0].rawValue!!)
+        }
+    }
+
     }
 }
