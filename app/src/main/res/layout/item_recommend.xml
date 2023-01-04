@@ -33,9 +33,9 @@
                 android:layout_marginStart="15dp"
                 android:text="@{data.title}"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/iv_item_recommend_redRect"
-                app:layout_constraintStart_toStartOf="@id/iv_item_recommend_redRect"
-                app:layout_constraintTop_toTopOf="@id/iv_item_recommend_redRect"
+                app:layout_constraintBottom_toBottomOf="@id/cl_item_recommend_redRect"
+                app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
+                app:layout_constraintTop_toTopOf="@id/cl_item_recommend_redRect"
                 tools:text="아무튼, 여름" />
 
             <View
@@ -68,9 +68,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_whitefill_redline_0_rect"
-            app:layout_constraintEnd_toEndOf="@id/iv_item_recommend_redRect"
-            app:layout_constraintStart_toStartOf="@id/iv_item_recommend_redRect"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_recommend_redRect">
+            app:layout_constraintEnd_toEndOf="@id/cl_item_recommend_redRect"
+            app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
+            app:layout_constraintTop_toBottomOf="@+id/cl_item_recommend_redRect">
 
             <ImageView
                 android:id="@+id/iv_item_recommend_cover"

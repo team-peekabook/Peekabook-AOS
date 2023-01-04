@@ -49,11 +49,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
-            android:layout_marginTop="20dp"
             android:text="@string/recommend_recommending"
             android:textColor="@drawable/selector_recommend_textview"
             app:layout_constraintStart_toEndOf="@id/tv_recommend_recommended"
-            app:layout_constraintTop_toBottomOf="@id/view_recommend_line" />
+            app:layout_constraintTop_toTopOf="@id/tv_recommend_recommended"
+            app:layout_constraintBottom_toBottomOf="@id/tv_recommend_recommended"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_recommend"
