@@ -45,6 +45,8 @@ typealias BarcodeAnalyzerListener = (barcode: MutableList<Barcode>) -> Unit
 @AndroidEntryPoint
 class BarcodeScannerActivity :
     BindingActivity<ActivityBarcodeScannerBinding>(R.layout.activity_barcode_scanner) {
+    private val barcodeViewModel: BarcodeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
