@@ -25,6 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@color/peeka_beige" />
+
         <ImageView
             android:id="@+id/iv_item_bookshelf_shelf_select"
             android:layout_width="96dp"

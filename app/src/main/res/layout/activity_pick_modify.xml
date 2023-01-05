@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.pickModify.PickModifyViewModel" />
@@ -31,13 +32,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
+            android:paddingBottom="82dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_pick_modify_notice"
             app:spanCount="3"
-            tools:listitem="@layout/item_pick_modify"
-            android:paddingBottom="82dp"/>
+            tools:listitem="@layout/item_pick_modify" />
 
         <ImageView
             android:id="@+id/iv_pick_modify_check"

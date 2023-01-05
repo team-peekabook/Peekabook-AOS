@@ -42,7 +42,7 @@ class PickModifyDecoration(val context: Context) : RecyclerView.ItemDecoration()
 
         if (position <= 2) {
             outRect.top = 0
-        }else{
+        } else {
             outRect.top = 80
         }
     }

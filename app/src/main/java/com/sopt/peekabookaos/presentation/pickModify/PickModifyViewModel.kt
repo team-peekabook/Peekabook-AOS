@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.peekabookaos.data.entity.Shelf
 
-class PickModifyViewModel:ViewModel() {
+class PickModifyViewModel : ViewModel() {
     private val _pickShelfData: MutableLiveData<List<Shelf>> = MutableLiveData()
     val pickShelfData: LiveData<List<Shelf>> = _pickShelfData
 
