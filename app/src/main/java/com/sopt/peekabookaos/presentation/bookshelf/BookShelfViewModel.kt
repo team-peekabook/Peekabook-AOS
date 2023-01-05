@@ -42,7 +42,7 @@ class BookShelfViewModel : ViewModel() {
         _userId.value = position
     }
 
-    private fun initUserData(){
+    private fun initUserData() {
         _userData.value = User(
             "수빈은문수빈",
             "https://play-lh.googleusercontent.com/R8-LD7m5rwQwIdAit3PwUG8QgYoDecAZBSaEuPAjhTpsG6mkqo130b-RKm9RrXBj-kI",
@@ -118,6 +118,23 @@ class BookShelfViewModel : ViewModel() {
 
     private fun initShelfData() {
         _shelfData.value = listOf(
+            Shelf("https://image.yes24.com/goods/76106687/XL", false),
+            Shelf("https://image.yes24.com/goods/114671132/XL", true),
+            Shelf(
+                "https://image.yes24.com/goods/97255028/XL",
+                false
+            ),
+            Shelf("https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
+            Shelf("https://image.yes24.com/goods/72127217/XL", false),
+            Shelf(
+                "https://image.yes24.com/goods/91159773/XL",
+                false
+            ),
+            Shelf(
+                "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png",
+                false
+            ),
+            Shelf("https://image.yes24.com/goods/72310907/XL", true),
             Shelf("https://image.yes24.com/goods/76106687/XL", false),
             Shelf("https://image.yes24.com/goods/114671132/XL", true),
             Shelf(

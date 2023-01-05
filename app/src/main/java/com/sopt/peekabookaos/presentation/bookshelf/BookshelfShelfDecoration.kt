@@ -23,6 +23,7 @@ class BookshelfShelfDecoration(val context: Context) : RecyclerView.ItemDecorati
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val lp = view.layoutParams as GridLayoutManager.LayoutParams
+        val position = parent.getChildAdapterPosition(view)
         val spanIndex = lp.spanIndex
         if (spanIndex != 0) {
             if (spanIndex == 1) {
@@ -38,6 +39,12 @@ class BookshelfShelfDecoration(val context: Context) : RecyclerView.ItemDecorati
             // 왼쪽 아이템
             outRect.left = sizeOutSide
             outRect.right = sizeInSide
+        }
+
+        if (position <= 2) {
+            outRect.top = 0
+        } else {
+            outRect.top = 80
         }
     }
 
