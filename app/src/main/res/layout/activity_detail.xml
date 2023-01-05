@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.detail.DetailViewModel" />
@@ -21,36 +23,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/ic_detail_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/ic_detail_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_detail_edit"
-            app:layout_constraintBottom_toBottomOf="@id/ic_detail_back"
-            app:layout_constraintEnd_toStartOf="@id/ic_detail_delete"
-            app:layout_constraintTop_toTopOf="@id/ic_detail_back" />
-
-        <ImageView
-            android:id="@+id/ic_detail_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="22dp"
-            android:src="@drawable/ic_detail_delete"
-            app:layout_constraintBottom_toBottomOf="@id/ic_detail_back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ic_detail_back" />
-
-        <ImageView
             android:id="@+id/iv_detail_book_cover"
+            setImage="@{vm.BookData.bookImage}"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="76dp"
+            android:background="@color/peeka_white"
             android:elevation="4dp"
             app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +47,7 @@
             style="@style/H3Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/peeka_red"
             android:layout_marginTop="16dp"
             android:text="@{vm.BookData.bookTitle}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +58,7 @@
         <TextView
             android:id="@+id/tv_detail_book_author"
             style="@style/H2Md"
+            android:textColor="@color/peeka_red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="80dp"
@@ -103,7 +89,7 @@
             android:id="@+id/tv_detail_getContent"
             style="@style/H2Md"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/shape_whitefill_redline_0_rect"
             android:gravity="top"
@@ -111,11 +97,30 @@
             android:paddingVertical="12dp"
             android:text="@{vm.BookData.description}"
             android:textColor="@color/peeka_red"
-            android:textSize="15dp"
+            android:visibility="@{vm.BookData.description == null ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintDimensionRatio="1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_book_content"
             tools:text="한 마디 전체" />
+
+        <TextView
+            android:id="@+id/tv_detail_nullContent"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_whitefill_redline_0_rect"
+            android:gravity="top"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="작성된 한 마디가 없습니다"
+            android:textColor="@color/peeka_g_1"
+            android:visibility="@{vm.BookData.description == null ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintDimensionRatio="1.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_book_content" />
 
         <TextView
             android:id="@+id/tv_detail_book_memo"
@@ -137,19 +142,37 @@
             android:id="@+id/et_detail_getMemo"
             style="@style/H2Md"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/shape_whitefill_redline_0_rect"
-            android:gravity="top"
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
             android:text="@{vm.BookData.memo}"
             android:textColor="@color/peeka_red"
-            android:textSize="15dp"
+            android:visibility="@{vm.BookData.description == null ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintDimensionRatio="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_book_memo"
             tools:text="메모 전체" />
+
+        <TextView
+            android:id="@+id/et_detail_nullMemo"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_whitefill_redline_0_rect"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="작성된 메모가 없습니다"
+            android:textColor="@color/peeka_g_1"
+            android:visibility="@{vm.BookData.description == null ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintDimensionRatio="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_book_memo" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
