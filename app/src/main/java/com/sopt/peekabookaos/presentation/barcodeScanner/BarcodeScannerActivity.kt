@@ -91,22 +91,17 @@ class BarcodeScannerActivity :
         val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
         val rotation = binding.pvBarcode.display.rotation
 
-        // Bind the CameraProvider to the LifeCycleOwner
         val cameraSelector =
             CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
-            // CameraProvider
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
             val preview = Preview.Builder().setTargetAspectRatio(screenAspectRatio)
-                // Set initial target rotation
                 .setTargetRotation(rotation).build()
 
             preview.setSurfaceProvider(binding.pvBarcode.surfaceProvider)
 
-            // ImageAnalysis
             val textBarcodeAnalyzer = initAnalyzer(screenAspectRatio, rotation)
             cameraProvider.unbindAll()
 
