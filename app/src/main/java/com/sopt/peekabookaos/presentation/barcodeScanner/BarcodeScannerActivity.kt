@@ -170,13 +170,23 @@ class BarcodeScannerActivity :
     }
 
     private fun initUiStateObserve() {
-        barcodeViewModel.uiState.flowWithLifecycle(lifecycle).onEach { detected ->
-            if (detected) {
-                val toCreateBook = Intent(this, CreateUpdateBookActivity::class.java)
-                toCreateBook.putExtra(CREATE, bookData)
-                toCreateBook.putExtra(LOCATION, CREATE)
-                startActivity(toCreateBook)
-                finish()
+        barcodeViewModel.uiState.flowWithLifecycle(lifecycle).onEach { uiState ->
+            when (uiState) {
+                BarcodeState.Success -> {
+                    Intent(this, CreateUpdateBookActivity::class.java).apply {
+                        putExtra(CREATE, bookData)
+                        putExtra(LOCATION, CREATE)
+                    }.also { intent ->
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+                BarcodeState.Fail -> {
+                    /* 에러 다이얼로그 구현 */
+                }
+                BarcodeState.Default -> {
+                    return@onEach
+                }
             }
         }.launchIn(lifecycleScope)
     }
