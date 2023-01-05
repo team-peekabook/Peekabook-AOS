@@ -41,7 +41,7 @@ class BookRecommendAdapter :
 
     companion object {
         private val recommendationDiffUtil = ItemDiffCallback<Recommend>(
-            onItemsTheSame = { old, new -> old.title == new.title },
+            onItemsTheSame = { old, new -> old.bookTitle == new.bookTitle },
             onContentsTheSame = { old, new -> old == new }
         )
     }
