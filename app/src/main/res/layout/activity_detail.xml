@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.detail.DetailViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:text="@{vm.BookData.bookTitle}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_detail_book_cover"
@@ -71,6 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="80dp"
             android:layout_marginTop="4dp"
+            android:text="@{vm.BookData.author}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_book_title"
@@ -78,6 +85,7 @@
 
         <TextView
             android:id="@+id/tv_detail_book_content"
+            style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -87,21 +95,21 @@
             android:paddingStart="14dp"
             android:text="한 마디"
             android:textColor="@color/peeka_white"
-            style="@style/H2Md"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_book_author" />
 
         <TextView
             android:id="@+id/tv_detail_getContent"
+            style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/shape_whitefill_redline_0_rect"
             android:gravity="top"
-            style="@style/H2Md"
-            android:paddingVertical="12dp"
             android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="@{vm.BookData.description}"
             android:textColor="@color/peeka_red"
             android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,6 +119,7 @@
 
         <TextView
             android:id="@+id/tv_detail_book_memo"
+            style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -119,7 +128,6 @@
             android:paddingVertical="8dp"
             android:paddingStart="14dp"
             android:text="메모"
-            style="@style/H2Md"
             android:textColor="@color/peeka_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,16 +135,17 @@
 
         <TextView
             android:id="@+id/et_detail_getMemo"
+            style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/shape_whitefill_redline_0_rect"
             android:gravity="top"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="@{vm.BookData.memo}"
             android:textColor="@color/peeka_red"
             android:textSize="15dp"
-            style="@style/H2Md"
-            android:paddingVertical="12dp"
-            android:paddingHorizontal="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_book_memo"

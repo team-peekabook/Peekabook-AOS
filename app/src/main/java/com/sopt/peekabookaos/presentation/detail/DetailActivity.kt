@@ -1,12 +1,18 @@
 package com.sopt.peekabookaos.presentation.detail
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
+import com.sopt.peekabookaos.databinding.ActivityDetailBinding
+import com.sopt.peekabookaos.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class DetailActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_detail) {
+    private val DetailViewModel: DetailViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding.vm = DetailViewModel
     }
 }
