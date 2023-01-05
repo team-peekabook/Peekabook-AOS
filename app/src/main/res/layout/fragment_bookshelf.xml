@@ -92,6 +92,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view_bookshelf_friend_list_top" />
 
+                <ImageView
+                    android:id="@+id/iv_bookshelf_user_profile_redline"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/shape_red_line_0_circle"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_bookshelf_friend_list_top" />
+
                 <TextView
                     android:id="@+id/tv_bookshelf_user_profile_name"
                     style="@style/S1Bd"

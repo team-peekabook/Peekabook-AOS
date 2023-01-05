@@ -39,11 +39,15 @@ class BookShelfFriendAdapter(
         }
         itemBookshelfFriendBinding.root.setOnClickListener {
             clickListener.onClick(position, getItem(position))
-            prePosition = selectPosition
-            selectPosition = position
-            notifyItemChanged(prePosition)
-            notifyItemChanged(selectPosition)
+            changeRedItem(position)
         }
+    }
+
+    fun changeRedItem(position: Int){
+        prePosition = selectPosition
+        selectPosition = position
+        notifyItemChanged(prePosition)
+        notifyItemChanged(selectPosition)
     }
 
     class FriendProfileViewHolder(val binding: ItemBookshelfUserProfileBinding) :

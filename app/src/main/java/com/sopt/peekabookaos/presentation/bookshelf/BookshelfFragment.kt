@@ -8,6 +8,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.User
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.util.binding.BindingFragment
+import com.sopt.peekabookaos.util.extensions.setOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,6 +42,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 override fun onClick(pos: Int, item: User) {
                     viewModel.updateShelfState(Companion.FRIEND)
                     viewModel.updateUserId(pos)
+                    binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
                 }
             }
         )
@@ -60,8 +62,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initUserClickListener() {
         binding.ivBookshelfUserProfile.setOnClickListener {
+            binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
             viewModel.updateUserId(-1)
+            friendAdapter.changeRedItem(-1)
         }
     }
 
