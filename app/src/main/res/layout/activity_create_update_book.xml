@@ -63,7 +63,7 @@
             android:layout_marginEnd="4dp"
             android:background="@null"
             android:onClick="@{() -> vm.initSaveClickListener()}"
-            android:src="@drawable/ic_create_update_book_save"
+            android:src="@drawable/ic_peeka_check"
             app:layout_constraintBottom_toBottomOf="@id/tv_create_update_book_create_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_create_update_book_create_title" />

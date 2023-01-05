@@ -25,6 +25,11 @@
             android:name=".presentation.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".presentation.pickModify.PickModifyActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -29,4 +29,7 @@
 
     <!-- MyPage -->
     <string name="my_page_error">앗! 준비 중인 기능이에요.</string>
+
+    <!-- PickModify -->
+    <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>
 </resources>
