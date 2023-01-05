@@ -5,10 +5,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.sopt.peekabookaos.R
+import com.sopt.peekabookaos.data.entity.FriendUser
 import com.sopt.peekabookaos.data.entity.User
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.util.binding.BindingFragment
-import com.sopt.peekabookaos.util.extensions.setOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,8 +38,8 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         pickAdapter.submitList(viewModel.pickData.value)
 
         friendAdapter = BookShelfFriendAdapter(
-            object : ItemClickListener<User> {
-                override fun onClick(pos: Int, item: User) {
+            object : ItemClickListener<FriendUser> {
+                override fun onClick(pos: Int, item: FriendUser) {
                     viewModel.updateShelfState(Companion.FRIEND)
                     viewModel.updateUserId(pos)
                     binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
@@ -47,12 +47,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             }
         )
         binding.rvBookshelfFriendList.adapter = friendAdapter
-        friendAdapter.submitList(
-            viewModel.userData.value!!.subList(
-                1,
-                viewModel.userData.value!!.size
-            )
-        )
+        friendAdapter.submitList(viewModel.friendUserData.value)
     }
 
     private fun initItemDecoration() {
@@ -64,8 +59,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.ivBookshelfUserProfile.setOnClickListener {
             binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
-            viewModel.updateUserId(-1)
-            friendAdapter.changeRedItem(-1)
+            friendAdapter.clearSelection(-1)
         }
     }
 
