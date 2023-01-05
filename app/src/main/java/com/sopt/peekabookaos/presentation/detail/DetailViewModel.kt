@@ -10,16 +10,16 @@ class DetailViewModel : ViewModel() {
     val BookData: LiveData<Book> = _BookData
 
     init {
-        initDetailData()
+        nullDetailData()
     }
 
-    private fun initDetailData() {
+    private fun nullDetailData() {
         _BookData.value = Book(
             bookImage = "http://image.yes24.com/goods/90365124/XL",
             bookTitle = "아무튼, 여름",
             author = "김신회",
-            description = "이 책 너무 인상깊어요",
-            memo = "입학 선물로 받은 책"
+            description = null,
+            memo = null
         )
     }
 }
