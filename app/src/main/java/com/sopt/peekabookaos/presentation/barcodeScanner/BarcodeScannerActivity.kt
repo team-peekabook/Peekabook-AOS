@@ -26,6 +26,7 @@ import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActiv
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.BarcodeState
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -157,8 +158,8 @@ class BarcodeScannerActivity :
     }
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
-        if (barcodes.isNotEmpty()) {
-            barcodeViewModel.initBarcode(barcodes[0].rawValue!!)
+        if (barcodes.isNotEmpty() && barcodeViewModel.uiState.value != BarcodeState.Success) {
+            barcodeViewModel.postBarcode(barcodes[0].rawValue!!)
         }
     }
 
