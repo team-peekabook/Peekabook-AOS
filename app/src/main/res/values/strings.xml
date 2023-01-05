@@ -29,4 +29,6 @@
 
     <!-- MyPage -->
     <string name="my_page_error">앗! 준비 중인 기능이에요.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
