@@ -31,9 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:paddingVertical="5dp"
                 android:text="@{data.bookTitle}"
                 android:textColor="@color/white"
-                android:paddingVertical="5dp"
                 app:layout_constraintBottom_toBottomOf="@id/cl_item_recommend_redRect"
                 app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
                 app:layout_constraintTop_toTopOf="@id/cl_item_recommend_redRect"
@@ -107,8 +107,7 @@
                 android:layout_width="15dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="14dp"
-                android:src="@color/white"
+                android:layout_marginTop="13dp"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintStart_toEndOf="@+id/view_item_recommend_line_middle"
                 app:layout_constraintTop_toTopOf="parent"
@@ -116,7 +115,7 @@
 
             <TextView
                 android:id="@+id/tv_item_recommend_name"
-                style="@style/C2Md"
+                style="@style/S2Md"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -142,12 +141,12 @@
 
             <TextView
                 android:id="@+id/tv_item_recommended_memo"
-                style="@style/C2Md"
+                style="@style/S2Md"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="11dp"
+                android:layout_marginBottom="8dp"
                 android:maxLength="200"
                 android:text="@{data.recommendDesc}"
                 android:textColor="@color/peeka_red"
@@ -155,30 +154,6 @@
                 app:layout_constraintStart_toEndOf="@+id/view_item_recommend_line_middle"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_recommend_name"
                 tools:text="추천사 전체" />
-
-            <View
-                android:id="@+id/view_item_recommend_line_bottom"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/peeka_red"
-                app:layout_constraintBottom_toTopOf="@id/tv_item_recommend_goShelf"
-                app:layout_constraintStart_toEndOf="@id/view_item_recommend_line_middle" />
-
-            <TextView
-                android:id="@+id/tv_item_recommend_goShelf"
-                style="@style/CBd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="6dp"
-                android:background="@color/peeka_white"
-                android:text="@{@string/recommend_item_peek(data.recommendBy)}"
-                android:textColor="@color/peeka_red"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/view_item_recommend_line_bottom"
-                tools:text="김하정님의 책장 보러가기 →" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
