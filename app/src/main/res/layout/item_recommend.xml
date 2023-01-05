@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_item_recommend_redRect"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="21dp"
             android:background="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +33,7 @@
                 android:layout_marginStart="15dp"
                 android:text="@{data.bookTitle}"
                 android:textColor="@color/white"
+                android:paddingVertical="5dp"
                 app:layout_constraintBottom_toBottomOf="@id/cl_item_recommend_redRect"
                 app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
                 app:layout_constraintTop_toTopOf="@id/cl_item_recommend_redRect"
@@ -46,9 +47,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"
                 android:background="@color/peeka_white"
-                app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_author"
                 app:layout_constraintStart_toEndOf="@+id/tv_item_recommend_title"
-                app:layout_constraintTop_toTopOf="@id/tv_item_recommend_title" />
+                app:layout_constraintTop_toTopOf="@id/tv_item_recommend_author" />
 
             <TextView
                 android:id="@+id/tv_item_recommend_author"
@@ -143,13 +144,13 @@
                 android:id="@+id/tv_item_recommended_memo"
                 style="@style/C2Md"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginTop="11dp"
                 android:maxLength="200"
                 android:text="@{data.recommendDesc}"
                 android:textColor="@color/peeka_red"
-                app:layout_constraintBottom_toTopOf="@+id/view_item_recommend_line_bottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view_item_recommend_line_middle"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_recommend_name"
