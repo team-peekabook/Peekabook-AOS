@@ -20,7 +20,7 @@ class BarcodeGuideView @JvmOverloads constructor(
     private val rect = RectF()
 
     private val stroke = Paint().apply {
-        isAntiAlias = false
+        isAntiAlias = true
         strokeWidth = 4f
         color = Color.parseColor("#902b21")
         style = Paint.Style.STROKE
