@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="42dp"
-            android:layout_marginBottom="108dp"
+            android:layout_marginBottom="90dp"
             android:text="@string/barcode_guide"
             android:textColor="@color/peeka_beige"
             app:layout_constraintBottom_toTopOf="@id/ll_barcode_hard_detected"
