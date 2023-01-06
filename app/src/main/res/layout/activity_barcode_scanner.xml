@@ -57,19 +57,6 @@
             app:layout_constraintStart_toStartOf="@id/pv_barcode"
             app:layout_constraintTop_toTopOf="@id/pv_barcode" />
 
-        <TextView
-            android:id="@+id/tv_barcode_guide"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            android:layout_marginBottom="90dp"
-            android:text="@string/barcode_guide"
-            android:textColor="@color/peeka_beige"
-            app:layout_constraintBottom_toTopOf="@id/ll_barcode_hard_detected"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <LinearLayout
             android:id="@+id/ll_barcode_hard_detected"
             android:layout_width="wrap_content"
