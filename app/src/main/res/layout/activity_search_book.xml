@@ -8,7 +8,6 @@
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.search.SearchBookViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
