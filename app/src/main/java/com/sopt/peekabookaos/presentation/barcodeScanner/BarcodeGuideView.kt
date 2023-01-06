@@ -9,7 +9,10 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
+import android.widget.TextView
+import com.sopt.peekabookaos.R
 
 class BarcodeGuideView @JvmOverloads constructor(
     context: Context,
@@ -37,6 +40,25 @@ class BarcodeGuideView @JvmOverloads constructor(
         drawHole(canvas)
         drawBorder(canvas)
         setBackgroundColor(Color.argb(99, 0, 0, 0))
+        drawText(canvas)
+    }
+
+    /**
+     * Text를 그려주는 함수
+     */
+    private fun drawText(canvas: Canvas) {
+        val textView = TextView(context).apply {
+            text = context.getText(R.string.barcode_guide)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+            setTextColor(Color.WHITE)
+            setTextAppearance(R.style.H2Md)
+        }
+        textView.measure(0, 0)
+        val xPos = (width - textView.measuredWidth) / 2
+        val yPos = rect.bottom + textView.measuredHeight
+        canvas.translate(xPos.toFloat(), yPos)
+        textView.layout(0, 0, textView.measuredWidth, textView.measuredHeight)
+        textView.draw(canvas)
     }
 
     /**
