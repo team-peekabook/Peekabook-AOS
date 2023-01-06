@@ -8,6 +8,9 @@
 
     <!-- Barcode -->
     <string name="barcode_permission">Please Accept all the permissions</string>
+    <string name="barcode_title">책 검색하기</string>
+    <string name="barcode_hard_detected">바코드 인식이 어려우신가요?</string>
+    <string name="barcode_guide">책의 뒷면에 있는 ISBN 바코드가\n사각형 안에 들어오게 해주세요.</string>
 
     <!-- Bottom Navigation -->
     <string name="bottom_bookshelf">책장</string>
