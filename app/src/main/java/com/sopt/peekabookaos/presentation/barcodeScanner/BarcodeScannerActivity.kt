@@ -16,8 +16,6 @@ import androidx.camera.core.Preview
 import androidx.camera.core.UseCase
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
@@ -26,11 +24,12 @@ import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActiv
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.BarcodeState
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
+import com.sopt.peekabookaos.util.extensions.UiState
+import com.sopt.peekabookaos.util.extensions.onFailed
+import com.sopt.peekabookaos.util.extensions.onSuccess
+import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
@@ -95,31 +94,34 @@ class BarcodeScannerActivity :
         val cameraSelector =
             CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+        cameraProviderFuture.addListener(
+            {
+                val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            val preview = Preview.Builder().setTargetAspectRatio(screenAspectRatio)
-                .setTargetRotation(rotation).build()
+                val preview = Preview.Builder().setTargetAspectRatio(screenAspectRatio)
+                    .setTargetRotation(rotation).build()
 
-            preview.setSurfaceProvider(binding.pvBarcode.surfaceProvider)
+                preview.setSurfaceProvider(binding.pvBarcode.surfaceProvider)
 
-            val textBarcodeAnalyzer = initAnalyzer(screenAspectRatio, rotation)
-            cameraProvider.unbindAll()
+                val textBarcodeAnalyzer = initAnalyzer(screenAspectRatio, rotation)
+                cameraProvider.unbindAll()
 
-            try {
-                val camera = cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    textBarcodeAnalyzer
-                )
-                cameraControl = camera.cameraControl
-                cameraInfo = camera.cameraInfo
-                cameraControl.setLinearZoom(0.5f)
-            } catch (exc: Exception) {
-                exc.printStackTrace()
-            }
-        }, ContextCompat.getMainExecutor(this))
+                try {
+                    val camera = cameraProvider.bindToLifecycle(
+                        this,
+                        cameraSelector,
+                        preview,
+                        textBarcodeAnalyzer
+                    )
+                    cameraControl = camera.cameraControl
+                    cameraInfo = camera.cameraInfo
+                    cameraControl.setLinearZoom(0.5f)
+                } catch (exc: Exception) {
+                    exc.printStackTrace()
+                }
+            },
+            ContextCompat.getMainExecutor(this)
+        )
     }
 
     private fun requestAllPermissions() {
@@ -154,7 +156,7 @@ class BarcodeScannerActivity :
     }
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
-        if (barcodes.isNotEmpty() && barcodeViewModel.uiState.value != BarcodeState.Success) {
+        if (barcodes.isNotEmpty() && barcodeViewModel.uiState.value !is UiState.Success) {
             barcodeViewModel.postBarcode(barcodes[0].rawValue!!)
         }
     }
@@ -172,9 +174,9 @@ class BarcodeScannerActivity :
     }
 
     private fun initUiStateObserve() {
-        barcodeViewModel.uiState.flowWithLifecycle(lifecycle).onEach { uiState ->
-            when (uiState) {
-                BarcodeState.Success -> {
+        repeatOnStarted {
+            barcodeViewModel.uiState.collect { uiState ->
+                uiState.onSuccess {
                     Intent(this, CreateUpdateBookActivity::class.java).apply {
                         putExtra(CREATE, bookData)
                         putExtra(LOCATION, CREATE)
@@ -182,15 +184,11 @@ class BarcodeScannerActivity :
                         startActivity(intent)
                         finish()
                     }
-                }
-                BarcodeState.Fail -> {
+                }.onFailed {
                     /* 에러 다이얼로그 구현 */
                 }
-                BarcodeState.Default -> {
-                    return@onEach
-                }
             }
-        }.launchIn(lifecycleScope)
+        }
     }
 
     companion object {
