@@ -38,6 +38,9 @@ class BarcodeGuideView @JvmOverloads constructor(
         setBackgroundColor(Color.argb(99, 0, 0, 0))
     }
 
+    /**
+     * Hole의 Border를 그려주는 함수
+     */
     private fun drawBorder(canvas: Canvas) {
         path.rewind()
         path.addRect(
@@ -50,6 +53,9 @@ class BarcodeGuideView @JvmOverloads constructor(
         canvas.drawPath(path, stroke)
     }
 
+    /**
+     * Hole을 그려주는 함수
+     */
     private fun drawHole(canvas: Canvas) {
         canvas.drawRect(
             rect.apply {
@@ -60,6 +66,9 @@ class BarcodeGuideView @JvmOverloads constructor(
     }
 
     private fun setRect(offset: Float = 4f) {
+    /**
+     * Hole의 크기를 업데이트 하는 함수
+     */
         val holeWidth = 312 * (width / 360f)
         val holeHeight = 168 * (width / 360f)
 
