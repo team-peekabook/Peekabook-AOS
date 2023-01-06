@@ -59,6 +59,7 @@
             android:maxLines="1"
             android:paddingVertical="10dp"
             android:paddingStart="16dp"
+            android:textColor="@color/peeka_red"
             android:textColorHint="@color/peeka_g_1"
             app:layout_constraintEnd_toStartOf="@id/btn_search_book"
             app:layout_constraintStart_toStartOf="parent"
