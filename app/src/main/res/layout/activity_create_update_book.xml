@@ -25,7 +25,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_create_update_book_close"
+            android:src="@drawable/ic_peeka_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
