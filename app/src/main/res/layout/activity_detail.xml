@@ -47,9 +47,9 @@
             style="@style/H3Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/peeka_red"
             android:layout_marginTop="16dp"
             android:text="@{vm.BookData.bookTitle}"
+            android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_detail_book_cover"
@@ -58,12 +58,12 @@
         <TextView
             android:id="@+id/tv_detail_book_author"
             style="@style/H2Md"
-            android:textColor="@color/peeka_red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="80dp"
             android:layout_marginTop="4dp"
             android:text="@{vm.BookData.author}"
+            android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_book_title"
@@ -172,7 +172,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_book_memo" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
