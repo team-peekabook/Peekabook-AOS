@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.barcodeScanner
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PorterDuff
@@ -10,7 +11,7 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
-class VerticalPreview @JvmOverloads constructor(
+class BarcodeGuideView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -20,7 +21,8 @@ class VerticalPreview @JvmOverloads constructor(
 
     private val stroke = Paint().apply {
         isAntiAlias = false
-        strokeWidth = 2f
+        strokeWidth = 4f
+        color = Color.parseColor("#902b21")
         style = Paint.Style.STROKE
     }
 
@@ -31,9 +33,9 @@ class VerticalPreview @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
         drawHole(requireNotNull(canvas))
         drawBorder(canvas)
+        setBackgroundColor(Color.argb(99, 0, 0, 0))
     }
 
     private fun drawBorder(canvas: Canvas) {
