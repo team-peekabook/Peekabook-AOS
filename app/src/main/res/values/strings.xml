@@ -34,4 +34,8 @@
 
     <!-- MyPage -->
     <string name="my_page_error">앗! 준비 중인 기능이에요.</string>
+
+    <!-- Search Book -->
+    <string name="search_book_title">책 검색하기</string>
+    <string name="search_book_hint">책 제목 또는 작가명을 입력해주세요.</string>
 </resources>
