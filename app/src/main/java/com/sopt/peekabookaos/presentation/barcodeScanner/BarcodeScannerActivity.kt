@@ -68,7 +68,7 @@ class BarcodeScannerActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initPermissionCallBack()
-        initUiStateObserve()
+        collectUiState()
         initCloseBtnClickListener()
         initHardDetectedClickListener()
     }
@@ -173,7 +173,7 @@ class BarcodeScannerActivity :
         }
     }
 
-    private fun initUiStateObserve() {
+    private fun collectUiState() {
         repeatOnStarted {
             barcodeViewModel.uiState.collect { uiState ->
                 uiState.onSuccess {
