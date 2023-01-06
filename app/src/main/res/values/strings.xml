@@ -27,6 +27,11 @@
     <string name="bookshelf_recommend_book">책 추천하기</string>
     <string name="bookshelf_myshelf_title">%d Books</string>
 
+    <!-- BookRecommend-->
+    <string name="recommend_recommended">추천받은 책</string>
+    <string name="recommend_recommending">추천한 책</string>
+    <string name="recommend_item_peek">%s님의 책장 보러가기 →</string>
+
     <!-- MyPage -->
     <string name="my_page_error">앗! 준비 중인 기능이에요.</string>
     <!-- TODO: Remove or change this placeholder text -->
