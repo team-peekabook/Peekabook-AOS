@@ -71,6 +71,7 @@ class BarcodeScannerActivity :
         initPermissionCallBack()
         initUiStateObserve()
         initCloseBtnClickListener()
+        initHardDetectedClickListener()
     }
 
     private fun initPermissionCallBack() {
@@ -161,6 +162,12 @@ class BarcodeScannerActivity :
     private fun initCloseBtnClickListener() {
         binding.btnBarcodeClose.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun initHardDetectedClickListener() {
+        binding.llBarcodeHardDetected.setOnClickListener {
+            /* 검색뷰 intent 구현 예정 */
         }
     }
 
