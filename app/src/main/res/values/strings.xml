@@ -38,4 +38,5 @@
     <!-- Search Book -->
     <string name="search_book_title">책 검색하기</string>
     <string name="search_book_hint">책 제목 또는 작가명을 입력해주세요.</string>
+    <string name="search_book_add">내 책장에 추가하기</string>
 </resources>
