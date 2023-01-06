@@ -45,7 +45,7 @@ class BarcodeGuideView @JvmOverloads constructor(
         path.rewind()
         path.addRect(
             rect.apply {
-                setRect(4f/*border width*/)
+                updateRect()
             },
             Path.Direction.CW
         )
@@ -59,16 +59,16 @@ class BarcodeGuideView @JvmOverloads constructor(
     private fun drawHole(canvas: Canvas) {
         canvas.drawRect(
             rect.apply {
-                setRect()
+                updateRect()
             },
             eraser
         )
     }
 
-    private fun setRect(offset: Float = 4f) {
     /**
      * Hole의 크기를 업데이트 하는 함수
      */
+    private fun updateRect(offset: Float = 4f) {
         val holeWidth = 312 * (width / 360f)
         val holeHeight = 168 * (width / 360f)
 
