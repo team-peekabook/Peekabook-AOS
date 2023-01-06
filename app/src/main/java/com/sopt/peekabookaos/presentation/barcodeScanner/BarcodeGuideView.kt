@@ -33,7 +33,8 @@ class BarcodeGuideView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        drawHole(requireNotNull(canvas))
+        if (canvas == null) return
+        drawHole(canvas)
         drawBorder(canvas)
         setBackgroundColor(Color.argb(99, 0, 0, 0))
     }
