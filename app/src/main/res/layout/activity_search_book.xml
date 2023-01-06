@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.search.SearchBookViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +75,7 @@
             android:layout_height="0dp"
             android:layout_marginEnd="20dp"
             android:background="@color/peeka_white_40"
+            android:onClick="@{() -> vm.searchBtnClickListener()}"
             android:src="@drawable/ic_search"
             app:layout_constraintBottom_toBottomOf="@id/et_search_book"
             app:layout_constraintEnd_toEndOf="parent"
