@@ -11,4 +11,7 @@ class SearchBookViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<UiState<List<Book>>>(UiState.IDLE)
     val uiState: StateFlow<UiState<List<Book>>> = _uiState.asStateFlow()
 
+    /* 서버 통신 시 제거 예정 */
+    private val serverStatus = true
+
 }
