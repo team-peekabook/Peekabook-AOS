@@ -198,7 +198,8 @@
                         android:maxLines="2"
                         android:text="@{vm.friendShelf == true ? vm.friendUserData[vm.getUserId()].comment : vm.UserData.comment }"
                         android:textColor="@color/peeka_red"
-                        tools:text="안녕하세요, 저는 한줄소개 입니다! 제 책장을 둘러보세요! marginEnd 23dp" />
+                        android:ellipsize="end"
+                        tools:text="안녕하세요, 저는 한줄소개 입니다! 제 책장을 둘러보세요! 만약에 최대를 넘어가게 되면 어떤 일이?" />
 
                 </LinearLayout>
 
@@ -282,6 +283,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_light_beige_fill_top15_rect">
+
+                <ImageView
+                    android:id="@+id/iv_bookshelf_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_bookshlef_indicator"/>
 
                 <TextView
                     android:id="@+id/tv_bookshelf_bottom_view_title"
