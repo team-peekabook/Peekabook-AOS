@@ -14,4 +14,6 @@ class SearchBookViewModel : ViewModel() {
     /* 서버 통신 시 제거 예정 */
     private val serverStatus = true
 
+    val bookTitle = MutableStateFlow("")
+
 }
