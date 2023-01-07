@@ -72,6 +72,17 @@ class SearchBookActivity :
         }
     }
 
+    private fun initAdapterText(): String {
+        return when (intent.getStringExtra(LOCATION) ?: CREATE) {
+            CREATE -> {
+                getString(R.string.search_book_add)
+            }
+            else -> {
+                getString(R.string.search_book_recommend)
+            }
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditTextClearFocus() {
         binding.clSearchBook.setOnTouchListener { _, _ ->
