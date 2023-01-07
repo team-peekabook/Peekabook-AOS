@@ -34,6 +34,10 @@
 
     <!-- MyPage -->
     <string name="my_page_error">앗! 준비 중인 기능이에요.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Book Detail-->
+    <string name="text_detail_description_is_null">작성된 한 마디가 없습니다</string>
+    <string name="text_detail_memo_is_null">작성된 메모가 없습니다</string>
+    <string name="tv_detail_content">한 마디</string>
+    <string name="tv_detail_memo">메모</string>
 </resources>
