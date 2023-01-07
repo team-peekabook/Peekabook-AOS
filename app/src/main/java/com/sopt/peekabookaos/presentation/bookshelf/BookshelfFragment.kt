@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.bookshelf
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -37,15 +38,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.rvBookshelfPick.adapter = pickAdapter
         pickAdapter.submitList(viewModel.pickData.value)
 
-        friendAdapter = BookShelfFriendAdapter(
-            object : ItemClickListener<FriendUser> {
-                override fun onClick(pos: Int, item: FriendUser) {
-                    viewModel.updateShelfState(Companion.FRIEND)
-                    viewModel.updateUserId(pos)
-                    binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
-                }
-            }
-        )
+        friendAdapter = BookShelfFriendAdapter { pos, item ->
+            viewModel.updateShelfState(FRIEND)
+            viewModel.updateUserId(pos)
+            binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
+        }
         binding.rvBookshelfFriendList.adapter = friendAdapter
         friendAdapter.submitList(viewModel.friendUserData.value)
     }
@@ -59,7 +56,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.ivBookshelfUserProfile.setOnClickListener {
             binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
-            friendAdapter.clearSelection(-1)
+            friendAdapter.clearSelection()
         }
     }
 
@@ -69,10 +66,9 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             Observer {
             }
         )
-        viewModel.userId.observe(
-            viewLifecycleOwner,
-            Observer { }
-        )
+        viewModel.userId.observe(viewLifecycleOwner) {
+            friendAdapter.updateSelectedPosition(it)
+        }
     }
 
     companion object {
