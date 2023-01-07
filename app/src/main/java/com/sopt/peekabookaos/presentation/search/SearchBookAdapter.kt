@@ -8,15 +8,17 @@ import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.databinding.ItemSearchBookBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
-class SearchBookAdapter :
-    ListAdapter<Book, SearchBookAdapter.SearchBookViewHolder>(searchBookDiffCallBack) {
+class SearchBookAdapter(
+    private val onClickBook: (Book) -> Unit,
+    private val text: String
+) : ListAdapter<Book, SearchBookAdapter.SearchBookViewHolder>(SEARCH_BOOK_DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchBookViewHolder {
         val binding = ItemSearchBookBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return SearchBookViewHolder(binding)
+        return SearchBookViewHolder(binding, onClickBook, text)
     }
 
     override fun onBindViewHolder(holder: SearchBookViewHolder, position: Int) {
@@ -24,10 +26,16 @@ class SearchBookAdapter :
     }
 
     class SearchBookViewHolder(
-        val binding: ItemSearchBookBinding
+        private val binding: ItemSearchBookBinding,
+        private val onClickBook: (Book) -> Unit,
+        private val text: String
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Book) {
             binding.data = data
+            binding.clItemSearchBook.setOnClickListener {
+                onClickBook(data)
+                binding.tvItemSearchBookAdd.text = text
+            }
         }
     }
 
