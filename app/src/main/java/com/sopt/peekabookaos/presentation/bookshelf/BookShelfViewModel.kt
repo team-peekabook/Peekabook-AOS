@@ -18,7 +18,6 @@ class BookShelfViewModel : ViewModel() {
 
     private val _friendUserData: MutableLiveData<List<FriendUser>> = MutableLiveData()
     val friendUserData: LiveData<List<FriendUser>> = _friendUserData
-    val friendsId = _friendUserData.map { it.map { } }
 
     private val _userData: MutableLiveData<User> = MutableLiveData()
     val userData: LiveData<User> = _userData
