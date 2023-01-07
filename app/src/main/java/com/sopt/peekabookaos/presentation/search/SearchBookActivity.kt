@@ -11,8 +11,15 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchBookActivity :
     BindingActivity<ActivitySearchBookBinding>(R.layout.activity_search_book) {
     private val searchBookViewModel: SearchBookViewModel by viewModels()
+    private val searchBookAdapter = SearchBookAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = searchBookViewModel
+        initSearchBookAdapter()
+    private fun initSearchBookAdapter() {
+        binding.rvSearchBook.adapter = searchBookAdapter
+    }
+
     }
 }
