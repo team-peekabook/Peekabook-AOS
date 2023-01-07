@@ -39,7 +39,7 @@
             app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ic_detail_back"
+            app:layout_constraintTop_toBottomOf="@id/ic_detail_back"
             tools:src="@color/black" />
 
         <TextView
@@ -90,7 +90,7 @@
             style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/shape_beigefill_redline_0_rect"
+            android:background="@drawable/shape_red_line_0_rect"
             android:gravity="top"
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
@@ -122,7 +122,7 @@
             style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/shape_beigefill_redline_0_rect"
+            android:background="@drawable/shape_red_line_0_rect"
             android:maxLength="50"
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
