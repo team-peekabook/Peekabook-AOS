@@ -5,6 +5,9 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySearchBookBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.onFailed
+import com.sopt.peekabookaos.util.extensions.onSuccess
+import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,9 +20,22 @@ class SearchBookActivity :
         super.onCreate(savedInstanceState)
         binding.vm = searchBookViewModel
         initSearchBookAdapter()
+        collectUiState()
+    }
+
     private fun initSearchBookAdapter() {
         binding.rvSearchBook.adapter = searchBookAdapter
     }
 
+    private fun collectUiState() {
+        repeatOnStarted {
+            searchBookViewModel.uiState.collect { uiState ->
+                uiState.onSuccess { result ->
+                    searchBookAdapter.submitList(result)
+                }.onFailed {
+                    /* empty뷰 띄우기 */
+                }
+            }
+        }
     }
 }
