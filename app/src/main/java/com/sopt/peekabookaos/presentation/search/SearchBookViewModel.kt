@@ -16,4 +16,71 @@ class SearchBookViewModel : ViewModel() {
 
     val bookTitle = MutableStateFlow("")
 
+    companion object {
+        private val dummy = listOf(
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 여름",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 가을",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 여름",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 가을",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 여름",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 여름",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 가을",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 여름",
+                author = "김신회",
+                description = "",
+                memo = ""
+            ),
+            Book(
+                bookImage = "http://image.yes24.com/goods/90365124/XL",
+                bookTitle = "아무튼, 가을",
+                author = "김신회",
+                description = "",
+                memo = ""
+            )
+        )
+    }
 }
