@@ -21,6 +21,8 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.vm = viewModel
         initAdapter()
         initItemDecoration()
+        initUserClickListener()
+        initObserver()
     }
 
     private fun initAdapter() {
@@ -32,13 +34,40 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.rvBookshelfPick.adapter = pickAdapter
         pickAdapter.submitList(viewModel.pickData.value)
 
-        friendAdapter = BookShelfFriendAdapter()
+        friendAdapter = BookShelfFriendAdapter { pos, _ ->
+            viewModel.updateShelfState(FRIEND)
+            viewModel.updateUserId(pos)
+            binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
+        }
         binding.rvBookshelfFriendList.adapter = friendAdapter
-        friendAdapter.submitList(viewModel.friendData.value)
+        friendAdapter.submitList(viewModel.friendUserData.value)
     }
 
     private fun initItemDecoration() {
         itemDeco = BookshelfShelfDecoration(requireContext())
         binding.rvBookshelfBottomViewShelf.addItemDecoration(itemDeco)
+    }
+
+    private fun initUserClickListener() {
+        binding.ivBookshelfUserProfile.setOnClickListener {
+            binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
+            viewModel.updateShelfState(USER)
+            friendAdapter.clearSelection()
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+        }
+    }
+
+    private fun initObserver() {
+        viewModel.userId.observe(viewLifecycleOwner) {
+            if (viewModel.friendShelf.value == FRIEND) {
+                friendAdapter.updateSelectedPosition(it)
+            }
+        }
+    }
+
+    companion object {
+        const val FRIEND = true
+        const val USER = false
     }
 }
