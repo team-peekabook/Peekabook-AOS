@@ -16,13 +16,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/shape_red_line_0_rect">
+        android:background="@drawable/shape_white88fill_redline_0_rect">
 
         <LinearLayout
             android:id="@+id/ll_item_bookshelf_pick"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_red_line_0_rect"
+            android:background="@drawable/shape_white88fill_redline_0_rect"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
             style="@style/CBd"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_red_line_0_rect"
+            android:background="@drawable/shape_white88fill_redline_0_rect"
             android:ellipsize="end"
             android:maxLines="3"
             android:minLines="3"
