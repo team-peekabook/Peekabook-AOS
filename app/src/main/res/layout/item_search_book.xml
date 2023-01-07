@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.sopt.peekabookaos.data.entity.Book" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_item_search_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_whitefill_redline_0_rect">
+
+        <ImageView
+            android:id="@+id/iv_item_search_book"
+            setImage="@{data.bookImage}"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="12dp"
+            android:layout_marginStart="20dp"
+            android:background="@color/peeka_white"
+            android:elevation="4dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/black" />
+
+        <View
+            android:id="@+id/view_item_search_book_vertical"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:background="@color/peeka_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_item_search_book"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_item_search_book_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:text="@{data.bookTitle}"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintStart_toEndOf="@id/view_item_search_book_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="아무튼, 여름" />
+
+        <TextView
+            android:id="@+id/tv_item_search_book_author"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.author}"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintStart_toStartOf="@id/tv_item_search_book_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_search_book_title"
+            tools:text="김신회" />
+
+        <View
+            android:id="@+id/view_item_search_book_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/peeka_red"
+            app:layout_constraintBottom_toTopOf="@id/iv_item_search_book_plus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_item_search_book_vertical" />
+
+        <TextView
+            android:id="@+id/tv_item_search_book_add"
+            style="@style/CBd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="1dp"
+            android:text="@string/search_book_add"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintBottom_toBottomOf="@id/iv_item_search_book_plus"
+            app:layout_constraintEnd_toStartOf="@id/iv_item_search_book_plus"
+            app:layout_constraintTop_toTopOf="@id/iv_item_search_book_plus" />
+
+        <ImageView
+            android:id="@+id/iv_item_search_book_plus"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_item_search_small_plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

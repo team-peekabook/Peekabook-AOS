@@ -22,6 +22,7 @@ import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.search.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.UiState
@@ -168,7 +169,12 @@ class BarcodeScannerActivity :
 
     private fun initHardDetectedClickListener() {
         binding.llBarcodeHardDetected.setOnClickListener {
-            /* 검색뷰 intent 구현 예정 */
+            Intent(this, SearchBookActivity::class.java).apply {
+                putExtra(LOCATION, CREATE)
+            }.also { intent ->
+                startActivity(intent)
+                finish()
+            }
         }
     }
 
