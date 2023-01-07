@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.search
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
@@ -22,6 +23,7 @@ class SearchBookActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = searchBookViewModel
+        initViewVisibility()
         initSearchBookAdapter()
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
@@ -30,6 +32,13 @@ class SearchBookActivity :
 
     private fun initSearchBookAdapter() {
         binding.rvSearchBook.adapter = searchBookAdapter
+    }
+
+    private fun initViewVisibility() {
+        with(binding) {
+            ivSearchBookError.visibility = View.INVISIBLE
+            tvSearchBookError.visibility = View.INVISIBLE
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
