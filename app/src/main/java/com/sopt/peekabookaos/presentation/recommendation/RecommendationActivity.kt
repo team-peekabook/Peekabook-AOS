@@ -10,11 +10,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecommendationActivity :
     BindingActivity<ActivityRecommendationBinding>(R.layout.activity_recommendation) {
-    private val RecommendationViewModel: RecommedationViewModel by viewModels()
+    private val recommendationViewModel: RecommedationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = RecommendationViewModel
+        binding.vm = recommendationViewModel
         initCloseBtnOnClickListener()
         initSaveBtnOnClickListener()
     }
@@ -29,4 +29,10 @@ class RecommendationActivity :
         binding.btnRecommendationCheck.setOnClickListener {
         }
     }
+/*
+    companion object {
+        const val BOOK_INFO = "book_info"
+        const val FRIEND_INFO = "friend_info"
+    }
+ */
 }

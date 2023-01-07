@@ -22,7 +22,7 @@
             android:id="@+id/btn_recommendation_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/ic_peeka_close"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +32,7 @@
             android:id="@+id/btn_recommendation_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/ic_peeka_check"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,13 +42,13 @@
             android:id="@+id/iv_recommendation_book_cover"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="16dp"
             android:background="@color/peeka_white"
             android:elevation="4dp"
             app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_recommendation_close"
             tools:src="@color/black" />
 
         <TextView
@@ -126,8 +125,8 @@
                 tools:text="문새연" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/tv_recommendation_getContent"
+        <EditText
+            android:id="@+id/et_recommendation_get_content"
             style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -148,11 +147,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{@string/register_book_comment_count(vm.comment.length())}"
+            android:text="@{@string/recommendation_book_comment_count(vm.comment.length())}"
             android:textColor="@color/peeka_g_2"
             android:theme="@style/H2Md"
-            app:layout_constraintEnd_toEndOf="@id/tv_recommendation_getContent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recommendation_getContent"
+            app:layout_constraintEnd_toEndOf="@id/et_recommendation_get_content"
+            app:layout_constraintTop_toBottomOf="@id/et_recommendation_get_content"
             tools:text="0/200" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

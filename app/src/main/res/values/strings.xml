@@ -46,4 +46,7 @@
     <string name="text_detail_memo_is_null">작성된 메모가 없습니다</string>
     <string name="tv_detail_content">한 마디</string>
     <string name="tv_detail_memo">메모</string>
+
+    <!-- Book Recommendation-->
+    <string name="recommendation_book_comment_count">%d/200</string>
 </resources>
