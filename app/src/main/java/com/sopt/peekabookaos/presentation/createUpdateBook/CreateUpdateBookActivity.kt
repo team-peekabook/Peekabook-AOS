@@ -31,8 +31,9 @@ class CreateUpdateBookActivity :
             }
             else -> {
                 createUpdateBookViewModel.initIsUpdateView(false)
-                /* 추후 bookData 대신 intent.getParcelable(CREATE, CreateUpdateBook::class.java)!! */
-                createUpdateBookViewModel.initCreateUpdateBookData(bookData)
+                createUpdateBookViewModel.initCreateUpdateBookData(
+                    intent.getParcelable(CREATE, Book::class.java)!!
+                )
             }
         }
     }
@@ -47,14 +48,5 @@ class CreateUpdateBookActivity :
         const val LOCATION = "location"
         const val UPDATE = "update"
         const val CREATE = "create"
-
-        /* 추후 제거 예정*/
-        private val bookData = Book(
-            bookImage = "http://image.yes24.com/goods/90365124/XL",
-            bookTitle = "아무튼, 여름",
-            author = "김신회",
-            description = "",
-            memo = "asdf"
-        )
     }
 }
