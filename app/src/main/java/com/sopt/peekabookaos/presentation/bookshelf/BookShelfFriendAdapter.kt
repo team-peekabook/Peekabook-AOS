@@ -10,6 +10,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.FriendUser
 import com.sopt.peekabookaos.databinding.ItemBookshelfUserProfileBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+
 class BookShelfFriendAdapter(
     private val clickListener: ItemClickListener<FriendUser>
 ) : ListAdapter<FriendUser, BookShelfFriendAdapter.FriendProfileViewHolder>(DIFF_CALLBACK) {
@@ -31,9 +32,9 @@ class BookShelfFriendAdapter(
         prePosition = selectedPosition
         holder.binding.ivItemBookshelfFriendProfileRedline.isVisible =
             (position == selectedPosition && position != RecyclerView.NO_POSITION)
-        if(position == selectedPosition && position != RecyclerView.NO_POSITION){
+        if (position == selectedPosition && position != RecyclerView.NO_POSITION) {
             holder.binding.tvItemBookshelfFriendProfile.setTextAppearance(R.style.S1Bd)
-        }else{
+        } else {
             holder.binding.tvItemBookshelfFriendProfile.setTextAppearance(R.style.S2Md)
         }
 
@@ -46,7 +47,7 @@ class BookShelfFriendAdapter(
     }
 
     fun updateSelectedPosition(position: Int) {
-        Log.e("kang","first $position")
+        Log.e("kang", "first $position")
         selectedPosition = position
         notifyItemChanged(selectedPosition)
         notifyItemChanged(prePosition)
