@@ -37,7 +37,6 @@ class BookShelfFriendAdapter(
         } else {
             holder.binding.tvItemBookshelfFriendProfile.setTextAppearance(R.style.S2Md)
         }
-
     }
 
     fun clearSelection() {
@@ -53,7 +52,6 @@ class BookShelfFriendAdapter(
         notifyItemChanged(prePosition)
     }
 
-
     class FriendProfileViewHolder(
         val binding: ItemBookshelfUserProfileBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -65,7 +63,6 @@ class BookShelfFriendAdapter(
             }
         }
     }
-
 
     companion object {
         private val DIFF_CALLBACK = ItemDiffCallback<FriendUser>(
