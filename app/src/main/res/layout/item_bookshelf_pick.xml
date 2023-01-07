@@ -13,16 +13,16 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="144dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/shape_red_line_0_rect">
+        android:background="@drawable/shape_white88fill_redline_0_rect">
 
         <LinearLayout
             android:id="@+id/ll_item_bookshelf_pick"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_red_line_0_rect"
+            android:background="@drawable/shape_white88fill_redline_0_rect"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,17 +51,19 @@
                 android:paddingVertical="5dp"
                 android:text="@{data.title}"
                 android:textColor="@color/peeka_red"
-                tools:text="하둘셋넷다여일곱여덟" />
+                tools:text="제목" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_item_bookshelf_pick"
             setImage="@{data.image}"
-            android:layout_width="120dp"
+            android:layout_width="0dp"
             android:layout_height="190dp"
             android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="9dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_item_bookshelf_pick"
@@ -70,15 +72,16 @@
         <TextView
             android:id="@+id/tv_item_bookshelf_pick_comment"
             style="@style/CBd"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_red_line_0_rect"
+            android:background="@drawable/shape_white88fill_redline_0_rect"
             android:ellipsize="end"
             android:maxLines="3"
             android:minLines="3"
             android:padding="11dp"
             android:text="@{data.comment}"
             android:textColor="@color/peeka_red"
+            android:visibility="@{data.comment == null ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
