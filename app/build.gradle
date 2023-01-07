@@ -56,9 +56,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     // hilt
-    implementation "com.google.dagger:hilt-android:2.44"
+    implementation 'com.google.dagger:hilt-android:2.44.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    kapt 'com.google.dagger:hilt-compiler:2.44'
 
     // shared preference
     implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha04'
@@ -89,18 +89,18 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
 
     // timber
-    implementation "com.jakewharton.timber:timber:5.0.1"
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 
     //navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     // CameraX
-    implementation "androidx.camera:camera-core:1.3.0-alpha02"
-    implementation "androidx.camera:camera-camera2:1.3.0-alpha02"
-    implementation "androidx.camera:camera-lifecycle:1.3.0-alpha02"
-    implementation 'androidx.camera:camera-view:1.3.0-alpha02'
-
+    implementation 'androidx.camera:camera-core:1.2.0'
+    implementation 'androidx.camera:camera-camera2:1.2.0'
+    implementation 'androidx.camera:camera-lifecycle:1.2.0'
+    implementation 'androidx.camera:camera-view:1.2.0'
+    
     // ML Kit
     implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0'
 
@@ -109,8 +109,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // SlidingUpPanel
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
