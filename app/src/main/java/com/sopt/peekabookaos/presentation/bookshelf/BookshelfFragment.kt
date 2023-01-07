@@ -67,7 +67,9 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             }
         )
         viewModel.userId.observe(viewLifecycleOwner) {
-            friendAdapter.updateSelectedPosition(it)
+            if (viewModel.friendShelf.value == FRIEND) {
+                friendAdapter.updateSelectedPosition(it)
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.presentation.bookshelf
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -28,7 +29,7 @@ class BookShelfFriendAdapter(
         holder.onBind(getItem(position), clickListener)
         prePosition = selectedPosition
         holder.binding.ivItemBookshelfFriendProfileRedline.isVisible =
-            (position == selectedPosition)
+            (position == selectedPosition && position != RecyclerView.NO_POSITION)
     }
 
     fun clearSelection() {
@@ -38,6 +39,7 @@ class BookShelfFriendAdapter(
     }
 
     fun updateSelectedPosition(position: Int) {
+        Log.e("kang","first $position")
         selectedPosition = position
         notifyItemChanged(selectedPosition)
         notifyItemChanged(prePosition)
