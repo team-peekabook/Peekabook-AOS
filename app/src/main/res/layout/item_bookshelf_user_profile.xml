@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp">
+        android:layout_marginEnd="15dp">
 
         <ImageView
             android:id="@+id/iv_item_bookshelf_friend_profile"
@@ -24,6 +24,7 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@color/peeka_light_beige" />
@@ -36,6 +37,7 @@
             android:visibility="invisible"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/shape_red_line_0_circle" />
@@ -43,17 +45,19 @@
         <TextView
             android:id="@+id/tv_item_bookshelf_friend_profile"
             style="@style/S2Md"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:ems="3"
+            android:maxLength="3"
             android:maxLines="1"
+            android:gravity="center"
             android:text="@{data.name}"
-            android:textAlignment="center"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/iv_item_bookshelf_friend_profile"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/iv_item_bookshelf_friend_profile"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_bookshelf_friend_profile" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_bookshelf_friend_profile"
+            tools:text="피카북사랑해"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
