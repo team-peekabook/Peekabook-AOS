@@ -3,7 +3,6 @@ package com.sopt.peekabookaos.presentation.bookshelf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import com.sopt.peekabookaos.data.entity.FriendUser
 import com.sopt.peekabookaos.data.entity.Pick
 import com.sopt.peekabookaos.data.entity.Shelf
