@@ -91,4 +91,8 @@ class SearchBookActivity :
             }
         }
     }
+
+    companion object {
+        const val RECOMMEND = "recommend"
+    }
 }
