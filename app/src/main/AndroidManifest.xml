@@ -42,7 +42,7 @@
         </activity>
         <activity
             android:name=".presentation.pickModify.PickModifyActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait" />
     </application>
 

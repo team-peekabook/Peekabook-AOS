@@ -87,40 +87,38 @@ class BookShelfViewModel : ViewModel() {
 
     private fun initShelfData() {
         _shelfData.value = listOf(
-            Shelf("https://image.yes24.com/goods/76106687/XL", false),
-            Shelf("https://image.yes24.com/goods/114671132/XL", true),
+            Shelf(1, "http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
+            Shelf(2, "https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
             Shelf(
-                "https://image.yes24.com/goods/97255028/XL",
-                false
+                3,
+                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
+                true
             ),
-            Shelf("https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
-            Shelf("https://image.yes24.com/goods/72127217/XL", false),
+            Shelf(4, "https://image.yes24.com/goods/74261416/XL", false),
+            Shelf(5, "http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
+            Shelf(6, "https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
             Shelf(
-                "https://image.yes24.com/goods/91159773/XL",
-                false
+                7,
+                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
+                true
             ),
+            Shelf(8, "https://image.yes24.com/goods/74261416/XL", false),
+            Shelf(9, "http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
+            Shelf(10, "https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
             Shelf(
-                "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png",
-                false
+                11,
+                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
+                true
             ),
-            Shelf("https://image.yes24.com/goods/72310907/XL", true),
-            Shelf("https://image.yes24.com/goods/76106687/XL", false),
-            Shelf("https://image.yes24.com/goods/114671132/XL", true),
+            Shelf(12, "https://image.yes24.com/goods/74261416/XL", false),
+            Shelf(13, "http://image.auction.co.kr/itemimage/1c/ae/9f/1cae9f7271.jpg", true),
+            Shelf(14, "https://cover.bookoob.co.kr/5/2/org/589952_org.jpg", false),
             Shelf(
-                "https://image.yes24.com/goods/97255028/XL",
-                false
+                15,
+                "https://image.aladin.co.kr/product/8663/31/cover500/s412836496_1.jpg",
+                true
             ),
-            Shelf("https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
-            Shelf("https://image.yes24.com/goods/72127217/XL", false),
-            Shelf(
-                "https://image.yes24.com/goods/91159773/XL",
-                false
-            ),
-            Shelf(
-                "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png",
-                false
-            ),
-            Shelf("https://image.yes24.com/goods/72310907/XL", true)
+            Shelf(16, "https://image.yes24.com/goods/74261416/XL", false)
         )
     }
 

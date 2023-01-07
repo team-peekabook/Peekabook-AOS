@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.pickModify
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
@@ -16,12 +17,22 @@ class PickModifyActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initItemDecoration()
+        binding.vm = viewModel
         initAdapter()
+        initItemDecoration()
     }
 
     private fun initAdapter() {
-        pickShelfAdapter = PickModifyAdapter()
+        pickShelfAdapter = PickModifyAdapter { pos, item ->
+            viewModel.updateSelectedItem(pos, item)
+            if (viewModel.itemSelectState.value == true) {
+                pickShelfAdapter.updateSelectedPosition(viewModel.position)
+                Log.e("kang", "ac: ${viewModel.position}")
+            } else {
+                pickShelfAdapter.updateUnSelectedPosition(viewModel.position)
+                Log.e("kang", "ac: ${viewModel.position}")
+            }
+        }
         binding.rvPickModify.adapter = pickShelfAdapter
         pickShelfAdapter.submitList(viewModel.pickShelfData.value)
     }
