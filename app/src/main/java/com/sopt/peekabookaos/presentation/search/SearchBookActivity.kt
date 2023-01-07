@@ -1,10 +1,12 @@
 package com.sopt.peekabookaos.presentation.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySearchBookBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.onFailed
 import com.sopt.peekabookaos.util.extensions.onSuccess
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
@@ -20,11 +22,30 @@ class SearchBookActivity :
         super.onCreate(savedInstanceState)
         binding.vm = searchBookViewModel
         initSearchBookAdapter()
+        initEditTextClearFocus()
         collectUiState()
     }
 
     private fun initSearchBookAdapter() {
         binding.rvSearchBook.adapter = searchBookAdapter
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditTextClearFocus() {
+        binding.clSearchBook.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
+
+        binding.rvSearchBook.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
+
+        binding.btnSearchBook.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
     }
 
     private fun collectUiState() {
