@@ -35,7 +35,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.rvBookshelfPick.adapter = pickAdapter
         pickAdapter.submitList(viewModel.pickData.value)
 
-        friendAdapter = BookShelfFriendAdapter { pos, item ->
+        friendAdapter = BookShelfFriendAdapter { pos, _ ->
             viewModel.updateShelfState(FRIEND)
             viewModel.updateUserId(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
