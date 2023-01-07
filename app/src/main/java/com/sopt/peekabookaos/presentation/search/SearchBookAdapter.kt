@@ -40,7 +40,7 @@ class SearchBookAdapter(
     }
 
     companion object {
-        private val searchBookDiffCallBack =
+        private val SEARCH_BOOK_DIFF_CALLBACK =
             ItemDiffCallback<Book>(
                 onItemsTheSame = { old, new -> old.bookTitle == new.bookTitle },
                 onContentsTheSame = { old, new -> old == new }
