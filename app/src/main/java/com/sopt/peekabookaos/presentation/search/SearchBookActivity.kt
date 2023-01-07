@@ -1,12 +1,17 @@
 package com.sopt.peekabookaos.presentation.search
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
+import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.databinding.ActivitySearchBookBinding
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.onFailed
@@ -39,6 +44,31 @@ class SearchBookActivity :
         with(binding) {
             ivSearchBookError.visibility = View.INVISIBLE
             tvSearchBookError.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun onClickBook(book: Book) {
+        when (intent.getStringExtra(LOCATION) ?: CREATE) {
+            CREATE -> {
+                Intent(this, CreateUpdateBookActivity::class.java).apply {
+                    putExtra(CREATE, book)
+                    putExtra(LOCATION, CREATE)
+                }.also { intent ->
+                    startActivity(intent)
+                    finish()
+                }
+            }
+            else -> {
+                /* 추후 Recommendation Activity 추가시 주석 제거
+                Intent(this, RecommendationActivity::class.java).apply {
+                    putExtra(RECOMMEND, book)
+                    putExtra(LOCATION, RECOMMEND)
+                }.also { intent ->
+                    startActivity(intent)
+                    finish()
+                }
+                */
+            }
         }
     }
 
