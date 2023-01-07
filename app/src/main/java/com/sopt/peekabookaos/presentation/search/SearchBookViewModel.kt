@@ -22,10 +22,8 @@ class SearchBookViewModel : ViewModel() {
         /* 서버 통신 시 구현 예정*/
         viewModelScope.launch {
             _uiState.emit(UiState.IDLE)
-            Timber.d("asdf 클릭리스너")
             if (serverStatus) {
                 _uiState.emit(UiState.Success(dummy))
-                Timber.d("asdf 성공됨 $dummy")
             } else {
                 _uiState.emit(UiState.Error(Throwable()))
             }
