@@ -18,7 +18,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
@@ -176,9 +175,9 @@ class BarcodeScannerActivity :
     private fun collectUiState() {
         repeatOnStarted {
             barcodeViewModel.uiState.collect { uiState ->
-                uiState.onSuccess {
+                uiState.onSuccess { result ->
                     Intent(this, CreateUpdateBookActivity::class.java).apply {
-                        putExtra(CREATE, bookData)
+                        putExtra(CREATE, result)
                         putExtra(LOCATION, CREATE)
                     }.also { intent ->
                         startActivity(intent)
@@ -189,15 +188,5 @@ class BarcodeScannerActivity :
                 }
             }
         }
-    }
-
-    companion object {
-        private val bookData = Book(
-            bookImage = "http://image.yes24.com/goods/90365124/XL",
-            bookTitle = "아무튼, 여름",
-            author = "김신회",
-            description = "",
-            memo = ""
-        )
     }
 }

@@ -21,10 +21,20 @@ class BarcodeViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.emit(UiState.IDLE)
             if (serverStatus) {
-                _uiState.emit(UiState.Success<Book>(Book()))
+                _uiState.emit(UiState.Success(bookData))
             } else {
                 _uiState.emit(UiState.Error(Throwable()))
             }
         }
+    }
+
+    companion object {
+        private val bookData = Book(
+            bookImage = "http://image.yes24.com/goods/90365124/XL",
+            bookTitle = "아무튼, 여름",
+            author = "김신회",
+            description = "",
+            memo = ""
+        )
     }
 }
