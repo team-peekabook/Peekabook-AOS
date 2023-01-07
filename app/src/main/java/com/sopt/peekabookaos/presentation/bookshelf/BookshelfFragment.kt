@@ -3,7 +3,6 @@ package com.sopt.peekabookaos.presentation.bookshelf
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.util.binding.BindingFragment
@@ -60,11 +59,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initObserver() {
-        viewModel.friendShelf.observe(
-            viewLifecycleOwner,
-            Observer {
-            }
-        )
         viewModel.userId.observe(viewLifecycleOwner) {
             if (viewModel.friendShelf.value == FRIEND) {
                 friendAdapter.updateSelectedPosition(it)
