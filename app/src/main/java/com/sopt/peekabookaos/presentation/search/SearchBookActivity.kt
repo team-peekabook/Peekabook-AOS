@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.search
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySearchBookBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
@@ -12,5 +13,6 @@ class SearchBookActivity :
     private val searchBookViewModel: SearchBookViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.vm = searchBookViewModel
     }
 }
