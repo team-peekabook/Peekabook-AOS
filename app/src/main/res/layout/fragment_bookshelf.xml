@@ -164,7 +164,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="22dp"
                     android:layout_marginBottom="23dp"
-                    android:background="@drawable/shape_white_redlines_0_rect"
+                    android:background="@drawable/shape_white30fill_redlines_0_rect"
                     android:gravity="center|start"
                     android:orientation="horizontal"
                     app:layout_constraintDimensionRatio="1:0.24"
