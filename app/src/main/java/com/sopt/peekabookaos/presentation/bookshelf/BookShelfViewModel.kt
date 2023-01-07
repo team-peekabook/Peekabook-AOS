@@ -18,7 +18,7 @@ class BookShelfViewModel : ViewModel() {
 
     private val _friendUserData: MutableLiveData<List<FriendUser>> = MutableLiveData()
     val friendUserData: LiveData<List<FriendUser>> = _friendUserData
-    val friendsId = _friendUserData.map { it.map {  }}
+    val friendsId = _friendUserData.map { it.map { } }
 
     private val _userData: MutableLiveData<User> = MutableLiveData()
     val userData: LiveData<User> = _userData
@@ -138,7 +138,7 @@ class BookShelfViewModel : ViewModel() {
                 "2",
                 "바로의 여행",
                 "https://image.yes24.com/goods/114671132/XL",
-                "『아빠 셋 꽃다발 셋』 『엄마 셋 도시락 셋』 등으로 부모와 아이 사이의 지극한 마음을 따뜻하게 그려 온 작가 국지승의 새 그림책이 출간되었다."
+                null
             ),
             Pick(
                 "3",

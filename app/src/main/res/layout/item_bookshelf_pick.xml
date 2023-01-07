@@ -80,6 +80,7 @@
             android:minLines="3"
             android:padding="11dp"
             android:text="@{data.comment}"
+            android:visibility="@{data.comment == null ? View.INVISIBLE : View.VISIBLE}"
             android:textColor="@color/peeka_red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

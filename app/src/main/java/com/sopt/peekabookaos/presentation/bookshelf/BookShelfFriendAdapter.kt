@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.FriendUser
 import com.sopt.peekabookaos.databinding.ItemBookshelfUserProfileBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
@@ -30,6 +31,12 @@ class BookShelfFriendAdapter(
         prePosition = selectedPosition
         holder.binding.ivItemBookshelfFriendProfileRedline.isVisible =
             (position == selectedPosition && position != RecyclerView.NO_POSITION)
+        if(position == selectedPosition && position != RecyclerView.NO_POSITION){
+            holder.binding.tvItemBookshelfFriendProfile.setTextAppearance(R.style.S1Bd)
+        }else{
+            holder.binding.tvItemBookshelfFriendProfile.setTextAppearance(R.style.S2Md)
+        }
+
     }
 
     fun clearSelection() {

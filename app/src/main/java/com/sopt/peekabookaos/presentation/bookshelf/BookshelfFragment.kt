@@ -1,13 +1,10 @@
 package com.sopt.peekabookaos.presentation.bookshelf
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.FriendUser
-import com.sopt.peekabookaos.data.entity.User
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +39,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             viewModel.updateShelfState(FRIEND)
             viewModel.updateUserId(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
         binding.rvBookshelfFriendList.adapter = friendAdapter
         friendAdapter.submitList(viewModel.friendUserData.value)
@@ -57,6 +55,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
             friendAdapter.clearSelection()
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
         }
     }
 
