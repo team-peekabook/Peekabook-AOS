@@ -51,4 +51,6 @@
     <string name="search_book_title">책 검색하기</string>
     <string name="search_book_hint">책 제목 또는 작가명을 입력해주세요.</string>
     <string name="search_book_add">내 책장에 추가하기</string>
+    <string name="search_book_recommend">친구에게 추천하기</string>
+    <string name="search_book_error">앗! 검색어에 해당되는 책이 없는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
 </resources>
