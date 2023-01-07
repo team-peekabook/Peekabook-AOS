@@ -4,5 +4,5 @@ data class Pick(
     val idx: String,
     val title: String,
     val image: String,
-    val comment: String
+    val comment: String?
 )
