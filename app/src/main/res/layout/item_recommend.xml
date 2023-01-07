@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.sopt.peekabookaos.data.entity.Recommend" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_item_recommend_redRect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="21dp"
+            android:background="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_item_recommend_title"
+                style="@style/Bd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:paddingVertical="5dp"
+                android:text="@{data.bookTitle}"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/cl_item_recommend_redRect"
+                app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
+                app:layout_constraintTop_toTopOf="@id/cl_item_recommend_redRect"
+                tools:text="아무튼, 여름" />
+
+            <View
+                android:id="@+id/view_item_recommend_line_title"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/peeka_white"
+                app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_author"
+                app:layout_constraintStart_toEndOf="@+id/tv_item_recommend_title"
+                app:layout_constraintTop_toTopOf="@id/tv_item_recommend_author" />
+
+            <TextView
+                android:id="@+id/tv_item_recommend_author"
+                style="@style/S3Md"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="@{data.author}"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_title"
+                app:layout_constraintStart_toEndOf="@+id/view_item_recommend_line_title"
+                app:layout_constraintTop_toTopOf="@id/tv_item_recommend_title"
+                tools:text="김신회" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_whitefill_redline_0_rect"
+            app:layout_constraintEnd_toEndOf="@id/cl_item_recommend_redRect"
+            app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
+            app:layout_constraintTop_toBottomOf="@+id/cl_item_recommend_redRect">
+
+            <ImageView
+                android:id="@+id/iv_item_recommend_cover"
+                setImage="@{data.image}"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginBottom="26dp"
+                android:background="@color/peeka_white"
+                android:elevation="4dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_width="92dp"
+                tools:src="@color/black" />
+
+            <View
+                android:id="@+id/view_item_recommend_line_middle"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/peeka_red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_item_recommend_cover"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_item_recommend_profile"
+                setCircleImage="@{data.profileImage}"
+                android:layout_width="15dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="13dp"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintStart_toEndOf="@+id/view_item_recommend_line_middle"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_item_recommend_name"
+                style="@style/S2Md"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{data.recommendBy}"
+                android:textColor="@color/peeka_red"
+                app:layout_constraintBottom_toBottomOf="@id/iv_item_recommend_profile"
+                app:layout_constraintStart_toEndOf="@id/iv_item_recommend_profile"
+                app:layout_constraintTop_toTopOf="@id/iv_item_recommend_profile"
+                tools:text="문새연" />
+
+            <TextView
+                android:id="@+id/tv_item_recommend_date"
+                style="@style/S4Md"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="@{data.createdAt}"
+                android:textColor="@color/peeka_red"
+                app:layout_constraintBottom_toBottomOf="@id/iv_item_recommend_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_item_recommend_profile"
+                tools:text="2022/01/27" />
+
+            <TextView
+                android:id="@+id/tv_item_recommended_memo"
+                style="@style/S2Md"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="8dp"
+                android:maxLength="200"
+                android:text="@{data.recommendDesc}"
+                android:textColor="@color/peeka_red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view_item_recommend_line_middle"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_recommend_name"
+                tools:text="추천사 전체" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -25,7 +25,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_create_update_book_close"
+            android:src="@drawable/ic_peeka_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,11 +71,12 @@
         <ImageView
             android:id="@+id/iv_create_update_book_image"
             setImage="@{vm.bookData.bookImage}"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="27dp"
             android:background="@color/peeka_beige"
             android:elevation="4dp"
+            app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_create_title"

@@ -1,10 +1,16 @@
 <resources>
-    <string name="app_name">Peekabook AOS</string>
+    <string name="app_name">Peekabook</string>
 
     <!-- Util -->
     <string name="binding_error">Binding not initialized to reference the view.</string>
     <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르시면 종료됩니다.</string>
     <string name="null_point_exception">NullPointException occurs..</string>
+
+    <!-- Barcode -->
+    <string name="barcode_permission">Please Accept all the permissions</string>
+    <string name="barcode_title">책 검색하기</string>
+    <string name="barcode_hard_detected">바코드 인식이 어려우신가요?</string>
+    <string name="barcode_guide">책의 뒷면에 있는 ISBN 바코드가\n사각형 안에 들어오게 해주세요.</string>
 
     <!-- Bottom Navigation -->
     <string name="bottom_bookshelf">책장</string>
@@ -27,8 +33,19 @@
     <string name="bookshelf_recommend_book">책 추천하기</string>
     <string name="bookshelf_myshelf_title">%d Books</string>
 
+    <!-- BookRecommend-->
+    <string name="recommend_recommended">추천받은 책</string>
+    <string name="recommend_recommending">추천한 책</string>
+    <string name="recommend_item_peek">%s님의 책장 보러가기 →</string>
+
     <!-- MyPage -->
     <string name="my_page_error">앗! 준비 중인 기능이에요.</string>
+
+    <!-- Book Detail-->
+    <string name="text_detail_description_is_null">작성된 한 마디가 없습니다</string>
+    <string name="text_detail_memo_is_null">작성된 메모가 없습니다</string>
+    <string name="tv_detail_content">한 마디</string>
+    <string name="tv_detail_memo">메모</string>
 
     <!-- PickModify -->
     <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>
