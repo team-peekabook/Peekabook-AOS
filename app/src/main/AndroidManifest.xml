@@ -23,7 +23,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.search.SearchBookActivity"
+            android:name=".presentation.search.book.SearchBookActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.sopt.peekabookaos.presentation.search.SearchBookViewModel" />
+            type="com.sopt.peekabookaos.presentation.search.book.SearchBookViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige"
-        tools:context=".presentation.search.SearchBookActivity">
+        tools:context=".presentation.search.book.SearchBookActivity">
 
         <ImageButton
             android:id="@+id/btn_search_book_close"

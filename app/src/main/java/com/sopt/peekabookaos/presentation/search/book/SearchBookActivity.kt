@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.search
+package com.sopt.peekabookaos.presentation.search.book
 
 import android.annotation.SuppressLint
 import android.content.Intent

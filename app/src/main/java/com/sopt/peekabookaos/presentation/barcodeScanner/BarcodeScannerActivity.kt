@@ -22,7 +22,7 @@ import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
-import com.sopt.peekabookaos.presentation.search.SearchBookActivity
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.UiState
