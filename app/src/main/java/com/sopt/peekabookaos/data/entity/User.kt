@@ -1,7 +1,8 @@
 package com.sopt.peekabookaos.data.entity
 
 data class User(
-    val name: String,
-    val profile: String,
-    val comment: String
+    val id: Int,
+    val nickname: String,
+    val profileImage: String,
+    val intro: String
 )
