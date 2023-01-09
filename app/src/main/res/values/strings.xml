@@ -56,4 +56,6 @@
     <string name="search_book_add">내 책장에 추가하기</string>
     <string name="search_book_recommend">친구에게 추천하기</string>
     <string name="search_book_error">앗! 검색어에 해당되는 책이 없는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
+    <string name="recommendation_hint">추천사를 적어주세요.</string>
+    <string name="recommendation_to_name">받는 사람</string>
 </resources>
