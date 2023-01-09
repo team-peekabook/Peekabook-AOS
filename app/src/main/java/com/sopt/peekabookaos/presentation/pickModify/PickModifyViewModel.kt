@@ -10,10 +10,10 @@ class PickModifyViewModel : ViewModel() {
     private val _pickModifyData: MutableLiveData<List<PickModify>> = MutableLiveData()
     val pickModifyData: LiveData<List<PickModify>> = _pickModifyData
 
-    private val _selectedItemList: MutableLiveData<LinkedHashSet<PickModify>> = MutableLiveData(
+    private val _selectedItemList: MutableLiveData<LinkedHashSet<Int>> = MutableLiveData(
         linkedSetOf()
     )
-    val selectedItemList: LiveData<LinkedHashSet<PickModify>> = _selectedItemList
+    val selectedItemList: LiveData<LinkedHashSet<Int>> = _selectedItemList
 //
 //    private val _itemSelectState: MutableLiveData<Boolean> = MutableLiveData()
 //    val itemSelectState: LiveData<Boolean> = _itemSelectState
@@ -28,10 +28,11 @@ class PickModifyViewModel : ViewModel() {
     fun updateSelectedItemState(item: PickModify) { // 클릭했을 때, 아이템의 상태 업데이트를 위한 함수
         if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) { // 고르지 않은 상태일 경우에
             item.pickIndex = _selectedItemList.value?.size!! + 1 ?: 1 // null이면 사이즈가 없으니까 인덱스는 1로
-            _selectedItemList.value?.add(item) // hash에 추가
+            _selectedItemList.value?.add(item.book.id) // hash에 추가
         } else { // 고른 경우
-            _selectedItemList.value!!.remove(item) // hash에서 제거
+            _selectedItemList.value!!.remove(item.book.id) // hash에서 제거
             item.pickIndex = 0 // index 0으로 변경
+            updateSelectedItem() // index 변경 고지
         }
         Timber.tag("kang").e("updateSelectedItemState: ${_selectedItemList.value}")
         Timber.tag("kang").d("updateSelectedItemState: ${_pickModifyData.value}")
@@ -40,18 +41,15 @@ class PickModifyViewModel : ViewModel() {
     private fun initSelectedItemList(data: List<PickModify>) { // _selectedItemList에 선택되어 있는 item 입력하기
         for (item in data) {
             if (item.pickIndex != 0) {
-                _selectedItemList.value?.add(item)
+                _selectedItemList.value?.add(item.book.id)
             }
         }
     }
 
-    fun updateSelectedItem(
-        item: PickModify,
-        data: List<PickModify>
-    ) { // 우선순위가 변동사항이 생기면 인덱스를 업데이트 하는 함수
-        for (tempItem in data) {
-            if (_selectedItemList.value?.contains(tempItem) == true) {
-                tempItem.pickIndex = getSelectedItemIndex(item)
+    fun updateSelectedItem() { // 우선순위가 변동사항이 생기면 인덱스를 업데이트 하는 함수
+        for (item in _pickModifyData.value!!) { // 데이터를 전부 넣어서
+            if (_selectedItemList.value?.contains(item.book.id) == true) { // 선택hash에 있으면
+                item.pickIndex = getSelectedItemIndex(item) // index 반환해서 index 새로고침
             }
         }
     }
@@ -66,15 +64,16 @@ class PickModifyViewModel : ViewModel() {
 //    }
 //
     private fun getSelectedItemIndex(item: PickModify): Int { // 아이템을 넣으면 linkedHash에서 몇 번째 인덱스인지 반환
-        Timber.tag("kang").d("vm-getSelectedItemIndex")
         val iterator = _selectedItemList.value!!.iterator()
-        var count = 1
+        var count = 0
         while (iterator.hasNext()) {
             count++
-            if (item == iterator.next()) {
+            if (item.book.id == iterator.next()) {
+                Timber.tag("kang").d("getSelectedItemIndex $count")
                 return count
             }
         }
+        Timber.tag("kang").d("getSelectedItemIndex $count")
         return count
     }
 
