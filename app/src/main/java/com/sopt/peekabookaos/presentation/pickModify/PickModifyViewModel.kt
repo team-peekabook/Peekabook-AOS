@@ -16,6 +16,7 @@ class PickModifyViewModel : ViewModel() {
     val selectState: LiveData<Boolean> = _selectState
     private val _overListState: MutableLiveData<Boolean> = MutableLiveData()
     val overListState: LiveData<Boolean> = _overListState
+    var preListState = _overListState.value
 
     init {
         initPickModifyData()
@@ -23,7 +24,7 @@ class PickModifyViewModel : ViewModel() {
     }
 
     fun updateSelectedItemState(item: PickModify) {
-        if (_selectedItemList.value?.size!! >= 3) _overListState.value = true
+        preListState = _selectedItemList.value?.size!! >= 3
         if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) {
             item.pickIndex = _selectedItemList.value?.size!! + 1
             _selectedItemList.value?.add(item.book.id)
@@ -34,6 +35,7 @@ class PickModifyViewModel : ViewModel() {
             _selectState.value = false
             updateSelectedItemIndex()
         }
+        _overListState.value = (_selectedItemList.value?.size!! >= 3 && preListState == true)
     }
 
     private fun initSelectedItemList(data: List<PickModify>) {

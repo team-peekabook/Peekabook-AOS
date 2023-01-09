@@ -50,7 +50,10 @@ class PickModifyActivity :
         viewModel.overListState.observe(
             this,
             Observer {
-                ToastMessageUtil.showToast(this, getString(R.string.pick_modify_notice))
+                if (viewModel.overListState.value == true) ToastMessageUtil.showToast(
+                    this,
+                    getString(R.string.pick_modify_notice)
+                )
             }
         )
     }
