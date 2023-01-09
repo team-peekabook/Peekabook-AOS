@@ -34,7 +34,10 @@ class SearchUserViewModel : ViewModel() {
                 _uiState.value = dummy
                 isFollowed.value = dummy.isFollowed
             } else {
-                _isServerStatus.emit(false)
+                _isSearchStatus.emit(false)
+            }
+        }
+    }
             }
         }
     }
