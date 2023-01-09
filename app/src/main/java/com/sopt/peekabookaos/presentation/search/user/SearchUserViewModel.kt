@@ -38,6 +38,18 @@ class SearchUserViewModel : ViewModel() {
             }
         }
     }
+
+    fun followBtnClickListener() {
+        /* 서버 통신 시 구현 예정*/
+        viewModelScope.launch {
+            if (isFollowed.value) {
+                deleteFollow()
+            } else {
+                postFollow()
+            }
+        }
+    }
+
             }
         }
     }
