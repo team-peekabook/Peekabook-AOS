@@ -68,7 +68,7 @@ class PickModifyAdapter(
     companion object {
         private val DIFF_CALLBACK =
             ItemDiffCallback<PickModify>(
-                onItemsTheSame = { old, new -> old.book == new.book },
+                onItemsTheSame = { old, new -> old.book.id == new.book.id },
                 onContentsTheSame = { old, new -> old == new }
             )
     }
