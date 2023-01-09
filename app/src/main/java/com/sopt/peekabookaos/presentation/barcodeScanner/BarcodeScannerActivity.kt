@@ -190,7 +190,8 @@ class BarcodeScannerActivity :
                     }
 
                     BarcodeState.ERROR -> {
-                        /* 에러 다이얼로그 구현 */
+                        Timber.e("asdf 다이얼로그 실행됨")
+                        BarcodeErrorDialog().show(supportFragmentManager, TAG)
                     }
 
                     BarcodeState.IDLE -> {
