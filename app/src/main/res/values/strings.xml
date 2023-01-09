@@ -53,6 +53,9 @@
     <string name="recommendation_book_comment_count">%d/200</string>
     <string name="recommendation_hint">추천사를 적어주세요.</string>
     <string name="recommendation_to_name">받는 사람</string>
+    <string name="recommendation_dialog">%s님에게\n책을 추천하시겠어요?</string>
+    <string name="recommendation_dialog_cancel">취소하기</string>
+    <string name="recommendation_dialog_recommend">추천하기</string>
 
     <!-- PickModify -->
     <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>
