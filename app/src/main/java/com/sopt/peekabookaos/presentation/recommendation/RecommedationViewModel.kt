@@ -10,15 +10,13 @@ class RecommedationViewModel : ViewModel() {
     private val _bookData = MutableLiveData<Book>()
     val bookData: LiveData<Book> = _bookData
 
-    // friendData 만들고
     private val _friendData = MutableLiveData<FriendUser>()
     val friendData: LiveData<FriendUser> = _friendData
 
     val comment = MutableLiveData("")
 
-    fun initRecommendData(bookData: Book, friendData: FriendUser) { // 파라미터로 친구데이터도 받아서
+    fun initRecommendData(bookData: Book, friendData: FriendUser) {
         _bookData.value = bookData
         _friendData.value = friendData
-        // 넘어오는 intent값이 없어서 더미값 넣음. 추후 ~Dummy->~Data로 변경 예정
     }
 }
