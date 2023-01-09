@@ -15,7 +15,7 @@ class BarcodeViewModel : ViewModel() {
     val serverStatus = _serverStatus.asStateFlow()
 
     /* 서버 통신 더미 변수 (추후 제거 예정) */
-    private val serverStatus = true
+    private val serverDummyStatus = true
 
     fun postBarcode(barcodeString: String) {
         /* 서버 통신 시 구현 예정*/
