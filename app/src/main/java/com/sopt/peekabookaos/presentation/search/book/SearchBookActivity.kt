@@ -31,6 +31,7 @@ class SearchBookActivity :
         initSearchBookAdapter()
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
+        initCloseBtnClickListener()
         collectUiState()
     }
 
@@ -102,6 +103,12 @@ class SearchBookActivity :
             }
             KeyBoardUtil.hide(activity = this)
             handled
+        }
+    }
+
+    private fun initCloseBtnClickListener() {
+        binding.btnSearchBookClose.setOnClickListener {
+            finish()
         }
     }
 
