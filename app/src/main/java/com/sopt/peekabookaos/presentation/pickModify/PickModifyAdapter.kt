@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.pickModify
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.data.entity.PickModify
 import com.sopt.peekabookaos.databinding.ItemPickModifyBinding
@@ -15,14 +16,9 @@ class PickModifyAdapter(
     androidx.recyclerview.widget.ListAdapter<PickModify, PickModifyAdapter.PickShelfViewHolder>(
         DIFF_CALLBACK
     ) {
-//    private var firstSelectedPosition = RecyclerView.NO_POSITION
-//    private var secondSelectedPosition = RecyclerView.NO_POSITION
-//    private var thirdSelectedPosition = RecyclerView.NO_POSITION
-//    private val selectedPositionSet: LinkedHashSet<Int> = linkedSetOf()
-
-    //    private var selectedPosition = RecyclerView.NO_POSITION
-//    private var unSelectedPosition = RecyclerView.NO_POSITION
-//    private var index = 1
+    private var selectedPositionSet: LinkedHashSet<Int>? = linkedSetOf()
+    private var selectedPosition = RecyclerView.NO_POSITION
+    private var unSelectedPosition = RecyclerView.NO_POSITION
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickShelfViewHolder {
         val itemPickModifyBinding =
@@ -32,47 +28,28 @@ class PickModifyAdapter(
 
     override fun onBindViewHolder(holder: PickShelfViewHolder, position: Int) {
         holder.onBind(getItem(position), clickListener)
-//        holder.binding.ivItemBookshelfShelfSelect.isVisible =
-//            (selectedPositionSet.contains(position) && position != RecyclerView.NO_POSITION)
-//        holder.binding.tvItemBookshelfShelfPick.isVisible =
-//            (selectedPositionSet.contains(position) && position != RecyclerView.NO_POSITION)
-//        when (position) {
-//            firstSelectedPosition ->
-//                holder.binding.tvItemBookshelfShelfPick.text = "1"
-//            secondSelectedPosition ->
-//                holder.binding.tvItemBookshelfShelfPick.text = "2"
-//            thirdSelectedPosition ->
-//                holder.binding.tvItemBookshelfShelfPick.text = "3"
-//        }
+        holder.binding.ivItemBookshelfShelfSelect.isVisible =
+            (selectedPosition == position && position != RecyclerView.NO_POSITION)
+        holder.binding.tvItemBookshelfShelfPick.isVisible =
+            (selectedPosition == position && position != RecyclerView.NO_POSITION)
     }
 
-    fun updateSelectedPosition(position: Int, i: Int) {
-        Timber.tag("kang")
-            .e("add $position: p $i: i")
-//        when (i) {
-//            1 -> {
-//                firstSelectedPosition = position
-//                Timber.tag("kang")
-//                    .e("updateSelectedPosition: 1 " + firstSelectedPosition + ": f " + secondSelectedPosition + " : s " + thirdSelectedPosition + " : t")
-//            }
-//            2
-//            -> {
-//                secondSelectedPosition = position
-//                Timber.tag("kang")
-//                    .e("updateSelectedPosition: 1 " + firstSelectedPosition + ": f " + secondSelectedPosition + " : s " + thirdSelectedPosition + " : t")
-//            }
-//
-//            3 -> {
-//                thirdSelectedPosition = position
-//                Timber.tag("kang")
-//                    .e("updateSelectedPosition: 1 " + firstSelectedPosition + ": f " + secondSelectedPosition + " : s " + thirdSelectedPosition + " : t")
-//            }
-//        }
-//        selectedPositionSet.add(position)
-//        Timber.tag("kang")
-//            .e("$selectedPositionSet : selectedPositionSet")
-//        selectedPosition = position
-//        notifyItemChanged(position)
+//    fun initSelectedPositionSet(hashSet: LinkedHashSet<Int>?) { // hashSet 업데이트
+//        Timber.tag("kang").i("initSelectedPositionSet")
+//        selectedPositionSet = hashSet
+//    }
+
+    fun updateSelectedPosition(position: Int, state: Boolean) {
+        if (state) { // 선택한 상황
+            Timber.tag("kang").i("updateSelectedPosition-selec: $position : position")
+            selectedPosition = position
+            unSelectedPosition = RecyclerView.NO_POSITION
+            notifyItemChanged(selectedPosition)
+        } else {
+            Timber.tag("kang").i("updateSelectedPosition-unselec: $position : position")
+            unSelectedPosition = position
+            notifyItemChanged(unSelectedPosition)
+        }
     }
 
     fun updateUnSelectedPosition(position: Int, i: Int) {

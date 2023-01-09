@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.pickModify
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
@@ -19,11 +20,18 @@ class PickModifyActivity :
         binding.vm = viewModel
         initAdapter()
         initItemDecoration()
+        initObserver()
     }
 
     private fun initAdapter() {
-        pickShelfAdapter = PickModifyAdapter { _, item ->
+        pickShelfAdapter = PickModifyAdapter { position, item ->
             viewModel.updateSelectedItemState(item)
+            viewModel.selectState.value?.let {
+                pickShelfAdapter.updateSelectedPosition(
+                    position,
+                    it
+                )
+            }
 //            var index = viewModel.getSelectedItemIndex(pos, item)
 //            if (viewModel.itemSelectState.value == true) {
 //                Timber.tag("kang").d("activity- 추가 포지션 update $pos 포지션")
@@ -45,5 +53,13 @@ class PickModifyActivity :
     private fun initItemDecoration() {
         itemDeco = PickModifyDecoration(this)
         binding.rvPickModify.addItemDecoration(itemDeco)
+    }
+
+    private fun initObserver() {
+        viewModel.selectedItemList?.observe(
+            this,
+            Observer {
+            }
+        )
     }
 }
