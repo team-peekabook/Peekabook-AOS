@@ -35,6 +35,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".presentation.recommendation.RecommendationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
