@@ -22,12 +22,7 @@ class RecommendDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.dialog_recommend,
-            container,
-            false
-        )
+        _binding = DataBindingUtil.inflate(inflater, R.layout.dialog_recommend, container, false)
         return binding.root
     }
 
