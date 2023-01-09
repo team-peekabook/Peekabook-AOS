@@ -62,5 +62,6 @@
     <!-- Search User -->
     <string name="search_user_title">사용자 검색하기</string>
     <string name="search_user_hint">사용자의 닉네임을 입력해주세요.</string>
+    <string name="search_user_error">앗! 해당 사용자가 존재하지 않는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
     <string name="search_user_follow">팔로잉</string>
 </resources>
