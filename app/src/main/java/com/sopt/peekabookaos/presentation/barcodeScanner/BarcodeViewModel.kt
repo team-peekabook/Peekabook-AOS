@@ -11,6 +11,9 @@ class BarcodeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(Book())
     val uiState = _uiState.asStateFlow()
 
+    private val _serverStatus = MutableStateFlow<BarcodeState>(BarcodeState.IDLE)
+    val serverStatus = _serverStatus.asStateFlow()
+
     /* 서버 통신 더미 변수 (추후 제거 예정) */
     private val serverStatus = true
 
