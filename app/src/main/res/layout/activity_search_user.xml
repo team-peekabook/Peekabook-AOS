@@ -19,5 +19,16 @@
         android:background="@color/peeka_beige"
         tools:context=".presentation.search.user.SearchUserActivity">
 
+        <ImageButton
+            android:id="@+id/btn_search_user_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:src="@drawable/ic_peeka_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
