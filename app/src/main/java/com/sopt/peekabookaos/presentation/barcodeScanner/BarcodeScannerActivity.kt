@@ -155,7 +155,7 @@ class BarcodeScannerActivity :
     }
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
-        if (barcodes.isNotEmpty() && (barcodeViewModel.serverStatus.value != BarcodeState.SUCCESS || barcodeViewModel.serverStatus.value != BarcodeState.ERROR)) {
+        if (barcodes.isNotEmpty() && barcodeViewModel.serverStatus.value == BarcodeState.IDLE) {
             barcodeViewModel.postBarcode(barcodes[0].rawValue!!)
         }
     }
