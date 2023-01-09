@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/peeka_beige">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageButton
-        android:id="@+id/btn_barcode_error_close"
-        android:layout_width="wrap_content"
+    <data>
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:src="@drawable/ic_peeka_close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/peeka_beige">
 
-    <TextView
-        android:id="@+id/tv_barcode_error_title"
-        style="@style/H4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="62dp"
-        android:layout_marginTop="34dp"
-        android:text="@string/barcode_error"
-        android:textColor="@color/peeka_red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/btn_barcode_error_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_peeka_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_barcode_error_search"
-        style="@style/H1Bd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/peeka_red"
-        android:paddingHorizontal="58dp"
-        android:paddingVertical="10dp"
-        android:text="@string/barcode_error_search"
-        android:textColor="@color/peeka_white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_barcode_error_title" />
+        <TextView
+            android:id="@+id/tv_barcode_error_title"
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="62dp"
+            android:layout_marginTop="34dp"
+            android:text="@string/barcode_error"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_barcode_error_search"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/peeka_red"
+            android:paddingHorizontal="58dp"
+            android:paddingVertical="10dp"
+            android:text="@string/barcode_error_search"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_barcode_error_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
