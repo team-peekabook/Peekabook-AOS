@@ -32,12 +32,12 @@ class PickModifyAdapter(
     }
 
     fun updateSelectedPosition(position: Int, state: Boolean) {
-        if (state) { // 선택한 상황
+        if (state) {
             selectedPositionSet?.add(position)
             for (pos in selectedPositionSet!!) {
                 notifyItemChanged(pos)
             }
-        } else { // 해제한 상황
+        } else {
             selectedPositionSet?.remove(position)
             notifyItemChanged(position)
             for (pos in selectedPositionSet!!) {

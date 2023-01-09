@@ -26,16 +26,13 @@ class PickModifyDecoration(val context: Context) : RecyclerView.ItemDecoration()
         val spanIndex = lp.spanIndex
         if (spanIndex != 0) {
             if (spanIndex == 1) {
-                // 가운데 아이템
                 outRect.left = sizeInSide
                 outRect.right = sizeInSide
             } else if (spanIndex == 2) {
-                // 오른쪽 아이템
                 outRect.left = sizeInSide
                 outRect.right = sizeOutSide
             }
         } else {
-            // 왼쪽 아이템
             outRect.left = sizeOutSide
             outRect.right = sizeInSide
         }
@@ -58,7 +55,7 @@ class PickModifyDecoration(val context: Context) : RecyclerView.ItemDecoration()
         for (i in 0 until parent.childCount) {
             val child = parent.getChildAt(i)
             val params = child.layoutParams as RecyclerView.LayoutParams
-            var top = (child.bottom + params.bottomMargin).toFloat()
+            val top = (child.bottom + params.bottomMargin).toFloat()
             val bottom: Float = top + 12f
             c.drawRect(left, top, right, bottom, paint)
         }

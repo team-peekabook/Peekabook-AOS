@@ -17,23 +17,23 @@ class PickModifyViewModel : ViewModel() {
 
     init {
         initPickModifyData()
-        _pickModifyData.value?.let { initSelectedItemList(it) } // _selectedItemList에 선택되어 있는 item 입력하기
+        _pickModifyData.value?.let { initSelectedItemList(it) }
     }
 
-    fun updateSelectedItemState(item: PickModify) { // 클릭했을 때, 아이템의 상태 업데이트를 위한 함수
-        if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) { // 고르지 않은 상태일 경우에
-            item.pickIndex = _selectedItemList.value?.size!! + 1 ?: 1 // null이면 사이즈가 없으니까 인덱스는 1로
-            _selectedItemList.value?.add(item.book.id) // hash에 추가
+    fun updateSelectedItemState(item: PickModify) {
+        if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) {
+            item.pickIndex = _selectedItemList.value?.size!! + 1
+            _selectedItemList.value?.add(item.book.id)
             _selectState.value = true
-        } else { // 고른 경우
-            _selectedItemList.value!!.remove(item.book.id) // hash에서 제거
-            item.pickIndex = 0 // index 0으로 변경
+        } else {
+            _selectedItemList.value!!.remove(item.book.id)
+            item.pickIndex = 0
             _selectState.value = false
-            updateSelectedItem() // index 변경 고지
+            updateSelectedItemIndex()
         }
     }
 
-    private fun initSelectedItemList(data: List<PickModify>) { // _selectedItemList에 선택되어 있는 item 입력하기
+    private fun initSelectedItemList(data: List<PickModify>) {
         for (item in data) {
             if (item.pickIndex != 0) {
                 _selectedItemList.value?.add(item.book.id)
@@ -41,15 +41,15 @@ class PickModifyViewModel : ViewModel() {
         }
     }
 
-    private fun updateSelectedItem() { // 우선순위가 변동사항이 생기면 인덱스를 업데이트 하는 함수
-        for (item in _pickModifyData.value!!) { // 데이터를 전부 넣어서
-            if (_selectedItemList.value?.contains(item.book.id) == true) { // 선택hash에 있으면
-                item.pickIndex = getSelectedItemIndex(item) // index 반환해서 index 새로고침
+    private fun updateSelectedItemIndex() {
+        for (item in _pickModifyData.value!!) {
+            if (_selectedItemList.value?.contains(item.book.id) == true) {
+                item.pickIndex = getSelectedItemIndex(item)
             }
         }
     }
 
-    private fun getSelectedItemIndex(item: PickModify): Int { // 아이템을 넣으면 linkedHash에서 몇 번째 인덱스인지 반환
+    private fun getSelectedItemIndex(item: PickModify): Int {
         val iterator = _selectedItemList.value!!.iterator()
         var count = 0
         while (iterator.hasNext()) {
