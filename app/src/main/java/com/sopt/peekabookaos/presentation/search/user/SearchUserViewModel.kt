@@ -32,6 +32,7 @@ class SearchUserViewModel : ViewModel() {
             if (serverStatus) {
                 _isSearchStatus.emit(true)
                 _uiState.value = dummy
+                isFollowed.value = dummy.isFollowed
             } else {
                 _isServerStatus.emit(false)
             }
