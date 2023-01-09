@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity android:name=".presentation.notification.NotificationActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.search.user.SearchUserActivity"

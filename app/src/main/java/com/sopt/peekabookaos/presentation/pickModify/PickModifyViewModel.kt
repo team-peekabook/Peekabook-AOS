@@ -90,7 +90,27 @@ class PickModifyViewModel : ViewModel() {
                     "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
                 )
             ),
-            PickModify(3, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
+            PickModify(3, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL")),
+            PickModify(0, PickModify.Book(0, "https://image.yes24.com/goods/76106687/XL")),
+            PickModify(0, PickModify.Book(1, "https://image.yes24.com/goods/114671132/XL")),
+            PickModify(0, PickModify.Book(2, "https://image.yes24.com/goods/97255028/XL")),
+            PickModify(
+                0,
+                PickModify.Book(
+                    3,
+                    "https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg"
+                )
+            ),
+            PickModify(0, PickModify.Book(4, "https://image.yes24.com/goods/72127217/XL")),
+            PickModify(0, PickModify.Book(5, "https://image.yes24.com/goods/91159773/XL")),
+            PickModify(
+                0,
+                PickModify.Book(
+                    6,
+                    "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
+                )
+            ),
+            PickModify(0, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
         )
     }
 }
