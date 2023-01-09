@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.sopt.peekabookaos.data.entity.Notification" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/peeka_beige">
+
+        <ImageView
+            android:id="@+id/iv_item_notification_profile_image"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginVertical="16dp"
+            android:src="@color/peeka_red"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_notification_mention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toEndOf="@id/iv_item_notification_profile_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="김한별님이 책을 추천했습니다!"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
