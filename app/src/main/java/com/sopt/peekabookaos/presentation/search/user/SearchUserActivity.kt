@@ -13,5 +13,6 @@ class SearchUserActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.vm = searchUserViewModel
     }
 }
