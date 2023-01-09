@@ -8,6 +8,7 @@ import com.sopt.peekabookaos.data.entity.PickModify
 import com.sopt.peekabookaos.databinding.ItemPickModifyBinding
 import com.sopt.peekabookaos.presentation.bookshelf.ItemClickListener
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import timber.log.Timber
 
 class PickModifyAdapter(
     private val clickListener: ItemClickListener<PickModify>
@@ -16,6 +17,7 @@ class PickModifyAdapter(
         DIFF_CALLBACK
     ) {
     private var selectedPositionSet: LinkedHashSet<Int>? = linkedSetOf()
+    private var initState = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickShelfViewHolder {
         val itemPickModifyBinding =
@@ -25,6 +27,7 @@ class PickModifyAdapter(
 
     override fun onBindViewHolder(holder: PickShelfViewHolder, position: Int) {
         holder.onBind(getItem(position), clickListener)
+        if (initState) initSelectedPositionSet(getItem(position), position)
         holder.binding.ivItemBookshelfShelfSelect.isVisible =
             (selectedPositionSet?.contains(position) == true && position != RecyclerView.NO_POSITION)
         holder.binding.tvItemBookshelfShelfPick.isVisible =
@@ -32,6 +35,7 @@ class PickModifyAdapter(
     }
 
     fun updateSelectedPosition(position: Int, state: Boolean) {
+        initState = false
         if (state) {
             selectedPositionSet?.add(position)
             for (pos in selectedPositionSet!!) {
@@ -46,8 +50,11 @@ class PickModifyAdapter(
         }
     }
 
-    fun initSelectedPositionSet(hashSet: LinkedHashSet<Int>?) {
-        selectedPositionSet = hashSet
+    private fun initSelectedPositionSet(item: PickModify, position: Int) {
+        if (item.pickIndex != 0) {
+            Timber.tag("kang").e("initSelectedPositionSet: $selectedPositionSet")
+            selectedPositionSet?.add(position)
+        }
     }
 
     class PickShelfViewHolder(val binding: ItemPickModifyBinding) :

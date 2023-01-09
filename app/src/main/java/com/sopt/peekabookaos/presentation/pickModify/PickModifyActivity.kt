@@ -32,7 +32,6 @@ class PickModifyActivity :
                 )
             }
         }
-        pickShelfAdapter.initSelectedPositionSet(viewModel.selectedItemList.value)
         binding.rvPickModify.adapter = pickShelfAdapter
         pickShelfAdapter.submitList(viewModel.pickModifyData.value)
 

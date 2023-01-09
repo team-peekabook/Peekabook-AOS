@@ -62,6 +62,9 @@ class PickModifyViewModel : ViewModel() {
         return count
     }
 
+    private fun getIinitSelectedItemPosition() {
+    }
+
     private fun initPickModifyData() {
         _pickModifyData.value = listOf(
             PickModify(0, PickModify.Book(0, "https://image.yes24.com/goods/76106687/XL")),
