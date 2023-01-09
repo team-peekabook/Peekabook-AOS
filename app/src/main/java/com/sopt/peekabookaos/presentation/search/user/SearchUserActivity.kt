@@ -62,12 +62,12 @@ class SearchUserActivity :
             searchUserViewModel.isServerStatus.collect { success ->
                 if (success) {
                     with(binding) {
-                        llSearchUserProfile.visibility = View.VISIBLE
+                        clSearchUserProfile.visibility = View.VISIBLE
                         llSearchUserError.visibility = View.INVISIBLE
                     }
                 } else {
                     with(binding) {
-                        llSearchUserProfile.visibility = View.INVISIBLE
+                        clSearchUserProfile.visibility = View.INVISIBLE
                         llSearchUserError.visibility = View.VISIBLE
                     }
                 }
