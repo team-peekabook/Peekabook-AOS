@@ -33,6 +33,10 @@ class BarcodeViewModel : ViewModel() {
         }
     }
 
+    fun initServerStatus() {
+        _serverStatus.value = BarcodeState.IDLE
+    }
+
     companion object {
         private val dummy = Book(
             bookImage = "http://image.yes24.com/goods/90365124/XL",
