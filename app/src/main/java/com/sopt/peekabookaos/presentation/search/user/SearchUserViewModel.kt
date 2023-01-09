@@ -16,8 +16,7 @@ class SearchUserViewModel : ViewModel() {
     private val _isSearchStatus = MutableSharedFlow<Boolean>()
     val isSearchStatus = _isSearchStatus.asSharedFlow()
 
-    private val _isFollowStatus = MutableSharedFlow<Boolean>()
-    val isFollowStatus = _isFollowStatus.asSharedFlow()
+    private val isFollowStatus = MutableSharedFlow<Boolean>()
 
     val nickname = MutableStateFlow("")
 
@@ -53,10 +52,10 @@ class SearchUserViewModel : ViewModel() {
     private fun deleteFollow() {
         viewModelScope.launch {
             if (serverStatus) {
-                _isFollowStatus.emit(true)
+                isFollowStatus.emit(true)
                 isFollowed.value = false
             } else {
-                _isFollowStatus.emit(false)
+                isFollowStatus.emit(false)
             }
         }
     }
@@ -64,10 +63,10 @@ class SearchUserViewModel : ViewModel() {
     private fun postFollow() {
         viewModelScope.launch {
             if (serverStatus) {
-                _isFollowStatus.emit(true)
+                isFollowStatus.emit(true)
                 isFollowed.value = true
             } else {
-                _isFollowStatus.emit(false)
+                isFollowStatus.emit(false)
             }
         }
     }
