@@ -53,5 +53,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_search_user_title" />
 
+        <EditText
+            android:id="@+id/et_search_user"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/peeka_white_40"
+            android:hint="@string/search_user_hint"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingVertical="10dp"
+            android:paddingStart="16dp"
+            android:text="@={vm.nickname}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintEnd_toStartOf="@id/btn_search_user"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_search_top" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
