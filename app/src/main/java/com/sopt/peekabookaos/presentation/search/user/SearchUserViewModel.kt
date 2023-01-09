@@ -50,6 +50,17 @@ class SearchUserViewModel : ViewModel() {
         }
     }
 
+    private fun deleteFollow() {
+        viewModelScope.launch {
+            if (serverStatus) {
+                _isFollowStatus.emit(true)
+                isFollowed.value = false
+            } else {
+                _isFollowStatus.emit(false)
+            }
+        }
+    }
+
             }
         }
     }
