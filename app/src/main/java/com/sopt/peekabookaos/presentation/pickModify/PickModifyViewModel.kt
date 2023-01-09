@@ -12,7 +12,6 @@ class PickModifyViewModel : ViewModel() {
     private val _selectedItemList: MutableLiveData<LinkedHashSet<Int>> = MutableLiveData(
         linkedSetOf()
     )
-    val selectedItemList: LiveData<LinkedHashSet<Int>>? = _selectedItemList
     private val _selectState: MutableLiveData<Boolean> = MutableLiveData()
     val selectState: LiveData<Boolean> = _selectState
 
