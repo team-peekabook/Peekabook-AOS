@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.pickModify.PickModifyViewModel" />
@@ -30,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="82dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
