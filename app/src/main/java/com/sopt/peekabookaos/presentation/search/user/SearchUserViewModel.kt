@@ -49,3 +49,10 @@ class SearchUserViewModel : ViewModel() {
         )
     }
 }
+
+data class SearchUserUiState(
+    val id: Int = -1,
+    val nickname: String = "",
+    val profileImage: String = "",
+    val intro: String = ""
+)
