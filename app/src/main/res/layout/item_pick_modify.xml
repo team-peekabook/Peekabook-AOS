@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/peeka_beige" />
+            android:src="@color/peeka_beige"/>
 
         <ImageView
             android:id="@+id/iv_item_bookshelf_shelf_select"
@@ -34,13 +34,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/peeka_white_60" />
+            android:src="@color/peeka_white_60"
+            tools:src="@color/peeka_white_60"/>
 
         <TextView
             android:id="@+id/tv_item_bookshelf_shelf_pick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_red_fill_rect"
+            android:background="@drawable/shape_red_fill_circle"
             android:gravity="center"
             android:text="1"
             android:textColor="@color/peeka_white"
