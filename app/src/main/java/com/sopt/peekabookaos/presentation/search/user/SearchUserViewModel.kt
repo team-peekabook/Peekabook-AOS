@@ -17,4 +17,22 @@ class SearchUserViewModel : ViewModel() {
     /* 서버 통신 시 제거 예정 */
     private val serverStatus = false
 
+    fun searchBtnClickListener() {
+        /* 서버 통신 시 구현 예정*/
+        viewModelScope.launch {
+            if (serverStatus) {
+                _isServerStatus.emit(true)
+                _uiState.value = _uiState.value.copy(
+                    id = dummy.id,
+                    nickname = dummy.nickname,
+                    profileImage = dummy.profileImage,
+                    intro = dummy.intro
+                )
+            } else {
+                _isServerStatus.emit(false)
+                Timber.e("error.")
+            }
+        }
+    }
+
 }
