@@ -44,9 +44,10 @@ class BookShelfViewModel : ViewModel() {
 
     private fun initUserData() {
         _userData.value = User(
-            "수빈은문수빈",
-            "https://play-lh.googleusercontent.com/R8-LD7m5rwQwIdAit3PwUG8QgYoDecAZBSaEuPAjhTpsG6mkqo130b-RKm9RrXBj-kI",
-            "안녕하세요, 문수빈의 책장입니다. \n선배들 구경 할람할 말람말 편한대로 하셔"
+            id = 1,
+            nickname = "이빵주",
+            profileImage = "https://play-lh.googleusercontent.com/R8-LD7m5rwQwIdAit3PwUG8QgYoDecAZBSaEuPAjhTpsG6mkqo130b-RKm9RrXBj-kI",
+            intro = "어쩔티비"
         )
     }
 
