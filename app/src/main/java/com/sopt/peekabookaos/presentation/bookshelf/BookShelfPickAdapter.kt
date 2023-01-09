@@ -9,7 +9,7 @@ import com.sopt.peekabookaos.databinding.ItemBookshelfPickBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookShelfPickAdapter :
-    ListAdapter<Pick, BookShelfPickAdapter.PickViewHolder>(pickDiffUtil) {
+    ListAdapter<Pick, BookShelfPickAdapter.PickViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickViewHolder {
         val itemBookshelfPickBinding =
@@ -29,7 +29,7 @@ class BookShelfPickAdapter :
     }
 
     companion object {
-        val pickDiffUtil =
+        val DIFF_CALLBACK =
             ItemDiffCallback<Pick>(
                 onItemsTheSame = { old, new -> old.idx == new.idx },
                 onContentsTheSame = { old, new -> old == new }

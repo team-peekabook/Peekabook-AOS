@@ -9,7 +9,7 @@ import com.sopt.peekabookaos.databinding.ItemBookshelfShelfBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookShelfShelfAdapter :
-    ListAdapter<Shelf, BookShelfShelfAdapter.MyShelfViewHolder>(myShelfDiffUtil) {
+    ListAdapter<Shelf, BookShelfShelfAdapter.MyShelfViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyShelfViewHolder {
         val itemBookshelfMyShelfBinding =
@@ -29,7 +29,7 @@ class BookShelfShelfAdapter :
     }
 
     companion object {
-        val myShelfDiffUtil = ItemDiffCallback<Shelf>(
+        val DIFF_CALLBACK = ItemDiffCallback<Shelf>(
             onItemsTheSame = { old, new -> old.book == new.book },
             onContentsTheSame = { old, new -> old == new }
         )
