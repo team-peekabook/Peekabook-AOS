@@ -13,8 +13,9 @@ class SearchUserViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(User())
     val uiState = _uiState.asStateFlow()
 
-    private val _isServerStatus = MutableSharedFlow<Boolean>()
-    val isServerStatus = _isServerStatus.asSharedFlow()
+    private val _isSearchStatus = MutableSharedFlow<Boolean>()
+    val isSearchStatus = _isSearchStatus.asSharedFlow()
+
 
     val nickname = MutableStateFlow("")
 
@@ -25,7 +26,7 @@ class SearchUserViewModel : ViewModel() {
         /* 서버 통신 시 구현 예정*/
         viewModelScope.launch {
             if (serverStatus) {
-                _isServerStatus.emit(true)
+                _isSearchStatus.emit(true)
                 _uiState.value = dummy
             } else {
                 _isServerStatus.emit(false)
