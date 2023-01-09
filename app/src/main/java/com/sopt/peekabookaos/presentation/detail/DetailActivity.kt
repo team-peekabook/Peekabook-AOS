@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +17,14 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
         initContentAppearance()
+        initDetailview()
+        initBookIdAppearance()
+    }
+
+    private fun initBookIdAppearance() {
+        detailViewModel.initBookIdData(
+            intent.getIntExtra("BOOK_ID", -1)
+        )
     }
 
     private fun initContentAppearance() {
@@ -43,5 +52,26 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 }
             }
         }
+    }
+
+    private fun initDetailview() {
+        val location = "friend"
+        when(location) {
+//        when (LOCATION) {
+            MY -> {
+                detailViewModel.initIsMyDetailView(true)
+                detailViewModel.initDetailMyData()
+            }
+            FRIEND -> {
+                detailViewModel.initIsMyDetailView(false)
+                detailViewModel.initDetailFriendData()
+            }
+        }
+    }
+
+    companion object {
+        const val MY = "my"
+        const val FRIEND = "friend"
+        private const val BOOK_ID = -1
     }
 }
