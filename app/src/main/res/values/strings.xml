@@ -47,6 +47,15 @@
     <string name="tv_detail_content">한 마디</string>
     <string name="tv_detail_memo">메모</string>
 
+    <!-- Book Recommendation-->
+    <string name="recommendation_book_comment_count">%d/200</string>
+    <string name="recommendation_hint">추천사를 적어주세요.</string>
+    <string name="recommendation_to_name">받는 사람</string>
+
+    <!-- PickModify -->
+    <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>
+    <string name="pick_modify_index">%d</string>
+
     <!-- Search Book -->
     <string name="search_book_title">책 검색하기</string>
     <string name="search_book_hint">책 제목 또는 작가명을 입력해주세요.</string>
