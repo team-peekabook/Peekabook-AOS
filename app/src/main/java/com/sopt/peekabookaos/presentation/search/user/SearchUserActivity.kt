@@ -59,7 +59,7 @@ class SearchUserActivity :
 
     private fun collectSearchStatus() {
         repeatOnStarted {
-            searchUserViewModel.isServerStatus.collect { success ->
+            searchUserViewModel.isSearchStatus.collect { success ->
                 if (success) {
                     with(binding) {
                         clSearchUserProfile.visibility = View.VISIBLE
