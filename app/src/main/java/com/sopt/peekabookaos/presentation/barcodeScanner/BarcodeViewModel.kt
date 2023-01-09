@@ -6,6 +6,7 @@ import com.sopt.peekabookaos.data.entity.Book
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class BarcodeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(Book())
@@ -23,9 +24,11 @@ class BarcodeViewModel : ViewModel() {
             _serverStatus.emit(BarcodeState.IDLE)
             if (serverDummyStatus) {
                 _serverStatus.emit(BarcodeState.SUCCESS)
+                Timber.e("asdf emit SUCCESS serverStatus = ${_serverStatus.value}")
                 _uiState.value = dummy
             } else {
                 _serverStatus.emit(BarcodeState.ERROR)
+                Timber.e("asdf emit ERROR serverStatus = ${_serverStatus.value}")
             }
         }
     }
