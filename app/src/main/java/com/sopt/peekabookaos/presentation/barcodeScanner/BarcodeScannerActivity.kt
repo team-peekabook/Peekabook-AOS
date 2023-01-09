@@ -28,7 +28,6 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
@@ -189,12 +188,9 @@ class BarcodeScannerActivity :
                             startActivity(intent)
                             finish()
                         }
-                        Timber.e("asdf intent 실행됨")
                     }
                     BarcodeState.ERROR -> {
-                        Timber.e("asdf 다이얼로그 실행됨")
                         BarcodeErrorDialog().show(supportFragmentManager, TAG)
-                        barcodeViewModel.initServerStatus()
                     }
                     BarcodeState.IDLE -> {
                         return@collect
