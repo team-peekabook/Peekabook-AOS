@@ -1,10 +1,15 @@
 package com.sopt.peekabookaos.presentation.search.user
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.User
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import timber.log.Timber
+
 class SearchUserViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(SearchUserUiState())
     val uiState = _uiState.asStateFlow()
