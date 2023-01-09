@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="1"
         android:layout_marginBottom="8dp"
         android:background="@color/peeka_white_40">
 
@@ -39,7 +40,7 @@
             android:textColor="@color/peeka_red"
             app:layout_constraintStart_toEndOf="@id/iv_item_notification_profile_image"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="알람 메세지가 띄워집니다." />
+            tools:text="'일이삼사오'님이 당신을 팔로우했어요!" />
 
         <TextView
             android:id="@+id/tv_notification_book_title"
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="3dp"
+            android:text="@{data.bookTitle}"
             android:textColor="@color/peeka_red_60"
             app:layout_constraintStart_toEndOf="@id/iv_item_notification_profile_image"
             app:layout_constraintTop_toBottomOf="@+id/tv_notification_mention"
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
+            android:text="@{data.createdAt.getMonth()+ data.createdAt.getDate()}"
             android:textColor="@color/peeka_red_60"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
