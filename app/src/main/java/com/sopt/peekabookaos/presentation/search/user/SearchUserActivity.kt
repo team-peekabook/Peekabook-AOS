@@ -7,7 +7,7 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 
 @AndroidEntryPoint
 class SearchUserActivity :
-    BindingActivity<ActivitySearchBookBinding>(R.layout.activity_search_user) {
+    BindingActivity<ActivitySearchUserBinding>(R.layout.activity_search_user) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
