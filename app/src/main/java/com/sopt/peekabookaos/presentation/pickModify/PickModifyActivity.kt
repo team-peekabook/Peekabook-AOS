@@ -24,20 +24,20 @@ class PickModifyActivity :
 
     private fun initAdapter() {
         pickShelfAdapter = PickModifyAdapter { pos, item ->
-            viewModel.updateSelectedItem(pos, item)
-            var index = viewModel.getSelectedItemIndex(pos, item)
-            if (viewModel.itemSelectState.value == true) {
-                Timber.tag("kang").d("activity- 추가 포지션 update $pos 포지션")
-                pickShelfAdapter.updateSelectedPosition( // 누른 포지션 update
-                    viewModel.position, // 인자: 아이템 포지션이랑 인덱스
-                    index
-                )
-            } else {
-                Timber.tag("kang").d("activity- 삭제 포지션 update $pos 포지션")
-                pickShelfAdapter.updateUnSelectedPosition( // 삭제한 포지션 update
-                    viewModel.position, // 인자: 아이템 포지션이랑 인덱스
-                    index
-                )
+//            viewModel.updateSelectedItem(pos, item)
+//            var index = viewModel.getSelectedItemIndex(pos, item)
+//            if (viewModel.itemSelectState.value == true) {
+//                Timber.tag("kang").d("activity- 추가 포지션 update $pos 포지션")
+//                pickShelfAdapter.updateSelectedPosition( // 누른 포지션 update
+//                    viewModel.position, // 인자: 아이템 포지션이랑 인덱스
+//                    index
+//                )
+//            } else {
+//                Timber.tag("kang").d("activity- 삭제 포지션 update $pos 포지션")
+//                pickShelfAdapter.updateUnSelectedPosition( // 삭제한 포지션 update
+//                    viewModel.position, // 인자: 아이템 포지션이랑 인덱스
+//                    index
+//                )
             }
         }
         binding.rvPickModify.adapter = pickShelfAdapter
