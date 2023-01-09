@@ -28,7 +28,6 @@ class SearchBookActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = searchBookViewModel
-        initViewVisibility()
         initSearchBookAdapter()
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
@@ -38,13 +37,6 @@ class SearchBookActivity :
     private fun initSearchBookAdapter() {
         searchBookAdapter = SearchBookAdapter(onClickBook = ::onClickBook, text = initAdapterText())
         binding.rvSearchBook.adapter = searchBookAdapter
-    }
-
-    private fun initViewVisibility() {
-        with(binding) {
-            ivSearchBookError.visibility = View.INVISIBLE
-            tvSearchBookError.visibility = View.INVISIBLE
-        }
     }
 
     private fun onClickBook(book: Book) {

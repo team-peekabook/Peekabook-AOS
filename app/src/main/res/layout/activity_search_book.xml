@@ -94,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="210dp"
             android:src="@drawable/ic_search_error"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_search_book" />
