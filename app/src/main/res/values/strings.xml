@@ -57,4 +57,5 @@
     <!-- Search User -->
     <string name="search_user_title">사용자 검색하기</string>
     <string name="search_user_hint">사용자의 닉네임을 입력해주세요.</string>
+    <string name="search_user_follow">팔로잉</string>
 </resources>
