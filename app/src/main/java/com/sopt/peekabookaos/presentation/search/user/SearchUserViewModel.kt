@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class SearchUserViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(SearchUserUiState())
+    private val _uiState = MutableStateFlow(User())
     val uiState = _uiState.asStateFlow()
 
     private val _isServerStatus = MutableSharedFlow<Boolean>()
@@ -26,12 +26,7 @@ class SearchUserViewModel : ViewModel() {
         viewModelScope.launch {
             if (serverStatus) {
                 _isServerStatus.emit(true)
-                _uiState.value = _uiState.value.copy(
-                    id = dummy.id,
-                    nickname = dummy.nickname,
-                    profileImage = dummy.profileImage,
-                    intro = dummy.intro
-                )
+                _uiState.value = dummy
             } else {
                 _isServerStatus.emit(false)
             }
@@ -48,10 +43,3 @@ class SearchUserViewModel : ViewModel() {
         )
     }
 }
-
-data class SearchUserUiState(
-    val id: Int = -1,
-    val nickname: String = "",
-    val profileImage: String = "",
-    val intro: String = ""
-)
