@@ -11,7 +11,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecommendFragment :
     BindingFragment<FragmentRecommendBinding>(R.layout.fragment_recommend) {
-    private lateinit var recommendAdapter: BookRecommendAdapter
+    private val recommendAdapter: BookRecommendAdapter?
+        get() = binding.rvRecommend.adapter as? BookRecommendAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,7 +24,7 @@ class RecommendFragment :
 
     private fun initRecommendedClickListener() {
         binding.tvRecommendRecommended.setOnClickListener {
-            recommendAdapter.submitList(recommendedList)
+            recommendAdapter?.submitList(recommendedList)
             with(binding) {
                 tvRecommendRecommended.isSelected = true
                 tvRecommendRecommending.isSelected = false
@@ -37,7 +38,7 @@ class RecommendFragment :
 
     private fun initRecommendingClickListener() {
         binding.tvRecommendRecommending.setOnClickListener {
-            recommendAdapter.submitList(recommendingList)
+            recommendAdapter?.submitList(recommendingList)
             with(binding) {
                 tvRecommendRecommended.isSelected = false
                 tvRecommendRecommending.isSelected = true
@@ -57,9 +58,8 @@ class RecommendFragment :
     }
 
     private fun initAdapter() {
-        recommendAdapter = BookRecommendAdapter()
-        binding.rvRecommend.adapter = recommendAdapter
-        recommendAdapter.submitList(recommendedList)
+        binding.rvRecommend.adapter = BookRecommendAdapter()
+        recommendAdapter?.submitList(recommendedList)
     }
 
     companion object {

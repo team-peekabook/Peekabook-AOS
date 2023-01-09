@@ -10,9 +10,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fragment_bookshelf) {
-    private lateinit var myShelfAdapter: BookShelfShelfAdapter
-    private lateinit var pickAdapter: BookShelfPickAdapter
-    private lateinit var friendAdapter: BookShelfFriendAdapter
+    private val myShelfAdapter: BookShelfShelfAdapter?
+        get() = binding.rvBookshelfBottomViewShelf.adapter as? BookShelfShelfAdapter
+    private val pickAdapter: BookShelfPickAdapter?
+        get() = binding.rvBookshelfPick.adapter as? BookShelfPickAdapter
+    private val friendAdapter: BookShelfFriendAdapter?
+        get() = binding.rvBookshelfFriendList.adapter as? BookShelfFriendAdapter
     private lateinit var itemDeco: BookshelfShelfDecoration
     private val viewModel by viewModels<BookShelfViewModel>()
 
@@ -26,22 +29,17 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initAdapter() {
-        myShelfAdapter = BookShelfShelfAdapter()
-        binding.rvBookshelfBottomViewShelf.adapter = myShelfAdapter
-        myShelfAdapter.submitList(viewModel.shelfData.value)
-
-        pickAdapter = BookShelfPickAdapter()
-        binding.rvBookshelfPick.adapter = pickAdapter
-        pickAdapter.submitList(viewModel.pickData.value)
-
-        friendAdapter = BookShelfFriendAdapter { pos, _ ->
+        binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter()
+        myShelfAdapter?.submitList(viewModel.shelfData.value)
+        binding.rvBookshelfPick.adapter = BookShelfPickAdapter()
+        pickAdapter?.submitList(viewModel.pickData.value)
+        binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, _ ->
             viewModel.updateShelfState(FRIEND)
             viewModel.updateUserId(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
-        binding.rvBookshelfFriendList.adapter = friendAdapter
-        friendAdapter.submitList(viewModel.friendUserData.value)
+        friendAdapter?.submitList(viewModel.friendUserData.value)
     }
 
     private fun initItemDecoration() {
@@ -53,7 +51,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.ivBookshelfUserProfile.setOnClickListener {
             binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
-            friendAdapter.clearSelection()
+            friendAdapter?.clearSelection()
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
         }
     }
@@ -61,7 +59,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initObserver() {
         viewModel.userId.observe(viewLifecycleOwner) {
             if (viewModel.friendShelf.value == FRIEND) {
-                friendAdapter.updateSelectedPosition(it)
+                friendAdapter?.updateSelectedPosition(it)
             }
         }
     }
