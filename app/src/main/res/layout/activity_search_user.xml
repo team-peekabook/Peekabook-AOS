@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_search_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.search.user.SearchUserActivity">
