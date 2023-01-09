@@ -117,8 +117,8 @@
                 android:textColor="@color/peeka_red_60" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_search_user_profile"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_user_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -134,8 +134,12 @@
                 android:id="@+id/iv_search_user_profile"
                 setCircleImage="@{vm.uiState.profileImage}"
                 android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="24dp"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@color/black" />
 
             <TextView
@@ -146,10 +150,14 @@
                 android:layout_marginTop="8dp"
                 android:text="@{vm.uiState.nickname}"
                 android:textColor="@color/peeka_red"
+                app:layout_constraintEnd_toEndOf="@id/iv_search_user_profile"
+                app:layout_constraintStart_toStartOf="@id/iv_search_user_profile"
+                app:layout_constraintTop_toBottomOf="@id/iv_search_user_profile"
                 tools:text="이빵주" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_search_user_follow"
+                style="@style/S3Md"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -158,8 +166,12 @@
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"
                 android:text="@string/search_user_follow"
-                android:textColor="@color/peeka_white" />
-        </LinearLayout>
+                android:textColor="@color/peeka_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tv_search_user_nickname"
+                app:layout_constraintStart_toStartOf="@id/tv_search_user_nickname"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_user_nickname" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
