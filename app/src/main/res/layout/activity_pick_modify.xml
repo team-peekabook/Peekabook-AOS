@@ -29,8 +29,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pick_modify"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="82dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

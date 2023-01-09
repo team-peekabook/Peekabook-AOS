@@ -16,6 +16,7 @@ class PickModifyViewModel : ViewModel() {
     val selectState: LiveData<Boolean> = _selectState
     private val _overListState: MutableLiveData<Boolean> = MutableLiveData()
     val overListState: LiveData<Boolean> = _overListState
+    var preListState = _overListState.value
 
     init {
         initPickModifyData()
@@ -23,7 +24,7 @@ class PickModifyViewModel : ViewModel() {
     }
 
     fun updateSelectedItemState(item: PickModify) {
-        if (_selectedItemList.value?.size!! >= 3) _overListState.value = true
+        preListState = _selectedItemList.value?.size!! >= 3
         if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) {
             item.pickIndex = _selectedItemList.value?.size!! + 1
             _selectedItemList.value?.add(item.book.id)
@@ -34,6 +35,7 @@ class PickModifyViewModel : ViewModel() {
             _selectState.value = false
             updateSelectedItemIndex()
         }
+        _overListState.value = (_selectedItemList.value?.size!! >= 3 && preListState == true)
     }
 
     private fun initSelectedItemList(data: List<PickModify>) {
@@ -88,7 +90,27 @@ class PickModifyViewModel : ViewModel() {
                     "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
                 )
             ),
-            PickModify(3, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
+            PickModify(3, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL")),
+            PickModify(0, PickModify.Book(0, "https://image.yes24.com/goods/76106687/XL")),
+            PickModify(0, PickModify.Book(1, "https://image.yes24.com/goods/114671132/XL")),
+            PickModify(0, PickModify.Book(2, "https://image.yes24.com/goods/97255028/XL")),
+            PickModify(
+                0,
+                PickModify.Book(
+                    3,
+                    "https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg"
+                )
+            ),
+            PickModify(0, PickModify.Book(4, "https://image.yes24.com/goods/72127217/XL")),
+            PickModify(0, PickModify.Book(5, "https://image.yes24.com/goods/91159773/XL")),
+            PickModify(
+                0,
+                PickModify.Book(
+                    6,
+                    "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
+                )
+            ),
+            PickModify(0, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
         )
     }
 }

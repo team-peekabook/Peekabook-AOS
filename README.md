@@ -17,7 +17,7 @@
 <br/>
 
 ## 📌 Kanban Board
-[PEEKABOOK AOS 칸반보드](https://github.com/orgs/team-peekabook/projects/1)
+[PEEKABOOK AOS 칸반보드](https://github.com/orgs/team-peekabook/projects/6)
 <br/><br/>
 
 ## 💚 Convention

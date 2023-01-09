@@ -11,6 +11,8 @@
     <string name="barcode_title">책 검색하기</string>
     <string name="barcode_hard_detected">바코드 인식이 어려우신가요?</string>
     <string name="barcode_guide">책의 뒷면에 있는 ISBN 바코드가\n사각형 안에 들어오게 해주세요.</string>
+    <string name="barcode_error">존재하지 않는 책입니다</string>
+    <string name="barcode_error_search">텍스트로 검색하기</string>
 
     <!-- Bottom Navigation -->
     <string name="bottom_bookshelf">책장</string>
@@ -51,6 +53,9 @@
     <string name="recommendation_book_comment_count">%d/200</string>
     <string name="recommendation_hint">추천사를 적어주세요.</string>
     <string name="recommendation_to_name">받는 사람</string>
+    <string name="recommendation_dialog">%s님에게\n책을 추천하시겠어요?</string>
+    <string name="recommendation_dialog_cancel">취소하기</string>
+    <string name="recommendation_dialog_recommend">추천하기</string>
 
     <!-- PickModify -->
     <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>
@@ -62,6 +67,12 @@
     <string name="search_book_add">내 책장에 추가하기</string>
     <string name="search_book_recommend">친구에게 추천하기</string>
     <string name="search_book_error">앗! 검색어에 해당되는 책이 없는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
+
+    <!-- Notification -->
+    <string name="notification_follow_name_short">\'%s\' 님이 당신을 팔로우했어요!</string>
+    <string name="notification_follow_name_long">\'%s\' 님이\n당신을 팔로우했어요!</string>
+    <string name="notification_recommend">\'%s\'님이\n당신에게 책을 추천했어요!</string>
+    <string name="notification_add">\'%s\'님의\n책장에 새로운 책이 추가되었어요!</string>
 
     <!-- Search User -->
     <string name="search_user_title">사용자 검색하기</string>

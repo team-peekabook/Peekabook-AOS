@@ -6,6 +6,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.FriendUser
 import com.sopt.peekabookaos.databinding.ActivityRecommendationBinding
+import com.sopt.peekabookaos.presentation.recommendation.RecommendDialog.Companion.TAG
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +41,7 @@ class RecommendationActivity :
 
     private fun initCheckBtnOnClickListener() {
         binding.btnRecommendationCheck.setOnClickListener {
-//            다이얼로그가 들어갈것이와요
+            RecommendDialog().show(supportFragmentManager, TAG)
         }
     }
 
