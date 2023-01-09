@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.peekabookaos.data.entity.PickModify
-import timber.log.Timber
 
 class PickModifyViewModel : ViewModel() {
     private val _pickModifyData: MutableLiveData<List<PickModify>> = MutableLiveData()
@@ -33,8 +32,6 @@ class PickModifyViewModel : ViewModel() {
             _selectState.value = false
             updateSelectedItem() // index 변경 고지
         }
-        Timber.tag("kang").e("updateSelectedItemState: ${_selectedItemList.value}")
-        Timber.tag("kang").d("updateSelectedItemState: ${_pickModifyData.value}")
     }
 
     private fun initSelectedItemList(data: List<PickModify>) { // _selectedItemList에 선택되어 있는 item 입력하기
@@ -59,11 +56,9 @@ class PickModifyViewModel : ViewModel() {
         while (iterator.hasNext()) {
             count++
             if (item.book.id == iterator.next()) {
-                Timber.tag("kang").d("getSelectedItemIndex $count")
                 return count
             }
         }
-        Timber.tag("kang").d("getSelectedItemIndex $count")
         return count
     }
 
