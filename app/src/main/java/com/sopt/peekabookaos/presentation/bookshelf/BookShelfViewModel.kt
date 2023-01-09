@@ -47,7 +47,8 @@ class BookShelfViewModel : ViewModel() {
             id = 1,
             nickname = "이빵주",
             profileImage = "https://play-lh.googleusercontent.com/R8-LD7m5rwQwIdAit3PwUG8QgYoDecAZBSaEuPAjhTpsG6mkqo130b-RKm9RrXBj-kI",
-            intro = "어쩔티비"
+            intro = "어쩔티비",
+            isFollowed = true
         )
     }
 
