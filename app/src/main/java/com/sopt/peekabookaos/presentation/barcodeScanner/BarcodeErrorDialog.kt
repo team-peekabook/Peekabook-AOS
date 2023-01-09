@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.presentation.barcodeScanner
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogBarcodeErrorBinding
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 
 class BarcodeErrorDialog : DialogFragment() {
     private var _binding: DialogBarcodeErrorBinding? = null
@@ -32,6 +34,7 @@ class BarcodeErrorDialog : DialogFragment() {
         binding.vm = barcodeViewModel
         initLayout()
         initCloseBtnClickListener()
+        initSearchBtnClickListener()
     }
 
     private fun initLayout() {
@@ -47,6 +50,15 @@ class BarcodeErrorDialog : DialogFragment() {
         binding.btnBarcodeErrorClose.setOnClickListener {
             barcodeViewModel.initServerStatus()
             dismiss()
+        }
+    }
+
+    private fun initSearchBtnClickListener() {
+        binding.btnBarcodeErrorSearch.setOnClickListener {
+            startActivity(
+                Intent(requireContext(), SearchBookActivity::class.java)
+            )
+            requireActivity().finish()
         }
     }
 
