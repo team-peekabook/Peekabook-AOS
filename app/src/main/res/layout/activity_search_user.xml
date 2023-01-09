@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="24dp"
-                android:background="@color/peeka_red"
+                android:background="@{vm.uiState.followed==true?@color/peeka_red:@color/peeka_g_1}"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"
                 android:text="@string/search_user_follow"
