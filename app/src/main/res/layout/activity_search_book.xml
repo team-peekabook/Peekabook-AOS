@@ -125,6 +125,7 @@
             android:clipToPadding="true"
             android:overScrollMode="never"
             android:paddingBottom="12dp"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_search_book"
