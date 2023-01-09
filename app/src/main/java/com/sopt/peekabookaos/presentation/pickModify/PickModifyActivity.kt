@@ -2,7 +2,6 @@ package com.sopt.peekabookaos.presentation.pickModify
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
@@ -20,7 +19,6 @@ class PickModifyActivity :
         binding.vm = viewModel
         initAdapter()
         initItemDecoration()
-        initObserver()
     }
 
     private fun initAdapter() {
@@ -32,19 +30,6 @@ class PickModifyActivity :
                     it
                 )
             }
-//            var index = viewModel.getSelectedItemIndex(pos, item)
-//            if (viewModel.itemSelectState.value == true) {
-//                Timber.tag("kang").d("activity- 추가 포지션 update $pos 포지션")
-//                pickShelfAdapter.updateSelectedPosition( // 누른 포지션 update
-//                    viewModel.position, // 인자: 아이템 포지션이랑 인덱스
-//                    index
-//                )
-//            } else {
-//                Timber.tag("kang").d("activity- 삭제 포지션 update $pos 포지션")
-//                pickShelfAdapter.updateUnSelectedPosition( // 삭제한 포지션 update
-//                    viewModel.position, // 인자: 아이템 포지션이랑 인덱스
-//                    index
-//                )
         }
         binding.rvPickModify.adapter = pickShelfAdapter
         pickShelfAdapter.submitList(viewModel.pickModifyData.value)
@@ -53,13 +38,5 @@ class PickModifyActivity :
     private fun initItemDecoration() {
         itemDeco = PickModifyDecoration(this)
         binding.rvPickModify.addItemDecoration(itemDeco)
-    }
-
-    private fun initObserver() {
-        viewModel.selectedItemList?.observe(
-            this,
-            Observer {
-            }
-        )
     }
 }

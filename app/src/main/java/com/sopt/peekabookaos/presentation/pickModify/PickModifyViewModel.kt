@@ -16,7 +16,6 @@ class PickModifyViewModel : ViewModel() {
     val selectedItemList: LiveData<LinkedHashSet<Int>>? = _selectedItemList
     private val _selectState: MutableLiveData<Boolean> = MutableLiveData()
     val selectState: LiveData<Boolean> = _selectState
-//    var position: Int = -1
 
     init {
         initPickModifyData()
@@ -54,15 +53,6 @@ class PickModifyViewModel : ViewModel() {
         }
     }
 
-    //
-//    fun removeItem(item: Shelf) {
-//        _selectedItemIdData.value!!.remove(item.bookId)
-//    }
-//
-//    fun addItem(item: Shelf) {
-//        _selectedItemIdData.value?.add(item.bookId)
-//    }
-//
     private fun getSelectedItemIndex(item: PickModify): Int { // 아이템을 넣으면 linkedHash에서 몇 번째 인덱스인지 반환
         val iterator = _selectedItemList.value!!.iterator()
         var count = 0
@@ -98,7 +88,7 @@ class PickModifyViewModel : ViewModel() {
                     "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
                 )
             ),
-            PickModify(3, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
+            PickModify(0, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
         )
     }
 }
