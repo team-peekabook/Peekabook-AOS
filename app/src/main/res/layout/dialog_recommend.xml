@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.recommendation.RecommedationViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/peeka_beige">
+
+        <TextView
+            android:id="@+id/tv_recommend_dialog_title"
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginTop="19dp"
+            android:gravity="center"
+            android:text="@{@string/recommendation_dialog(vm.friendData.name)}"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="이빵주님에게\n책을 추천하시겠어요?" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_recommend_dialog_cancel"
+            style="H1Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/peeka_g_2"
+            android:paddingHorizontal="34dp"
+            android:paddingVertical="10dp"
+            android:text="@string/recommendation_dialog_cancel"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_recommend_dialog_recommend"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_recommend_dialog_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_recommend_dialog_recommend"
+            style="H1Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/peeka_red"
+            android:paddingHorizontal="34dp"
+            android:paddingVertical="10dp"
+            android:text="@string/recommendation_dialog_recommend"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="@id/btn_recommend_dialog_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_recommend_dialog_cancel"
+            app:layout_constraintTop_toTopOf="@id/btn_recommend_dialog_cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
