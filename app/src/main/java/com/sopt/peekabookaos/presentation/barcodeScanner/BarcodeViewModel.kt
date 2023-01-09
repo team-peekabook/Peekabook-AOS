@@ -20,17 +20,18 @@ class BarcodeViewModel : ViewModel() {
     fun postBarcode(barcodeString: String) {
         /* 서버 통신 시 구현 예정*/
         viewModelScope.launch {
-            _uiState.emit(UiState.IDLE)
-            if (serverStatus) {
-                _uiState.emit(UiState.Success(bookData))
+            _serverStatus.emit(BarcodeState.IDLE)
+            if (serverDummyStatus) {
+                _serverStatus.emit(BarcodeState.SUCCESS)
+                _uiState.value = dummy
             } else {
-                _uiState.emit(UiState.Error(Throwable()))
+                _serverStatus.emit(BarcodeState.ERROR)
             }
         }
     }
 
     companion object {
-        private val bookData = Book(
+        private val dummy = Book(
             bookImage = "http://image.yes24.com/goods/90365124/XL",
             bookTitle = "아무튼, 여름",
             author = "김신회",
