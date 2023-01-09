@@ -24,11 +24,11 @@ class SearchBookViewModel : ViewModel() {
     fun searchBtnClickListener() {
         /* 서버 통신 시 구현 예정*/
         viewModelScope.launch {
-            _uiState.emit(UiState.IDLE)
             if (serverStatus) {
-                _uiState.emit(UiState.Success(dummy))
+                _isServerStatus.emit(true)
+                _uiState.value = dummy
             } else {
-                _uiState.emit(UiState.Error(Throwable()))
+                _isServerStatus.emit(false)
             }
         }
     }
