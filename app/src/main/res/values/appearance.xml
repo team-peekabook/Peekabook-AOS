@@ -80,4 +80,10 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">9dp</item>
     </style>
+
+    <style name="H1Bd">
+        <item name="android:fontFamily">@font/noto_sans_kr</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
 </resources>

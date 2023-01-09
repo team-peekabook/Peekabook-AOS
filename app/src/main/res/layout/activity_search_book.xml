@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.sopt.peekabookaos.presentation.search.SearchBookViewModel" />
+            type="com.sopt.peekabookaos.presentation.search.book.SearchBookViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige"
-        tools:context=".presentation.search.SearchBookActivity">
+        tools:context=".presentation.search.book.SearchBookActivity">
 
         <ImageButton
             android:id="@+id/btn_search_book_close"
@@ -88,28 +88,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_search_book" />
 
-        <ImageView
-            android:id="@+id/iv_search_book_error"
+        <LinearLayout
+            android:id="@+id/ll_search_book_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="210dp"
-            android:src="@drawable/ic_search_error"
+            android:orientation="vertical"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_search_book" />
+            app:layout_constraintTop_toBottomOf="@id/et_search_book">
 
-        <TextView
-            android:id="@+id/tv_search_book_error"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="@string/search_book_error"
-            android:textColor="@color/peeka_red_60"
-            app:layout_constraintEnd_toEndOf="@id/iv_search_book_error"
-            app:layout_constraintStart_toStartOf="@id/iv_search_book_error"
-            app:layout_constraintTop_toBottomOf="@id/iv_search_book_error" />
+            <ImageView
+                android:id="@+id/iv_search_book_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_search_error" />
+
+            <TextView
+                android:id="@+id/tv_search_book_error"
+                style="@style/H2Md"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/search_book_error"
+                android:textColor="@color/peeka_red_60" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_book"
@@ -119,6 +125,7 @@
             android:clipToPadding="true"
             android:overScrollMode="never"
             android:paddingBottom="12dp"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_search_book"
