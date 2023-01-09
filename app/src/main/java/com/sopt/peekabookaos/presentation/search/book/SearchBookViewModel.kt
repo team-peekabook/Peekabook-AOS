@@ -1,17 +1,20 @@
-package com.sopt.peekabookaos.presentation.search
+package com.sopt.peekabookaos.presentation.search.book
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
-import com.sopt.peekabookaos.util.extensions.UiState
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class SearchBookViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow<UiState<List<Book>>>(UiState.IDLE)
-    val uiState: StateFlow<UiState<List<Book>>> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(emptyList<Book>())
+    val uiState = _uiState.asStateFlow()
+
+    private val _isServerStatus = MutableSharedFlow<Boolean>()
+    val isServerStatus = _isServerStatus.asSharedFlow()
 
     /* 서버 통신 시 제거 예정 */
     private val serverStatus = true
@@ -21,11 +24,11 @@ class SearchBookViewModel : ViewModel() {
     fun searchBtnClickListener() {
         /* 서버 통신 시 구현 예정*/
         viewModelScope.launch {
-            _uiState.emit(UiState.IDLE)
             if (serverStatus) {
-                _uiState.emit(UiState.Success(dummy))
+                _isServerStatus.emit(true)
+                _uiState.value = dummy
             } else {
-                _uiState.emit(UiState.Error(Throwable()))
+                _isServerStatus.emit(false)
             }
         }
     }

@@ -22,12 +22,9 @@ import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
-import com.sopt.peekabookaos.presentation.search.SearchBookActivity
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
-import com.sopt.peekabookaos.util.extensions.UiState
-import com.sopt.peekabookaos.util.extensions.onFailed
-import com.sopt.peekabookaos.util.extensions.onSuccess
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
@@ -68,7 +65,7 @@ class BarcodeScannerActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initPermissionCallBack()
-        collectUiState()
+        collectServerStatusState()
         initCloseBtnClickListener()
         initHardDetectedClickListener()
     }
@@ -156,7 +153,7 @@ class BarcodeScannerActivity :
     }
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
-        if (barcodes.isNotEmpty() && barcodeViewModel.uiState.value !is UiState.Success) {
+        if (barcodes.isNotEmpty() && barcodeViewModel.serverStatus.value !is BarcodeState.SUCCESS) {
             barcodeViewModel.postBarcode(barcodes[0].rawValue!!)
         }
     }
@@ -178,19 +175,27 @@ class BarcodeScannerActivity :
         }
     }
 
-    private fun collectUiState() {
+    private fun collectServerStatusState() {
         repeatOnStarted {
-            barcodeViewModel.uiState.collect { uiState ->
-                uiState.onSuccess { result ->
-                    Intent(this, CreateUpdateBookActivity::class.java).apply {
-                        putExtra(CREATE, result)
-                        putExtra(LOCATION, CREATE)
-                    }.also { intent ->
-                        startActivity(intent)
-                        finish()
+            barcodeViewModel.serverStatus.collect { uiState ->
+                when (uiState) {
+                    BarcodeState.SUCCESS -> {
+                        Intent(this, CreateUpdateBookActivity::class.java).apply {
+                            putExtra(CREATE, barcodeViewModel.uiState.value)
+                            putExtra(LOCATION, CREATE)
+                        }.also { intent ->
+                            startActivity(intent)
+                            finish()
+                        }
                     }
-                }.onFailed {
-                    /* 에러 다이얼로그 구현 */
+
+                    BarcodeState.ERROR -> {
+                        /* 에러 다이얼로그 구현 */
+                    }
+
+                    BarcodeState.IDLE -> {
+                        return@collect
+                    }
                 }
             }
         }

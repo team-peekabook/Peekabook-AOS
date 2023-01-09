@@ -8,6 +8,6 @@ data class Book(
     val bookImage: String = "",
     val bookTitle: String = "",
     val author: String = "",
-    val description: String? = "",
-    val memo: String? = ""
+    val description: String? = null,
+    val memo: String? = null
 ) : Parcelable
