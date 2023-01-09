@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogBarcodeErrorBinding
 
 class BarcodeErrorDialog : DialogFragment() {
     private var _binding: DialogBarcodeErrorBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
+
+    private val barcodeViewModel by activityViewModels<BarcodeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
