@@ -1,6 +1,5 @@
 package com.sopt.peekabookaos.presentation.notification
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -22,7 +21,6 @@ class NotificationAdapter(
         return NotificationViewHolder(itemNotificationBinding)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         holder.onBind(getItem(position), itemStringListener)
         when (getItem(position).typeId) {
