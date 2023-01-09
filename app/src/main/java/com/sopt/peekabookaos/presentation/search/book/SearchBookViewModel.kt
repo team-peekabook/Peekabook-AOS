@@ -13,6 +13,8 @@ class SearchBookViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(emptyList<Book>())
     val uiState = _uiState.asStateFlow()
 
+    private val _isServerStatus = MutableSharedFlow<Boolean>()
+    val isServerStatus = _isServerStatus.asSharedFlow()
 
     /* 서버 통신 시 제거 예정 */
     private val serverStatus = true
