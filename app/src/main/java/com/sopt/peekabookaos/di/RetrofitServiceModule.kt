@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.di
 
+import com.sopt.peekabookaos.data.service.CreateUpdateService
 import com.sopt.peekabookaos.data.service.DetailService
 import com.sopt.peekabookaos.data.service.NotificationService
 import com.sopt.peekabookaos.data.service.RecommendService
@@ -34,3 +35,7 @@ object RetrofitServiceModule {
     fun providesShelfService(retrofit: Retrofit): ShelfService =
         retrofit.create(ShelfService::class.java)
 
+    @Provides
+    fun providesCreateUpdateService(retrofit: Retrofit): CreateUpdateService =
+        retrofit.create(CreateUpdateService::class.java)
+}
