@@ -45,7 +45,8 @@ class SearchUserViewModel : ViewModel() {
             id = 1,
             nickname = "이빵주",
             profileImage = "http://image.yes24.com/goods/90365124/XL",
-            intro = "어쩔티비"
+            intro = "어쩔티비",
+            isFollowed = true
         )
     }
 }
