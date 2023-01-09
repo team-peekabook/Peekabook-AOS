@@ -38,3 +38,9 @@ class BarcodeViewModel : ViewModel() {
         )
     }
 }
+
+sealed class BarcodeState {
+    object IDLE : BarcodeState()
+    object SUCCESS : BarcodeState()
+    object ERROR : BarcodeState()
+}
