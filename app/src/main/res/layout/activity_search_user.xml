@@ -30,5 +30,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_search_user_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_user_title"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintBottom_toBottomOf="@id/btn_search_user_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_search_user_close" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
