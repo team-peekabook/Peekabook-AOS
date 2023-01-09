@@ -1,6 +1,5 @@
 package com.sopt.peekabookaos.presentation.bookshelf
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -46,7 +45,6 @@ class BookShelfFriendAdapter(
     }
 
     fun updateSelectedPosition(position: Int) {
-        Log.e("kang", "first $position")
         selectedPosition = position
         notifyItemChanged(selectedPosition)
         notifyItemChanged(prePosition)

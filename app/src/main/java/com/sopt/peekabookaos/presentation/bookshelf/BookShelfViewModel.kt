@@ -87,40 +87,46 @@ class BookShelfViewModel : ViewModel() {
 
     private fun initShelfData() {
         _shelfData.value = listOf(
-            Shelf("https://image.yes24.com/goods/76106687/XL", false),
-            Shelf("https://image.yes24.com/goods/114671132/XL", true),
+            Shelf(1, "https://image.yes24.com/goods/76106687/XL", false),
+            Shelf(2, "https://image.yes24.com/goods/114671132/XL", true),
             Shelf(
+                3,
                 "https://image.yes24.com/goods/97255028/XL",
                 false
             ),
-            Shelf("https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
-            Shelf("https://image.yes24.com/goods/72127217/XL", false),
+            Shelf(4, "https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
+            Shelf(5, "https://image.yes24.com/goods/72127217/XL", false),
             Shelf(
+                6,
                 "https://image.yes24.com/goods/91159773/XL",
                 false
             ),
             Shelf(
+                7,
                 "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png",
                 false
             ),
-            Shelf("https://image.yes24.com/goods/72310907/XL", true),
-            Shelf("https://image.yes24.com/goods/76106687/XL", false),
-            Shelf("https://image.yes24.com/goods/114671132/XL", true),
+            Shelf(8, "https://image.yes24.com/goods/72310907/XL", true),
+            Shelf(9, "https://image.yes24.com/goods/76106687/XL", false),
+            Shelf(10, "https://image.yes24.com/goods/114671132/XL", true),
             Shelf(
+                11,
                 "https://image.yes24.com/goods/97255028/XL",
                 false
             ),
-            Shelf("https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
-            Shelf("https://image.yes24.com/goods/72127217/XL", false),
+            Shelf(12, "https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg", true),
+            Shelf(13, "https://image.yes24.com/goods/72127217/XL", false),
             Shelf(
+                14,
                 "https://image.yes24.com/goods/91159773/XL",
                 false
             ),
             Shelf(
+                15,
                 "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png",
                 false
             ),
-            Shelf("https://image.yes24.com/goods/72310907/XL", true)
+            Shelf(16, "https://image.yes24.com/goods/72310907/XL", true)
         )
     }
 
