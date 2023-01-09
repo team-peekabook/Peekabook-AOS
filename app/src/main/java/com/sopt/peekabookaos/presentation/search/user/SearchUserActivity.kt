@@ -17,6 +17,7 @@ class SearchUserActivity :
         super.onCreate(savedInstanceState)
         binding.vm = searchUserViewModel
         initEditTextClearFocus()
+        initKeyboardDoneClickListener()
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditTextClearFocus() {
         binding.clSearchUser.setOnTouchListener { _, _ ->
@@ -27,6 +28,18 @@ class SearchUserActivity :
         binding.btnSearchUser.setOnTouchListener { _, _ ->
             KeyBoardUtil.hide(activity = this)
             return@setOnTouchListener false
+        }
+    }
+
+    private fun initKeyboardDoneClickListener() {
+        binding.etSearchUser.setOnEditorActionListener { _, actionId, _ ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                binding.btnSearchUser.performClick()
+                handled = true
+            }
+            KeyBoardUtil.hide(activity = this)
+            handled
         }
     }
 
