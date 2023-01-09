@@ -2,11 +2,15 @@ package com.sopt.peekabookaos.presentation.search.user
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySearchUserBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
+import com.sopt.peekabookaos.util.extensions.repeatOnStarted
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchUserActivity :
@@ -19,6 +23,9 @@ class SearchUserActivity :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
+        collectServerStatus()
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private fun initEditTextClearFocus() {
         binding.clSearchUser.setOnTouchListener { _, _ ->
@@ -50,5 +57,21 @@ class SearchUserActivity :
         }
     }
 
+    private fun collectServerStatus() {
+        repeatOnStarted {
+            searchUserViewModel.isServerStatus.collect { success ->
+                if (success) {
+                    with(binding) {
+                        llSearchUserProfile.visibility = View.VISIBLE
+                        llSearchUserError.visibility = View.INVISIBLE
+                    }
+                } else {
+                    with(binding) {
+                        llSearchUserProfile.visibility = View.INVISIBLE
+                        llSearchUserError.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
     }
 }
