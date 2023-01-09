@@ -11,6 +11,8 @@
     <string name="barcode_title">책 검색하기</string>
     <string name="barcode_hard_detected">바코드 인식이 어려우신가요?</string>
     <string name="barcode_guide">책의 뒷면에 있는 ISBN 바코드가\n사각형 안에 들어오게 해주세요.</string>
+    <string name="barcode_error">존재하지 않는 책입니다</string>
+    <string name="barcode_error_search">텍스트로 검색하기</string>
 
     <!-- Bottom Navigation -->
     <string name="bottom_bookshelf">책장</string>
@@ -51,6 +53,9 @@
     <string name="recommendation_book_comment_count">%d/200</string>
     <string name="recommendation_hint">추천사를 적어주세요.</string>
     <string name="recommendation_to_name">받는 사람</string>
+    <string name="recommendation_dialog">%s님에게\n책을 추천하시겠어요?</string>
+    <string name="recommendation_dialog_cancel">취소하기</string>
+    <string name="recommendation_dialog_recommend">추천하기</string>
 
     <!-- PickModify -->
     <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>

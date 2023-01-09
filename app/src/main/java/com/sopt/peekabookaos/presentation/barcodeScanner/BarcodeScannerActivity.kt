@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
+import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeErrorDialog.Companion.TAG
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
@@ -153,7 +154,7 @@ class BarcodeScannerActivity :
     }
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
-        if (barcodes.isNotEmpty() && barcodeViewModel.serverStatus.value !is BarcodeState.SUCCESS) {
+        if (barcodes.isNotEmpty() && barcodeViewModel.serverStatus.value == BarcodeState.IDLE) {
             barcodeViewModel.postBarcode(barcodes[0].rawValue!!)
         }
     }
@@ -188,11 +189,9 @@ class BarcodeScannerActivity :
                             finish()
                         }
                     }
-
                     BarcodeState.ERROR -> {
-                        /* 에러 다이얼로그 구현 */
+                        BarcodeErrorDialog().show(supportFragmentManager, TAG)
                     }
-
                     BarcodeState.IDLE -> {
                         return@collect
                     }
