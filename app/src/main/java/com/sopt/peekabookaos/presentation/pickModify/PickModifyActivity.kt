@@ -22,8 +22,8 @@ class PickModifyActivity :
     }
 
     private fun initAdapter() {
-        pickShelfAdapter = PickModifyAdapter { _, _ ->
-//            viewModel.updateSelectedItem(pos, item)
+        pickShelfAdapter = PickModifyAdapter { _, item ->
+            viewModel.updateSelectedItemState(item)
 //            var index = viewModel.getSelectedItemIndex(pos, item)
 //            if (viewModel.itemSelectState.value == true) {
 //                Timber.tag("kang").d("activity- 추가 포지션 update $pos 포지션")

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.peekabookaos.data.entity.PickModify
+import timber.log.Timber
 
 class PickModifyViewModel : ViewModel() {
     private val _pickModifyData: MutableLiveData<List<PickModify>> = MutableLiveData()
@@ -12,7 +13,7 @@ class PickModifyViewModel : ViewModel() {
     private val _selectedItemList: MutableLiveData<LinkedHashSet<PickModify>> = MutableLiveData(
         linkedSetOf()
     )
-    private val selectedItemList: LiveData<LinkedHashSet<PickModify>> = _selectedItemList
+    val selectedItemList: LiveData<LinkedHashSet<PickModify>> = _selectedItemList
 //
 //    private val _itemSelectState: MutableLiveData<Boolean> = MutableLiveData()
 //    val itemSelectState: LiveData<Boolean> = _itemSelectState
@@ -21,28 +22,41 @@ class PickModifyViewModel : ViewModel() {
 
     init {
         initPickModifyData()
+        _pickModifyData.value?.let { initSelectedItemList(it) } // _selectedItemList에 선택되어 있는 item 입력하기
     }
 
-    fun updateSelectedItemState(pos: Int, item: PickModify) { // 클릭했을 때, 아이템의 상태 업데이트를 위한 함수
-        if (item.pickIndex == 0) {
+    fun updateSelectedItemState(item: PickModify) { // 클릭했을 때, 아이템의 상태 업데이트를 위한 함수
+        if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) { // 고르지 않은 상태일 경우에
+            item.pickIndex = _selectedItemList.value?.size!! + 1 ?: 1 // null이면 사이즈가 없으니까 인덱스는 1로
+            _selectedItemList.value?.add(item) // hash에 추가
+        } else { // 고른 경우
+            _selectedItemList.value!!.remove(item) // hash에서 제거
+            item.pickIndex = 0 // index 0으로 변경
+        }
+        Timber.tag("kang").e("updateSelectedItemState: ${_selectedItemList.value}")
+        Timber.tag("kang").d("updateSelectedItemState: ${_pickModifyData.value}")
+    }
+
+    private fun initSelectedItemList(data: List<PickModify>) { // _selectedItemList에 선택되어 있는 item 입력하기
+        for (item in data) {
+            if (item.pickIndex != 0) {
+                _selectedItemList.value?.add(item)
+            }
         }
     }
 
-    fun initselectedItemList(data: List<PickModify>) {
-        lateinit var item: PickModify
-        while (item in data) {
+    fun updateSelectedItem(
+        item: PickModify,
+        data: List<PickModify>
+    ) { // 우선순위가 변동사항이 생기면 인덱스를 업데이트 하는 함수
+        for (tempItem in data) {
+            if (_selectedItemList.value?.contains(tempItem) == true) {
+                tempItem.pickIndex = getSelectedItemIndex(item)
+            }
         }
     }
 
-//    fun updateSelectedItem(pos: Int, item: Shelf) {
-//        position = pos
-//        if (_selectedItemIdData.value?.contains(item.bookId) == true) { // bookId에 이미 존재하면 제거
-//            _itemSelectState.value = false
-//        } else { // 존재하지 않고
-//            _itemSelectState.value = _selectedItemIdData.value!!.size <= 2
-//        }
-//    }
-//
+    //
 //    fun removeItem(item: Shelf) {
 //        _selectedItemIdData.value!!.remove(item.bookId)
 //    }
@@ -51,23 +65,18 @@ class PickModifyViewModel : ViewModel() {
 //        _selectedItemIdData.value?.add(item.bookId)
 //    }
 //
-//    fun getSelectedItemIndex(position: Int, item: Shelf): Int { // 책장의 포지션을 넣으면 몇 번째 인덱스인지 반환
-//        Timber.tag("kang").d("vm-getSelectedItemIndex")
-//        val iterator = selectedItemData.value!!.iterator()
-//        var count = 1
-//        while (iterator.hasNext()) {
-//            count++
-//            if (position == iterator.next()) {
-//                Timber.tag("kang").e("vm-${selectedItemData.value}, count - $count")
-//                removeItem(item)
-//                return count
-//            }
-//        }
-//        Timber.tag("kang")
-//            .e("vm-${selectedItemData.value}, size - ${selectedItemData.value!!.size}")
-//        addItem(item)
-//        return selectedItemData.value!!.size
-//    }
+    private fun getSelectedItemIndex(item: PickModify): Int { // 아이템을 넣으면 linkedHash에서 몇 번째 인덱스인지 반환
+        Timber.tag("kang").d("vm-getSelectedItemIndex")
+        val iterator = _selectedItemList.value!!.iterator()
+        var count = 1
+        while (iterator.hasNext()) {
+            count++
+            if (item == iterator.next()) {
+                return count
+            }
+        }
+        return count
+    }
 
     private fun initPickModifyData() {
         _pickModifyData.value = listOf(

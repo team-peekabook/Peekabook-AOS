@@ -1,7 +1,7 @@
 package com.sopt.peekabookaos.data.entity
 
 data class PickModify(
-    val pickIndex: Int,
+    var pickIndex: Int,
     val book: Book
 ) {
     @kotlinx.serialization.Serializable
