@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.Shelf
+import com.sopt.peekabookaos.data.entity.PickModify
 import com.sopt.peekabookaos.databinding.ItemPickModifyBinding
 import com.sopt.peekabookaos.presentation.bookshelf.ItemClickListener
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 import timber.log.Timber
 
 class PickModifyAdapter(
-    private val clickListener: ItemClickListener<Shelf>
+    private val clickListener: ItemClickListener<PickModify>
 ) :
-    androidx.recyclerview.widget.ListAdapter<Shelf, PickModifyAdapter.PickShelfViewHolder>(
+    androidx.recyclerview.widget.ListAdapter<PickModify, PickModifyAdapter.PickShelfViewHolder>(
         DIFF_CALLBACK
     ) {
     private var firstSelectedPosition = RecyclerView.NO_POSITION
@@ -116,7 +116,7 @@ class PickModifyAdapter(
 
     class PickShelfViewHolder(val binding: ItemPickModifyBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Shelf, itemClickListener: ItemClickListener<Shelf>) {
+        fun onBind(data: PickModify, itemClickListener: ItemClickListener<PickModify>) {
             binding.data = data
             binding.root.setOnClickListener {
                 itemClickListener.onClick(absoluteAdapterPosition, data)
@@ -126,7 +126,7 @@ class PickModifyAdapter(
 
     companion object {
         private val DIFF_CALLBACK =
-            ItemDiffCallback<Shelf>(
+            ItemDiffCallback<PickModify>(
                 onItemsTheSame = { old, new -> old.book == new.book },
                 onContentsTheSame = { old, new -> old == new }
             )

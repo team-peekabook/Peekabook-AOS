@@ -6,7 +6,6 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class PickModifyActivity :
@@ -23,7 +22,7 @@ class PickModifyActivity :
     }
 
     private fun initAdapter() {
-        pickShelfAdapter = PickModifyAdapter { pos, item ->
+        pickShelfAdapter = PickModifyAdapter { _, _ ->
 //            viewModel.updateSelectedItem(pos, item)
 //            var index = viewModel.getSelectedItemIndex(pos, item)
 //            if (viewModel.itemSelectState.value == true) {
@@ -38,10 +37,9 @@ class PickModifyActivity :
 //                    viewModel.position, // 인자: 아이템 포지션이랑 인덱스
 //                    index
 //                )
-            }
         }
         binding.rvPickModify.adapter = pickShelfAdapter
-        pickShelfAdapter.submitList(viewModel.pickShelfData.value)
+        pickShelfAdapter.submitList(viewModel.pickModifyData.value)
     }
 
     private fun initItemDecoration() {

@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.sopt.peekabookaos.data.entity.PickModify
 
 class PickModifyViewModel : ViewModel() {
-    private val _pickShelfData: MutableLiveData<List<PickModify>> = MutableLiveData()
-    val pickShelfData: LiveData<List<PickModify>> = _pickShelfData
+    private val _pickModifyData: MutableLiveData<List<PickModify>> = MutableLiveData()
+    val pickModifyData: LiveData<List<PickModify>> = _pickModifyData
 
-    private val _selectedItemIdData: MutableLiveData<LinkedHashSet<Int>> = MutableLiveData(
+    private val _selectedItemList: MutableLiveData<LinkedHashSet<PickModify>> = MutableLiveData(
         linkedSetOf()
     )
-    private val selectedItemData: LiveData<LinkedHashSet<Int>> = _selectedItemIdData
+    private val selectedItemList: LiveData<LinkedHashSet<PickModify>> = _selectedItemList
 //
 //    private val _itemSelectState: MutableLiveData<Boolean> = MutableLiveData()
 //    val itemSelectState: LiveData<Boolean> = _itemSelectState
@@ -20,7 +20,7 @@ class PickModifyViewModel : ViewModel() {
 //    var position: Int = -1
 
     init {
-        initShelfData()
+        initPickModifyData()
     }
 
 //    fun updateSelectedItem(pos: Int, item: Shelf) {
@@ -58,8 +58,8 @@ class PickModifyViewModel : ViewModel() {
 //        return selectedItemData.value!!.size
 //    }
 
-    private fun initShelfData() {
-        _pickShelfData.value = listOf(
+    private fun initPickModifyData() {
+        _pickModifyData.value = listOf(
             PickModify(0, PickModify.Book(0, "https://image.yes24.com/goods/76106687/XL")),
             PickModify(2, PickModify.Book(1, "https://image.yes24.com/goods/114671132/XL")),
             PickModify(0, PickModify.Book(2, "https://image.yes24.com/goods/97255028/XL")),
