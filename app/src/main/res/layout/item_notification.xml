@@ -13,9 +13,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintDimensionRatio="1"
         android:layout_marginBottom="8dp"
         android:background="@color/peeka_white_40">
+
 
         <ImageView
             android:id="@+id/iv_item_notification_profile_image"
@@ -25,6 +25,19 @@
             android:layout_marginVertical="16dp"
             android:layout_marginStart="13dp"
             android:src="@color/peeka_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_item_notification_read"
+            setCircleImage="@color/peeka_white_40"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="16dp"
+            android:layout_marginStart="13dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,14 +56,29 @@
             tools:text="'일이삼사오'님이 당신을 팔로우했어요!" />
 
         <TextView
+            android:id="@+id/tv_notification_mention_type1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:visibility="invisible"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintStart_toEndOf="@id/iv_item_notification_profile_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="'일이삼사오'님이 당신을 팔로우했어요!" />
+
+        <TextView
             android:id="@+id/tv_notification_book_title"
             style="@style/S3Md"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="3dp"
+            android:layout_marginBottom="20dp"
             android:text="@{data.bookTitle}"
             android:textColor="@color/peeka_red_60"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_item_notification_profile_image"
             app:layout_constraintTop_toBottomOf="@+id/tv_notification_mention"
             tools:text="책 제목이 띄워집니다." />
@@ -62,7 +90,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
-            android:text="@{data.createdAt.getMonth()+ data.createdAt.getDate()}"
             android:textColor="@color/peeka_red_60"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
