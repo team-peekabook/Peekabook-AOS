@@ -23,6 +23,17 @@ class PickModifyViewModel : ViewModel() {
         initPickModifyData()
     }
 
+    fun updateSelectedItemState(pos: Int, item: PickModify) { // 클릭했을 때, 아이템의 상태 업데이트를 위한 함수
+        if (item.pickIndex == 0) {
+        }
+    }
+
+    fun initselectedItemList(data: List<PickModify>) {
+        lateinit var item: PickModify
+        while (item in data) {
+        }
+    }
+
 //    fun updateSelectedItem(pos: Int, item: Shelf) {
 //        position = pos
 //        if (_selectedItemIdData.value?.contains(item.bookId) == true) { // bookId에 이미 존재하면 제거

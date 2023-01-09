@@ -43,10 +43,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_red_fill_circle"
             android:gravity="center"
-            android:text="@{data.pickIndex ==0 ? View.INVISIBLE : View.VISIBLE}"
+            android:text="@{@string/pick_modify_index(data.pickIndex)}"
+            tools:text="0"
             android:textColor="@color/peeka_white"
             android:textSize="12dp"
-            android:visibility="invisible"
+            android:visibility="@{data.pickIndex == 0 ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -49,4 +49,5 @@
 
     <!-- PickModify -->
     <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>
+    <string name="pick_modify_index">%d</string>
 </resources>
