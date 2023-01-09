@@ -191,12 +191,11 @@ class BarcodeScannerActivity :
                         }
                         Timber.e("asdf intent 실행됨")
                     }
-
                     BarcodeState.ERROR -> {
                         Timber.e("asdf 다이얼로그 실행됨")
                         BarcodeErrorDialog().show(supportFragmentManager, TAG)
+                        barcodeViewModel.initServerStatus()
                     }
-
                     BarcodeState.IDLE -> {
                         return@collect
                     }
