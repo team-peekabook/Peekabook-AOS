@@ -3,6 +3,7 @@ package com.sopt.peekabookaos.di
 import com.sopt.peekabookaos.data.service.DetailService
 import com.sopt.peekabookaos.data.service.NotificationService
 import com.sopt.peekabookaos.data.service.RecommendService
+import com.sopt.peekabookaos.data.service.SearchService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +24,8 @@ object RetrofitServiceModule {
     @Provides
     fun providesRecommendService(retrofit: Retrofit): RecommendService =
         retrofit.create(RecommendService::class.java)
+
+    @Provides
+    fun providesSearchService(retrofit: Retrofit): SearchService =
+        retrofit.create(SearchService::class.java)
 
