@@ -16,6 +16,8 @@ class SearchUserViewModel : ViewModel() {
     private val _isSearchStatus = MutableSharedFlow<Boolean>()
     val isSearchStatus = _isSearchStatus.asSharedFlow()
 
+    private val _isFollowStatus = MutableSharedFlow<Boolean>()
+    val isFollowStatus = _isFollowStatus.asSharedFlow()
 
     val nickname = MutableStateFlow("")
 
