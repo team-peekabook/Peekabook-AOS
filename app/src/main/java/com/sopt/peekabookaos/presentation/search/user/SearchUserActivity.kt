@@ -23,7 +23,7 @@ class SearchUserActivity :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
-        collectServerStatus()
+        collectSearchStatus()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -57,7 +57,7 @@ class SearchUserActivity :
         }
     }
 
-    private fun collectServerStatus() {
+    private fun collectSearchStatus() {
         repeatOnStarted {
             searchUserViewModel.isServerStatus.collect { success ->
                 if (success) {
