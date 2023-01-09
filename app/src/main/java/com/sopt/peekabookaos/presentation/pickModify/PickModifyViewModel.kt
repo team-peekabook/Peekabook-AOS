@@ -12,9 +12,10 @@ class PickModifyViewModel : ViewModel() {
     private val _selectedItemList: MutableLiveData<LinkedHashSet<Int>> = MutableLiveData(
         linkedSetOf()
     )
-    val selectedItemList: LiveData<LinkedHashSet<Int>> = _selectedItemList
     private val _selectState: MutableLiveData<Boolean> = MutableLiveData()
     val selectState: LiveData<Boolean> = _selectState
+    private val _overListState: MutableLiveData<Boolean> = MutableLiveData()
+    val overListState: LiveData<Boolean> = _overListState
 
     init {
         initPickModifyData()
@@ -22,6 +23,7 @@ class PickModifyViewModel : ViewModel() {
     }
 
     fun updateSelectedItemState(item: PickModify) {
+        if (_selectedItemList.value?.size!! >= 3) _overListState.value = true
         if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) {
             item.pickIndex = _selectedItemList.value?.size!! + 1
             _selectedItemList.value?.add(item.book.id)

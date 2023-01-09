@@ -8,7 +8,6 @@ import com.sopt.peekabookaos.data.entity.PickModify
 import com.sopt.peekabookaos.databinding.ItemPickModifyBinding
 import com.sopt.peekabookaos.presentation.bookshelf.ItemClickListener
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
-import timber.log.Timber
 
 class PickModifyAdapter(
     private val clickListener: ItemClickListener<PickModify>
@@ -52,7 +51,6 @@ class PickModifyAdapter(
 
     private fun initSelectedPositionSet(item: PickModify, position: Int) {
         if (item.pickIndex != 0) {
-            Timber.tag("kang").e("initSelectedPositionSet: $selectedPositionSet")
             selectedPositionSet?.add(position)
         }
     }
