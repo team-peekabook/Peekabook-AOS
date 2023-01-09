@@ -117,15 +117,13 @@ class SearchBookActivity :
             searchBookViewModel.uiState.collect { uiState ->
                 uiState.onSuccess { result ->
                     with(binding) {
-                        ivSearchBookError.visibility = View.INVISIBLE
-                        tvSearchBookError.visibility = View.INVISIBLE
+                        llSearchBookError.visibility = View.INVISIBLE
                         rvSearchBook.visibility = View.VISIBLE
                     }
                     searchBookAdapter.submitList(result)
                 }.onFailed {
                     with(binding) {
-                        ivSearchBookError.visibility = View.VISIBLE
-                        tvSearchBookError.visibility = View.VISIBLE
+                        llSearchBookError.visibility = View.VISIBLE
                         rvSearchBook.visibility = View.INVISIBLE
                     }
                 }
