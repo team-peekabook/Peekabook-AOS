@@ -18,28 +18,31 @@
         android:background="@color/peeka_beige"
         tools:context=".presentation.detail.DetailActivity">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_recommendation_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
+            android:background="@color/peeka_beige"
             android:src="@drawable/ic_peeka_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_recommendation_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/peeka_beige"
             android:src="@drawable/ic_peeka_check"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_recommendation_book_cover"
+            setImage="@{vm.bookData.bookImage}"
             android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="16dp"
@@ -56,8 +59,9 @@
             style="@style/H3Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/peeka_red"
             android:layout_marginTop="16dp"
+            android:text="@{vm.bookData.bookTitle}"
+            android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_recommendation_book_cover"
@@ -66,11 +70,12 @@
         <TextView
             android:id="@+id/tv_recommendation_book_author"
             style="@style/H2Md"
-            android:textColor="@color/peeka_red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="80dp"
             android:layout_marginTop="4dp"
+            android:text="@{vm.bookData.author}"
+            android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_recommendation_book_title"
@@ -80,9 +85,9 @@
             android:id="@+id/cl_recommendation_redRect"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
             android:background="@color/peeka_red"
-            android:layout_marginHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_recommendation_book_author">
@@ -118,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
+                android:text="@{vm.friendData.name}"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_title"
                 app:layout_constraintStart_toEndOf="@+id/view_recommendation_line_title"
@@ -133,14 +139,15 @@
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/shape_whitefill_redline_0_rect"
             android:gravity="top"
+            android:hint="추천사를 적어주세요."
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
+            android:text="@={vm.comment}"
             android:textColor="@color/peeka_red"
             app:layout_constraintDimensionRatio="1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_recommendation_redRect"
-            android:hint="추천사를 적어주세요." />
+            app:layout_constraintTop_toBottomOf="@id/cl_recommendation_redRect" />
 
         <TextView
             android:id="@+id/tv_recommendation_book_comment_count"
