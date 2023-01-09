@@ -22,6 +22,10 @@
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".presentation.search.user.SearchUserActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".presentation.pickModify.PickModifyActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -30,7 +34,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.search.SearchBookActivity"
+            android:name=".presentation.search.book.SearchBookActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

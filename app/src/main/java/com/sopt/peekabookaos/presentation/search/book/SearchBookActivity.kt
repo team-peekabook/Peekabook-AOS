@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.search
+package com.sopt.peekabookaos.presentation.search.book
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,8 +14,6 @@ import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActiv
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
-import com.sopt.peekabookaos.util.extensions.onFailed
-import com.sopt.peekabookaos.util.extensions.onSuccess
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,23 +26,16 @@ class SearchBookActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = searchBookViewModel
-        initViewVisibility()
         initSearchBookAdapter()
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
-        collectUiState()
+        initCloseBtnClickListener()
+        collectServerStatusState()
     }
 
     private fun initSearchBookAdapter() {
         searchBookAdapter = SearchBookAdapter(onClickBook = ::onClickBook, text = initAdapterText())
         binding.rvSearchBook.adapter = searchBookAdapter
-    }
-
-    private fun initViewVisibility() {
-        with(binding) {
-            ivSearchBookError.visibility = View.INVISIBLE
-            tvSearchBookError.visibility = View.INVISIBLE
-        }
     }
 
     private fun onClickBook(book: Book) {
@@ -113,22 +104,22 @@ class SearchBookActivity :
         }
     }
 
-    private fun collectUiState() {
+    private fun initCloseBtnClickListener() {
+        binding.btnSearchBookClose.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun collectServerStatusState() {
         repeatOnStarted {
-            searchBookViewModel.uiState.collect { uiState ->
-                uiState.onSuccess { result ->
-                    with(binding) {
-                        ivSearchBookError.visibility = View.INVISIBLE
-                        tvSearchBookError.visibility = View.INVISIBLE
-                        rvSearchBook.visibility = View.VISIBLE
-                    }
-                    searchBookAdapter.submitList(result)
-                }.onFailed {
-                    with(binding) {
-                        ivSearchBookError.visibility = View.VISIBLE
-                        tvSearchBookError.visibility = View.VISIBLE
-                        rvSearchBook.visibility = View.INVISIBLE
-                    }
+            searchBookViewModel.isServerStatus.collect { success ->
+                if (success) {
+                    binding.llSearchBookError.visibility = View.INVISIBLE
+                    binding.rvSearchBook.visibility = View.VISIBLE
+                    searchBookAdapter.submitList(searchBookViewModel.uiState.value)
+                } else {
+                    binding.llSearchBookError.visibility = View.VISIBLE
+                    binding.rvSearchBook.visibility = View.INVISIBLE
                 }
             }
         }
