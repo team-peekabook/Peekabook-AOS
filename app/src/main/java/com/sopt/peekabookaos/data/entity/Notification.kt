@@ -4,6 +4,7 @@ import java.util.Date
 
 data class Notification(
     val alarmId: Int,
+    val profile: String,
     val receiverId: Int,
     val senderId: Int,
     val bookTitle: String,

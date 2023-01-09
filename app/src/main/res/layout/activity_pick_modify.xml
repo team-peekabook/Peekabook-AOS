@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.pickModify.PickModifyViewModel" />

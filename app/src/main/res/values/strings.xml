@@ -64,6 +64,8 @@
     <string name="search_book_error">앗! 검색어에 해당되는 책이 없는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
 
     <!-- Notification -->
-    <string name="notification_recommend_name_short">%d 님이 당신에게 책을 추천했어요!</string>
-    <string name="notification_recommend_name_long">%d 님이\n당신에게 책을 추천했어요!</string>
+    <string name="notification_follow_name_short">\'%d\' 님이 당신을 팔로우했어요!</string>
+    <string name="notification_follow_name_long">\'%d\' 님이\n당신을 팔로우했어요!</string>
+    <string name="notification_recommend">\'%d\'님이\n당신에게 책을 추천했어요!</string>
+    <string name="notification_add">\'%d\'님의\n책장에 새로운 책이 추가되었어요!</string>
 </resources>
