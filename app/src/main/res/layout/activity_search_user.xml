@@ -142,6 +142,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@color/black" />
 
+            <ImageView
+                android:id="@+id/iv_search_profile_outline"
+                android:layout_width="56dp"
+                android:layout_height="0dp"
+                android:src="@drawable/shape_red_line_0_circle"
+                app:layout_constraintBottom_toBottomOf="@id/iv_search_user_profile"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="@id/iv_search_user_profile"
+                app:layout_constraintStart_toStartOf="@id/iv_search_user_profile"
+                app:layout_constraintTop_toTopOf="@id/iv_search_user_profile" />
+
             <TextView
                 android:id="@+id/tv_search_user_nickname"
                 style="@style/H1Bd"
