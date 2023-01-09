@@ -23,6 +23,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".presentation.pickModify.PickModifyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".presentation.barcodeScanner.BarcodeScannerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
