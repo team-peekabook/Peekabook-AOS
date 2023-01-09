@@ -14,8 +14,6 @@ import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActiv
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
-import com.sopt.peekabookaos.util.extensions.onFailed
-import com.sopt.peekabookaos.util.extensions.onSuccess
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +30,7 @@ class SearchBookActivity :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
-        collectUiState()
+        collectServerStatusState()
     }
 
     private fun initSearchBookAdapter() {
@@ -112,20 +110,16 @@ class SearchBookActivity :
         }
     }
 
-    private fun collectUiState() {
+    private fun collectServerStatusState() {
         repeatOnStarted {
-            searchBookViewModel.uiState.collect { uiState ->
-                uiState.onSuccess { result ->
-                    with(binding) {
-                        llSearchBookError.visibility = View.INVISIBLE
-                        rvSearchBook.visibility = View.VISIBLE
-                    }
-                    searchBookAdapter.submitList(result)
-                }.onFailed {
-                    with(binding) {
-                        llSearchBookError.visibility = View.VISIBLE
-                        rvSearchBook.visibility = View.INVISIBLE
-                    }
+            searchBookViewModel.isServerStatus.collect { success ->
+                if (success) {
+                    binding.llSearchBookError.visibility = View.INVISIBLE
+                    binding.rvSearchBook.visibility = View.VISIBLE
+                    searchBookAdapter.submitList(searchBookViewModel.uiState.value)
+                } else {
+                    binding.llSearchBookError.visibility = View.VISIBLE
+                    binding.rvSearchBook.visibility = View.INVISIBLE
                 }
             }
         }
