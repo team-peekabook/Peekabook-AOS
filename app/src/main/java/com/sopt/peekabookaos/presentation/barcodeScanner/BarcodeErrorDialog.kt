@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
@@ -21,7 +22,8 @@ class BarcodeErrorDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogBarcodeErrorBinding.inflate(inflater, container, false)
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.dialog_barcode_error, container, false)
         return binding.root
     }
 
