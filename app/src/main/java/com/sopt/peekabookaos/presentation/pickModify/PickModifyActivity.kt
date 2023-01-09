@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.pickModify
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
@@ -31,8 +32,14 @@ class PickModifyActivity :
                 )
             }
         }
+        pickShelfAdapter.initSelectedPositionSet(viewModel.selectedItemList.value)
         binding.rvPickModify.adapter = pickShelfAdapter
         pickShelfAdapter.submitList(viewModel.pickModifyData.value)
+
+        val animator = binding.rvPickModify.itemAnimator
+        if (animator is SimpleItemAnimator) {
+            animator.supportsChangeAnimations = false
+        }
     }
 
     private fun initItemDecoration() {

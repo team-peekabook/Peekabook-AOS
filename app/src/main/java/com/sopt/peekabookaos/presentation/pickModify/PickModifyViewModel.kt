@@ -12,6 +12,7 @@ class PickModifyViewModel : ViewModel() {
     private val _selectedItemList: MutableLiveData<LinkedHashSet<Int>> = MutableLiveData(
         linkedSetOf()
     )
+    val selectedItemList: LiveData<LinkedHashSet<Int>> = _selectedItemList
     private val _selectState: MutableLiveData<Boolean> = MutableLiveData()
     val selectState: LiveData<Boolean> = _selectState
 
@@ -82,7 +83,7 @@ class PickModifyViewModel : ViewModel() {
                     "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
                 )
             ),
-            PickModify(0, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
+            PickModify(3, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
         )
     }
 }

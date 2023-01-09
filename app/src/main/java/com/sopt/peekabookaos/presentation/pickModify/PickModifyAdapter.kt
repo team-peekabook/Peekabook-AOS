@@ -46,6 +46,10 @@ class PickModifyAdapter(
         }
     }
 
+    fun initSelectedPositionSet(hashSet: LinkedHashSet<Int>?) {
+        selectedPositionSet = hashSet
+    }
+
     class PickShelfViewHolder(val binding: ItemPickModifyBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: PickModify, itemClickListener: ItemClickListener<PickModify>) {
