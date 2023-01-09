@@ -61,6 +61,13 @@ class SearchUserViewModel : ViewModel() {
         }
     }
 
+    private fun postFollow() {
+        viewModelScope.launch {
+            if (serverStatus) {
+                _isFollowStatus.emit(true)
+                isFollowed.value = true
+            } else {
+                _isFollowStatus.emit(false)
             }
         }
     }
