@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
+import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeErrorDialog.Companion.TAG
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
@@ -27,6 +28,7 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
@@ -187,6 +189,7 @@ class BarcodeScannerActivity :
                             startActivity(intent)
                             finish()
                         }
+                        Timber.e("asdf intent 실행됨")
                     }
 
                     BarcodeState.ERROR -> {
