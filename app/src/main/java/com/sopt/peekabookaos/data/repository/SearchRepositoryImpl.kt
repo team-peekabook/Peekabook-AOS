@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.data.repository
 
+import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.entity.User
 import com.sopt.peekabookaos.data.entity.response.FollowResponse
 import com.sopt.peekabookaos.data.source.remote.SearchDataSource
@@ -17,4 +18,7 @@ class SearchRepositoryImpl @Inject constructor(
         kotlin.runCatching { searchDataSource.postFollow(friendId) }.map { response ->
             response.data!!
         }
+
+    override suspend fun deleteFollow(friendId: String): Result<NoResponse> =
+        kotlin.runCatching { searchDataSource.deleteFollow(friendId) }
 }
