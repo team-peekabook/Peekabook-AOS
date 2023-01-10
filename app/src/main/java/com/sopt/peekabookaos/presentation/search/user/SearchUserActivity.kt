@@ -9,6 +9,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySearchUserBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
+import com.sopt.peekabookaos.util.extensions.UiState
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +24,7 @@ class SearchUserActivity :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
-        collectSearchStatus()
+        collectSearchState()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -57,18 +58,24 @@ class SearchUserActivity :
         }
     }
 
-    private fun collectSearchStatus() {
+    private fun collectSearchState() {
         repeatOnStarted {
-            searchUserViewModel.isSearchStatus.collect { success ->
-                if (success) {
-                    with(binding) {
-                        clSearchUserProfile.visibility = View.VISIBLE
-                        llSearchUserError.visibility = View.INVISIBLE
+            searchUserViewModel.searchState.collect { uiState ->
+                when (uiState) {
+                    UiState.SUCCESS -> {
+                        with(binding) {
+                            clSearchUserProfile.visibility = View.VISIBLE
+                            llSearchUserError.visibility = View.INVISIBLE
+                        }
                     }
-                } else {
-                    with(binding) {
-                        clSearchUserProfile.visibility = View.INVISIBLE
-                        llSearchUserError.visibility = View.VISIBLE
+                    UiState.ERROR -> {
+                        with(binding) {
+                            clSearchUserProfile.visibility = View.INVISIBLE
+                            llSearchUserError.visibility = View.VISIBLE
+                        }
+                    }
+                    UiState.IDLE -> {
+                        return@collect
                     }
                 }
             }
