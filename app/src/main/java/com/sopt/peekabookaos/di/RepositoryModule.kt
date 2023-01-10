@@ -6,6 +6,8 @@ import com.sopt.peekabookaos.data.repository.DetailRepository
 import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NotificationRepository
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
+import com.sopt.peekabookaos.data.repository.RecommendRepository
+import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
 import com.sopt.peekabookaos.data.repository.SearchRepository
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import dagger.Module
@@ -39,4 +41,10 @@ object RepositoryModule {
     fun providesNotificationRepository(
         notificationRepositoryImpl: NotificationRepositoryImpl
     ): NotificationRepository = notificationRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun providesRecommendRepository(
+        recommendRepositoryImpl: RecommendRepositoryImpl
+    ): RecommendRepository = recommendRepositoryImpl
 
