@@ -38,65 +38,47 @@ class SearchBookViewModel : ViewModel() {
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 여름",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 가을",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 여름",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 가을",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 여름",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 여름",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 가을",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 여름",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             ),
             Book(
                 bookImage = "http://image.yes24.com/goods/90365124/XL",
                 bookTitle = "아무튼, 가을",
-                author = "김신회",
-                description = "",
-                memo = ""
+                author = "김신회"
             )
         )
     }
