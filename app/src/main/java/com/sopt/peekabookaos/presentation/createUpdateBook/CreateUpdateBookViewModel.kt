@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.peekabookaos.data.entity.Book
+import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 
 class CreateUpdateBookViewModel : ViewModel() {
+@HiltViewModel
     private val _bookData = MutableLiveData<Book>()
     val bookData: LiveData<Book> = _bookData
 
