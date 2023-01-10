@@ -38,9 +38,7 @@ class BarcodeViewModel : ViewModel() {
         private val dummy = Book(
             bookImage = "http://image.yes24.com/goods/90365124/XL",
             bookTitle = "아무튼, 여름",
-            author = "김신회",
-            description = "",
-            memo = ""
+            author = "김신회"
         )
     }
 }
