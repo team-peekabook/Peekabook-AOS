@@ -1,3 +1,13 @@
 package com.sopt.peekabookaos.data.service
 
-interface SearchService
+import com.sopt.peekabookaos.data.entity.BaseResponse
+import com.sopt.peekabookaos.data.entity.response.SearchUserResponse
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface SearchService {
+    @GET("friend")
+    suspend fun getSearchUser(
+        @Query("nickname") nickname: String
+    ): BaseResponse<SearchUserResponse>
+}

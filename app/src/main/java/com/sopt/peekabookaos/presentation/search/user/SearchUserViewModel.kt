@@ -3,18 +3,25 @@ package com.sopt.peekabookaos.presentation.search.user
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.User
+import com.sopt.peekabookaos.data.repository.SearchRepository
+import com.sopt.peekabookaos.util.extensions.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class SearchUserViewModel : ViewModel() {
+@HiltViewModel
+class SearchUserViewModel @Inject constructor(
+    private val searchRepository: SearchRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(User())
     val uiState = _uiState.asStateFlow()
 
-    private val _isSearchStatus = MutableSharedFlow<Boolean>()
-    val isSearchStatus = _isSearchStatus.asSharedFlow()
+    private val _searchState = MutableStateFlow<UiState>(UiState.IDLE)
+    val searchState = _searchState.asStateFlow()
 
     private val isFollowStatus = MutableSharedFlow<Boolean>()
 
@@ -26,15 +33,18 @@ class SearchUserViewModel : ViewModel() {
     private val serverStatus = false
 
     fun searchBtnClickListener() {
-        /* 서버 통신 시 구현 예정*/
         viewModelScope.launch {
-            if (serverStatus) {
-                _isSearchStatus.emit(true)
-                _uiState.value = dummy
-                isFollowed.value = dummy.isFollowed
-            } else {
-                _isSearchStatus.emit(false)
-            }
+            _searchState.emit(UiState.IDLE)
+            searchRepository.getSearchUser(nickname.value)
+                .onSuccess { response ->
+                    _uiState.value = response
+                    isFollowed.value = response.isFollowed
+                    _searchState.emit(UiState.SUCCESS)
+                    Timber.d("asdf success $response")
+                }.onFailure { throwable ->
+                    _searchState.emit(UiState.ERROR)
+                    Timber.e("asdf throwable $throwable")
+                }
         }
     }
 
@@ -69,15 +79,5 @@ class SearchUserViewModel : ViewModel() {
                 isFollowStatus.emit(false)
             }
         }
-    }
-
-    companion object {
-        private val dummy = User(
-            id = 1,
-            nickname = "이빵주",
-            profileImage = "http://image.yes24.com/goods/90365124/XL",
-            intro = "어쩔티비",
-            isFollowed = true
-        )
     }
 }

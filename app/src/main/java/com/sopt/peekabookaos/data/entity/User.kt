@@ -1,5 +1,8 @@
 package com.sopt.peekabookaos.data.entity
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class User(
     val id: Int = -1,
     val nickname: String = "",
