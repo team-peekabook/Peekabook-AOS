@@ -19,7 +19,7 @@ class NotificationViewModel @Inject constructor(
     private val _notificationData: MutableLiveData<List<Notification>> = MutableLiveData()
     val notificationData: LiveData<List<Notification>> = _notificationData
 
-    private val _isServerStatus = MutableLiveData<Boolean>()
+    private val _isServerStatus = MutableLiveData(false)
     val isServerStatus: LiveData<Boolean> = _isServerStatus
 
     init {
