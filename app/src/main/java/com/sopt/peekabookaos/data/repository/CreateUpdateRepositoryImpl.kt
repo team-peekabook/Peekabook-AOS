@@ -9,7 +9,8 @@ class CreateUpdateRepositoryImpl @Inject constructor(
     private val createUpdateDataSource: CreateUpdateDataSource
 ) : CreateUpdateRepository {
     override suspend fun postCreateBook(createBookRequest: CreateBookRequest): Result<CreateBookResponse> =
-        kotlin.runCatching {createUpdateDataSource.postCreateBook(createBookRequest)}.map { response ->
-            response.data!!
-        }
+        kotlin.runCatching { createUpdateDataSource.postCreateBook(createBookRequest) }
+            .map { response ->
+                response.data!!
+            }
 }
