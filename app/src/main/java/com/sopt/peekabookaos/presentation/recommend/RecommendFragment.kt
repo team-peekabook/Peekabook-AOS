@@ -19,6 +19,7 @@ class RecommendFragment :
         super.onViewCreated(view, savedInstanceState)
         initTextAppearance()
         initAdapter()
+        initRecommendBookObserve()
         initRecommendedClickListener()
         initRecommendingClickListener()
     }
@@ -62,5 +63,8 @@ class RecommendFragment :
         binding.rvRecommend.adapter = BookRecommendAdapter()
     }
 
+    private fun initRecommendBookObserve() {
+        recommendViewModel.recommendedBook.observe(viewLifecycleOwner) { book ->
+        }
     }
 }
