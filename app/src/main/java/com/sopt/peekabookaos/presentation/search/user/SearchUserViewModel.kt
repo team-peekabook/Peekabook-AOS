@@ -3,15 +3,19 @@ package com.sopt.peekabookaos.presentation.search.user
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.User
+import com.sopt.peekabookaos.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class SearchUserViewModel : ViewModel() {
+class SearchUserViewModel @Inject constructor(
+    private val searchRepository: SearchRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(User())
     val uiState = _uiState.asStateFlow()
 
