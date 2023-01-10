@@ -10,13 +10,16 @@ import com.sopt.peekabookaos.data.repository.RecommendRepository
 import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
 import com.sopt.peekabookaos.data.repository.SearchRepository
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
+import com.sopt.peekabookaos.data.repository.ShelfRepository
+import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule
 object RepositoryModule {
     @Provides
     @Singleton
@@ -48,3 +51,9 @@ object RepositoryModule {
         recommendRepositoryImpl: RecommendRepositoryImpl
     ): RecommendRepository = recommendRepositoryImpl
 
+    @Provides
+    @Singleton
+    fun providesShelfRepository(
+        shelfRepositoryImpl: ShelfRepositoryImpl
+    ): ShelfRepository = shelfRepositoryImpl
+}
