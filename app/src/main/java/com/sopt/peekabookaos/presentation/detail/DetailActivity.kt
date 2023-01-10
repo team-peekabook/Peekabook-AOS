@@ -55,9 +55,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initDetailview() {
-        val location = "friend"
-        when(location) {
-//        when (LOCATION) {
+        when (LOCATION) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
                 detailViewModel.initDetailMyData()
