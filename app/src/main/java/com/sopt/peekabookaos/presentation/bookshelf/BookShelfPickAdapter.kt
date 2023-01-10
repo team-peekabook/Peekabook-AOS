@@ -31,7 +31,7 @@ class BookShelfPickAdapter :
     companion object {
         private val DIFF_CALLBACK =
             ItemDiffCallback<Picks>(
-                onItemsTheSame = { old, new -> old.book.id == new.book.id },
+                onItemsTheSame = { old, new -> old.pickIndex == new.pickIndex },
                 onContentsTheSame = { old, new -> old == new }
             )
     }
