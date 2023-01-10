@@ -19,7 +19,7 @@
         tools:context=".presentation.detail.DetailActivity">
 
         <ImageButton
-            android:id="@+id/ic_detail_back"
+            android:id="@+id/btn_detail_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
@@ -30,27 +30,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/ic_detail_edit"
+            android:id="@+id/btn_detail_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
             android:src="@drawable/ic_detail_edit"
             android:visibility="@{vm.isMyDetailView == true ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/ic_detail_back"
-            app:layout_constraintEnd_toStartOf="@id/ic_detail_delete"
-            app:layout_constraintTop_toTopOf="@id/ic_detail_back" />
+            app:layout_constraintBottom_toBottomOf="@id/btn_detail_back"
+            app:layout_constraintEnd_toStartOf="@id/btn_detail_delete"
+            app:layout_constraintTop_toTopOf="@id/btn_detail_back" />
 
         <ImageButton
-            android:id="@+id/ic_detail_delete"
+            android:id="@+id/btn_detail_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
             android:background="@null"
             android:src="@drawable/ic_detail_delete"
             android:visibility="@{vm.isMyDetailView == true ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/ic_detail_back"
+            app:layout_constraintBottom_toBottomOf="@id/btn_detail_edit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ic_detail_back" />
+            app:layout_constraintTop_toTopOf="@id/btn_detail_edit" />
 
         <ImageView
             android:id="@+id/iv_detail_book_cover"
@@ -63,7 +63,7 @@
             app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_detail_back"
+            app:layout_constraintTop_toBottomOf="@id/btn_detail_delete"
             tools:src="@color/black" />
 
         <TextView
