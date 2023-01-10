@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.Pick
+import com.sopt.peekabookaos.data.entity.Picks
 import com.sopt.peekabookaos.databinding.ItemBookshelfPickBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookShelfPickAdapter :
-    ListAdapter<Pick, BookShelfPickAdapter.PickViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<Picks, BookShelfPickAdapter.PickViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickViewHolder {
         val itemBookshelfPickBinding =
@@ -23,15 +23,15 @@ class BookShelfPickAdapter :
 
     class PickViewHolder(private val binding: ItemBookshelfPickBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Pick) {
+        fun onBind(data: Picks) {
             binding.data = data
         }
     }
 
     companion object {
         private val DIFF_CALLBACK =
-            ItemDiffCallback<Pick>(
-                onItemsTheSame = { old, new -> old.idx == new.idx },
+            ItemDiffCallback<Picks>(
+                onItemsTheSame = { old, new -> old.book.id == new.book.id },
                 onContentsTheSame = { old, new -> old == new }
             )
     }
