@@ -30,7 +30,7 @@ class BookShelfShelfAdapter :
 
     companion object {
         private val DIFF_CALLBACK = ItemDiffCallback<Books>(
-            onItemsTheSame = { old, new -> old.bookId == new.bookId },
+            onItemsTheSame = { old, new -> old.id == new.id },
             onContentsTheSame = { old, new -> old == new }
         )
     }
