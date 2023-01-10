@@ -1,5 +1,7 @@
 package com.sopt.peekabookaos.di
 
+import com.sopt.peekabookaos.data.repository.CreateUpdateRepository
+import com.sopt.peekabookaos.data.repository.CreateUpdateRepositoryImpl
 import com.sopt.peekabookaos.data.repository.SearchRepository
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import dagger.Module
@@ -15,4 +17,10 @@ object RepositoryModule {
     fun providesSearchRepository(
         searchRepositoryImpl: SearchRepositoryImpl
     ): SearchRepository = searchRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun providesCreateUpdateRepository(
+        createUpdateRepositoryImpl: CreateUpdateRepositoryImpl
+    ): CreateUpdateRepository = createUpdateRepositoryImpl
 
