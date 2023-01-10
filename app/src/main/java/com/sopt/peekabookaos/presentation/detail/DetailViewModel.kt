@@ -12,7 +12,7 @@ class DetailViewModel : ViewModel() {
     private val _isMyDetailView = MutableLiveData<Boolean>()
     val isMyDetailView: LiveData<Boolean> = _isMyDetailView
 
-    private val idData = MutableLiveData<Int>()
+    private val bookId = MutableLiveData<Int>()
 
     init {
         initDetailMyData()
@@ -23,8 +23,8 @@ class DetailViewModel : ViewModel() {
         _isMyDetailView.value = detail
     }
 
-    fun initBookIdData(id: Int) {
-        idData.value = id
+    fun initBookId(id: Int) {
+        bookId.value = id
     }
 
     fun initDetailMyData() {
