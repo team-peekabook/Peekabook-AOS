@@ -20,6 +20,9 @@ class CreateUpdateBookViewModel @Inject constructor(
 
     private val createUpdateRequest = MutableLiveData<CreateBookRequest>()
 
+    private val _isServerStatus = MutableLiveData<Boolean>()
+    val isServerStatus: LiveData<Boolean> = _isServerStatus
+
     val comment = MutableLiveData("")
 
     val memo = MutableLiveData("")
