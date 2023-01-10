@@ -8,6 +8,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
+import com.sopt.peekabookaos.util.extensions.setOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,7 @@ class PickModifyActivity :
         binding.vm = viewModel
         initAdapter()
         initItemDecoration()
+        initCheckClickListener()
         initObserver()
     }
 
@@ -44,6 +46,12 @@ class PickModifyActivity :
     private fun initItemDecoration() {
         itemDeco = PickModifyDecoration(this)
         binding.rvPickModify.addItemDecoration(itemDeco)
+    }
+
+    private fun initCheckClickListener() {
+        binding.ivPickModifyCheck.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initObserver() {
