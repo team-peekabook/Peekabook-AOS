@@ -18,6 +18,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
+    private val json = Json { ignoreUnknownKeys = true }
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
 
@@ -54,6 +55,6 @@ object RetrofitModule {
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URI)
             .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
 }
