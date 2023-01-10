@@ -22,8 +22,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initBookIdAppearance() {
-        detailViewModel.initBookIdData(
-            intent.getIntExtra("BOOK_ID", -1)
+        detailViewModel.initBookId(
+            intent.getIntExtra(BOOK_INFO, DEFAULT)
         )
     }
 
@@ -70,6 +70,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     companion object {
         const val MY = "my"
         const val FRIEND = "friend"
-        private const val BOOK_ID = -1
+        const val BOOK_INFO = "book_info"
+        private const val DEFAULT = -1
     }
 }
