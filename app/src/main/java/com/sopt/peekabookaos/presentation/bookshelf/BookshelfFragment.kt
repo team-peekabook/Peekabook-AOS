@@ -1,10 +1,16 @@
 package com.sopt.peekabookaos.presentation.bookshelf
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
+import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
+import com.sopt.peekabookaos.presentation.notification.NotificationActivity
+import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
+import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity
+import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +31,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         initAdapter()
         initItemDecoration()
         initUserClickListener()
+        initFriendPlusClickListener()
+        initNotificationClickListener()
+        initRecommendClickListener()
+        initPickModifyClickListener()
+        initCreateBookClickListener()
         initObserver()
     }
 
@@ -53,6 +64,41 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             viewModel.updateShelfState(USER)
             friendAdapter?.clearSelection()
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+        }
+    }
+
+    private fun initFriendPlusClickListener() {
+        binding.btnBookshelfFriendPlus.setOnClickListener {
+            val toSearchUser = Intent(requireActivity(), SearchUserActivity::class.java)
+            startActivity(toSearchUser)
+        }
+    }
+
+    private fun initNotificationClickListener() {
+        binding.btnBookshelfNotification.setOnClickListener {
+            val toNotification = Intent(requireActivity(), NotificationActivity::class.java)
+            startActivity(toNotification)
+        }
+    }
+
+    private fun initRecommendClickListener() {
+        binding.btnBookshelfRecommend.setOnClickListener {
+            val toRecommendation = Intent(requireActivity(), RecommendationActivity::class.java)
+            startActivity(toRecommendation)
+        }
+    }
+
+    private fun initPickModifyClickListener() {
+        binding.btnBookshelfPickModify.setOnClickListener {
+            val toPickModify = Intent(requireActivity(), PickModifyActivity::class.java)
+            startActivity(toPickModify)
+        }
+    }
+
+    private fun initCreateBookClickListener() {
+        binding.btnBookshelfAddBook.setOnClickListener {
+            val toBarcodeScanner = Intent(requireActivity(), BarcodeScannerActivity::class.java)
+            startActivity(toBarcodeScanner)
         }
     }
 

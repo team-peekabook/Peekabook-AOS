@@ -16,6 +16,7 @@ class NotificationActivity :
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
         initAdapter()
+        initCloseClickListener()
     }
 
     private fun initAdapter() {
@@ -24,6 +25,12 @@ class NotificationActivity :
         }
         binding.rvNotification.adapter = notifyAdapter
         notifyAdapter.submitList(viewModel.notificationData.value)
+    }
+
+    private fun initCloseClickListener() {
+        binding.ivNotificationClose.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initCommentString(item: Notification): String {

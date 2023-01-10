@@ -22,6 +22,7 @@ class PickModifyActivity :
         binding.vm = viewModel
         initAdapter()
         initItemDecoration()
+        initCheckClickListener()
         initObserver()
     }
 
@@ -44,6 +45,12 @@ class PickModifyActivity :
     private fun initItemDecoration() {
         itemDeco = PickModifyDecoration(this)
         binding.rvPickModify.addItemDecoration(itemDeco)
+    }
+
+    private fun initCheckClickListener() {
+        binding.ivPickModifyCheck.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initObserver() {
