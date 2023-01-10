@@ -18,6 +18,8 @@ class CreateUpdateBookViewModel @Inject constructor(
     private val _isUpdateView = MutableLiveData<Boolean>()
     val isUpdateView: LiveData<Boolean> = _isUpdateView
 
+    private val createUpdateRequest = MutableLiveData<CreateBookRequest>()
+
     val comment = MutableLiveData("")
 
     val memo = MutableLiveData("")
@@ -32,6 +34,17 @@ class CreateUpdateBookViewModel @Inject constructor(
         } else {
             Timber.d("책 등록 서버 통신")
         }
+    }
+
+    private fun initCreateBookRequest(
+        bookImage: String,
+        bookTitle: String,
+        author: String,
+        description: String?,
+        memo: String?
+    ) {
+        createUpdateRequest.value =
+            CreateBookRequest(bookImage, bookTitle, author, description, memo)
     }
 
     fun initCreateUpdateBookData(bookData: Book) {
