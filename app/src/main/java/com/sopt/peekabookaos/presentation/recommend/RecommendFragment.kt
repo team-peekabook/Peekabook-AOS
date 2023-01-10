@@ -2,8 +2,8 @@ package com.sopt.peekabookaos.presentation.recommend
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.Recommend
 import com.sopt.peekabookaos.databinding.FragmentRecommendBinding
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecommendFragment :
     BindingFragment<FragmentRecommendBinding>(R.layout.fragment_recommend) {
+    private val recommendViewModel: RecommendViewModel by viewModels()
     private val recommendAdapter: BookRecommendAdapter?
         get() = binding.rvRecommend.adapter as? BookRecommendAdapter
 
