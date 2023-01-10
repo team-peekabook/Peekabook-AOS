@@ -9,6 +9,6 @@ class SearchRepositoryImpl @Inject constructor(
 ) : SearchRepository {
     override suspend fun getSearchUser(nickname: String): Result<User> =
         kotlin.runCatching { searchDataSource.getSearchUser(nickname) }.map { response ->
-            response.data!![0].toUser()
+            response.data!!.toUser()
         }
 }
