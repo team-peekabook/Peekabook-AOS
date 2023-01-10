@@ -1,10 +1,12 @@
 package com.sopt.peekabookaos.presentation.createUpdateBook
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
+import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,7 @@ class CreateUpdateBookActivity :
         binding.vm = createUpdateBookViewModel
         initView()
         initCloseBtnOnClickListener()
+        initIsServerStatus()
     }
 
     private fun initView() {
@@ -41,6 +44,13 @@ class CreateUpdateBookActivity :
     private fun initCloseBtnOnClickListener() {
         binding.btnCreateUpdateBookClose.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun initIsServerStatus() {
+        createUpdateBookViewModel.isServerStatus.observe(this) { success ->
+            if (success) {
+            }
         }
     }
 
