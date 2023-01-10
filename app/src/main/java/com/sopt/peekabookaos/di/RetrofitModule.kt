@@ -19,14 +19,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
     private const val CONTENT_TYPE = "Content-Type"
-    private const val JSON = "application/json"
+    private const val APPLICATION_JSON = "application/json"
 
     @Provides
     @Singleton
     fun providesInterceptor(): Interceptor = Interceptor { chain ->
         with(chain) {
             proceed(
-                request().newBuilder().addHeader(CONTENT_TYPE, JSON).build()
+                request()
+                    .newBuilder()
+                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                    .build()
             )
         }
     }
@@ -45,7 +48,9 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun providesAuthRetrofit(okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().baseUrl(BuildConfig.BASE_URI).client(okHttpClient).addConverterFactory(
-            Json.asConverterFactory("application/json".toMediaType())
-        ).build()
+        Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URI)
+            .client(okHttpClient)
+            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .build()
 }
