@@ -37,9 +37,12 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(interceptor: Interceptor): OkHttpClient =
-        OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS)
-            .addInterceptor(interceptor).addInterceptor(
+        OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(interceptor)
+            .addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 }
@@ -47,7 +50,7 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun providesAuthRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun providesPeekaRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URI)
             .client(okHttpClient)
