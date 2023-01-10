@@ -27,9 +27,11 @@ class PickModifyViewModel @Inject constructor(
     val overListState: LiveData<Boolean> = _overListState
     var preListState = _overListState.value
 
+    private val _isServerStatus = MutableLiveData<Boolean>()
+    val isServerStatus: LiveData<Boolean> = _isServerStatus
+
     init {
         getPick()
-        _pickModifyData.value?.let { initSelectedItemList(it) }
     }
 
     fun updateSelectedItemState(item: PickModify) {
@@ -80,7 +82,10 @@ class PickModifyViewModel @Inject constructor(
             shelfRepository.getPick()
                 .onSuccess { response ->
                     _pickModifyData.value = response
+                    initSelectedItemList(response)
+                    _isServerStatus.value = true
                 }.onFailure { throwable ->
+                    _isServerStatus.value = false
                     Timber.e("$throwable")
                 }
         }
