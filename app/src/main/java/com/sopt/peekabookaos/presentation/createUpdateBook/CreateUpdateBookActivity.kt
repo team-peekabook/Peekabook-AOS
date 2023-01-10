@@ -50,6 +50,9 @@ class CreateUpdateBookActivity :
     private fun initIsServerStatus() {
         createUpdateBookViewModel.isServerStatus.observe(this) { success ->
             if (success) {
+                val toDetail = Intent(this@CreateUpdateBookActivity, DetailActivity::class.java)
+                startActivity(toDetail)
+                finish()
             }
         }
     }
