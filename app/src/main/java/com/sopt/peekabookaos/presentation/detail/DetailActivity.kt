@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,11 +17,19 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
         initContentAppearance()
+        initDetailView()
+        initBookIdAppearance()
+    }
+
+    private fun initBookIdAppearance() {
+        detailViewModel.initBookId(
+            intent.getIntExtra(BOOK_INFO, DEFAULT)
+        )
     }
 
     private fun initContentAppearance() {
         detailViewModel.bookData.observe(this) {
-            if (it.description?.isNullOrEmpty() == true) {
+            if (it.description?.isEmpty() == true) {
                 with(binding) {
                     tvDetailGetContent.text = getString(R.string.text_detail_description_is_null)
                     tvDetailGetContent.setTextColor(
@@ -31,7 +40,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                     )
                 }
             }
-            if (it.memo?.isNullOrEmpty() == true) {
+            if (it.memo?.isEmpty() == true) {
                 with(binding) {
                     tvDetailGetMemo.text = getString(R.string.text_detail_memo_is_null)
                     tvDetailGetMemo.setTextColor(
@@ -43,5 +52,25 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 }
             }
         }
+    }
+
+    private fun initDetailView() {
+        when (LOCATION) {
+            MY -> {
+                detailViewModel.initIsMyDetailView(true)
+                detailViewModel.initDetailMyData()
+            }
+            FRIEND -> {
+                detailViewModel.initIsMyDetailView(false)
+                detailViewModel.initDetailFriendData()
+            }
+        }
+    }
+
+    companion object {
+        const val MY = "my"
+        const val FRIEND = "friend"
+        const val BOOK_INFO = "book_info"
+        private const val DEFAULT = -1
     }
 }
