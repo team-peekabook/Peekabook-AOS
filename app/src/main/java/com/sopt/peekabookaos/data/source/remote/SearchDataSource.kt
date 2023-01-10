@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.data.source.remote
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
+import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.entity.response.FollowResponse
 import com.sopt.peekabookaos.data.entity.response.SearchUserResponse
 import com.sopt.peekabookaos.data.service.SearchService
@@ -14,4 +15,7 @@ data class SearchDataSource @Inject constructor(
 
     suspend fun postFollow(friendId: String): BaseResponse<FollowResponse> =
         searchService.postFollow(friendId)
+
+    suspend fun deleteFollow(friendId: String): NoResponse =
+        searchService.deleteFollow(friendId)
 }
