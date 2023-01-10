@@ -20,6 +20,11 @@ class RecommendViewModel @Inject constructor(
 
     private val _recommendingBook = MutableLiveData<List<Recommend>>()
     val recommendingBook: LiveData<List<Recommend>> = _recommendingBook
+
+    init {
+        getRecommend()
+    }
+
     private fun getRecommend() {
         viewModelScope.launch {
             recommendRepository.getRecommend()
