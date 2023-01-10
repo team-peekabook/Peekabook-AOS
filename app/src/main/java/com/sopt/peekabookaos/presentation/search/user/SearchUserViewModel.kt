@@ -28,19 +28,12 @@ class SearchUserViewModel @Inject constructor(
 
     val isFollowed = MutableStateFlow(false)
 
-    /* 서버 통신 시 제거 예정 */
-    private val serverStatus = false
-
     fun searchBtnClickListener() {
-        /* 서버 통신 시 구현 예정*/
         viewModelScope.launch {
-            if (serverStatus) {
-                _isSearchStatus.emit(true)
-                _uiState.value = dummy
-                isFollowed.value = dummy.isFollowed
-            } else {
-                _isSearchStatus.emit(false)
-            }
+            _isSearchStatus.emit(true)
+            _uiState.value = dummy
+            isFollowed.value = dummy.isFollowed
+            _isSearchStatus.emit(false)
         }
     }
 
