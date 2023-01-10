@@ -6,7 +6,9 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Notification
 import com.sopt.peekabookaos.databinding.ActivityNotificationBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NotificationActivity :
     BindingActivity<ActivityNotificationBinding>(R.layout.activity_notification) {
     private lateinit var notifyAdapter: NotificationAdapter
@@ -15,8 +17,17 @@ class NotificationActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
+        initIsServerObserver()
         initAdapter()
         initCloseClickListener()
+    }
+
+    private fun initIsServerObserver() {
+        viewModel.isServerStatus.observe(this) { success ->
+            if (success) {
+                notifyAdapter.submitList(viewModel.notificationData.value)
+            }
+        }
     }
 
     private fun initAdapter() {
@@ -24,7 +35,6 @@ class NotificationActivity :
             notifyAdapter.setComment(initCommentString(item))
         }
         binding.rvNotification.adapter = notifyAdapter
-        notifyAdapter.submitList(viewModel.notificationData.value)
     }
 
     private fun initCloseClickListener() {
