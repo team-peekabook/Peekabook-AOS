@@ -65,6 +65,7 @@ class RecommendFragment :
 
     private fun initRecommendBookObserve() {
         recommendViewModel.recommendedBook.observe(viewLifecycleOwner) { book ->
+            recommendAdapter?.submitList(book)
         }
     }
 }
