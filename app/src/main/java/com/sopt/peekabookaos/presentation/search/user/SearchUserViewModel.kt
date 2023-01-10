@@ -33,10 +33,14 @@ class SearchUserViewModel @Inject constructor(
 
     fun searchBtnClickListener() {
         viewModelScope.launch {
-            _isSearchStatus.emit(true)
-            _uiState.value = dummy
-            isFollowed.value = dummy.isFollowed
-            _isSearchStatus.emit(false)
+            searchRepository.getSearchUser(nickname.value)
+                .onSuccess {
+                    _isSearchStatus.emit(true)
+                    _uiState.value = dummy
+                    isFollowed.value = dummy.isFollowed
+                }.onFailure {
+                    _isSearchStatus.emit(false)
+                }
         }
     }
 
