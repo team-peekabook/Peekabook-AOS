@@ -1,14 +1,17 @@
 package com.sopt.peekabookaos.data.entity
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Recommend(
     val recommendId: Int,
     val recommendDesc: String?,
-    val recommendBy: String,
-    val recommendTo: String,
     val createdAt: String,
+    val friendId: Int,
+    val friendNickname: String,
     val bookId: Int,
     val bookTitle: String,
     val author: String,
-    val image: String,
-    val profileImage: String
+    val bookImage: String,
+    val profileImage: String = ""
 )

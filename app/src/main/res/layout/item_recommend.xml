@@ -75,7 +75,7 @@
 
             <ImageView
                 android:id="@+id/iv_item_recommend_cover"
-                setImage="@{data.image}"
+                setImage="@{data.bookImage}"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="15dp"
@@ -119,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="@{data.recommendBy}"
+                android:text="@{data.friendNickname}"
                 android:textColor="@color/peeka_red"
                 app:layout_constraintBottom_toBottomOf="@id/iv_item_recommend_profile"
                 app:layout_constraintStart_toEndOf="@id/iv_item_recommend_profile"
