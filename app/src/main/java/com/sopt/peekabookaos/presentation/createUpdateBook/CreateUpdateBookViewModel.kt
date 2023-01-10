@@ -8,7 +8,6 @@ import com.sopt.peekabookaos.data.repository.CreateUpdateRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 
-class CreateUpdateBookViewModel : ViewModel() {
 @HiltViewModel
 class CreateUpdateBookViewModel @Inject constructor(
     private val createUpdateRepository: CreateUpdateRepository
