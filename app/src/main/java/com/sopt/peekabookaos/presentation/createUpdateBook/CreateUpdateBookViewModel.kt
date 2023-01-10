@@ -74,7 +74,7 @@ class CreateUpdateBookViewModel @Inject constructor(
 
     fun initCreateUpdateBookData(bookData: Book) {
         _bookData.value = bookData
-        comment.value = _bookData.value?.description
-        memo.value = _bookData.value?.memo
+//        comment.value = _bookData.value?.description
+//        memo.value = _bookData.value?.memo
     }
 }

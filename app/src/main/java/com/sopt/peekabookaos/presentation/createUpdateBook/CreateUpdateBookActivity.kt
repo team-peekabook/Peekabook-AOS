@@ -37,6 +37,7 @@ class CreateUpdateBookActivity :
                 createUpdateBookViewModel.initCreateUpdateBookData(
                     intent.getParcelable(CREATE, Book::class.java)!!
                 )
+                // 수정뷰에서 넘어올 경우 comment, memo도 전달받기
             }
         }
     }
