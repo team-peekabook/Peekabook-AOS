@@ -6,8 +6,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SearchService {
-    @GET("friend?nickname=")
+    @GET("friend")
     suspend fun getSearchUser(
         @Query("nickname") nickname: String
-    ): BaseResponse<List<SearchUserResponse>>
+    ): BaseResponse<SearchUserResponse>
 }
