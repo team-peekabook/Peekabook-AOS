@@ -17,7 +17,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
         initContentAppearance()
-        initDetailview()
+        initDetailView()
         initBookIdAppearance()
     }
 
@@ -54,7 +54,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
     }
 
-    private fun initDetailview() {
+    private fun initDetailView() {
         when (LOCATION) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
