@@ -25,7 +25,7 @@ class RecommendFragment :
 
     private fun initRecommendedClickListener() {
         binding.tvRecommendRecommended.setOnClickListener {
-            recommendAdapter?.submitList(recommendedList)
+            recommendAdapter?.submitList(recommendViewModel.recommendedBook.value)
             with(binding) {
                 tvRecommendRecommended.isSelected = true
                 tvRecommendRecommending.isSelected = false
@@ -39,7 +39,7 @@ class RecommendFragment :
 
     private fun initRecommendingClickListener() {
         binding.tvRecommendRecommending.setOnClickListener {
-            recommendAdapter?.submitList(recommendingList)
+            recommendAdapter?.submitList(recommendViewModel.recommendingBook.value)
             with(binding) {
                 tvRecommendRecommended.isSelected = false
                 tvRecommendRecommending.isSelected = true
