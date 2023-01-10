@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,12 +35,14 @@ class SearchUserViewModel @Inject constructor(
     fun searchBtnClickListener() {
         viewModelScope.launch {
             searchRepository.getSearchUser(nickname.value)
-                .onSuccess {
+                .onSuccess { response ->
+                    _uiState.value = response
+                    isFollowed.value = response.isFollowed
                     _isSearchStatus.emit(true)
-                    _uiState.value = dummy
-                    isFollowed.value = dummy.isFollowed
-                }.onFailure {
+                    Timber.d("asdf success $response")
+                }.onFailure { throwable ->
                     _isSearchStatus.emit(false)
+                    Timber.e("asdf throwable $throwable")
                 }
         }
     }
@@ -75,15 +78,5 @@ class SearchUserViewModel @Inject constructor(
                 isFollowStatus.emit(false)
             }
         }
-    }
-
-    companion object {
-        private val dummy = User(
-            id = 1,
-            nickname = "이빵주",
-            profileImage = "http://image.yes24.com/goods/90365124/XL",
-            intro = "어쩔티비",
-            isFollowed = true
-        )
     }
 }
