@@ -14,3 +14,6 @@ class RecommendViewModel @Inject constructor(
 ) : ViewModel() {
     private val _recommendedBook = MutableLiveData<List<Recommend>>()
     val recommendedBook: LiveData<List<Recommend>> = _recommendedBook
+
+    private val _recommendingBook = MutableLiveData<List<Recommend>>()
+    val recommendingBook: LiveData<List<Recommend>> = _recommendingBook
