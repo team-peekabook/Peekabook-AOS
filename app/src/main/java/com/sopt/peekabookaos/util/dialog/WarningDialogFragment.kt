@@ -28,6 +28,7 @@ class WarningDialogFragment : DialogFragment() {
         isCancelable = true
         initLayout()
         initWarningDialogContent()
+        initConfirmClickListener()
 
     private fun initWarningDialogContent() {
         val warningType = arguments?.get(WARNING_TYPE)
@@ -43,6 +44,20 @@ class WarningDialogFragment : DialogFragment() {
                     WarningDialogContent().getWarningDeleteFollow(requireContext(), follower)
             }
         }
+    }
+
+    private fun initConfirmClickListener() {
+        binding.btnWarningDialogConfirm.setOnClickListener {
+            arguments?.getParcelable<ConfirmClickListener>(CONFIRM_ACTION)
+                ?.onConfirmClick()
+                ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
+            dismiss()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     }
