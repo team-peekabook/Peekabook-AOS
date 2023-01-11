@@ -19,6 +19,6 @@ class SearchRepositoryImpl @Inject constructor(
             response.data!!
         }
 
-    override suspend fun deleteFollow(friendId: String): Result<NoResponse> =
+    override suspend fun deleteFollow(friendId: Int): Result<NoResponse> =
         kotlin.runCatching { searchDataSource.deleteFollow(friendId) }
 }
