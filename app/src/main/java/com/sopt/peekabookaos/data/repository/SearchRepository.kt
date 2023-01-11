@@ -9,5 +9,5 @@ interface SearchRepository {
 
     suspend fun postFollow(friendId: String): Result<FollowResponse>
 
-    suspend fun deleteFollow(friendId: String): Result<NoResponse>
+    suspend fun deleteFollow(friendId: Int): Result<NoResponse>
 }
