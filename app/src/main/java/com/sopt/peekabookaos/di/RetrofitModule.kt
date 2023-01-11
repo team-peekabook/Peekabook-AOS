@@ -21,6 +21,8 @@ object RetrofitModule {
     private val json = Json { ignoreUnknownKeys = true }
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
+    private const val AUTH = "auth"
+    private const val USER_ID = "2"
 
     @Provides
     @Singleton
@@ -30,6 +32,7 @@ object RetrofitModule {
                 request()
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                    .addHeader(AUTH, USER_ID)
                     .build()
             )
         }
