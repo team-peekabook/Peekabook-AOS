@@ -9,6 +9,7 @@ import com.sopt.peekabookaos.data.entity.FriendList
 import com.sopt.peekabookaos.data.entity.Picks
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.data.repository.ShelfRepository
+import com.sopt.peekabookaos.presentation.bookshelf.BookshelfFragment.Companion.FRIEND
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -42,37 +43,59 @@ class BookShelfViewModel @Inject constructor(
     private val _bookTotalNum: MutableLiveData<Int> = MutableLiveData()
     var bookTotalNum: LiveData<Int> = _bookTotalNum
 
-    private val _isServerStatus = MutableLiveData<Boolean>()
-    val isServerStatus: LiveData<Boolean> = _isServerStatus
+    private val _isMyServerStatus = MutableLiveData<Boolean>()
+    val isMyServerStatus: LiveData<Boolean> = _isMyServerStatus
+
+    private val _isFriendServerStatus = MutableLiveData<Boolean>()
+    val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
     init {
-        getShelf()
+        getMyShelf()
     }
 
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
+        if (state == FRIEND) getFriendShelf()
+        else getMyShelf()
     }
 
-    fun updateUserId(position: Int) {
-        _userId.value = position
+    fun updateUserId(item: FriendList) {
+        _userId.value = item.id
+        Timber.tag("kang").e("${item.nickname}")
     }
 
-    private fun getShelf() {
-        if (friendShelf.value == false) {
-            viewModelScope.launch {
-                shelfRepository.getMyShelf()
-                    .onSuccess { response ->
-                        _pickData.value = response.picks
-                        _bookTotalNum.value = response.bookTotalNum
-                        _shelfData.value = response.books
-                        _friendUserData.value = response.friendList
-                        _userData.value = response.myIntro
-                        _isServerStatus.value = true
-                    }.onFailure { throwable ->
-                        Timber.e("$throwable")
-                        _isServerStatus.value = false
-                    }
-            }
+    private fun getMyShelf() {
+        viewModelScope.launch {
+            shelfRepository.getMyShelf()
+                .onSuccess { response ->
+                    _pickData.value = response.picks
+                    _bookTotalNum.value = response.bookTotalNum
+                    _shelfData.value = response.books
+                    _friendUserData.value = response.friendList
+                    _userData.value = response.myIntro
+                    _isMyServerStatus.value = true
+                    _isFriendServerStatus.value = false
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                    _isMyServerStatus.value = false
+                }
+        }
+    }
+
+    private fun getFriendShelf() {
+        viewModelScope.launch {
+            shelfRepository.getFriendShelf(userId.value!!)
+                .onSuccess { response ->
+                    _pickData.value = response.picks
+                    _bookTotalNum.value = response.bookTotalNum
+                    _shelfData.value = response.books
+                    _friendData.value = response.friendIntro
+                    _isFriendServerStatus.value = true
+                    _isMyServerStatus.value = false
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                    _isFriendServerStatus.value = false
+                }
         }
     }
 }

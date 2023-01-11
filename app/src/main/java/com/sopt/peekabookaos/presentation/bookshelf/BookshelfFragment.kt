@@ -37,15 +37,15 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         initRecommendClickListener()
         initPickModifyClickListener()
         initCreateBookClickListener()
-        initObserver()
     }
 
     private fun initAdapter() {
         binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter()
         binding.rvBookshelfPick.adapter = BookShelfPickAdapter()
-        binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, _ ->
+        binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, item ->
+            viewModel.updateUserId(item)
             viewModel.updateShelfState(FRIEND)
-            viewModel.updateUserId(pos)
+            friendAdapter?.updateSelectedPosition(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
@@ -100,21 +100,23 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
     }
 
-    private fun initObserver() {
-        viewModel.userId.observe(viewLifecycleOwner) {
-            if (viewModel.friendShelf.value == FRIEND) {
-                friendAdapter?.updateSelectedPosition(it)
-            }
-        }
-    }
-
     private fun initIsServerObserver() {
-        viewModel.isServerStatus.observe(viewLifecycleOwner) { success ->
+        viewModel.isMyServerStatus.observe(viewLifecycleOwner) { success ->
             if (success) {
                 myShelfAdapter?.submitList(viewModel.shelfData.value)
                 pickAdapter?.submitList(viewModel.pickData.value)
                 friendAdapter?.submitList(viewModel.friendUserData.value)
             }
+        }
+        viewModel.isFriendServerStatus.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                myShelfAdapter?.submitList(viewModel.shelfData.value)
+                pickAdapter?.submitList(viewModel.pickData.value)
+            }
+        }
+        viewModel.shelfData.observe(viewLifecycleOwner) {
+            myShelfAdapter?.submitList(viewModel.shelfData.value)
+            pickAdapter?.submitList(viewModel.pickData.value)
         }
     }
 
