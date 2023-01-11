@@ -7,6 +7,9 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
+import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
+import com.sopt.peekabookaos.util.dialog.WarningType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +23,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         initDetailView()
         initBookIdAppearance()
         initBookIdObserve()
+        initDeleteBtnClickListener()
     }
 
     private fun initBookIdAppearance() {
@@ -62,6 +66,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initDetailView() {
+        /** LOCATION getStringExtra로 구현하기 */
         when (LOCATION) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
@@ -72,10 +77,15 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         }
     }
 
+    private fun initDeleteBtnClickListener() {
+        binding.btnDetailDelete.setOnClickListener {
+        }
+    }
+
     companion object {
         const val MY = "my"
         const val FRIEND = "friend"
         const val BOOK_INFO = "book_info"
-        private const val DEFAULT = 2 // 추후 -1로 수정
+        private const val DEFAULT = 3 // 추후 -1로 수정
     }
 }
