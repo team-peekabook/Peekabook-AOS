@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.PickModify
+import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.data.repository.ShelfRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,14 +22,19 @@ class PickModifyViewModel @Inject constructor(
     private val _selectedItemList: MutableLiveData<LinkedHashSet<Int>> = MutableLiveData(
         linkedSetOf()
     )
+
     private val _selectState: MutableLiveData<Boolean> = MutableLiveData()
     val selectState: LiveData<Boolean> = _selectState
+
     private val _overListState: MutableLiveData<Boolean> = MutableLiveData()
     val overListState: LiveData<Boolean> = _overListState
+
     var preListState = _overListState.value
 
     private val _isServerStatus = MutableLiveData<Boolean>()
     val isServerStatus: LiveData<Boolean> = _isServerStatus
+
+    var selectItemIdList = arrayOfNulls<Int>(3)
 
     init {
         getPick()
@@ -65,6 +71,15 @@ class PickModifyViewModel @Inject constructor(
         }
     }
 
+    fun changeHashToPickRequest() {
+        val iterator = _selectedItemList.value!!.iterator()
+        var count = 0
+        while (iterator.hasNext()) {
+            selectItemIdList[count] = iterator.next()
+            count++
+        }
+    }
+
     private fun getSelectedItemIndex(item: PickModify): Int {
         val iterator = _selectedItemList.value!!.iterator()
         var count = 0
@@ -86,6 +101,22 @@ class PickModifyViewModel @Inject constructor(
                     _isServerStatus.value = true
                 }.onFailure { throwable ->
                     _isServerStatus.value = false
+                    Timber.e("$throwable")
+                }
+        }
+    }
+
+    fun patchPick() {
+        viewModelScope.launch {
+            shelfRepository.patchPick(
+                PickRequest(
+                    selectItemIdList[0] ?: 0,
+                    selectItemIdList[1] ?: 0,
+                    selectItemIdList[2] ?: 0
+                )
+            )
+                .onSuccess {
+                }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
         }

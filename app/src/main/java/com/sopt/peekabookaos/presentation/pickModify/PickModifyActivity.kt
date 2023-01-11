@@ -57,6 +57,8 @@ class PickModifyActivity :
 
     private fun initCheckClickListener() {
         binding.ivPickModifyCheck.setOnClickListener {
+            viewModel.changeHashToPickRequest()
+            viewModel.patchPick()
             finish()
         }
     }

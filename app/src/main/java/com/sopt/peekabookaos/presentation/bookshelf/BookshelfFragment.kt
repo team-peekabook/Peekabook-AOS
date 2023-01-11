@@ -25,6 +25,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private lateinit var itemDeco: BookshelfShelfDecoration
     private val viewModel by viewModels<BookShelfViewModel>()
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMyShelf()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
