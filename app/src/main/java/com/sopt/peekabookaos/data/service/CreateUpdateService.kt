@@ -5,7 +5,7 @@ import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.entity.response.CreateBookResponse
 import retrofit2.http.Body
-import retrofit2.http.DELETE
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -15,8 +15,8 @@ interface CreateUpdateService {
         @Body body: CreateBookRequest
     ): BaseResponse<CreateBookResponse>
 
-    @DELETE("bookshelf/{bookId}")
-    suspend fun deleteBook(
+    @PATCH("bookshelf/{bookId}")
+    suspend fun patchBook(
         @Path("bookId") bookId: Int
     ): NoResponse
 }
