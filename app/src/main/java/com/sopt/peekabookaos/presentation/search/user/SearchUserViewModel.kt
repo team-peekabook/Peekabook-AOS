@@ -6,7 +6,6 @@ import com.sopt.peekabookaos.data.entity.User
 import com.sopt.peekabookaos.data.repository.SearchRepository
 import com.sopt.peekabookaos.util.extensions.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -23,7 +22,8 @@ class SearchUserViewModel @Inject constructor(
     private val _searchState = MutableStateFlow<UiState>(UiState.IDLE)
     val searchState = _searchState.asStateFlow()
 
-    private val isFollowStatus = MutableSharedFlow<Boolean>()
+    private val _isFollowed = MutableStateFlow(false)
+    val isFollowed = _isFollowed.asStateFlow()
 
     val nickname = MutableStateFlow("")
 
