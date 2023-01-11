@@ -7,12 +7,6 @@
         <item name="android:textSize">22dp</item>
     </style>
 
-    <style name="EngCBd">
-        <item name="android:fontFamily">@font/montserrat_semibold</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">12dp</item>
-    </style>
-
     <style name="H3Bd">
         <item name="android:fontFamily">@font/noto_sans_kr</item>
         <item name="android:textStyle">bold</item>
@@ -33,7 +27,13 @@
         <item name="android:lineSpacingExtra">8dp</item>
     </style>
 
-    <style name="Bd">
+    <style name="EngC">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="H1Bd">
         <item name="android:fontFamily">@font/noto_sans_kr</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14dp</item>
@@ -43,6 +43,12 @@
         <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="EngCBd">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
     <style name="S3Md">
@@ -79,11 +85,5 @@
         <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">9dp</item>
-    </style>
-
-    <style name="H1Bd">
-        <item name="android:fontFamily">@font/noto_sans_kr</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14dp</item>
     </style>
 </resources>
