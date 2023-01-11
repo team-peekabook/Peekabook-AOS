@@ -30,16 +30,14 @@ class SearchUserViewModel @Inject constructor(
     fun searchBtnClickListener() {
         viewModelScope.launch {
             _searchState.emit(UiState.IDLE)
-            searchRepository.getSearchUser(nickname.value)
-                .onSuccess { response ->
-                    _uiState.value = response
-                    isFollowed.value = response.isFollowed
-                    _searchState.emit(UiState.SUCCESS)
-                    Timber.d("asdf success $response")
-                }.onFailure { throwable ->
-                    _searchState.emit(UiState.ERROR)
-                    Timber.e("asdf throwable $throwable")
-                }
+            searchRepository.getSearchUser(nickname.value).onSuccess { response ->
+                _uiState.emit(response)
+                _isFollowed.emit(response.isFollowed)
+                _searchState.emit(UiState.SUCCESS)
+            }.onFailure { throwable ->
+                _searchState.emit(UiState.ERROR)
+                Timber.e("$throwable")
+            }
         }
     }
 
