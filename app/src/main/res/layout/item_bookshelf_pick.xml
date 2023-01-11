@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.Pick" />
+            type="com.sopt.peekabookaos.data.entity.Picks" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
                 android:background="@color/peeka_red"
                 android:gravity="center"
                 android:paddingHorizontal="10dp"
-                android:text="@{data.idx}"
+                android:text="@{@string/bookshelf_pick_index(data.pickIndex)}"
                 android:textColor="@color/white"
                 tools:text="1" />
 
@@ -49,14 +49,14 @@
                 android:maxLines="1"
                 android:paddingHorizontal="6dp"
                 android:paddingVertical="5dp"
-                android:text="@{data.title}"
+                android:text="@{data.book.bookTitle}"
                 android:textColor="@color/peeka_red"
                 tools:text="제목" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_item_bookshelf_pick"
-            setImage="@{data.image}"
+            setImage="@{data.book.bookImage}"
             android:layout_width="0dp"
             android:layout_height="190dp"
             android:layout_marginHorizontal="12dp"
@@ -79,9 +79,9 @@
             android:maxLines="3"
             android:minLines="3"
             android:padding="11dp"
-            android:text="@{data.comment}"
+            android:text="@{data.description}"
             android:textColor="@color/peeka_red"
-            android:visibility="@{data.comment == null ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{data.description == null ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

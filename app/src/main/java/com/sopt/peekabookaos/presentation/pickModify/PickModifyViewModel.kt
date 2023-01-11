@@ -3,9 +3,18 @@ package com.sopt.peekabookaos.presentation.pickModify
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.PickModify
+import com.sopt.peekabookaos.data.repository.ShelfRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class PickModifyViewModel : ViewModel() {
+@HiltViewModel
+class PickModifyViewModel @Inject constructor(
+    private val shelfRepository: ShelfRepository
+) : ViewModel() {
     private val _pickModifyData: MutableLiveData<List<PickModify>> = MutableLiveData()
     val pickModifyData: LiveData<List<PickModify>> = _pickModifyData
 
@@ -18,9 +27,11 @@ class PickModifyViewModel : ViewModel() {
     val overListState: LiveData<Boolean> = _overListState
     var preListState = _overListState.value
 
+    private val _isServerStatus = MutableLiveData<Boolean>()
+    val isServerStatus: LiveData<Boolean> = _isServerStatus
+
     init {
-        initPickModifyData()
-        _pickModifyData.value?.let { initSelectedItemList(it) }
+        getPick()
     }
 
     fun updateSelectedItemState(item: PickModify) {
@@ -66,51 +77,17 @@ class PickModifyViewModel : ViewModel() {
         return count
     }
 
-    private fun getIinitSelectedItemPosition() {
-    }
-
-    private fun initPickModifyData() {
-        _pickModifyData.value = listOf(
-            PickModify(0, PickModify.Book(0, "https://image.yes24.com/goods/76106687/XL")),
-            PickModify(2, PickModify.Book(1, "https://image.yes24.com/goods/114671132/XL")),
-            PickModify(0, PickModify.Book(2, "https://image.yes24.com/goods/97255028/XL")),
-            PickModify(
-                1,
-                PickModify.Book(
-                    3,
-                    "https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg"
-                )
-            ),
-            PickModify(0, PickModify.Book(4, "https://image.yes24.com/goods/72127217/XL")),
-            PickModify(0, PickModify.Book(5, "https://image.yes24.com/goods/91159773/XL")),
-            PickModify(
-                0,
-                PickModify.Book(
-                    6,
-                    "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
-                )
-            ),
-            PickModify(3, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL")),
-            PickModify(0, PickModify.Book(0, "https://image.yes24.com/goods/76106687/XL")),
-            PickModify(0, PickModify.Book(1, "https://image.yes24.com/goods/114671132/XL")),
-            PickModify(0, PickModify.Book(2, "https://image.yes24.com/goods/97255028/XL")),
-            PickModify(
-                0,
-                PickModify.Book(
-                    3,
-                    "https://image.yes24.com/momo/TopCate215/MidCate002/21414510.jpg"
-                )
-            ),
-            PickModify(0, PickModify.Book(4, "https://image.yes24.com/goods/72127217/XL")),
-            PickModify(0, PickModify.Book(5, "https://image.yes24.com/goods/91159773/XL")),
-            PickModify(
-                0,
-                PickModify.Book(
-                    6,
-                    "https://blog.kakaocdn.net/dn/66RoG/btqSGiU51MK/4NZO9mMJnAoFHmjXtSGiuK/img.png"
-                )
-            ),
-            PickModify(0, PickModify.Book(7, "https://image.yes24.com/goods/72310907/XL"))
-        )
+    private fun getPick() {
+        viewModelScope.launch {
+            shelfRepository.getPick()
+                .onSuccess { response ->
+                    _pickModifyData.value = response
+                    initSelectedItemList(response)
+                    _isServerStatus.value = true
+                }.onFailure { throwable ->
+                    _isServerStatus.value = false
+                    Timber.e("$throwable")
+                }
+        }
     }
 }

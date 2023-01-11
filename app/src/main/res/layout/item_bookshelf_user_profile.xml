@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.FriendUser" />
+            type="com.sopt.peekabookaos.data.entity.FriendList" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/iv_item_bookshelf_friend_profile"
-            setCircleImage="@{data.profile}"
+            setCircleImage="@{data.profileImage}"
             android:layout_width="40dp"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1"
@@ -51,7 +51,7 @@
             android:gravity="center"
             android:maxLength="3"
             android:maxLines="1"
-            android:text="@{data.name}"
+            android:text="@{data.nickname}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/iv_item_bookshelf_friend_profile"
             app:layout_constraintHorizontal_bias="0"
