@@ -79,6 +79,19 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initDeleteBtnClickListener() {
         binding.btnDetailDelete.setOnClickListener {
+            WarningDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(
+                        WarningDialogFragment.WARNING_TYPE,
+                        WarningType.WARNING_DELETE_BOOK
+                    )
+                    putParcelable(
+                        WarningDialogFragment.CONFIRM_ACTION,
+                        /** 하정아 "삭제하기" 버튼 눌렀을 때 detailViewModel.delete() 호출했당 확인하고 주석 지워 ~ */
+                        ConfirmClickListener(confirmAction = { detailViewModel.delete() })
+                    )
+                }
+            }.show(supportFragmentManager, WarningDialogFragment.DIALOG_WARNING)
         }
     }
 
