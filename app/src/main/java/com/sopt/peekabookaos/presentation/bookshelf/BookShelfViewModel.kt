@@ -48,6 +48,10 @@ class BookShelfViewModel @Inject constructor(
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
+    init {
+        getMyShelfData()
+    }
+
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
     }

@@ -31,7 +31,12 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMyShelfData()
+        if (viewModel.isMyServerStatus.value == true) {
+            viewModel.getMyShelfData()
+        } else if (viewModel.isFriendServerStatus.value == true) {
+            viewModel.getFriendShelfData()
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
