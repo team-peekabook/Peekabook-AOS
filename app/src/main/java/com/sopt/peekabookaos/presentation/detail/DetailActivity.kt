@@ -118,11 +118,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                     )
                 }
             }.show(supportFragmentManager, WarningDialogFragment.DIALOG_WARNING)
-            initIsDeleted()
+            initIsDeletedObserve()
         }
     }
 
-    private fun initIsDeleted() {
+    private fun initIsDeletedObserve() {
         detailViewModel.isDeleted.observe(this) { success ->
             if (success) {
                 finish()
