@@ -7,9 +7,11 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
+import com.sopt.peekabookaos.presentation.detail.DetailActivity
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
-import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity
+import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,8 +42,16 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initAdapter() {
-        binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter()
-        binding.rvBookshelfPick.adapter = BookShelfPickAdapter()
+        binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter { _, item ->
+            val toDetail = Intent(requireActivity(), DetailActivity::class.java)
+            toDetail.putExtra(BOOK_INFO, item.id)
+            startActivity(toDetail)
+        }
+        binding.rvBookshelfPick.adapter = BookShelfPickAdapter { _, item ->
+            val toDetail = Intent(requireActivity(), DetailActivity::class.java)
+            toDetail.putExtra(BOOK_INFO, item.book.id)
+            startActivity(toDetail)
+        }
         binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, item ->
             viewModel.updateUserId(item)
             viewModel.updateShelfState(FRIEND)
@@ -81,8 +91,9 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initRecommendClickListener() {
         binding.btnBookshelfRecommend.setOnClickListener {
-            val toRecommendation = Intent(requireActivity(), RecommendationActivity::class.java)
-            startActivity(toRecommendation)
+            val toSearch = Intent(requireActivity(), BarcodeScannerActivity::class.java)
+            toSearch.putExtra(FRIEND_INFO, viewModel.friendData.value)
+            startActivity(toSearch)
         }
     }
 
