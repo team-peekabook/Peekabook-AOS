@@ -19,4 +19,8 @@ class RecommedationViewModel : ViewModel() {
         _bookData.value = bookData
         _friendData.value = friendData
     }
+
+    fun post() {
+        /** 서버통신 함수 여기에 만들면 되고 함수명은 수정하세요 ~ */
+    }
 }

@@ -49,10 +49,6 @@ class BookShelfViewModel @Inject constructor(
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
-    init {
-        getMyShelf()
-    }
-
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
         if (state == FRIEND) getFriendShelf()
@@ -64,7 +60,7 @@ class BookShelfViewModel @Inject constructor(
         Timber.tag("kang").e("${item.nickname}")
     }
 
-    private fun getMyShelf() {
+    fun getMyShelf() {
         viewModelScope.launch {
             shelfRepository.getMyShelf()
                 .onSuccess { response ->

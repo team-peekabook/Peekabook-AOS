@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/tv_item_recommend_title"
-                style="@style/Bd"
+                style="@style/H1Bd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
