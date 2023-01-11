@@ -50,39 +50,37 @@ class BookShelfViewModel @Inject constructor(
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
     init {
-        // 유저 서버 통신 초기 설정
-        // getMyShelf()
+        getMyShelf()
     }
 
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
         if (state == FRIEND) getFriendShelf()
-        // state == USER일 떄, 서버 통신 함수
-        // else getMyShelf()
+        else getMyShelf()
     }
 
     fun updateUserId(item: FriendList) {
         _userId.value = item.id
         Timber.tag("kang").e("${item.nickname}")
     }
-// USER 서버 통신 함수, 함수명 변경 확인
-//    private fun getMyShelf() {
-//        viewModelScope.launch {
-//            shelfRepository.getMyShelf()
-//                .onSuccess { response ->
-//                    _pickData.value = response.picks
-//                    _bookTotalNum.value = response.bookTotalNum
-//                    _shelfData.value = response.books
-//                    _friendUserData.value = response.friendList
-//                    _userData.value = response.myIntro
-//                    _isMyServerStatus.value = true
-//                    _isFriendServerStatus.value = false
-//                }.onFailure { throwable ->
-//                    Timber.e("$throwable")
-//                    _isMyServerStatus.value = false
-//                }
-//        }
-//    }
+
+    private fun getMyShelf() {
+        viewModelScope.launch {
+            shelfRepository.getMyShelf()
+                .onSuccess { response ->
+                    _pickData.value = response.picks
+                    _bookTotalNum.value = response.bookTotalNum
+                    _shelfData.value = response.books
+                    _friendUserData.value = response.friendList
+                    _userData.value = response.myIntro
+                    _isMyServerStatus.value = true
+                    _isFriendServerStatus.value = false
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                    _isMyServerStatus.value = false
+                }
+        }
+    }
 
     private fun getFriendShelf() {
         viewModelScope.launch {
