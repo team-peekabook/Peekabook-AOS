@@ -182,7 +182,6 @@
                         android:maxEms="2"
                         android:maxLines="2"
                         android:minEms="2"
-                        android:text="@{vm.friendShelf == true?  vm.friendData.nickname : vm.userData.nickname}"
                         android:textAlignment="center"
                         android:textColor="@color/peeka_red"
                         tools:text="수빈은문수빈" />
@@ -197,7 +196,6 @@
                         android:layout_marginEnd="23dp"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@{vm.friendShelf == true ? vm.friendData.intro : vm.userData.intro }"
                         android:textColor="@color/peeka_red"
                         tools:text="안녕하세요, 저는 한줄소개 입니다! 제 책장을 둘러보세요! 만약에 최대를 넘어가게 되면 어떤 일이?" />
 
