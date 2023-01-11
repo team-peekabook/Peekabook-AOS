@@ -9,7 +9,6 @@ import com.sopt.peekabookaos.data.entity.FriendList
 import com.sopt.peekabookaos.data.entity.Picks
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.data.repository.ShelfRepository
-import com.sopt.peekabookaos.presentation.bookshelf.BookshelfFragment.Companion.FRIEND
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -49,10 +48,12 @@ class BookShelfViewModel @Inject constructor(
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
+    init {
+        getMyShelfData()
+    }
+
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
-        if (state == FRIEND) getFriendShelf()
-        else getMyShelf()
     }
 
     fun updateUserId(item: FriendList) {
@@ -60,7 +61,7 @@ class BookShelfViewModel @Inject constructor(
         Timber.tag("kang").e("${item.nickname}")
     }
 
-    fun getMyShelf() {
+    fun getMyShelfData() {
         viewModelScope.launch {
             shelfRepository.getMyShelf()
                 .onSuccess { response ->
@@ -74,23 +75,25 @@ class BookShelfViewModel @Inject constructor(
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isMyServerStatus.value = false
+                    _isFriendServerStatus.value = false
                 }
         }
     }
 
-    private fun getFriendShelf() {
+    fun getFriendShelfData() {
         viewModelScope.launch {
             shelfRepository.getFriendShelf(userId.value!!)
                 .onSuccess { response ->
+                    _friendData.value = response.friendIntro
                     _pickData.value = response.picks
                     _bookTotalNum.value = response.bookTotalNum
                     _shelfData.value = response.books
-                    _friendData.value = response.friendIntro
                     _isFriendServerStatus.value = true
                     _isMyServerStatus.value = false
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isFriendServerStatus.value = false
+                    _isMyServerStatus.value = false
                 }
         }
     }
