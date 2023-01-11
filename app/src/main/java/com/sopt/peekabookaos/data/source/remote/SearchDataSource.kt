@@ -16,6 +16,6 @@ data class SearchDataSource @Inject constructor(
     suspend fun postFollow(friendId: Int): BaseResponse<FollowResponse> =
         searchService.postFollow(friendId)
 
-    suspend fun deleteFollow(friendId: String): NoResponse =
+    suspend fun deleteFollow(friendId: Int): NoResponse =
         searchService.deleteFollow(friendId)
 }
