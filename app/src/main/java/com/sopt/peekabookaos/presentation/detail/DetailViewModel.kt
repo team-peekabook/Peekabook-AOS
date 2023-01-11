@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Detail
+import com.sopt.peekabookaos.data.entity.Book
+import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.data.repository.DetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,11 +16,17 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val detailRepository: DetailRepository
 ) : ViewModel() {
-    private val _detailData = MutableLiveData<Detail>()
-    val detailData: LiveData<Detail> = _detailData
+    private val _bookData = MutableLiveData<Book>()
+    val bookData: LiveData<Book> = _bookData
+
+    private val _bookComment = MutableLiveData<BookComment>()
+    val bookComment: LiveData<BookComment> = _bookComment
 
     private val _isMyDetailView = MutableLiveData<Boolean>()
     val isMyDetailView: LiveData<Boolean> = _isMyDetailView
+
+    private val _isDeleted = MutableLiveData<Boolean>()
+    val isDeleted: LiveData<Boolean> = _isDeleted
 
     val bookId = MutableLiveData<Int>()
 
@@ -35,15 +42,26 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             detailRepository.getDetail(bookId)
                 .onSuccess { response ->
-                    _detailData.value = response
-                    Timber.e("$response")
+                    _bookComment.value = BookComment(
+                        response.description,
+                        response.memo
+                    )
+                    _bookData.value = response.book
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
         }
     }
 
-    fun delete() {
-        /** 서버통신 함수 여기에 만들면 되고 함수명은 수정하세요 ~ */
+    fun deleteDetail() {
+        viewModelScope.launch {
+            detailRepository.deleteDetail(bookId.value!!)
+                .onSuccess {
+                    _isDeleted.value = true
+                }.onFailure { throwable ->
+                    _isDeleted.value = false
+                    Timber.e("$throwable")
+                }
+        }
     }
 }

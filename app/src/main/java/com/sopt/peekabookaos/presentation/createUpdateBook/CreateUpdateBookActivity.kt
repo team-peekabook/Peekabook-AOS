@@ -62,5 +62,7 @@ class CreateUpdateBookActivity :
         const val LOCATION = "location"
         const val UPDATE = "update"
         const val CREATE = "create"
+        const val BOOK = "book"
+        const val BOOK_COMMENT = "book_comment"
     }
 }
