@@ -66,7 +66,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initDetailView() {
-        /** LOCATION getStringExtra로 구현하기 */
+        /** LOCATION intent.getStringExtra로 구현하기 */
         when (LOCATION) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
