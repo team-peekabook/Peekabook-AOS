@@ -23,6 +23,6 @@ interface SearchService {
 
     @DELETE("friend/{friendId}")
     suspend fun deleteFollow(
-        @Path("friendId") friendId: String
+        @Path("friendId") friendId: Int
     ): NoResponse
 }
