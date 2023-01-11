@@ -44,6 +44,7 @@
 
         <TextView
             android:id="@+id/tv_notification_mention"
+            style="@style/H1Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -56,6 +57,7 @@
 
         <TextView
             android:id="@+id/tv_notification_mention_type1"
+            style="@style/H1Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
