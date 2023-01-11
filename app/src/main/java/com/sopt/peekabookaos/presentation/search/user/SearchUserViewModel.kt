@@ -60,13 +60,13 @@ class SearchUserViewModel @Inject constructor(
         }
     }
 
-    private fun postFollow() {
+    private fun postFollow(id: Int) {
         viewModelScope.launch {
-            if (serverStatus) {
-                isFollowStatus.emit(true)
-                isFollowed.value = true
-            } else {
-                isFollowStatus.emit(false)
+            searchRepository.postFollow(id).onSuccess {
+                _isFollowed.emit(true)
+            }.onFailure { throwable ->
+                _isFollowed.emit(false)
+                Timber.e("$throwable")
             }
         }
     }
