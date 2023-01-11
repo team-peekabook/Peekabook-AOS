@@ -29,6 +29,8 @@ class WarningDialogFragment : DialogFragment() {
         initLayout()
         initWarningDialogContent()
         initConfirmClickListener()
+        initCancelBtnClickListener()
+    }
 
     private fun initWarningDialogContent() {
         val warningType = arguments?.get(WARNING_TYPE)
@@ -43,6 +45,12 @@ class WarningDialogFragment : DialogFragment() {
                 WarningType.WARNING_DELETE_FOLLOWER ->
                     WarningDialogContent().getWarningDeleteFollow(requireContext(), follower)
             }
+        }
+    }
+
+    private fun initCancelBtnClickListener() {
+        binding.btnWarningDialogCancel.setOnClickListener {
+            dismiss()
         }
     }
 
