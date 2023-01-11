@@ -31,7 +31,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMyShelf()
+        viewModel.getMyShelfData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,6 +71,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, item ->
             viewModel.updateUserId(item)
+            viewModel.getFriendShelfData()
             viewModel.updateShelfState(FRIEND)
             friendAdapter?.updateSelectedPosition(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
@@ -85,6 +86,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initUserClickListener() {
         binding.ivBookshelfUserProfile.setOnClickListener {
+            viewModel.getMyShelfData()
             binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
             friendAdapter?.clearSelection()
@@ -136,16 +138,28 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 friendAdapter?.submitList(viewModel.friendUserData.value)
             }
         }
-        viewModel.isFriendServerStatus.observe(viewLifecycleOwner) { success ->
-            if (success) {
-                myShelfAdapter?.submitList(viewModel.shelfData.value)
-                pickAdapter?.submitList(viewModel.pickData.value)
-            }
-        }
         viewModel.shelfData.observe(viewLifecycleOwner) {
             myShelfAdapter?.submitList(viewModel.shelfData.value)
+        }
+        viewModel.pickData.observe(viewLifecycleOwner) {
             pickAdapter?.submitList(viewModel.pickData.value)
         }
+        viewModel.friendData.observe(viewLifecycleOwner) {
+            setFriendShelfText()
+        }
+        viewModel.userData.observe(viewLifecycleOwner) {
+            setMyShelfText()
+        }
+    }
+
+    private fun setFriendShelfText() {
+        binding.tvBookshelfSelfIntroName.text = viewModel.friendData.value?.nickname ?: ""
+        binding.tvBookshelfSelfIntroNameComment.text = viewModel.friendData.value?.intro ?: ""
+    }
+
+    private fun setMyShelfText() {
+        binding.tvBookshelfSelfIntroName.text = viewModel.userData.value?.nickname ?: ""
+        binding.tvBookshelfSelfIntroNameComment.text = viewModel.userData.value?.intro ?: ""
     }
 
     companion object {
