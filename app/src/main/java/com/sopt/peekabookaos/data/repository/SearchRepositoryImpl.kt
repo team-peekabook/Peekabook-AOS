@@ -14,7 +14,7 @@ class SearchRepositoryImpl @Inject constructor(
             response.data!!.toUser()
         }
 
-    override suspend fun postFollow(friendId: String): Result<FollowResponse> =
+    override suspend fun postFollow(friendId: Int): Result<FollowResponse> =
         kotlin.runCatching { searchDataSource.postFollow(friendId) }.map { response ->
             response.data!!
         }
