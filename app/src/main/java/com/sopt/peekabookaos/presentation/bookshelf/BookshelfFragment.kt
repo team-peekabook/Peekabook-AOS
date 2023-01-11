@@ -36,7 +36,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         } else if (viewModel.isFriendServerStatus.value == true) {
             viewModel.getFriendShelfData()
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
