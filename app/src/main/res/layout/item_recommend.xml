@@ -103,7 +103,7 @@
 
             <ImageView
                 android:id="@+id/iv_item_recommend_profile"
-                setCircleImage="@{data.profileImage}"
+                setCircleImage="@{data.friendImage}"
                 android:layout_width="15dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="12dp"
