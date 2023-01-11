@@ -13,7 +13,7 @@ data class SearchDataSource @Inject constructor(
     suspend fun getSearchUser(nickname: String): BaseResponse<SearchUserResponse> =
         searchService.getSearchUser(nickname)
 
-    suspend fun postFollow(friendId: String): BaseResponse<FollowResponse> =
+    suspend fun postFollow(friendId: Int): BaseResponse<FollowResponse> =
         searchService.postFollow(friendId)
 
     suspend fun deleteFollow(friendId: String): NoResponse =
