@@ -18,7 +18,7 @@ interface SearchService {
 
     @POST("friend/{friendId}")
     suspend fun postFollow(
-        @Path("friendId") friendId: String
+        @Path("friendId") friendId: Int
     ): BaseResponse<FollowResponse>
 
     @DELETE("friend/{friendId}")
