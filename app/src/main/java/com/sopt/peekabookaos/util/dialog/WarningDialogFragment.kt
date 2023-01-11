@@ -27,5 +27,23 @@ class WarningDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         isCancelable = true
         initLayout()
+        initWarningDialogContent()
+
+    private fun initWarningDialogContent() {
+        val warningType = arguments?.get(WARNING_TYPE)
+            ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
+        val follower = arguments?.getString(FOLLOWER) ?: DEFAULT
+        with(binding) {
+            warning = when (warningType as WarningType) {
+                WarningType.WARNING_RECOMMEND ->
+                    WarningDialogContent().getWarningRecommendBook(requireContext(), follower)
+                WarningType.WARNING_DELETE_BOOK ->
+                    WarningDialogContent().getWarningDeleteBook(requireContext())
+                WarningType.WARNING_DELETE_FOLLOWER ->
+                    WarningDialogContent().getWarningDeleteFollow(requireContext(), follower)
+            }
+        }
+    }
+
     }
 }
