@@ -48,10 +48,12 @@ class BookShelfViewModel @Inject constructor(
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
+    init {
+        getMyShelfData()
+    }
+
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
-//        if (state == FRIEND) getFriendShelf()
-//        else getMyShelf()
     }
 
     fun updateUserId(item: FriendList) {
@@ -73,6 +75,7 @@ class BookShelfViewModel @Inject constructor(
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isMyServerStatus.value = false
+                    _isFriendServerStatus.value = false
                 }
         }
     }
@@ -90,6 +93,7 @@ class BookShelfViewModel @Inject constructor(
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isFriendServerStatus.value = false
+                    _isMyServerStatus.value = false
                 }
         }
     }

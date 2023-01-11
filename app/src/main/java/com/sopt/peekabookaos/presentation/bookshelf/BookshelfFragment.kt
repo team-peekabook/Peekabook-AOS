@@ -7,8 +7,10 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
@@ -29,7 +31,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMyShelfData()
+        if (viewModel.isMyServerStatus.value == true) {
+            viewModel.getMyShelfData()
+        } else if (viewModel.isFriendServerStatus.value == true) {
+            viewModel.getFriendShelfData()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,11 +56,21 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter { _, item ->
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
             toDetail.putExtra(BOOK_INFO, item.id)
+            if (viewModel.isMyServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, MY)
+            } else if (viewModel.isFriendServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, FRIEND)
+            }
             startActivity(toDetail)
         }
         binding.rvBookshelfPick.adapter = BookShelfPickAdapter { _, item ->
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
             toDetail.putExtra(BOOK_INFO, item.book.id)
+            if (viewModel.isMyServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, MY)
+            } else if (viewModel.isFriendServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, FRIEND)
+            }
             startActivity(toDetail)
         }
         binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, item ->
@@ -133,19 +149,19 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             pickAdapter?.submitList(viewModel.pickData.value)
         }
         viewModel.friendData.observe(viewLifecycleOwner) {
-            setFriendShelfText()
+            updateFriendShelfText()
         }
         viewModel.userData.observe(viewLifecycleOwner) {
-            setMyShelfText()
+            updateMyShelfText()
         }
     }
 
-    private fun setFriendShelfText() {
+    private fun updateFriendShelfText() {
         binding.tvBookshelfSelfIntroName.text = viewModel.friendData.value?.nickname ?: ""
         binding.tvBookshelfSelfIntroNameComment.text = viewModel.friendData.value?.intro ?: ""
     }
 
-    private fun setMyShelfText() {
+    private fun updateMyShelfText() {
         binding.tvBookshelfSelfIntroName.text = viewModel.userData.value?.nickname ?: ""
         binding.tvBookshelfSelfIntroNameComment.text = viewModel.userData.value?.intro ?: ""
     }
