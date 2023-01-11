@@ -5,6 +5,6 @@ import com.sopt.peekabookaos.data.entity.Notification
 import retrofit2.http.GET
 
 interface NotificationService {
-    @GET("/alarm")
+    @GET("alarm")
     suspend fun getAlarm(): BaseResponse<List<Notification>>
 }
