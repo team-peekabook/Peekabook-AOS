@@ -110,7 +110,7 @@
 
         <TextView
             android:id="@+id/tv_create_update_book_comment"
-            style="@style/Bd"
+            style="@style/H1Bd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -160,7 +160,7 @@
 
         <TextView
             android:id="@+id/tv_create_update_book_memo"
-            style="@style/Bd"
+            style="@style/H1Bd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
