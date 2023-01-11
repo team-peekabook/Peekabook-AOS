@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK
@@ -16,7 +15,6 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
-import com.sopt.peekabookaos.util.extensions.getParcelable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,9 +24,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
+        initBookIdAppearance()
         initContentAppearance()
         initDetailView()
-        initBookIdAppearance()
         initBookIdObserve()
         initDeleteBtnClickListener()
         initBackBtnOnClickListener()
@@ -78,11 +76,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         when (intent.getStringExtra(LOCATION)) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
-                intent.getParcelable(MY, Book::class.java)!!
+                intent.getIntExtra(BOOK_INFO, DEFAULT)
             }
             FRIEND -> {
                 detailViewModel.initIsMyDetailView(false)
-                intent.getParcelable(FRIEND, Book::class.java)!!
+                intent.getIntExtra(BOOK_INFO, DEFAULT)
             }
         }
     }
@@ -120,6 +118,15 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                     )
                 }
             }.show(supportFragmentManager, WarningDialogFragment.DIALOG_WARNING)
+            initIsDeleted()
+        }
+    }
+
+    private fun initIsDeleted() {
+        detailViewModel.isDeleted.observe(this) { success ->
+            if (success) {
+                finish()
+            }
         }
     }
 
