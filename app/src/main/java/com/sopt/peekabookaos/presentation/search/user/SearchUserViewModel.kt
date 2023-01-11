@@ -49,13 +49,13 @@ class SearchUserViewModel @Inject constructor(
         }
     }
 
-    private fun deleteFollow() {
+    private fun deleteFollow(id: Int) {
         viewModelScope.launch {
-            if (serverStatus) {
-                isFollowStatus.emit(true)
-                isFollowed.value = false
-            } else {
-                isFollowStatus.emit(false)
+            searchRepository.deleteFollow(id).onSuccess {
+                _isFollowed.emit(false)
+            }.onFailure { throwable ->
+                _isFollowed.emit(true)
+                Timber.e("$throwable")
             }
         }
     }
