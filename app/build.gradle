@@ -23,6 +23,7 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "BASE_URI", properties["BASE_URI"]
+        buildConfigField "String", "NAVER_URL", properties["NAVER_URL"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
