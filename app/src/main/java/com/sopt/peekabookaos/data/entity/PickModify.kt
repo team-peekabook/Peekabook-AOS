@@ -8,10 +8,4 @@ data class PickModify(
     var pickIndex: Int,
     @SerialName("Book")
     val book: Book
-) {
-    @Serializable
-    data class Book(
-        val id: Int,
-        val bookImage: String
-    )
-}
+)
