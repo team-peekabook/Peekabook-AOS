@@ -6,8 +6,11 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.FriendUser
 import com.sopt.peekabookaos.databinding.ActivityRecommendationBinding
-import com.sopt.peekabookaos.presentation.recommendation.RecommendDialog.Companion.TAG
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
+import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
+import com.sopt.peekabookaos.util.dialog.WarningType
+import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +44,19 @@ class RecommendationActivity :
 
     private fun initCheckBtnOnClickListener() {
         binding.btnRecommendationCheck.setOnClickListener {
-            RecommendDialog().show(supportFragmentManager, TAG)
+            WarningDialogFragment().withArgs {
+                /** 추후 friendDummy.name에 intent에서 넘어온 name 넣어주기 */
+                putString(WarningDialogFragment.FOLLOWER, friendDummy.name)
+                putSerializable(
+                    WarningDialogFragment.WARNING_TYPE,
+                    WarningType.WARNING_RECOMMEND
+                )
+                putParcelable(
+                    WarningDialogFragment.CONFIRM_ACTION,
+                    /** 하정아 "추천하기" 버튼 눌렀을 때 recommendationViewModel.post() 호출했당 확인하고 주석 지워 ~ */
+                    ConfirmClickListener(confirmAction = { recommendationViewModel.post() })
+                )
+            }.show(supportFragmentManager, WarningDialogFragment.DIALOG_WARNING)
         }
     }
 

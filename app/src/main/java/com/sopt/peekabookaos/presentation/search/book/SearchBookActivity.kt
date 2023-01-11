@@ -12,6 +12,7 @@ import com.sopt.peekabookaos.databinding.ActivitySearchBookBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
@@ -50,7 +51,6 @@ class SearchBookActivity :
                 }
             }
             else -> {
-                /* 추후 Recommendation Activity 추가시 주석 제거
                 Intent(this, RecommendationActivity::class.java).apply {
                     putExtra(RECOMMEND, book)
                     putExtra(LOCATION, RECOMMEND)
@@ -58,7 +58,6 @@ class SearchBookActivity :
                     startActivity(intent)
                     finish()
                 }
-                */
             }
         }
     }

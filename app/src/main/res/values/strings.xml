@@ -5,6 +5,7 @@
     <string name="binding_error">Binding not initialized to reference the view.</string>
     <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르시면 종료됩니다.</string>
     <string name="null_point_exception">NullPointException occurs..</string>
+    <string name="null_point_exception_warning_dialog_argument">"WarningDialogFragment에 필요한 arguments에 안들어옴"</string>
 
     <!-- Barcode -->
     <string name="barcode_permission">Please Accept all the permissions</string>
@@ -54,9 +55,6 @@
     <string name="recommendation_book_comment_count">%d/200</string>
     <string name="recommendation_hint">추천사를 적어주세요.</string>
     <string name="recommendation_to_name">받는 사람</string>
-    <string name="recommendation_dialog">%s님에게\n책을 추천하시겠어요?</string>
-    <string name="recommendation_dialog_cancel">취소하기</string>
-    <string name="recommendation_dialog_recommend">추천하기</string>
 
     <!-- PickModify -->
     <string name="pick_modify_notice">최대 3개까지 선택 가능해요.</string>
@@ -80,4 +78,12 @@
     <string name="search_user_hint">사용자의 닉네임을 입력해주세요.</string>
     <string name="search_user_error">앗! 해당 사용자가 존재하지 않는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
     <string name="search_user_follow">팔로잉</string>
+
+    <!-- Warning Dialog -->
+    <string name="warning_dialog_recommend_title">%s님에게\n책을 추천하시겠어요?</string>
+    <string name="warning_dialog_delete_follower_title">%s님을\n정말 삭제하시겠어요?</string>
+    <string name="warning_dialog_delete_book_title">해당 책을\n정말 삭제하시겠습니까?</string>
+    <string name="warning_dialog_cancel">취소하기</string>
+    <string name="warning_dialog_recommend">추천하기</string>
+    <string name="warning_dialog_delete">삭제하기</string>
 </resources>
