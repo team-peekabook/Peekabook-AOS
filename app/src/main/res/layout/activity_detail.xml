@@ -54,11 +54,11 @@
 
         <ImageView
             android:id="@+id/iv_detail_book_cover"
-            setImage="@{vm.detailData.book.bookTitle}"
+            setImage="@{vm.detailData.book.bookImage}"
             android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="16dp"
-            android:background="@color/peeka_white"
+            android:background="@color/peeka_beige"
             android:elevation="4dp"
             app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"

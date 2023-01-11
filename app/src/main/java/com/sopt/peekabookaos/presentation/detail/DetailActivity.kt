@@ -19,12 +19,19 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         initContentAppearance()
         initDetailView()
         initBookIdAppearance()
+        initBookIdObserve()
     }
 
     private fun initBookIdAppearance() {
         detailViewModel.initBookId(
             intent.getIntExtra(BOOK_INFO, DEFAULT)
         )
+    }
+
+    private fun initBookIdObserve() {
+        detailViewModel.bookId.observe(this) { bookId ->
+            detailViewModel.getDetail(bookId)
+        }
     }
 
     private fun initContentAppearance() {
@@ -58,11 +65,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         when (LOCATION) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
-                detailViewModel.initDetailMyData()
             }
             FRIEND -> {
                 detailViewModel.initIsMyDetailView(false)
-                detailViewModel.initDetailFriendData()
             }
         }
     }
@@ -71,6 +76,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val MY = "my"
         const val FRIEND = "friend"
         const val BOOK_INFO = "book_info"
-        private const val DEFAULT = -1
+        private const val DEFAULT = 2 // 추후 -1로 수정
     }
 }

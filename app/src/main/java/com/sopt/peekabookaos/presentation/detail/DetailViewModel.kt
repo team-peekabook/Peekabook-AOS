@@ -15,17 +15,13 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val detailRepository: DetailRepository
 ) : ViewModel() {
-    private val _detailData = MutableLiveData<List<Detail>>()
-    val detailData: LiveData<List<Detail>> = _detailData
+    private val _detailData = MutableLiveData<Detail>()
+    val detailData: LiveData<Detail> = _detailData
 
     private val _isMyDetailView = MutableLiveData<Boolean>()
     val isMyDetailView: LiveData<Boolean> = _isMyDetailView
 
-    private val bookId = MutableLiveData<Int>()
-
-    init {
-        getDetail()
-    }
+    val bookId = MutableLiveData<Int>()
 
     fun initIsMyDetailView(detail: Boolean) {
         _isMyDetailView.value = detail
@@ -35,11 +31,12 @@ class DetailViewModel @Inject constructor(
         bookId.value = id
     }
 
-    private fun getDetail() {
+    fun getDetail(bookId: Int) {
         viewModelScope.launch {
-            detailRepository.getDetail()
+            detailRepository.getDetail(bookId)
                 .onSuccess { response ->
-                    _detailData.value = response.detailBook
+                    _detailData.value = response
+                    Timber.e("$response")
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
