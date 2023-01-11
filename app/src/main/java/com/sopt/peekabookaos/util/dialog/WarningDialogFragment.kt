@@ -68,5 +68,11 @@ class WarningDialogFragment : DialogFragment() {
         _binding = null
     }
 
+    companion object {
+        const val DIALOG_WARNING = "warningDialog"
+        const val WARNING_TYPE = "warningType"
+        const val CONFIRM_ACTION = "confirmAction"
+        const val FOLLOWER = "follower"
+        const val DEFAULT = "default"
     }
 }
