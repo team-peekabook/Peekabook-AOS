@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogWarningBinding
+import com.sopt.peekabookaos.util.extensions.getBundleParcelable
 import com.sopt.peekabookaos.util.extensions.initLayout
 import timber.log.Timber
 
@@ -33,7 +34,7 @@ class WarningDialogFragment : DialogFragment() {
     }
 
     private fun initWarningDialogContent() {
-        val warningType = arguments?.get(WARNING_TYPE)
+        val warningType = arguments?.getBundleParcelable(WARNING_TYPE, WarningType::class.java)
             ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
         val follower = arguments?.getString(FOLLOWER) ?: DEFAULT
         with(binding) {
