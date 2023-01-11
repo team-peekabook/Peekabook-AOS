@@ -15,6 +15,11 @@ class RecommendFragment :
     private val recommendAdapter: BookRecommendAdapter?
         get() = binding.rvRecommend.adapter as? BookRecommendAdapter
 
+    override fun onResume() {
+        super.onResume()
+        recommendViewModel.getRecommend()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTextAppearance()
