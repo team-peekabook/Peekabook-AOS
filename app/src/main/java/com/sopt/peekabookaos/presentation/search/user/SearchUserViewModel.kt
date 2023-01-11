@@ -42,13 +42,10 @@ class SearchUserViewModel @Inject constructor(
     }
 
     fun followBtnClickListener() {
-        /* 서버 통신 시 구현 예정*/
-        viewModelScope.launch {
-            if (isFollowed.value) {
-                deleteFollow()
-            } else {
-                postFollow()
-            }
+        if (_isFollowed.value) {
+            deleteFollow(_uiState.value.id)
+        } else {
+            postFollow(_uiState.value.id)
         }
     }
 
