@@ -10,11 +10,3 @@ data class Picks(
     val book: Book,
     val description: String
 )
-// {
-//    @Serializable
-//    data class Book(
-//        val id: Int,
-//        val bookImage: String,
-//        val bookTitle: String
-//    )
-// }
