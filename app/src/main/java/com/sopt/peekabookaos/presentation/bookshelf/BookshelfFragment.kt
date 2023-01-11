@@ -145,19 +145,19 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             pickAdapter?.submitList(viewModel.pickData.value)
         }
         viewModel.friendData.observe(viewLifecycleOwner) {
-            setFriendShelfText()
+            updateFriendShelfText()
         }
         viewModel.userData.observe(viewLifecycleOwner) {
-            setMyShelfText()
+            updateMyShelfText()
         }
     }
 
-    private fun setFriendShelfText() {
+    private fun updateFriendShelfText() {
         binding.tvBookshelfSelfIntroName.text = viewModel.friendData.value?.nickname ?: ""
         binding.tvBookshelfSelfIntroNameComment.text = viewModel.friendData.value?.intro ?: ""
     }
 
-    private fun setMyShelfText() {
+    private fun updateMyShelfText() {
         binding.tvBookshelfSelfIntroName.text = viewModel.userData.value?.nickname ?: ""
         binding.tvBookshelfSelfIntroNameComment.text = viewModel.userData.value?.intro ?: ""
     }

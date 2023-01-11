@@ -50,8 +50,6 @@ class BookShelfViewModel @Inject constructor(
 
     fun updateShelfState(state: Boolean) {
         _friendShelf.value = state
-//        if (state == FRIEND) getFriendShelf()
-//        else getMyShelf()
     }
 
     fun updateUserId(item: FriendList) {
