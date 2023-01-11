@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.Shelf" />
+            type="com.sopt.peekabookaos.data.entity.Books" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
 
         <ImageView
             android:id="@+id/iv_item_bookshelf_shelf"
-            setImage="@{data.book}"
+            setImage="@{data.book.bookImage}"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:scaleType="fitXY"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_bookshelf_friend_plus"
-            android:visibility="@{data.pick == true ? View.VISIBLE: View.INVISIBLE}"
+            android:visibility="@{data.pickIndex != 0 ? View.VISIBLE: View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

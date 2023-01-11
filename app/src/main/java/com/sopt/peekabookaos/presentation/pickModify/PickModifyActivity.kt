@@ -21,9 +21,18 @@ class PickModifyActivity :
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
         initAdapter()
+        initIsServerObserve()
         initItemDecoration()
         initCheckClickListener()
         initObserver()
+    }
+
+    private fun initIsServerObserve() {
+        viewModel.isServerStatus.observe(this) { success ->
+            if (success) {
+                pickShelfAdapter.submitList(viewModel.pickModifyData.value)
+            }
+        }
     }
 
     private fun initAdapter() {
@@ -34,7 +43,6 @@ class PickModifyActivity :
             }
         }
         binding.rvPickModify.adapter = pickShelfAdapter
-        pickShelfAdapter.submitList(viewModel.pickModifyData.value)
 
         val animator = binding.rvPickModify.itemAnimator
         if (animator is SimpleItemAnimator) {
