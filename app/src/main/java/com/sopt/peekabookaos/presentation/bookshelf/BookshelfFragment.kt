@@ -28,6 +28,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
+        initIsServerObserver()
         initAdapter()
         initItemDecoration()
         initUserClickListener()
@@ -41,16 +42,13 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initAdapter() {
         binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter()
-        myShelfAdapter?.submitList(viewModel.shelfData.value)
         binding.rvBookshelfPick.adapter = BookShelfPickAdapter()
-        pickAdapter?.submitList(viewModel.pickData.value)
         binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, _ ->
             viewModel.updateShelfState(FRIEND)
             viewModel.updateUserId(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
-        friendAdapter?.submitList(viewModel.friendUserData.value)
     }
 
     private fun initItemDecoration() {
@@ -106,6 +104,16 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         viewModel.userId.observe(viewLifecycleOwner) {
             if (viewModel.friendShelf.value == FRIEND) {
                 friendAdapter?.updateSelectedPosition(it)
+            }
+        }
+    }
+
+    private fun initIsServerObserver() {
+        viewModel.isServerStatus.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                myShelfAdapter?.submitList(viewModel.shelfData.value)
+                pickAdapter?.submitList(viewModel.pickData.value)
+                friendAdapter?.submitList(viewModel.friendUserData.value)
             }
         }
     }
