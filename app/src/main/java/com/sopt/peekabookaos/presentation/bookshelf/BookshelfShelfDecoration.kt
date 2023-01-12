@@ -42,9 +42,15 @@ class BookshelfShelfDecoration(val context: Context) : RecyclerView.ItemDecorati
         }
 
         if (position <= 2) {
-            outRect.top = 0
+            outRect.top = 20
         } else {
-            outRect.top = 80
+            outRect.top = 0
+        }
+
+        if ((position + 1) / 3 == parent.childCount / 3) {
+            outRect.bottom = 80
+        } else {
+            outRect.bottom = 0
         }
     }
 
