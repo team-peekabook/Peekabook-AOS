@@ -1,8 +1,11 @@
 package com.sopt.peekabookaos.presentation.search.book
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
+import com.sopt.peekabookaos.data.entity.SelfIntro
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -12,6 +15,9 @@ import kotlinx.coroutines.launch
 class SearchBookViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(emptyList<Book>())
     val uiState = _uiState.asStateFlow()
+
+    private val _friendInfo = MutableLiveData<SelfIntro>()
+    val friendInfo: LiveData<SelfIntro> = _friendInfo
 
     private val _isServerStatus = MutableSharedFlow<Boolean>()
     val isServerStatus = _isServerStatus.asSharedFlow()
@@ -31,6 +37,10 @@ class SearchBookViewModel : ViewModel() {
                 _isServerStatus.emit(false)
             }
         }
+    }
+
+    fun initFriendInfo(friend: SelfIntro) {
+        _friendInfo.value = friend
     }
 
     companion object {

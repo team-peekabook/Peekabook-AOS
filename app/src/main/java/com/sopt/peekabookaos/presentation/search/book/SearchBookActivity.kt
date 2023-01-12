@@ -8,11 +8,14 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
+import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.databinding.ActivitySearchBookBinding
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity
+import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
@@ -28,6 +31,7 @@ class SearchBookActivity :
         super.onCreate(savedInstanceState)
         binding.vm = searchBookViewModel
         initSearchBookAdapter()
+        initFriendInfo()
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
@@ -39,8 +43,18 @@ class SearchBookActivity :
         binding.rvSearchBook.adapter = searchBookAdapter
     }
 
+    private fun initFriendInfo() {
+        searchBookViewModel.initFriendInfo(
+//            intent.getParcelable(
+//                FRIEND_INFO,
+//                SelfIntro::class.java
+//            )!!
+            SELFINTRO
+        )
+    }
+
     private fun onClickBook(book: Book) {
-        when (intent.getStringExtra(LOCATION) ?: CREATE) {
+        when (intent.getStringExtra(LOCATION) ?: RECOMMEND) {
             CREATE -> {
                 Intent(this, CreateUpdateBookActivity::class.java).apply {
                     putExtra(CREATE, book)
@@ -52,8 +66,8 @@ class SearchBookActivity :
             }
             else -> {
                 Intent(this, RecommendationActivity::class.java).apply {
-                    putExtra(RECOMMEND, book)
-                    putExtra(LOCATION, RECOMMEND)
+                    putExtra(BOOK_INFO, book)
+                    putExtra(FRIEND_INFO, searchBookViewModel.friendInfo.value)
                 }.also { intent ->
                     startActivity(intent)
                     finish()
@@ -126,5 +140,10 @@ class SearchBookActivity :
 
     companion object {
         const val RECOMMEND = "recommend"
+
+        private val SELFINTRO = SelfIntro(
+            nickname = "이빵주",
+            id = 9
+        )
     }
 }
