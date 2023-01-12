@@ -161,6 +161,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 myShelfAdapter?.submitList(viewModel.shelfData.value)
                 pickAdapter?.submitList(viewModel.pickData.value)
                 friendAdapter?.submitList(viewModel.friendUserData.value)
+                updateMyShelfText()
             }
         }
         viewModel.shelfData.observe(viewLifecycleOwner) {
@@ -171,9 +172,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         viewModel.friendData.observe(viewLifecycleOwner) {
             updateFriendShelfText()
-        }
-        viewModel.userData.observe(viewLifecycleOwner) {
-            updateMyShelfText()
         }
         viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
             if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {

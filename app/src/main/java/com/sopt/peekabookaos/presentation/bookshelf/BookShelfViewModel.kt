@@ -45,7 +45,7 @@ class BookShelfViewModel @Inject constructor(
     private val _bookTotalNum: MutableLiveData<Int> = MutableLiveData()
     var bookTotalNum: LiveData<Int> = _bookTotalNum
 
-    private val _isMyServerStatus = MutableLiveData<Boolean>()
+    private val _isMyServerStatus = MutableLiveData<Boolean>(true)
     val isMyServerStatus: LiveData<Boolean> = _isMyServerStatus
 
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
