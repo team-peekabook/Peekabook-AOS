@@ -37,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="145dp"
             android:layout_marginHorizontal="4dp"
+            android:elevation="4dp"
             android:layout_marginTop="4dp"
             android:src="@color/peeka_white_60"
             android:visibility="@{data.pickIndex == 0 ? View.INVISIBLE : View.VISIBLE}"
