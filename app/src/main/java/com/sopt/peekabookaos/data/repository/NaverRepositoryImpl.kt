@@ -14,8 +14,10 @@ class NaverRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getBookToBarcode(isbn: String): Result<Book> =
+    override suspend fun getBookToBarcode(isbn: String): Result<List<Book>> =
         kotlin.runCatching { naverDataSource.getBookToBarcode(isbn) }.map { response ->
-            response.items[0].toBook()
+            response.items.map { naverBookItem ->
+                naverBookItem.toBook()
+            }
         }
 }

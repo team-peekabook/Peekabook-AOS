@@ -31,13 +31,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:maxLines="1"
                 android:paddingVertical="5dp"
                 android:text="@{data.bookTitle}"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/cl_item_recommend_redRect"
                 app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
                 app:layout_constraintTop_toTopOf="@id/cl_item_recommend_redRect"
-                tools:text="아무튼, 여름" />
+                tools:text="일이삼사오육칠팔구십일이삼사오육칠팔구십일이삽이십" />
 
             <View
                 android:id="@+id/view_item_recommend_line_title"
@@ -57,12 +60,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
+                android:ellipsize="end"
+                android:maxEms="6"
+                android:maxLines="1"
                 android:text="@{data.author}"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_title"
                 app:layout_constraintStart_toEndOf="@+id/view_item_recommend_line_title"
                 app:layout_constraintTop_toTopOf="@id/tv_item_recommend_title"
-                tools:text="김신회" />
+                tools:text="김마마마마마마마마마마마신회" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

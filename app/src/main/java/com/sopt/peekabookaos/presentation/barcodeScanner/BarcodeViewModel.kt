@@ -15,7 +15,7 @@ import javax.inject.Inject
 class BarcodeViewModel @Inject constructor(
     private val naverRepository: NaverRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(Book())
+    private val _uiState = MutableStateFlow(emptyList<Book>())
     val uiState = _uiState.asStateFlow()
 
     private val _serverStatus = MutableStateFlow<BarcodeState>(BarcodeState.IDLE)
@@ -26,8 +26,13 @@ class BarcodeViewModel @Inject constructor(
             _serverStatus.emit(BarcodeState.IDLE)
             naverRepository.getBookToBarcode(barcodeString)
                 .onSuccess { response ->
-                    _uiState.value = response
-                    _serverStatus.emit(BarcodeState.SUCCESS)
+                    if (response.isEmpty()) {
+                        _serverStatus.emit(BarcodeState.ERROR)
+                    } else {
+                        _uiState.value = response
+                        _serverStatus.emit(BarcodeState.SUCCESS)
+                        Thread.sleep(1)
+                    }
                 }.onFailure { throwable ->
                     _serverStatus.emit(BarcodeState.ERROR)
                     Timber.e("$throwable")
