@@ -86,4 +86,12 @@
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+    <string name="tv_my_page_name">북과픽</string>
+    <string name="tv_my_page_intro">안녕하세요. 저는 픽과북입니다.</string>
+    <string name="tv_my_page_1">알림 설정</string>
+    <string name="tv_my_page_2"><![CDATA[개인정보 보호 정책 & 서비스 이용 약관]]></string>
+    <string name="tv_my_page_3">문의하기</string>
+    <string name="tv_my_page_4">개발자 정보</string>
+    <string name="tv_my_page_5">로그아웃</string>
+    <string name="tv_my_page_6">서비스 탈퇴하기</string>
 </resources>
