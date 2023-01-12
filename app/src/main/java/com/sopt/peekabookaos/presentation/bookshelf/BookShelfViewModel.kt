@@ -91,6 +91,7 @@ class BookShelfViewModel @Inject constructor(
         viewModelScope.launch {
             shelfRepository.getFriendShelf(userId.value!!)
                 .onSuccess { response ->
+                    _friendUserData.value = response.friendList
                     _friendData.value = response.friendIntro
                     _pickData.value = response.picks
                     _bookTotalNum.value = response.bookTotalNum

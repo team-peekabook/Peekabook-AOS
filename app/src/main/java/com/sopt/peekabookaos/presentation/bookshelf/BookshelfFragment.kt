@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
@@ -14,6 +15,7 @@ import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
@@ -87,7 +89,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             viewModel.updateUserId(item)
             viewModel.getFriendShelfData()
             viewModel.updateShelfState(FRIEND)
-            viewModel.updateLastSelectedItem(pos)
             friendAdapter?.updateSelectedPosition(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
@@ -112,6 +113,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initFriendPlusClickListener() {
         binding.btnBookshelfFriendPlus.setSingleOnClickListener {
             val toSearchUser = Intent(requireActivity(), SearchUserActivity::class.java)
+            toSearchUser.putExtra(LOCATION, CREATE)
             startActivity(toSearchUser)
         }
     }
@@ -125,10 +127,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initRecommendClickListener() {
         binding.btnBookshelfRecommend.setSingleOnClickListener {
-            val toSearch = Intent(requireActivity(), BarcodeScannerActivity::class.java)
-            toSearch.putExtra(FRIEND_INFO, viewModel.friendData.value)
-            toSearch.putExtra(LOCATION, RECOMMEND)
-            startActivity(toSearch)
+            val toSearchBook = Intent(requireActivity(), SearchBookActivity::class.java)
+            toSearchBook.putExtra(FRIEND_INFO, viewModel.friendData.value)
+            toSearchBook.putExtra(LOCATION, RECOMMEND)
+            startActivity(toSearchBook)
         }
     }
 
@@ -174,6 +176,9 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 friendAdapter?.clearSelection()
                 binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
             }
+        }
+        viewModel.friendUserData.observe(viewLifecycleOwner) {
+            friendAdapter?.submitList(viewModel.friendUserData.value)
         }
     }
 
