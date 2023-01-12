@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.data.repository
 
+import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.entity.response.CreateBookResponse
@@ -15,6 +16,6 @@ class CreateUpdateRepositoryImpl @Inject constructor(
                 response.data!!
             }
 
-    override suspend fun deleteBook(bookId: Int): Result<NoResponse> =
-        kotlin.runCatching { createUpdateDataSource.deleteBook(bookId) }
+    override suspend fun patchBook(bookId: Int, bookComment: BookComment): Result<NoResponse> =
+        kotlin.runCatching { createUpdateDataSource.patchBook(bookId, bookComment) }
 }
