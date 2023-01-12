@@ -35,8 +35,16 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         super.onResume()
         if (viewModel.isMyServerStatus.value == true) {
             viewModel.getMyShelfData()
+            binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
+            viewModel.updateShelfState(USER)
+            friendAdapter?.clearSelection()
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
         } else if (viewModel.isFriendServerStatus.value == true) {
             viewModel.getFriendShelfData()
+            friendAdapter?.submitList(viewModel.friendUserData.value)
+            friendAdapter?.updateSelectedPosition(viewModel.lastSelectedItem.value!!)
+            binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
     }
 
@@ -79,6 +87,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             viewModel.updateUserId(item)
             viewModel.getFriendShelfData()
             viewModel.updateShelfState(FRIEND)
+            viewModel.updateLastSelectedItem(pos)
             friendAdapter?.updateSelectedPosition(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
@@ -156,6 +165,15 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         viewModel.userData.observe(viewLifecycleOwner) {
             updateMyShelfText()
+        }
+        viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
+            if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
+                viewModel.getMyShelfData()
+                binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
+                viewModel.updateShelfState(USER)
+                friendAdapter?.clearSelection()
+                binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+            }
         }
     }
 

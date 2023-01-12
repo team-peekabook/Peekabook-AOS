@@ -39,6 +39,9 @@ class BookShelfViewModel @Inject constructor(
     private val _userId: MutableLiveData<Int> = MutableLiveData(0)
     var userId: LiveData<Int> = _userId
 
+    private val _lastSelectedItem: MutableLiveData<Int> = MutableLiveData()
+    var lastSelectedItem: LiveData<Int> = _lastSelectedItem
+
     private val _bookTotalNum: MutableLiveData<Int> = MutableLiveData()
     var bookTotalNum: LiveData<Int> = _bookTotalNum
 
@@ -58,10 +61,14 @@ class BookShelfViewModel @Inject constructor(
 
     fun updateUserId(item: FriendList) {
         _userId.value = item.id
-        Timber.tag("kang").e("${item.nickname}")
+    }
+
+    fun updateLastSelectedItem(position: Int) {
+        _lastSelectedItem.value = position
     }
 
     fun getMyShelfData() {
+        Timber.tag("kang").e("getMyshelf")
         viewModelScope.launch {
             shelfRepository.getMyShelf()
                 .onSuccess { response ->
