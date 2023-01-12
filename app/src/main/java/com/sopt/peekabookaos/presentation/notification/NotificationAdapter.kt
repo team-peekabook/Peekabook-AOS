@@ -35,8 +35,20 @@ class NotificationAdapter(
                     tvNotificationBookTitle.isVisible = false
                 }
             }
-            2 -> holder.binding.tvNotificationBookTitle.isVisible = true
-            3 -> holder.binding.tvNotificationBookTitle.isVisible = true
+            2 -> {
+                with(holder.binding) {
+                    tvNotificationMentionType1.isVisible = false
+                    tvNotificationMention.isVisible = true
+                    tvNotificationBookTitle.isVisible = true
+                }
+            }
+            3 -> {
+                with(holder.binding) {
+                    tvNotificationMentionType1.isVisible = false
+                    tvNotificationMention.isVisible = true
+                    tvNotificationBookTitle.isVisible = true
+                }
+            }
         }
         with(holder.binding) {
             tvNotificationMention.text = String.format(

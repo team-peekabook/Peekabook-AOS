@@ -44,10 +44,10 @@ class PickModifyViewModel @Inject constructor(
         preListState = _selectedItemList.value?.size!! >= 3
         if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) {
             item.pickIndex = _selectedItemList.value?.size!! + 1
-            _selectedItemList.value?.add(item.book.id)
+            _selectedItemList.value?.add(item.id)
             _selectState.value = true
         } else {
-            _selectedItemList.value!!.remove(item.book.id)
+            _selectedItemList.value!!.remove(item.id)
             item.pickIndex = 0
             _selectState.value = false
             updateSelectedItemIndex()
@@ -58,14 +58,14 @@ class PickModifyViewModel @Inject constructor(
     private fun initSelectedItemList(data: List<PickModify>) {
         for (item in data) {
             if (item.pickIndex != 0) {
-                _selectedItemList.value?.add(item.book.id)
+                _selectedItemList.value?.add(item.id)
             }
         }
     }
 
     private fun updateSelectedItemIndex() {
         for (item in _pickModifyData.value!!) {
-            if (_selectedItemList.value?.contains(item.book.id) == true) {
+            if (_selectedItemList.value?.contains(item.id) == true) {
                 item.pickIndex = getSelectedItemIndex(item)
             }
         }
@@ -85,7 +85,7 @@ class PickModifyViewModel @Inject constructor(
         var count = 0
         while (iterator.hasNext()) {
             count++
-            if (item.book.id == iterator.next()) {
+            if (item.id == iterator.next()) {
                 return count
             }
         }
