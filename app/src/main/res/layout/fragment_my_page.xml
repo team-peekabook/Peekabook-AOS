@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:layout_marginTop="21dp"
-            android:text="북과픽"
+            android:text="@string/tv_my_page_name"
             android:textColor="@color/peeka_red"
             app:layout_constraintStart_toEndOf="@id/iv_my_page_image"
             app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
@@ -74,7 +74,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_my_page_name"
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_name"
-            tools:text="안녕하세요. 저는 픽과북입니다.  " />
+            android:text="@string/tv_my_page_intro" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="27dp"
-        android:text="알림 설정"
+        android:text="@string/tv_my_page_1"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
         app:layout_constraintTop_toBottomOf="@id/iv_my_page_rect" />
@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="개인정보 보호 정책 & 서비스 이용 약관"
+        android:text="@string/tv_my_page_2"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
         app:layout_constraintTop_toBottomOf="@id/view_my_page_1" />
@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="문의하기"
+        android:text="@string/tv_my_page_3"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
         app:layout_constraintTop_toBottomOf="@id/view_my_page_2" />
@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="개발자 정보"
+        android:text="@string/tv_my_page_4"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
         app:layout_constraintTop_toBottomOf="@id/view_my_page_3" />
@@ -171,7 +171,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="로그아웃"
+        android:text="@string/tv_my_page_5"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
         app:layout_constraintTop_toBottomOf="@id/view_my_page_4" />
@@ -193,7 +193,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="서비스 탈퇴하기"
+        android:text="@string/tv_my_page_6"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
         app:layout_constraintTop_toBottomOf="@id/view_my_page_5" />
