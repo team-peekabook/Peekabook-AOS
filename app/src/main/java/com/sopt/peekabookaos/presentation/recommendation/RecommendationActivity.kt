@@ -4,12 +4,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
-import com.sopt.peekabookaos.data.entity.FriendUser
+import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.databinding.ActivityRecommendationBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
+import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,18 +22,17 @@ class RecommendationActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = recommendationViewModel
+        initView()
+        initIsRecommendationObserve()
         initCloseBtnOnClickListener()
         initCheckBtnOnClickListener()
-        initView()
+        initIsRecommendationObserve()
     }
 
     private fun initView() {
         recommendationViewModel.initRecommendData(
-            // 추후 intent값 넘어올시 주석 제거
-//            intent.getParcelable(BOOK_INFO, Book::class.java)!!,
-//            intent.getParcelable(FRIEND_INFO, FriendUser::class.java)!!
-            bookDummy,
-            friendDummy
+            intent.getParcelable(BOOK_INFO, Book::class.java)!!,
+            intent.getParcelable(FRIEND_INFO, SelfIntro::class.java)!!
         )
     }
 
@@ -45,34 +45,32 @@ class RecommendationActivity :
     private fun initCheckBtnOnClickListener() {
         binding.btnRecommendationCheck.setOnClickListener {
             WarningDialogFragment().withArgs {
-                /** 추후 friendDummy.name에 intent에서 넘어온 name 넣어주기 */
-                putString(WarningDialogFragment.FOLLOWER, friendDummy.name)
+                putString(
+                    WarningDialogFragment.FOLLOWER,
+                    recommendationViewModel.friendData.value!!.nickname
+                )
                 putSerializable(
                     WarningDialogFragment.WARNING_TYPE,
                     WarningType.WARNING_RECOMMEND
                 )
                 putParcelable(
                     WarningDialogFragment.CONFIRM_ACTION,
-                    /** 하정아 "추천하기" 버튼 눌렀을 때 recommendationViewModel.post() 호출했당 확인하고 주석 지워 ~ */
-                    ConfirmClickListener(confirmAction = { recommendationViewModel.post() })
+                    ConfirmClickListener(confirmAction = { recommendationViewModel.postRecommendation() })
                 )
             }.show(supportFragmentManager, WarningDialogFragment.DIALOG_WARNING)
+        }
+    }
+
+    private fun initIsRecommendationObserve() {
+        recommendationViewModel.isRecommendation.observe(this) { success ->
+            if (success) {
+                finish()
+            }
         }
     }
 
     companion object {
         const val BOOK_INFO = "book_info"
         const val FRIEND_INFO = "friend_info"
-
-        private val bookDummy = Book(
-            bookImage = "http://image.yes24.com/goods/90365124/XL",
-            bookTitle = "아무튼, 여름",
-            author = "김신회"
-        )
-        private val friendDummy = FriendUser(
-            name = "문새연",
-            profile = "",
-            comment = ""
-        )
     }
 }
