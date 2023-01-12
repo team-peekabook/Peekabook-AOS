@@ -27,6 +27,7 @@ import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
@@ -160,13 +161,13 @@ class BarcodeScannerActivity :
     }
 
     private fun initCloseBtnClickListener() {
-        binding.btnBarcodeClose.setOnClickListener {
+        binding.btnBarcodeClose.setSingleOnClickListener {
             finish()
         }
     }
 
     private fun initHardDetectedClickListener() {
-        binding.llBarcodeHardDetected.setOnClickListener {
+        binding.llBarcodeHardDetected.setSingleOnClickListener {
             Intent(this, SearchBookActivity::class.java).apply {
                 putExtra(LOCATION, CREATE)
             }.also { intent ->

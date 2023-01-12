@@ -8,6 +8,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,7 +57,7 @@ class PickModifyActivity :
     }
 
     private fun initCheckClickListener() {
-        binding.ivPickModifyCheck.setOnClickListener {
+        binding.ivPickModifyCheck.setSingleOnClickListener {
             viewModel.changeHashToPickRequest()
             viewModel.patchPick()
             finish()

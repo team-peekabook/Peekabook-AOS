@@ -6,6 +6,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Notification
 import com.sopt.peekabookaos.databinding.ActivityNotificationBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -47,7 +48,7 @@ class NotificationActivity :
     }
 
     private fun initCloseClickListener() {
-        binding.ivNotificationClose.setOnClickListener {
+        binding.ivNotificationClose.setSingleOnClickListener {
             finish()
         }
     }
