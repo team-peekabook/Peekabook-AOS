@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.data.source.remote
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
+import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.entity.response.CreateBookResponse
@@ -13,6 +14,6 @@ data class CreateUpdateDataSource @Inject constructor(
     suspend fun postCreateBook(createBookRequest: CreateBookRequest): BaseResponse<CreateBookResponse> =
         createUpdateService.postCreateBook(createBookRequest)
 
-    suspend fun deleteBook(bookId: Int): NoResponse =
-        createUpdateService.deleteBook(bookId)
+    suspend fun patchBook(bookId: Int, bookComment: BookComment): NoResponse =
+        createUpdateService.patchBook(bookId, bookComment)
 }
