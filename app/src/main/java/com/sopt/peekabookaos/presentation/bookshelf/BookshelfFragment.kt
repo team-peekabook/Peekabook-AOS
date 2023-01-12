@@ -14,6 +14,7 @@ import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -116,6 +117,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.btnBookshelfRecommend.setOnClickListener {
             val toSearch = Intent(requireActivity(), BarcodeScannerActivity::class.java)
             toSearch.putExtra(FRIEND_INFO, viewModel.friendData.value)
+            toSearch.putExtra(LOCATION, RECOMMEND)
             startActivity(toSearch)
         }
     }
