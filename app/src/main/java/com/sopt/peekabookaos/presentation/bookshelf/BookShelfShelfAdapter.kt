@@ -8,7 +8,7 @@ import com.sopt.peekabookaos.data.entity.Books
 import com.sopt.peekabookaos.databinding.ItemBookshelfShelfBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
-class BookShelfShelfAdapter :
+class BookShelfShelfAdapter(private val clickListener: ItemClickListener<Books>) :
     ListAdapter<Books, BookShelfShelfAdapter.MyShelfViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyShelfViewHolder {
@@ -18,13 +18,16 @@ class BookShelfShelfAdapter :
     }
 
     override fun onBindViewHolder(holder: MyShelfViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        holder.onBind(getItem(position), clickListener)
     }
 
     class MyShelfViewHolder(private val binding: ItemBookshelfShelfBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Books) {
+        fun onBind(data: Books, itemClickListener: ItemClickListener<Books>) {
             binding.data = data
+            binding.root.setOnClickListener {
+                itemClickListener.onClick(absoluteAdapterPosition, data)
+            }
         }
     }
 

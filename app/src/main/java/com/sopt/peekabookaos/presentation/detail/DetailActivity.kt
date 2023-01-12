@@ -1,15 +1,21 @@
 package com.sopt.peekabookaos.presentation.detail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK_COMMENT
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,11 +25,13 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
+        initBookIdAppearance()
         initContentAppearance()
         initDetailView()
-        initBookIdAppearance()
         initBookIdObserve()
         initDeleteBtnClickListener()
+        initBackBtnOnClickListener()
+        initEditBtnClickListener()
     }
 
     private fun initBookIdAppearance() {
@@ -39,7 +47,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initContentAppearance() {
-        detailViewModel.detailData.observe(this) {
+        detailViewModel.bookComment.observe(this) {
             if (it.description.isEmpty()) {
                 with(binding) {
                     tvDetailGetContent.text = getString(R.string.text_detail_description_is_null)
@@ -66,19 +74,39 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initDetailView() {
-        /** LOCATION intent.getStringExtra로 구현하기 */
-        when (LOCATION) {
+        when (intent.getStringExtra(LOCATION)) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
+                intent.getIntExtra(BOOK_INFO, DEFAULT)
             }
             FRIEND -> {
                 detailViewModel.initIsMyDetailView(false)
+                intent.getIntExtra(BOOK_INFO, DEFAULT)
+            }
+        }
+    }
+
+    private fun initBackBtnOnClickListener() {
+        binding.btnDetailBack.setSingleOnClickListener {
+            finish()
+        }
+    }
+
+    private fun initEditBtnClickListener() {
+        binding.btnDetailEdit.setSingleOnClickListener {
+            Intent(this, CreateUpdateBookActivity::class.java).apply {
+                putExtra(LOCATION, UPDATE)
+                putExtra(BOOK, detailViewModel.bookData.value)
+                putExtra(BOOK_COMMENT, detailViewModel.bookComment.value)
+            }.also { intent ->
+                startActivity(intent)
+                finish()
             }
         }
     }
 
     private fun initDeleteBtnClickListener() {
-        binding.btnDetailDelete.setOnClickListener {
+        binding.btnDetailDelete.setSingleOnClickListener {
             WarningDialogFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(
@@ -87,11 +115,19 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                     )
                     putParcelable(
                         WarningDialogFragment.CONFIRM_ACTION,
-                        /** 하정아 "삭제하기" 버튼 눌렀을 때 detailViewModel.delete() 호출했당 확인하고 주석 지워 ~ */
-                        ConfirmClickListener(confirmAction = { detailViewModel.delete() })
+                        ConfirmClickListener(confirmAction = { detailViewModel.deleteDetail() })
                     )
                 }
             }.show(supportFragmentManager, WarningDialogFragment.DIALOG_WARNING)
+            initIsDeletedObserve()
+        }
+    }
+
+    private fun initIsDeletedObserve() {
+        detailViewModel.isDeleted.observe(this) { success ->
+            if (success) {
+                finish()
+            }
         }
     }
 

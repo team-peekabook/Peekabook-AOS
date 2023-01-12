@@ -7,11 +7,17 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.detail.DetailActivity
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
-import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity
+import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +33,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMyShelf()
+        if (viewModel.isMyServerStatus.value == true) {
+            viewModel.getMyShelfData()
+        } else if (viewModel.isFriendServerStatus.value == true) {
+            viewModel.getFriendShelfData()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,10 +55,29 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initAdapter() {
-        binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter()
-        binding.rvBookshelfPick.adapter = BookShelfPickAdapter()
+        binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter { _, item ->
+            val toDetail = Intent(requireActivity(), DetailActivity::class.java)
+            toDetail.putExtra(BOOK_INFO, item.id)
+            if (viewModel.isMyServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, MY)
+            } else if (viewModel.isFriendServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, FRIEND)
+            }
+            startActivity(toDetail)
+        }
+        binding.rvBookshelfPick.adapter = BookShelfPickAdapter { _, item ->
+            val toDetail = Intent(requireActivity(), DetailActivity::class.java)
+            toDetail.putExtra(BOOK_INFO, item.book.id)
+            if (viewModel.isMyServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, MY)
+            } else if (viewModel.isFriendServerStatus.value == true) {
+                toDetail.putExtra(LOCATION, FRIEND)
+            }
+            startActivity(toDetail)
+        }
         binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, item ->
             viewModel.updateUserId(item)
+            viewModel.getFriendShelfData()
             viewModel.updateShelfState(FRIEND)
             friendAdapter?.updateSelectedPosition(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
@@ -62,7 +91,8 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initUserClickListener() {
-        binding.ivBookshelfUserProfile.setOnClickListener {
+        binding.ivBookshelfUserProfile.setSingleOnClickListener {
+            viewModel.getMyShelfData()
             binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
             friendAdapter?.clearSelection()
@@ -71,35 +101,37 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initFriendPlusClickListener() {
-        binding.btnBookshelfFriendPlus.setOnClickListener {
+        binding.btnBookshelfFriendPlus.setSingleOnClickListener {
             val toSearchUser = Intent(requireActivity(), SearchUserActivity::class.java)
             startActivity(toSearchUser)
         }
     }
 
     private fun initNotificationClickListener() {
-        binding.btnBookshelfNotification.setOnClickListener {
+        binding.btnBookshelfNotification.setSingleOnClickListener {
             val toNotification = Intent(requireActivity(), NotificationActivity::class.java)
             startActivity(toNotification)
         }
     }
 
     private fun initRecommendClickListener() {
-        binding.btnBookshelfRecommend.setOnClickListener {
-            val toRecommendation = Intent(requireActivity(), RecommendationActivity::class.java)
-            startActivity(toRecommendation)
+        binding.btnBookshelfRecommend.setSingleOnClickListener {
+            val toSearch = Intent(requireActivity(), BarcodeScannerActivity::class.java)
+            toSearch.putExtra(FRIEND_INFO, viewModel.friendData.value)
+            toSearch.putExtra(LOCATION, RECOMMEND)
+            startActivity(toSearch)
         }
     }
 
     private fun initPickModifyClickListener() {
-        binding.btnBookshelfPickModify.setOnClickListener {
+        binding.btnBookshelfPickModify.setSingleOnClickListener {
             val toPickModify = Intent(requireActivity(), PickModifyActivity::class.java)
             startActivity(toPickModify)
         }
     }
 
     private fun initCreateBookClickListener() {
-        binding.btnBookshelfAddBook.setOnClickListener {
+        binding.btnBookshelfAddBook.setSingleOnClickListener {
             val toBarcodeScanner = Intent(requireActivity(), BarcodeScannerActivity::class.java)
             startActivity(toBarcodeScanner)
         }
@@ -113,16 +145,28 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 friendAdapter?.submitList(viewModel.friendUserData.value)
             }
         }
-        viewModel.isFriendServerStatus.observe(viewLifecycleOwner) { success ->
-            if (success) {
-                myShelfAdapter?.submitList(viewModel.shelfData.value)
-                pickAdapter?.submitList(viewModel.pickData.value)
-            }
-        }
         viewModel.shelfData.observe(viewLifecycleOwner) {
             myShelfAdapter?.submitList(viewModel.shelfData.value)
+        }
+        viewModel.pickData.observe(viewLifecycleOwner) {
             pickAdapter?.submitList(viewModel.pickData.value)
         }
+        viewModel.friendData.observe(viewLifecycleOwner) {
+            updateFriendShelfText()
+        }
+        viewModel.userData.observe(viewLifecycleOwner) {
+            updateMyShelfText()
+        }
+    }
+
+    private fun updateFriendShelfText() {
+        binding.tvBookshelfSelfIntroName.text = viewModel.friendData.value?.nickname ?: ""
+        binding.tvBookshelfSelfIntroNameComment.text = viewModel.friendData.value?.intro ?: ""
+    }
+
+    private fun updateMyShelfText() {
+        binding.tvBookshelfSelfIntroName.text = viewModel.userData.value?.nickname ?: ""
+        binding.tvBookshelfSelfIntroNameComment.text = viewModel.userData.value?.intro ?: ""
     }
 
     companion object {

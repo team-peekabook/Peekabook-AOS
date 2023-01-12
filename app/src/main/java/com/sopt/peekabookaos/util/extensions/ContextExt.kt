@@ -2,6 +2,6 @@ package com.sopt.peekabookaos.util.extensions
 
 import android.view.View
 
-fun View.setOnClickListener(onSingleClick: (View) -> Unit) {
+fun View.setSingleOnClickListener(onSingleClick: (View) -> Unit) {
     setOnClickListener(OnSingleClickListener { onSingleClick(it) })
 }

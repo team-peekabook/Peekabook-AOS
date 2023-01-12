@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogWarningBinding
 import com.sopt.peekabookaos.util.extensions.initLayout
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import timber.log.Timber
 
 class WarningDialogFragment : DialogFragment() {
@@ -49,13 +50,13 @@ class WarningDialogFragment : DialogFragment() {
     }
 
     private fun initCancelBtnClickListener() {
-        binding.btnWarningDialogCancel.setOnClickListener {
+        binding.btnWarningDialogCancel.setSingleOnClickListener {
             dismiss()
         }
     }
 
     private fun initConfirmClickListener() {
-        binding.btnWarningDialogConfirm.setOnClickListener {
+        binding.btnWarningDialogConfirm.setSingleOnClickListener {
             arguments?.getParcelable<ConfirmClickListener>(CONFIRM_ACTION)
                 ?.onConfirmClick()
                 ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))

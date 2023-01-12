@@ -9,6 +9,7 @@ import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +44,7 @@ class CreateUpdateBookActivity :
     }
 
     private fun initCloseBtnOnClickListener() {
-        binding.btnCreateUpdateBookClose.setOnClickListener {
+        binding.btnCreateUpdateBookClose.setSingleOnClickListener {
             finish()
         }
     }
@@ -62,5 +63,7 @@ class CreateUpdateBookActivity :
         const val LOCATION = "location"
         const val UPDATE = "update"
         const val CREATE = "create"
+        const val BOOK = "book"
+        const val BOOK_COMMENT = "book_comment"
     }
 }

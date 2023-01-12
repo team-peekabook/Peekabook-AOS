@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
+import javax.inject.Qualifier
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,9 +24,13 @@ object RetrofitModule {
     private const val AUTH = "auth"
     private const val USER_ID = "2"
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class PeekaType
+
+    @PeekaType
     @Provides
-    @Singleton
-    fun providesInterceptor(): Interceptor = Interceptor { chain ->
+    fun providesPeekaInterceptor(): Interceptor = Interceptor { chain ->
         with(chain) {
             proceed(
                 request()
@@ -38,9 +42,9 @@ object RetrofitModule {
         }
     }
 
+    @PeekaType
     @Provides
-    @Singleton
-    fun providesOkHttpClient(interceptor: Interceptor): OkHttpClient =
+    fun providesPeekaOkHttpClient(@PeekaType interceptor: Interceptor): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
@@ -52,9 +56,9 @@ object RetrofitModule {
                 }
             ).build()
 
+    @PeekaType
     @Provides
-    @Singleton
-    fun providesPeekaRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun providesPeekaRetrofit(@PeekaType okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URI)
             .client(okHttpClient)

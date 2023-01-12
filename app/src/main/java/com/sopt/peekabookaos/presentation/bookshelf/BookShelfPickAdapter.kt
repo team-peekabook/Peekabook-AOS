@@ -8,7 +8,7 @@ import com.sopt.peekabookaos.data.entity.Picks
 import com.sopt.peekabookaos.databinding.ItemBookshelfPickBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
-class BookShelfPickAdapter :
+class BookShelfPickAdapter(private val clickListener: ItemClickListener<Picks>) :
     ListAdapter<Picks, BookShelfPickAdapter.PickViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickViewHolder {
@@ -18,13 +18,16 @@ class BookShelfPickAdapter :
     }
 
     override fun onBindViewHolder(holder: PickViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        holder.onBind(getItem(position), clickListener)
     }
 
     class PickViewHolder(private val binding: ItemBookshelfPickBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Picks) {
+        fun onBind(data: Picks, itemClickListener: ItemClickListener<Picks>) {
             binding.data = data
+            binding.root.setOnClickListener {
+                itemClickListener.onClick(absoluteAdapterPosition, data)
+            }
         }
     }
 

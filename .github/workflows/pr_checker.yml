@@ -36,6 +36,24 @@ jobs:
         HOST_URI: ${{ secrets.BASE_URI }}
       run: |
         echo BASE_URI=\"$BASE_URI\" >> local.properties
+        
+    - name: Access NAVER_URL
+      env:
+        NAVER_URL: ${{ secrets.NAVER_URL }}
+      run: |
+        echo NAVER_URL=\"$NAVER_URL\" >> local.properties
+        
+    - name: Access CLIENT_ID
+      env:
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      run: |
+        echo CLIENT_ID=\"$CLIENT_ID\" >> local.properties
+                
+    - name: Access CLIENT_SECRET
+      env:
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      run: |
+        echo CLIENT_SECRET=\"$CLIENT_SECRET\" >> local.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew

@@ -42,10 +42,12 @@ class BookshelfShelfDecoration(val context: Context) : RecyclerView.ItemDecorati
         }
 
         if (position <= 2) {
-            outRect.top = 0
+            outRect.top = 20
         } else {
-            outRect.top = 80
+            outRect.top = 0
         }
+
+        outRect.bottom = 64
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
