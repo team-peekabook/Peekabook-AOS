@@ -29,7 +29,6 @@ object NaverRetrofitModule {
 
     @NaverType
     @Provides
-    @Singleton
     fun providesNaverInterceptor(): Interceptor = Interceptor { chain ->
         with(chain) {
             proceed(
@@ -43,7 +42,6 @@ object NaverRetrofitModule {
 
     @NaverType
     @Provides
-    @Singleton
     fun providesNaverOkHttpClient(@NaverType interceptor: Interceptor): OkHttpClient =
         OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS)
@@ -55,7 +53,6 @@ object NaverRetrofitModule {
 
     @NaverType
     @Provides
-    @Singleton
     fun providesNaverRetrofit(@NaverType okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder().baseUrl(BuildConfig.NAVER_URL).client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
