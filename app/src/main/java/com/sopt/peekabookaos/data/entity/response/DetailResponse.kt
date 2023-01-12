@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Parcelize
 data class DetailResponse(
-    val description: String,
-    val memo: String,
+    val description: String?,
+    val memo: String?,
     @SerialName("Book")
     val book: Book
 ) : Parcelable

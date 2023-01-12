@@ -32,9 +32,9 @@ class SearchBookAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Book) {
             binding.data = data
+            binding.tvItemSearchBookAdd.text = text
             binding.clItemSearchBook.setOnClickListener {
                 onClickBook(data)
-                binding.tvItemSearchBookAdd.text = text
             }
         }
     }

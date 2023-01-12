@@ -1,13 +1,16 @@
 package com.sopt.peekabookaos.presentation.createUpdateBook
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
+import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.repository.CreateUpdateRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,65 +19,79 @@ import javax.inject.Inject
 class CreateUpdateBookViewModel @Inject constructor(
     private val createUpdateRepository: CreateUpdateRepository
 ) : ViewModel() {
-    private val _bookData = MutableLiveData<Book>()
-    val bookData: LiveData<Book> = _bookData
+    private val _uiState = MutableStateFlow(CreateUpdateUiState())
+    val uiState = _uiState.asStateFlow()
 
-    private val _isUpdateView = MutableLiveData<Boolean>()
-    val isUpdateView: LiveData<Boolean> = _isUpdateView
+    private val _isPost = MutableSharedFlow<Boolean>()
+    val isPost = _isPost.asSharedFlow()
 
-    private val createUpdateRequest = MutableLiveData<CreateBookRequest>()
+    private val _isPatch = MutableSharedFlow<Boolean>()
+    val isPatch = _isPatch.asSharedFlow()
 
-    private val _isServerStatus = MutableLiveData<Boolean>()
-    val isServerStatus: LiveData<Boolean> = _isServerStatus
+    val description = MutableStateFlow<String?>("")
 
-    val comment = MutableLiveData("")
-
-    val memo = MutableLiveData("")
-
-    fun initIsUpdateView(update: Boolean) {
-        _isUpdateView.value = update
-    }
+    val memo = MutableStateFlow<String?>("")
 
     fun initSaveClickListener() {
-        if (_isUpdateView.value == true) {
-            Timber.d("책 수정 서버 통신")
+        if (_uiState.value.isUpdateView) {
+            patchBook()
         } else {
             postCreateBook()
         }
     }
 
-    private fun postCreateBook() {
-        initCreateBookRequest(
-            bookImage = _bookData.value!!.bookImage,
-            bookTitle = _bookData.value!!.bookTitle,
-            author = _bookData.value!!.author,
-            description = comment.value,
-            memo = memo.value
-        )
+    private fun patchBook() {
         viewModelScope.launch {
-            createUpdateRepository.postCreateBook(createUpdateRequest.value!!)
-                .onSuccess {
-                    _isServerStatus.value = true
-                }.onFailure {
-                    _isServerStatus.value = false
+            createUpdateRepository.patchBook(
+                _uiState.value.bookData.id,
+                BookComment(
+                    description = description.value,
+                    memo = memo.value
+                )
+            ).onSuccess {
+                _isPatch.emit(true)
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+            }
+        }
+    }
+
+    private fun postCreateBook() {
+        viewModelScope.launch {
+            createUpdateRepository.postCreateBook(
+                CreateBookRequest(
+                    bookImage = _uiState.value.bookData.bookImage,
+                    bookTitle = _uiState.value.bookData.bookTitle,
+                    author = _uiState.value.bookData.author,
+                    description = description.value,
+                    memo = memo.value
+                )
+            )
+                .onSuccess { response ->
+                    _uiState.value = _uiState.value.copy(
+                        bookData = Book(id = response.bookId)
+                    )
+                    _isPost.emit(true)
+                }.onFailure { throwable ->
+                    _isPost.emit(false)
+                    Timber.e("$throwable")
                 }
         }
     }
 
-    private fun initCreateBookRequest(
-        bookImage: String,
-        bookTitle: String,
-        author: String,
-        description: String?,
-        memo: String?
-    ) {
-        createUpdateRequest.value =
-            CreateBookRequest(bookImage, bookTitle, author, description, memo)
+    fun initUiState(bookData: Book, bookComment: BookComment, update: Boolean) {
+        _uiState.value = CreateUpdateUiState().copy(
+            bookData = bookData,
+            bookComment = bookComment,
+            isUpdateView = update
+        )
+        description.value = _uiState.value.bookComment.description
+        memo.value = _uiState.value.bookComment.memo
     }
 
-    fun initCreateUpdateBookData(bookData: Book) {
-        _bookData.value = bookData
-//        comment.value = _bookData.value?.description
-//        memo.value = _bookData.value?.memo
-    }
+    data class CreateUpdateUiState(
+        val bookData: Book = Book(),
+        val bookComment: BookComment = BookComment(),
+        val isUpdateView: Boolean = false
+    )
 }

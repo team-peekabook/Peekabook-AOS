@@ -6,6 +6,11 @@ import retrofit2.http.Query
 
 interface NaverService {
     @GET("search/book_adv.json")
+    suspend fun getBookToTitle(
+        @Query("d_titl") title: String
+    ): NaverBookResponse
+
+    @GET("search/book_adv.json")
     suspend fun getBookToBarcode(
         @Query("d_isbn") isbn: String
     ): NaverBookResponse

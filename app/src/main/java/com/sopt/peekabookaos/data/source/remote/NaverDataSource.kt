@@ -7,6 +7,9 @@ import javax.inject.Inject
 class NaverDataSource @Inject constructor(
     private val naverService: NaverService
 ) {
+    suspend fun getBookToTitle(title: String): NaverBookResponse =
+        naverService.getBookToTitle(title)
+
     suspend fun getBookToBarcode(isbn: String): NaverBookResponse =
         naverService.getBookToBarcode(isbn)
 }

@@ -21,11 +21,11 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeErrorDialog.Companion.TAG
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
+import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,10 +53,7 @@ class BarcodeScannerActivity :
     private val multiPermissionCallback =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
             if (map.entries.isEmpty()) {
-                ToastMessageUtil.showToast(
-                    this@BarcodeScannerActivity,
-                    getString(R.string.barcode_permission)
-                )
+                return@registerForActivityResult
             } else {
                 binding.pvBarcode.post {
                     startCamera()
@@ -183,7 +180,7 @@ class BarcodeScannerActivity :
                 when (uiState) {
                     BarcodeState.SUCCESS -> {
                         Intent(this, CreateUpdateBookActivity::class.java).apply {
-                            putExtra(CREATE, barcodeViewModel.uiState.value)
+                            putExtra(BOOK, barcodeViewModel.uiState.value[0])
                             putExtra(LOCATION, CREATE)
                         }.also { intent ->
                             startActivity(intent)
