@@ -142,6 +142,7 @@
             android:background="@drawable/shape_whitefill_redline_0_rect"
             android:gravity="top"
             android:hint="@string/recommendation_hint"
+            android:maxLength="200"
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
             android:text="@={vm.comment}"
