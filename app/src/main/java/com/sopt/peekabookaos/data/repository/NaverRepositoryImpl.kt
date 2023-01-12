@@ -7,6 +7,11 @@ import javax.inject.Inject
 class NaverRepositoryImpl @Inject constructor(
     private val naverDataSource: NaverDataSource
 ) : NaverRepository {
+    override suspend fun getBookToTitle(title: String): Result<Book> =
+        kotlin.runCatching { naverDataSource.getBookToTitle(title) }.map { response ->
+            response.items[0].toBook()
+        }
+
     override suspend fun getBookToBarcode(isbn: String): Result<Book> =
         kotlin.runCatching { naverDataSource.getBookToBarcode(isbn) }.map { response ->
             response.items[0].toBook()
