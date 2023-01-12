@@ -17,51 +17,43 @@ import javax.inject.Qualifier
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitModule {
+object NaverRetrofitModule {
     private val json = Json { ignoreUnknownKeys = true }
-    private const val CONTENT_TYPE = "Content-Type"
-    private const val APPLICATION_JSON = "application/json"
-    private const val AUTH = "auth"
-    private const val USER_ID = "2"
+    private const val NAVER_CLIENT_ID = "X-Naver-Client-Id"
+    private const val NAVER_CLIENT_SECRET = "X-Naver-Client-Secret"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class PeekaType
+    annotation class NaverType
 
-    @PeekaType
+    @NaverType
     @Provides
-    fun providesPeekaInterceptor(): Interceptor = Interceptor { chain ->
+    fun providesNaverInterceptor(): Interceptor = Interceptor { chain ->
         with(chain) {
             proceed(
-                request()
-                    .newBuilder()
-                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                    .addHeader(AUTH, USER_ID)
+                request().newBuilder()
+                    .addHeader(NAVER_CLIENT_ID, BuildConfig.CLIENT_ID)
+                    .addHeader(NAVER_CLIENT_SECRET, BuildConfig.CLIENT_SECRET)
                     .build()
             )
         }
     }
 
-    @PeekaType
+    @NaverType
     @Provides
-    fun providesPeekaOkHttpClient(@PeekaType interceptor: Interceptor): OkHttpClient =
-        OkHttpClient.Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
-            .addInterceptor(interceptor)
-            .addInterceptor(
+    fun providesNaverOkHttpClient(@NaverType interceptor: Interceptor): OkHttpClient =
+        OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(interceptor).addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 }
             ).build()
 
-    @PeekaType
+    @NaverType
     @Provides
-    fun providesPeekaRetrofit(@PeekaType okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URI)
-            .client(okHttpClient)
+    fun providesNaverRetrofit(@NaverType okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder().baseUrl(BuildConfig.NAVER_URL).client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
 }
