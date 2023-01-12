@@ -19,6 +19,7 @@ import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -118,7 +119,7 @@ class SearchBookActivity :
     }
 
     private fun initCloseBtnClickListener() {
-        binding.btnSearchBookClose.setOnClickListener {
+        binding.btnSearchBookClose.setSingleOnClickListener {
             finish()
         }
     }
