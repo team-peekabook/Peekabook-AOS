@@ -25,7 +25,8 @@
         <activity
             android:name=".presentation.search.user.SearchUserActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.pickModify.PickModifyActivity"
             android:exported="false"
@@ -37,7 +38,8 @@
         <activity
             android:name=".presentation.search.book.SearchBookActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.detail.DetailActivity"
             android:exported="false"
