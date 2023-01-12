@@ -26,16 +26,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_my_page_logo">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/iv_my_page_image"
-            android:src="@drawable/image"
             android:layout_width="64dp"
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="16.5dp"
-            app:layout_constraintDimensionRatio="1"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="19dp"
+            android:src="@drawable/img"
             app:layout_constraintBottom_toBottomOf="@id/iv_my_page_rect"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
             app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
             android:layout_marginTop="21dp"
-            android:text="문수빈"
+            android:text="북과픽"
             android:textColor="@color/peeka_red"
             app:layout_constraintStart_toEndOf="@id/iv_my_page_image"
             app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
@@ -55,24 +55,26 @@
             android:id="@+id/iv_my_page_edit"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
             android:background="@null"
             android:src="@drawable/ic_my_page_edit"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/tv_my_page_name"
-            app:layout_constraintTop_toTopOf="@id/iv_my_page_rect"/>
+            app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
 
         <TextView
             style="@style/S3Md"
-            android:layout_width="212dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:textColor="@color/peeka_red"
+            android:layout_marginEnd="15dp"
             android:maxLines="2"
-            tools:text="안녕하세요. 저는 한 줄 소개입니다.  "
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_my_page_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_page_name" />
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_name"
+            tools:text="안녕하세요. 저는 픽과북입니다.  " />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -103,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="개인정보 보호 정책, 서비스 이용 약관"
+        android:text="개인정보 보호 정책 & 서비스 이용 약관"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
         app:layout_constraintTop_toBottomOf="@id/view_my_page_1" />
@@ -115,8 +117,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:background="@color/peeka_g_1"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_page_2"
-        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"/>
+        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_page_2" />
 
     <TextView
         android:id="@+id/tv_my_page_3"
@@ -137,8 +139,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:background="@color/peeka_g_1"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_page_3"
-        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"/>
+        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_page_3" />
 
     <TextView
         android:id="@+id/tv_my_page_4"
@@ -159,8 +161,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:background="@color/peeka_g_1"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_page_4"
-        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"/>
+        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_page_4" />
 
     <TextView
         android:id="@+id/tv_my_page_5"
@@ -181,8 +183,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:background="@color/peeka_g_1"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_page_5"
-        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"/>
+        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_page_5" />
 
     <TextView
         android:id="@+id/tv_my_page_6"
@@ -203,8 +205,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
         android:background="@color/peeka_g_1"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_page_6"
-        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"/>
+        app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_page_6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
