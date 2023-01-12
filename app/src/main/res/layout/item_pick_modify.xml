@@ -21,7 +21,7 @@
             setImage="@{data.Book.bookImage}"
             android:layout_width="0dp"
             android:layout_height="145dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@color/peeka_beige"
             app:layout_constraintDimensionRatio="1:1.5"
             app:layout_constraintEnd_toEndOf="parent"

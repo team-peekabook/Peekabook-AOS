@@ -47,11 +47,7 @@ class BookshelfShelfDecoration(val context: Context) : RecyclerView.ItemDecorati
             outRect.top = 0
         }
 
-        if ((position + 1) / 3 == parent.childCount / 3) {
-            outRect.bottom = 80
-        } else {
-            outRect.bottom = 0
-        }
+        outRect.bottom = 64
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
