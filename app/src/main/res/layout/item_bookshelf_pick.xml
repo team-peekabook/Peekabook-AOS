@@ -15,14 +15,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/shape_white88fill_redline_0_rect">
+        android:background="@drawable/shape_white88fill_redline_0_rect_1"
+        android:layout_marginStart="20dp">
 
         <LinearLayout
             android:id="@+id/ll_item_bookshelf_pick"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_white88fill_redline_0_rect"
+            android:background="@drawable/shape_white88fill_redline_0_rect_1"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +30,13 @@
 
             <TextView
                 android:id="@+id/tv_item_bookshelf_pick_idx"
+                style="@style/EngC"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/peeka_red"
                 android:gravity="center"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="11dp"
+                android:paddingVertical="7dp"
                 android:text="@{@string/bookshelf_pick_index(data.pickIndex)}"
                 android:textColor="@color/white"
                 tools:text="1" />
@@ -59,9 +61,11 @@
             setImage="@{data.book.bookImage}"
             android:layout_width="0dp"
             android:layout_height="190dp"
-            android:layout_marginHorizontal="12dp"
+            android:layout_marginHorizontal="14dp"
             android:layout_marginVertical="9dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
+            android:elevation="4dp"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,11 +78,13 @@
             style="@style/CBd"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_white88fill_redline_0_rect"
+            android:background="@drawable/shape_white88fill_redline_0_rect_2"
             android:ellipsize="end"
             android:maxLines="3"
             android:minLines="3"
-            android:padding="11dp"
+            android:elevation="4dp"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="10dp"
             android:text="@{data.description}"
             android:textColor="@color/peeka_red"
             android:visibility="@{data.description == null ? View.INVISIBLE : View.VISIBLE}"

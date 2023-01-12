@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PickModify(
+    var id: Int,
     var pickIndex: Int,
     @SerialName("Book")
     val book: Book

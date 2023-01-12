@@ -15,11 +15,13 @@ class NotificationActivity :
     BindingActivity<ActivityNotificationBinding>(R.layout.activity_notification) {
     private lateinit var notifyAdapter: NotificationAdapter
     private val viewModel: NotificationViewModel by viewModels()
+    private lateinit var itemDeco: NotificationDecoration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
         initIsServerObserver()
+        initItemDecoration()
         initAdapter()
         initCloseClickListener()
     }
@@ -31,6 +33,11 @@ class NotificationActivity :
                 Timber.tag("kang").d("${viewModel.notificationData.value}")
             }
         }
+    }
+
+    private fun initItemDecoration() {
+        itemDeco = NotificationDecoration(applicationContext)
+        binding.rvNotification.addItemDecoration(itemDeco)
     }
 
     private fun initAdapter() {
