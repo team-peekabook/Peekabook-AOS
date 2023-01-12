@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
-import com.sopt.peekabookaos.data.entity.FriendUser
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
