@@ -58,7 +58,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter { _, item ->
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
             toDetail.putExtra(BOOK_INFO, item.bookId)
-
             if (viewModel.isMyServerStatus.value == true) {
                 toDetail.putExtra(LOCATION, MY)
             } else if (viewModel.isFriendServerStatus.value == true) {

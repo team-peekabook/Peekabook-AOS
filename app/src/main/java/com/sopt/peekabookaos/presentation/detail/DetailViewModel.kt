@@ -28,14 +28,15 @@ class DetailViewModel @Inject constructor(
     private val _isDeleted = MutableLiveData<Boolean>()
     val isDeleted: LiveData<Boolean> = _isDeleted
 
-    val bookId = MutableLiveData<Int>()
+    private val _bookId = MutableLiveData<Int>()
+    val bookId: LiveData<Int> = _bookId
 
     fun initIsMyDetailView(detail: Boolean) {
         _isMyDetailView.value = detail
     }
 
     fun initBookId(id: Int) {
-        bookId.value = id
+        _bookId.value = id
     }
 
     fun getDetail(bookId: Int) {
@@ -63,5 +64,9 @@ class DetailViewModel @Inject constructor(
                     Timber.e("$throwable")
                 }
         }
+    }
+
+    fun updateBookData() {
+        _bookData.value = _bookData.value!!.copy(id = _bookId.value!!)
     }
 }

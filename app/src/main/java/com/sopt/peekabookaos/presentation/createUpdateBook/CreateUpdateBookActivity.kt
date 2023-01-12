@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
+import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
+import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,25 +22,27 @@ class CreateUpdateBookActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = createUpdateBookViewModel
-        initView()
+        initUiState()
         initCloseBtnOnClickListener()
-        initIsServerStatus()
+        isPatchCollect()
+        isPostCollect()
     }
 
-    private fun initView() {
+    private fun initUiState() {
         when (intent.getStringExtra(LOCATION)) {
             UPDATE -> {
-                createUpdateBookViewModel.initIsUpdateView(true)
-                createUpdateBookViewModel.initCreateUpdateBookData(
-                    intent.getParcelable(UPDATE, Book::class.java)!!
+                createUpdateBookViewModel.initUiState(
+                    bookData = intent.getParcelable(BOOK, Book::class.java)!!,
+                    bookComment = intent.getParcelable(BOOK_COMMENT, BookComment::class.java)!!,
+                    update = true
                 )
             }
             else -> {
-                createUpdateBookViewModel.initIsUpdateView(false)
-                createUpdateBookViewModel.initCreateUpdateBookData(
-                    intent.getParcelable(CREATE, Book::class.java)!!
+                createUpdateBookViewModel.initUiState(
+                    bookData = intent.getParcelable(BOOK, Book::class.java)!!,
+                    bookComment = BookComment(),
+                    update = false
                 )
-                // 수정뷰에서 넘어올 경우 comment, memo도 전달받기
             }
         }
     }
@@ -49,12 +53,24 @@ class CreateUpdateBookActivity :
         }
     }
 
-    private fun initIsServerStatus() {
-        createUpdateBookViewModel.isServerStatus.observe(this) { success ->
-            if (success) {
-                val toDetail = Intent(this@CreateUpdateBookActivity, DetailActivity::class.java)
-                startActivity(toDetail)
-                finish()
+    private fun isPatchCollect() {
+        repeatOnStarted {
+            createUpdateBookViewModel.isPatch.collect { success ->
+                if (success) {
+                    finish()
+                }
+            }
+        }
+    }
+
+    private fun isPostCollect() {
+        repeatOnStarted {
+            createUpdateBookViewModel.isPost.collect { success ->
+                if (success) {
+                    val toDetail = Intent(this@CreateUpdateBookActivity, DetailActivity::class.java)
+                    startActivity(toDetail)
+                    finish()
+                }
             }
         }
     }

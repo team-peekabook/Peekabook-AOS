@@ -25,19 +25,12 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
-        initBookIdAppearance()
         initContentAppearance()
         initDetailView()
         initBookIdObserve()
         initDeleteBtnClickListener()
         initBackBtnOnClickListener()
         initEditBtnClickListener()
-    }
-
-    private fun initBookIdAppearance() {
-        detailViewModel.initBookId(
-            intent.getIntExtra(BOOK_INFO, DEFAULT)
-        )
     }
 
     private fun initBookIdObserve() {
@@ -48,7 +41,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initContentAppearance() {
         detailViewModel.bookComment.observe(this) {
-            if (it.description.isEmpty()) {
+            if (it.description?.isEmpty() == true) {
                 with(binding) {
                     tvDetailGetContent.text = getString(R.string.text_detail_description_is_null)
                     tvDetailGetContent.setTextColor(
@@ -59,7 +52,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                     )
                 }
             }
-            if (it.memo.isEmpty()) {
+            if (it.memo?.isEmpty() == true) {
                 with(binding) {
                     tvDetailGetMemo.text = getString(R.string.text_detail_memo_is_null)
                     tvDetailGetMemo.setTextColor(
@@ -77,11 +70,16 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         when (intent.getStringExtra(LOCATION)) {
             MY -> {
                 detailViewModel.initIsMyDetailView(true)
-                intent.getIntExtra(BOOK_INFO, DEFAULT)
+                detailViewModel.initBookId(
+                    intent.getIntExtra(BOOK_INFO, DEFAULT)
+                )
             }
             FRIEND -> {
                 detailViewModel.initIsMyDetailView(false)
                 intent.getIntExtra(BOOK_INFO, DEFAULT)
+                detailViewModel.initBookId(
+                    intent.getIntExtra(BOOK_INFO, DEFAULT)
+                )
             }
         }
     }
@@ -94,6 +92,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initEditBtnClickListener() {
         binding.btnDetailEdit.setSingleOnClickListener {
+            detailViewModel.updateBookData()
             Intent(this, CreateUpdateBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
                 putExtra(BOOK, detailViewModel.bookData.value)
@@ -135,6 +134,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         const val MY = "my"
         const val FRIEND = "friend"
         const val BOOK_INFO = "book_info"
-        private const val DEFAULT = 3 // 추후 -1로 수정
+        const val BOOK_ID = "book_id"
+        const val DEFAULT = -1
     }
 }
