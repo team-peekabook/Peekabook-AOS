@@ -13,7 +13,6 @@ import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CreateUpdateBookActivity :
