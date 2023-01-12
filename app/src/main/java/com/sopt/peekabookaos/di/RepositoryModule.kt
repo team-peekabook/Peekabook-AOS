@@ -51,4 +51,9 @@ object RepositoryModule {
     fun providesShelfRepository(
         shelfRepositoryImpl: ShelfRepositoryImpl
     ): ShelfRepository = shelfRepositoryImpl
+
+    @Provides
+    fun providesNaverRepository(
+        naverRepositoryImpl: NaverRepositoryImpl
+    ): NaverRepository = naverRepositoryImpl
 }
