@@ -67,9 +67,13 @@ class CreateUpdateBookViewModel @Inject constructor(
                     memo = memo.value
                 )
             )
-                .onSuccess {
+                .onSuccess { response ->
+                    _uiState.value = _uiState.value.copy(
+                        bookData = Book(id = response.bookId)
+                    )
                     _isPost.emit(true)
                 }.onFailure { throwable ->
+                    _isPost.emit(false)
                     Timber.e("$throwable")
                 }
         }

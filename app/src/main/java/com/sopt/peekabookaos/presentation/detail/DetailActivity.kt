@@ -22,6 +22,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_detail) {
     private val detailViewModel: DetailViewModel by viewModels()
 
+    override fun onResume() {
+        super.onResume()
+        detailViewModel.initBookId(intent.getIntExtra(BOOK_INFO, DEFAULT))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
