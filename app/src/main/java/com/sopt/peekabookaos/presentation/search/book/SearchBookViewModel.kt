@@ -37,10 +37,10 @@ class SearchBookViewModel @Inject constructor(
         viewModelScope.launch {
             naverRepository.getBookToTitle(bookTitle.value)
                 .onSuccess { response ->
-                    _uiState.value = response
-                    if (response.isNullOrEmpty()) {
+                    if (response.isEmpty()) {
                         _isSearch.emit(false)
                     } else {
+                        _uiState.value = response
                         _isSearch.emit(true)
                     }
                 }.onFailure {

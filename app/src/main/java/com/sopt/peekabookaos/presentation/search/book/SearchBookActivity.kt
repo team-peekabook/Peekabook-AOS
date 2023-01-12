@@ -23,7 +23,6 @@ import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchBookActivity :
@@ -43,7 +42,7 @@ class SearchBookActivity :
     }
 
     private fun initView() {
-        when (intent.getStringExtra(LOCATION) ?: RECOMMEND) {
+        when (intent.getStringExtra(LOCATION) ?: CREATE) {
             RECOMMEND -> {
                 searchBookViewModel.initFriendInfo(
                     intent.getParcelable(FRIEND_INFO, SelfIntro::class.java)!!
@@ -54,8 +53,6 @@ class SearchBookActivity :
                 searchBookViewModel.initIsCreateView(true)
             }
         }
-        Timber.tag("asdf")
-            .e("SearchBook initView 실행됨 isCreate : ${searchBookViewModel.isCreateView.value}")
     }
 
     private fun initSearchBookAdapter() {
@@ -80,7 +77,6 @@ class SearchBookActivity :
                 startActivity(intent)
                 finish()
             }
-            Timber.tag("asdf").e("북 클릭함 : $book, ${searchBookViewModel.friendInfo.value}")
         }
     }
 
