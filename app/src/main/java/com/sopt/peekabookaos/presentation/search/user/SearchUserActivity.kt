@@ -11,6 +11,7 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.UiState
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,7 +54,7 @@ class SearchUserActivity :
     }
 
     private fun initCloseBtnClickListener() {
-        binding.btnSearchUserClose.setOnClickListener {
+        binding.btnSearchUserClose.setSingleOnClickListener {
             finish()
         }
     }

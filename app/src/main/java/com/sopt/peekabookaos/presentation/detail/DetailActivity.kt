@@ -15,6 +15,7 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -86,13 +87,13 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initBackBtnOnClickListener() {
-        binding.btnDetailBack.setOnClickListener {
+        binding.btnDetailBack.setSingleOnClickListener {
             finish()
         }
     }
 
     private fun initEditBtnClickListener() {
-        binding.btnDetailEdit.setOnClickListener {
+        binding.btnDetailEdit.setSingleOnClickListener {
             Intent(this, CreateUpdateBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
                 putExtra(BOOK, detailViewModel.bookData.value)
@@ -105,7 +106,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initDeleteBtnClickListener() {
-        binding.btnDetailDelete.setOnClickListener {
+        binding.btnDetailDelete.setSingleOnClickListener {
             WarningDialogFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(

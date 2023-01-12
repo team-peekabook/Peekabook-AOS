@@ -6,6 +6,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Notification
 import com.sopt.peekabookaos.databinding.ActivityNotificationBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -14,11 +15,13 @@ class NotificationActivity :
     BindingActivity<ActivityNotificationBinding>(R.layout.activity_notification) {
     private lateinit var notifyAdapter: NotificationAdapter
     private val viewModel: NotificationViewModel by viewModels()
+    private lateinit var itemDeco: NotificationDecoration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
         initIsServerObserver()
+        initItemDecoration()
         initAdapter()
         initCloseClickListener()
     }
@@ -32,6 +35,11 @@ class NotificationActivity :
         }
     }
 
+    private fun initItemDecoration() {
+        itemDeco = NotificationDecoration(applicationContext)
+        binding.rvNotification.addItemDecoration(itemDeco)
+    }
+
     private fun initAdapter() {
         notifyAdapter = NotificationAdapter { _, item ->
             notifyAdapter.setComment(initCommentString(item))
@@ -40,7 +48,7 @@ class NotificationActivity :
     }
 
     private fun initCloseClickListener() {
-        binding.ivNotificationClose.setOnClickListener {
+        binding.ivNotificationClose.setSingleOnClickListener {
             finish()
         }
     }

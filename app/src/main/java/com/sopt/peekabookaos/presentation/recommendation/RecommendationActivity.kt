@@ -11,6 +11,7 @@ import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
 import com.sopt.peekabookaos.util.extensions.getParcelable
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,13 +38,13 @@ class RecommendationActivity :
     }
 
     private fun initCloseBtnOnClickListener() {
-        binding.btnRecommendationClose.setOnClickListener {
+        binding.btnRecommendationClose.setSingleOnClickListener {
             finish()
         }
     }
 
     private fun initCheckBtnOnClickListener() {
-        binding.btnRecommendationCheck.setOnClickListener {
+        binding.btnRecommendationCheck.setSingleOnClickListener {
             WarningDialogFragment().withArgs {
                 putString(
                     WarningDialogFragment.FOLLOWER,
