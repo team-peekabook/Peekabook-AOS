@@ -8,6 +8,7 @@ import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
@@ -68,6 +69,10 @@ class CreateUpdateBookActivity :
             createUpdateBookViewModel.isPost.collect { success ->
                 if (success) {
                     val toDetail = Intent(this@CreateUpdateBookActivity, DetailActivity::class.java)
+                    toDetail.putExtra(
+                        BOOK_INFO,
+                        createUpdateBookViewModel.uiState.value.bookData.id
+                    )
                     startActivity(toDetail)
                     finish()
                 }
