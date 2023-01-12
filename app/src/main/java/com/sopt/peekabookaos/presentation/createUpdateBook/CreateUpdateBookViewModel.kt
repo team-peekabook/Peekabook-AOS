@@ -28,9 +28,9 @@ class CreateUpdateBookViewModel @Inject constructor(
     private val _isPatch = MutableSharedFlow<Boolean>()
     val isPatch = _isPatch.asSharedFlow()
 
-    val description = MutableStateFlow("")
+    val description = MutableStateFlow<String?>("")
 
-    val memo = MutableStateFlow("")
+    val memo = MutableStateFlow<String?>("")
 
     fun initSaveClickListener() {
         if (_uiState.value.isUpdateView) {

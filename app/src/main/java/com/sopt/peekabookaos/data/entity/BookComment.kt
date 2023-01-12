@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Parcelize
 data class BookComment(
-    val description: String = "",
-    val memo: String = ""
+    val description: String? = "",
+    val memo: String? = ""
 ) : Parcelable
