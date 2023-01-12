@@ -68,7 +68,6 @@ class BookShelfViewModel @Inject constructor(
     }
 
     fun getMyShelfData() {
-        Timber.tag("kang").e("getMyshelf")
         viewModelScope.launch {
             shelfRepository.getMyShelf()
                 .onSuccess { response ->
