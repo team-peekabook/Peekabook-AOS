@@ -25,7 +25,6 @@ object RetrofitModule {
     private const val USER_ID = "2"
 
     @Provides
-    @Singleton
     fun providesInterceptor(): Interceptor = Interceptor { chain ->
         with(chain) {
             proceed(
@@ -39,7 +38,6 @@ object RetrofitModule {
     }
 
     @Provides
-    @Singleton
     fun providesOkHttpClient(interceptor: Interceptor): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
@@ -53,7 +51,6 @@ object RetrofitModule {
             ).build()
 
     @Provides
-    @Singleton
     fun providesPeekaRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URI)
