@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:elevation="4dp"
-            android:src="@drawable/ic_bookshelf_pick_mdpi"
+            android:src="@drawable/ic_bookshelf_pick"
             android:visibility="@{data.pickIndex != 0 ? View.VISIBLE: View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
