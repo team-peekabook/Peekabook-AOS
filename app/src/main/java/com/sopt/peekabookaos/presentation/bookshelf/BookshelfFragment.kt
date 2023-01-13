@@ -32,7 +32,8 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         get() = binding.rvBookshelfPick.adapter as? BookShelfPickAdapter
     private val friendAdapter: BookShelfFriendAdapter?
         get() = binding.rvBookshelfFriendList.adapter as? BookShelfFriendAdapter
-    private lateinit var itemDeco: BookshelfShelfDecoration
+    private lateinit var shelfItemDeco: BookshelfShelfDecoration
+    private lateinit var pickItemDeco: BookshelfPickDecoration
     private val viewModel by viewModels<BookShelfViewModel>()
 
     override fun onResume() {
@@ -103,8 +104,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initItemDecoration() {
-        itemDeco = BookshelfShelfDecoration(requireContext())
-        binding.rvBookshelfBottomViewShelf.addItemDecoration(itemDeco)
+        shelfItemDeco = BookshelfShelfDecoration(requireContext())
+        binding.rvBookshelfBottomViewShelf.addItemDecoration(shelfItemDeco)
+        pickItemDeco = BookshelfPickDecoration(requireContext())
+        binding.rvBookshelfPick.addItemDecoration(pickItemDeco)
     }
 
     private fun initUserClickListener() {
