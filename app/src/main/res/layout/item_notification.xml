@@ -81,7 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_item_notification_profile_image"
             app:layout_constraintTop_toBottomOf="@+id/tv_notification_mention"
-            tools:text="책 제목이 띄워집니다." />
+            tools:text="책 제목이 띄워집니다.책 제목이 길때에는 뷰가 어떻게 되는지 저도 잘 모르겠습니다." />
 
         <TextView
             android:id="@+id/tv_notification_date"

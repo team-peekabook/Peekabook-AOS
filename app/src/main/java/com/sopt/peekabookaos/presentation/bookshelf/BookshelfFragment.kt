@@ -11,7 +11,8 @@ import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActiv
 import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
-import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND_SHELF
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHELF
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
@@ -21,6 +22,7 @@ import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fragment_bookshelf) {
@@ -37,8 +39,16 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         super.onResume()
         if (viewModel.isMyServerStatus.value == true) {
             viewModel.getMyShelfData()
+            binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
+            viewModel.updateShelfState(USER)
+            friendAdapter?.clearSelection()
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
         } else if (viewModel.isFriendServerStatus.value == true) {
             viewModel.getFriendShelfData()
+            friendAdapter?.submitList(viewModel.friendUserData.value)
+            friendAdapter?.updateSelectedPosition(viewModel.lastSelectedItem.value!!)
+            binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
+            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
     }
 
@@ -61,9 +71,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
             toDetail.putExtra(BOOK_INFO, item.bookId)
             if (viewModel.isMyServerStatus.value == true) {
-                toDetail.putExtra(LOCATION, MY)
+                Timber.tag("kang").e("my> item.bookId: ${item.bookId}")
+                toDetail.putExtra(LOCATION, MY_SHELF)
             } else if (viewModel.isFriendServerStatus.value == true) {
-                toDetail.putExtra(LOCATION, FRIEND)
+                Timber.tag("kang").e("friend> item.bookId: ${item.bookId}")
+                toDetail.putExtra(LOCATION, FRIEND_SHELF)
             }
             startActivity(toDetail)
         }
@@ -71,15 +83,18 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
             toDetail.putExtra(BOOK_INFO, item.book.id)
             if (viewModel.isMyServerStatus.value == true) {
-                toDetail.putExtra(LOCATION, MY)
+                Timber.tag("kang").e("my> item.book.id: ${item.book.id}")
+                toDetail.putExtra(LOCATION, MY_SHELF)
             } else if (viewModel.isFriendServerStatus.value == true) {
-                toDetail.putExtra(LOCATION, FRIEND)
+                Timber.tag("kang").e("friend> item.book.id: ${item.book.id}")
+                toDetail.putExtra(LOCATION, FRIEND_SHELF)
             }
             startActivity(toDetail)
         }
         binding.rvBookshelfFriendList.adapter = BookShelfFriendAdapter { pos, item ->
             viewModel.updateUserId(item)
             viewModel.getFriendShelfData()
+            viewModel.updateLastSelectedItem(pos)
             viewModel.updateShelfState(FRIEND)
             friendAdapter?.updateSelectedPosition(pos)
             binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
@@ -146,6 +161,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 myShelfAdapter?.submitList(viewModel.shelfData.value)
                 pickAdapter?.submitList(viewModel.pickData.value)
                 friendAdapter?.submitList(viewModel.friendUserData.value)
+                updateMyShelfText()
             }
         }
         viewModel.shelfData.observe(viewLifecycleOwner) {
@@ -157,8 +173,14 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         viewModel.friendData.observe(viewLifecycleOwner) {
             updateFriendShelfText()
         }
-        viewModel.userData.observe(viewLifecycleOwner) {
-            updateMyShelfText()
+        viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
+            if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
+                viewModel.getMyShelfData()
+                binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
+                viewModel.updateShelfState(USER)
+                friendAdapter?.clearSelection()
+                binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+            }
         }
         viewModel.friendUserData.observe(viewLifecycleOwner) {
             friendAdapter?.submitList(viewModel.friendUserData.value)
