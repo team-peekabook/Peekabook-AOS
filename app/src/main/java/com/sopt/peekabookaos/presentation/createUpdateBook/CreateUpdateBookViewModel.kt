@@ -91,7 +91,7 @@ class CreateUpdateBookViewModel @Inject constructor(
 
     data class CreateUpdateUiState(
         val bookData: Book = Book(),
-        val bookComment: BookComment = BookComment(),
+        val bookComment: BookComment = BookComment("", ""),
         val isUpdateView: Boolean = false
     )
 }

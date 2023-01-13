@@ -58,7 +58,7 @@ class CreateUpdateBookActivity :
             else -> {
                 createUpdateBookViewModel.initUiState(
                     bookData = intent.getParcelable(BOOK, Book::class.java)!!,
-                    bookComment = BookComment(),
+                    bookComment = BookComment("", ""),
                     update = false
                 )
             }
