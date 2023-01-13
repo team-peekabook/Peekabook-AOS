@@ -16,9 +16,9 @@ interface CreateUpdateService {
         @Body body: CreateBookRequest
     ): BaseResponse<CreateBookResponse>
 
-    @PATCH("bookshelf/{bookId}")
+    @PATCH("bookshelf/{bookshelfId}")
     suspend fun patchBook(
-        @Path("bookId") bookId: Int,
+        @Path("bookshelfId") bookId: Int,
         @Body bookComment: BookComment
     ): NoResponse
 }

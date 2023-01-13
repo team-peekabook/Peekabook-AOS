@@ -8,13 +8,13 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface DetailService {
-    @GET("bookshelf/detail/{bookId}")
+    @GET("bookshelf/detail/{bookshelfId}")
     suspend fun getDetail(
-        @Path("bookId") bookId: Int
+        @Path("bookshelfId") bookId: Int
     ): BaseResponse<DetailResponse>
 
-    @DELETE("bookshelf/{bookId}")
+    @DELETE("bookshelf/{bookshelfId}")
     suspend fun deleteDetail(
-        @Path("bookId") bookId: Int
+        @Path("bookshelfId") bookId: Int
     ): NoResponse
 }

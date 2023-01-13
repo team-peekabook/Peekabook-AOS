@@ -17,6 +17,7 @@ import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_detail) {
@@ -24,14 +25,15 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     override fun onResume() {
         super.onResume()
+        Timber.tag("kang").e("detail 시작")
         detailViewModel.initBookId(intent.getIntExtra(BOOK_INFO, DEFAULT))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
-        initContentAppearance()
         initDetailView()
+        initContentAppearance()
         initBookIdObserve()
         initDeleteBtnClickListener()
         initBackBtnOnClickListener()
@@ -73,15 +75,16 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initDetailView() {
         when (intent.getStringExtra(LOCATION)) {
-            MY -> {
+            MY_SHELF -> {
                 detailViewModel.initIsMyDetailView(true)
+                Timber.tag("kang").e("detail my:${intent.getIntExtra(BOOK_INFO, DEFAULT)} ")
                 detailViewModel.initBookId(
                     intent.getIntExtra(BOOK_INFO, DEFAULT)
                 )
             }
-            FRIEND -> {
+            FRIEND_SHELF -> {
+                Timber.tag("kang").e("detail friend:${intent.getIntExtra(BOOK_INFO, DEFAULT)} ")
                 detailViewModel.initIsMyDetailView(false)
-                intent.getIntExtra(BOOK_INFO, DEFAULT)
                 detailViewModel.initBookId(
                     intent.getIntExtra(BOOK_INFO, DEFAULT)
                 )
@@ -136,10 +139,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     companion object {
-        const val MY = "my"
-        const val FRIEND = "friend"
+        const val MY_SHELF = "my"
+        const val FRIEND_SHELF = "friend"
         const val BOOK_INFO = "book_info"
-        const val BOOK_ID = "book_id"
         const val DEFAULT = -1
     }
 }
