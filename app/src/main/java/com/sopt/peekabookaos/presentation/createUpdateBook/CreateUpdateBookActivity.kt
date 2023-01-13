@@ -1,8 +1,8 @@
 package com.sopt.peekabookaos.presentation.createUpdateBook
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
@@ -10,7 +10,9 @@ import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -25,10 +27,23 @@ class CreateUpdateBookActivity :
         super.onCreate(savedInstanceState)
         binding.vm = createUpdateBookViewModel
         initUiState()
-        initScrollPosition()
+        initEditTextClearFocus()
         initCloseBtnOnClickListener()
         isPatchCollect()
         isPostCollect()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditTextClearFocus() {
+        binding.clCreateUpdate.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
+
+        binding.btnCreateUpdateBookSave.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
     }
 
     private fun initUiState() {
@@ -50,18 +65,6 @@ class CreateUpdateBookActivity :
         }
     }
 
-    private fun initScrollPosition() {
-        binding.etCreateUpdateBookComment.onFocusChangeListener =
-            View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    binding.tvCreateUpdateBookCommentCount.scrollTo(
-                        0,
-                        binding.etCreateUpdateBookComment.bottom
-                    )
-                }
-            }
-    }
-
     private fun initCloseBtnOnClickListener() {
         binding.btnCreateUpdateBookClose.setSingleOnClickListener {
             finish()
@@ -72,7 +75,9 @@ class CreateUpdateBookActivity :
         repeatOnStarted {
             createUpdateBookViewModel.isPatch.collect { success ->
                 if (success) {
-                    finishAffinity()
+                    val activity = SearchBookActivity()
+                    activity.finish()
+                    finish()
                 }
             }
         }

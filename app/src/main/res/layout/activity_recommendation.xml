@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_recommendation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige"
@@ -29,6 +30,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_create_update_book_create_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_recommendation_title"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintBottom_toBottomOf="@id/btn_recommendation_close"
+            app:layout_constraintEnd_toStartOf="@id/btn_recommendation_check"
+            app:layout_constraintStart_toEndOf="@id/btn_recommendation_close"
+            app:layout_constraintTop_toTopOf="@id/btn_recommendation_close" />
+
         <ImageButton
             android:id="@+id/btn_recommendation_check"
             android:layout_width="wrap_content"
@@ -41,7 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
-            android:id="@+id/sv_create_update"
+            android:id="@+id/sv_recomendation"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
@@ -63,7 +76,7 @@
                     android:elevation="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_recommendation_close"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:src="@color/black" />
 
                 <TextView

@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.presentation.recommendation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
@@ -10,6 +11,7 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
+import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import com.sopt.peekabookaos.util.extensions.withArgs
@@ -24,10 +26,24 @@ class RecommendationActivity :
         super.onCreate(savedInstanceState)
         binding.vm = recommendationViewModel
         initView()
+        initEditTextClearFocus()
         initIsRecommendationObserve()
         initCloseBtnOnClickListener()
         initCheckBtnOnClickListener()
         initIsRecommendationObserve()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditTextClearFocus() {
+        binding.clRecommendation.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
+
+        binding.btnRecommendationCheck.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
     }
 
     private fun initView() {
