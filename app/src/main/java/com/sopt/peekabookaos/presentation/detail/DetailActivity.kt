@@ -47,8 +47,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initContentAppearance() {
-        detailViewModel.bookComment.observe(this) {
-            if (it.description.isEmpty()) {
+        detailViewModel.bookComment.observe(this) { bookComment ->
+            if (bookComment.description.isNullOrBlank()) {
                 with(binding) {
                     tvDetailGetContent.text = getString(R.string.text_detail_description_is_null)
                     tvDetailGetContent.setTextColor(
@@ -59,7 +59,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                     )
                 }
             }
-            if (it.memo.isEmpty()) {
+            if (bookComment.memo.isNullOrBlank()) {
                 with(binding) {
                     tvDetailGetMemo.text = getString(R.string.text_detail_memo_is_null)
                     tvDetailGetMemo.setTextColor(
