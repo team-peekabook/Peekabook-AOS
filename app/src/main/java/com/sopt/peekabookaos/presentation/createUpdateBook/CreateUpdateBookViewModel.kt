@@ -42,7 +42,6 @@ class CreateUpdateBookViewModel @Inject constructor(
 
     private fun patchBook() {
         viewModelScope.launch {
-            Timber.tag("kang").e("${_uiState.value.bookData.id}")
             createUpdateRepository.patchBook(
                 _uiState.value.bookData.id,
                 BookComment(
@@ -59,17 +58,6 @@ class CreateUpdateBookViewModel @Inject constructor(
 
     private fun postCreateBook() {
         viewModelScope.launch {
-            Timber.tag("kang").e(
-                "${
-                CreateBookRequest(
-                    bookImage = _uiState.value.bookData.bookImage,
-                    bookTitle = _uiState.value.bookData.bookTitle,
-                    author = _uiState.value.bookData.author,
-                    description = description.value,
-                    memo = memo.value
-                )
-                }"
-            )
             createUpdateRepository.postCreateBook(
                 CreateBookRequest(
                     bookImage = _uiState.value.bookData.bookImage,

@@ -8,7 +8,6 @@ import com.sopt.peekabookaos.databinding.ActivityNotificationBinding
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class NotificationActivity :
@@ -30,7 +29,6 @@ class NotificationActivity :
         viewModel.isServerStatus.observe(this) { success ->
             if (success) {
                 notifyAdapter.submitList(viewModel.notificationData.value)
-                Timber.tag("kang").d("${viewModel.notificationData.value}")
             }
         }
     }
