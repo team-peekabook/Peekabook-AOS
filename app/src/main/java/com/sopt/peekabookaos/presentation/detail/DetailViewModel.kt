@@ -39,10 +39,9 @@ class DetailViewModel @Inject constructor(
         _bookId.value = id
     }
 
-    fun getDetail() {
+    fun getDetail(bookId: Int) {
         viewModelScope.launch {
-            Timber.tag("kang").e("서버 연결 bookId")
-            detailRepository.getDetail(bookId.value!!)
+            detailRepository.getDetail(bookId)
                 .onSuccess { response ->
                     _bookComment.value = BookComment(
                         response.description,

@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Picks(
+    val id: Int,
     val pickIndex: Int,
     @SerialName("Book")
     val book: Book,

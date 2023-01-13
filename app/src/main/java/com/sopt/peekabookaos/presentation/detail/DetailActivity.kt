@@ -25,6 +25,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     override fun onResume() {
         super.onResume()
+        Timber.tag("kang").e("detail 시작")
         detailViewModel.initBookId(intent.getIntExtra(BOOK_INFO, DEFAULT))
     }
 
@@ -41,7 +42,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initBookIdObserve() {
         detailViewModel.bookId.observe(this) { bookId ->
-            detailViewModel.getDetail()
+            detailViewModel.getDetail(bookId)
         }
     }
 
