@@ -18,7 +18,7 @@
     <!-- Bottom Navigation -->
     <string name="bottom_bookshelf">책장</string>
     <string name="bottom_recommend">추천</string>
-    <string name="bottom_my_page">마이페이지</string>
+    <string name="bottom_my_page">MY</string>
 
     <!-- Create Update Book -->
     <string name="createUpdate_book_create_title">책 등록하기</string>
@@ -87,7 +87,8 @@
     <string name="search_user_title">사용자 검색하기</string>
     <string name="search_user_hint">사용자의 닉네임을 입력해주세요.</string>
     <string name="search_user_error">앗! 해당 사용자가 존재하지 않는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
-    <string name="search_user_follow">팔로잉</string>
+    <string name="search_user_following">팔로잉</string>
+    <string name="search_user_follow">팔로우</string>
 
     <!-- Warning Dialog -->
     <string name="warning_dialog_recommend_title">%s님에게\n책을 추천하시겠어요?</string>

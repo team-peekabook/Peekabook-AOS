@@ -18,11 +18,13 @@
         android:theme="@style/Theme.PeekabookAOS"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".presentation.splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme"
-            android:screenOrientation="portrait">
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PeekabookAOS.RemoveSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -69,7 +71,7 @@
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

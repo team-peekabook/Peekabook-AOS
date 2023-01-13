@@ -6,12 +6,10 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentRecommendBinding
 import com.sopt.peekabookaos.util.binding.BindingFragment
-import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecommendFragment :
-    BindingFragment<FragmentRecommendBinding>(R.layout.fragment_recommend) {
+class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fragment_recommend) {
     private val recommendViewModel: RecommendViewModel by viewModels()
     private val recommendAdapter: BookRecommendAdapter?
         get() = binding.rvRecommend.adapter as? BookRecommendAdapter
@@ -31,7 +29,7 @@ class RecommendFragment :
     }
 
     private fun initRecommendedClickListener() {
-        binding.tvRecommendRecommended.setSingleOnClickListener {
+        binding.tvRecommendRecommended.setOnClickListener {
             recommendAdapter?.submitList(recommendViewModel.recommendedBook.value)
             with(binding) {
                 tvRecommendRecommended.isSelected = true
@@ -45,7 +43,7 @@ class RecommendFragment :
     }
 
     private fun initRecommendingClickListener() {
-        binding.tvRecommendRecommending.setSingleOnClickListener {
+        binding.tvRecommendRecommending.setOnClickListener {
             recommendAdapter?.submitList(recommendViewModel.recommendingBook.value)
             with(binding) {
                 tvRecommendRecommended.isSelected = false
