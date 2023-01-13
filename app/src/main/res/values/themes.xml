@@ -16,4 +16,8 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
+
+    <style name="Theme.PeekabookAOS.RemoveSplash" parent="Theme.PeekabookAOS">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>
