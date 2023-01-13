@@ -36,6 +36,8 @@
     <string name="bookshelf_recommend_book">책 추천하기</string>
     <string name="bookshelf_myshelf_title">%d Books</string>
     <string name="bookshelf_pick_index">%d</string>
+    <string name="bookshelf_pick_empty_my">잠깐! PICK 한 책이 없어요.\nPICK 수정하기 버튼을 눌러\n추천하고 싶은 책을 PICK 해보세요!</string>
+    <string name="bookshelf_pick_empty_friend">앗! 친구가 Pick한 책이 없어요.\n책 추천하기 버튼을 눌러\n친구에게 책을 추천 해보세요!</string>
 
     <!-- BookRecommend-->
     <string name="recommend_recommended">추천받은 책</string>
