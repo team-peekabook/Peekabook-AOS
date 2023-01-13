@@ -44,13 +44,13 @@ class SearchBookActivity :
     private fun initView() {
         when (intent.getStringExtra(LOCATION) ?: CREATE) {
             RECOMMEND -> {
-                searchBookViewModel.initFriendInfo(
-                    intent.getParcelable(FRIEND_INFO, SelfIntro::class.java)!!
+                searchBookViewModel.updateUiState(
+                    friendInfo = intent.getParcelable(FRIEND_INFO, SelfIntro::class.java)!!,
+                    isCreateView = false
                 )
-                searchBookViewModel.initIsCreateView(false)
             }
             else -> {
-                searchBookViewModel.initIsCreateView(true)
+                searchBookViewModel.updateUiState(friendInfo = SelfIntro(), isCreateView = true)
             }
         }
     }
@@ -61,25 +61,27 @@ class SearchBookActivity :
     }
 
     private fun onClickBook(book: Book) {
-        if (searchBookViewModel.isCreateView.value == true) {
+        if (searchBookViewModel.uiState.value.isCreateView) {
             Intent(this, CreateUpdateBookActivity::class.java).apply {
                 putExtra(BOOK, book)
                 putExtra(LOCATION, CREATE)
             }.also { intent ->
                 startActivity(intent)
+                finish()
             }
         } else {
             Intent(this, RecommendationActivity::class.java).apply {
                 putExtra(BOOK_INFO, book)
-                putExtra(FRIEND_INFO, searchBookViewModel.friendInfo.value)
+                putExtra(FRIEND_INFO, searchBookViewModel.uiState.value.friendInfo)
             }.also { intent ->
                 startActivity(intent)
+                finish()
             }
         }
     }
 
     private fun initAdapterText(): String {
-        return if (searchBookViewModel.isCreateView.value == true) {
+        return if (searchBookViewModel.uiState.value.isCreateView) {
             getString(R.string.search_book_add)
         } else {
             getString(R.string.search_book_recommend)
@@ -128,7 +130,7 @@ class SearchBookActivity :
                 if (success) {
                     binding.llSearchBookError.visibility = View.INVISIBLE
                     binding.rvSearchBook.visibility = View.VISIBLE
-                    searchBookAdapter.submitList(searchBookViewModel.uiState.value)
+                    searchBookAdapter.submitList(searchBookViewModel.uiState.value.book)
                 } else {
                     binding.llSearchBookError.visibility = View.VISIBLE
                     binding.rvSearchBook.visibility = View.INVISIBLE

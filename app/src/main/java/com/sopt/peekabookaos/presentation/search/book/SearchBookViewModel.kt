@@ -1,7 +1,5 @@
 package com.sopt.peekabookaos.presentation.search.book
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
@@ -20,14 +18,8 @@ import javax.inject.Inject
 class SearchBookViewModel @Inject constructor(
     private val naverRepository: NaverRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(emptyList<Book>())
+    private val _uiState = MutableStateFlow(SearchBookUiState())
     val uiState = _uiState.asStateFlow()
-
-    private val _friendInfo = MutableLiveData<SelfIntro>()
-    val friendInfo: LiveData<SelfIntro> = _friendInfo
-
-    private val _isCreateView = MutableLiveData<Boolean>()
-    val isCreateView: LiveData<Boolean> = _isCreateView
 
     private val _isSearch = MutableSharedFlow<Boolean>()
     val isSearch = _isSearch.asSharedFlow()
@@ -41,7 +33,7 @@ class SearchBookViewModel @Inject constructor(
                     if (response.isEmpty()) {
                         _isSearch.emit(false)
                     } else {
-                        _uiState.value = response
+                        _uiState.value = _uiState.value.copy(book = response)
                         _isSearch.emit(true)
                     }
                 }.onFailure { throwable ->
@@ -51,11 +43,16 @@ class SearchBookViewModel @Inject constructor(
         }
     }
 
-    fun initFriendInfo(friend: SelfIntro) {
-        _friendInfo.value = friend
+    fun updateUiState(friendInfo: SelfIntro, isCreateView: Boolean) {
+        _uiState.value = _uiState.value.copy(
+            friendInfo = friendInfo,
+            isCreateView = isCreateView
+        )
     }
 
-    fun initIsCreateView(create: Boolean) {
-        _isCreateView.value = create
-    }
+    data class SearchBookUiState(
+        val book: List<Book> = emptyList(),
+        val friendInfo: SelfIntro = SelfIntro(),
+        val isCreateView: Boolean = false
+    )
 }
