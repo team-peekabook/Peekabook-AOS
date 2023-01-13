@@ -69,19 +69,20 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initAdapter() {
         binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter { _, item ->
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
-            toDetail.putExtra(BOOK_INFO, item.bookId)
+            toDetail.putExtra(BOOK_INFO, item.id)
             if (viewModel.isMyServerStatus.value == true) {
-                Timber.tag("kang").e("my> item.bookId: ${item.bookId}")
+                Timber.tag("kang").e("my> item.bookId: ${item.id}")
                 toDetail.putExtra(LOCATION, MY_SHELF)
             } else if (viewModel.isFriendServerStatus.value == true) {
-                Timber.tag("kang").e("friend> item.bookId: ${item.bookId}")
+                Timber.tag("kang").e("friend> item.bookId: ${item.id}")
                 toDetail.putExtra(LOCATION, FRIEND_SHELF)
             }
             startActivity(toDetail)
         }
         binding.rvBookshelfPick.adapter = BookShelfPickAdapter { _, item ->
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
-            toDetail.putExtra(BOOK_INFO, item.book.id)
+            toDetail.putExtra(BOOK_INFO, item.id)
+            Timber.tag("kang").e("my> item.book.id: ${item.book}")
             if (viewModel.isMyServerStatus.value == true) {
                 Timber.tag("kang").e("my> item.book.id: ${item.book.id}")
                 toDetail.putExtra(LOCATION, MY_SHELF)
