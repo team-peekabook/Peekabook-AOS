@@ -17,27 +17,27 @@ import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_detail) {
     private val detailViewModel: DetailViewModel by viewModels()
 
+    override fun onResume() {
+        super.onResume()
+        Timber.tag("kang").e("detail 시작")
+        detailViewModel.initBookId(intent.getIntExtra(BOOK_INFO, DEFAULT))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = detailViewModel
-        initBookIdAppearance()
-        initContentAppearance()
         initDetailView()
+        initContentAppearance()
         initBookIdObserve()
         initDeleteBtnClickListener()
         initBackBtnOnClickListener()
         initEditBtnClickListener()
-    }
-
-    private fun initBookIdAppearance() {
-        detailViewModel.initBookId(
-            intent.getIntExtra(BOOK_INFO, DEFAULT)
-        )
     }
 
     private fun initBookIdObserve() {
@@ -75,13 +75,19 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initDetailView() {
         when (intent.getStringExtra(LOCATION)) {
-            MY -> {
+            MY_SHELF -> {
                 detailViewModel.initIsMyDetailView(true)
-                intent.getIntExtra(BOOK_INFO, DEFAULT)
+                Timber.tag("kang").e("detail my:${intent.getIntExtra(BOOK_INFO, DEFAULT)} ")
+                detailViewModel.initBookId(
+                    intent.getIntExtra(BOOK_INFO, DEFAULT)
+                )
             }
-            FRIEND -> {
+            FRIEND_SHELF -> {
+                Timber.tag("kang").e("detail friend:${intent.getIntExtra(BOOK_INFO, DEFAULT)} ")
                 detailViewModel.initIsMyDetailView(false)
-                intent.getIntExtra(BOOK_INFO, DEFAULT)
+                detailViewModel.initBookId(
+                    intent.getIntExtra(BOOK_INFO, DEFAULT)
+                )
             }
         }
     }
@@ -94,6 +100,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initEditBtnClickListener() {
         binding.btnDetailEdit.setSingleOnClickListener {
+            detailViewModel.updateBookData()
             Intent(this, CreateUpdateBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
                 putExtra(BOOK, detailViewModel.bookData.value)
@@ -132,9 +139,9 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     companion object {
-        const val MY = "my"
-        const val FRIEND = "friend"
+        const val MY_SHELF = "my"
+        const val FRIEND_SHELF = "friend"
         const val BOOK_INFO = "book_info"
-        private const val DEFAULT = 3 // 추후 -1로 수정
+        const val DEFAULT = -1
     }
 }

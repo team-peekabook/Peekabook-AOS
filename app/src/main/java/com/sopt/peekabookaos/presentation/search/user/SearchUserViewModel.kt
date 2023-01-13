@@ -30,14 +30,15 @@ class SearchUserViewModel @Inject constructor(
     fun searchBtnClickListener() {
         viewModelScope.launch {
             _searchState.emit(UiState.IDLE)
-            searchRepository.getSearchUser(nickname.value).onSuccess { response ->
-                _uiState.emit(response)
-                _isFollowed.emit(response.isFollowed)
-                _searchState.emit(UiState.SUCCESS)
-            }.onFailure { throwable ->
-                _searchState.emit(UiState.ERROR)
-                Timber.e("$throwable")
-            }
+            searchRepository.getSearchUser(nickname.value)
+                .onSuccess { response ->
+                    _uiState.emit(response)
+                    _isFollowed.emit(response.isFollowed)
+                    _searchState.emit(UiState.SUCCESS)
+                }.onFailure { throwable ->
+                    _searchState.emit(UiState.ERROR)
+                    Timber.e("$throwable")
+                }
         }
     }
 
@@ -51,23 +52,25 @@ class SearchUserViewModel @Inject constructor(
 
     private fun deleteFollow(id: Int) {
         viewModelScope.launch {
-            searchRepository.deleteFollow(id).onSuccess {
-                _isFollowed.emit(false)
-            }.onFailure { throwable ->
-                _isFollowed.emit(true)
-                Timber.e("$throwable")
-            }
+            searchRepository.deleteFollow(id)
+                .onSuccess {
+                    _isFollowed.emit(false)
+                }.onFailure { throwable ->
+                    _isFollowed.emit(true)
+                    Timber.e("$throwable")
+                }
         }
     }
 
     private fun postFollow(id: Int) {
         viewModelScope.launch {
-            searchRepository.postFollow(id).onSuccess {
-                _isFollowed.emit(true)
-            }.onFailure { throwable ->
-                _isFollowed.emit(false)
-                Timber.e("$throwable")
-            }
+            searchRepository.postFollow(id)
+                .onSuccess {
+                    _isFollowed.emit(true)
+                }.onFailure { throwable ->
+                    _isFollowed.emit(false)
+                    Timber.e("$throwable")
+                }
         }
     }
 }
