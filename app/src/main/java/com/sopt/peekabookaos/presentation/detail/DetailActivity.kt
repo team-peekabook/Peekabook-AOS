@@ -58,6 +58,16 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                         )
                     )
                 }
+            } else {
+                with(binding) {
+                    tvDetailGetContent.text = bookComment.description
+                    tvDetailGetContent.setTextColor(
+                        ContextCompat.getColor(
+                            this@DetailActivity,
+                            R.color.peeka_red
+                        )
+                    )
+                }
             }
             if (bookComment.memo.isNullOrBlank()) {
                 with(binding) {
@@ -66,6 +76,16 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                         ContextCompat.getColor(
                             this@DetailActivity,
                             R.color.peeka_g_1
+                        )
+                    )
+                }
+            } else {
+                with(binding) {
+                    tvDetailGetMemo.text = bookComment.memo
+                    tvDetailGetMemo.setTextColor(
+                        ContextCompat.getColor(
+                            this@DetailActivity,
+                            R.color.peeka_red
                         )
                     )
                 }
