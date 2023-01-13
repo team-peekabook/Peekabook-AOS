@@ -43,7 +43,14 @@
     <string name="recommend_item_peek">%s님의 책장 보러가기 →</string>
 
     <!-- MyPage -->
-    <string name="my_page_error">앗! 준비 중인 기능이에요.</string>
+    <string name="tv_my_page_name">북과픽</string>
+    <string name="tv_my_page_intro">안녕하세요. 저는 북과픽입니다.</string>
+    <string name="tv_my_page_1">알림 설정</string>
+    <string name="tv_my_page_2"><![CDATA[개인정보 보호 정책 & 서비스 이용 약관]]></string>
+    <string name="tv_my_page_3">문의하기</string>
+    <string name="tv_my_page_4">개발자 정보</string>
+    <string name="tv_my_page_5">로그아웃</string>
+    <string name="tv_my_page_6">서비스 탈퇴하기</string>
 
     <!-- Book Detail-->
     <string name="text_detail_description_is_null">작성된 한 마디가 없습니다</string>
