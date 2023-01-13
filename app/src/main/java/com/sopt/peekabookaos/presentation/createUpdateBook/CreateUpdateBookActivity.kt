@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.createUpdateBook
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
@@ -24,6 +25,7 @@ class CreateUpdateBookActivity :
         super.onCreate(savedInstanceState)
         binding.vm = createUpdateBookViewModel
         initUiState()
+        initScrollPosition()
         initCloseBtnOnClickListener()
         isPatchCollect()
         isPostCollect()
@@ -48,6 +50,18 @@ class CreateUpdateBookActivity :
         }
     }
 
+    private fun initScrollPosition() {
+        binding.etCreateUpdateBookComment.onFocusChangeListener =
+            View.OnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    binding.tvCreateUpdateBookCommentCount.scrollTo(
+                        0,
+                        binding.etCreateUpdateBookComment.bottom
+                    )
+                }
+            }
+    }
+
     private fun initCloseBtnOnClickListener() {
         binding.btnCreateUpdateBookClose.setSingleOnClickListener {
             finish()
@@ -58,7 +72,7 @@ class CreateUpdateBookActivity :
         repeatOnStarted {
             createUpdateBookViewModel.isPatch.collect { success ->
                 if (success) {
-                    finish()
+                    finishAffinity()
                 }
             }
         }
@@ -73,8 +87,8 @@ class CreateUpdateBookActivity :
                         BOOK_INFO,
                         createUpdateBookViewModel.uiState.value.bookData.id
                     )
-                    startActivity(toDetail)
                     finish()
+                    startActivity(toDetail)
                 }
             }
         }

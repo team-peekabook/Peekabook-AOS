@@ -37,19 +37,18 @@ class RecommedationViewModel @Inject constructor(
         viewModelScope.launch {
             recommendRepository.postRecommendation(
                 RecommendationRequest(
-                    recommendDesc = _bookData.value!!.bookImage,
+                    recommendDesc = comment.value,
                     bookTitle = _bookData.value!!.bookTitle,
                     bookImage = _bookData.value!!.bookImage,
                     author = _bookData.value!!.author
                 ),
                 _friendData.value!!.id
-            )
-                .onSuccess {
-                    _isRecommendation.value = true
-                }.onFailure { throwable ->
-                    _isRecommendation.value = false
-                    Timber.e("$throwable")
-                }
+            ).onSuccess {
+                _isRecommendation.value = true
+            }.onFailure { throwable ->
+                _isRecommendation.value = false
+                Timber.e("$throwable")
+            }
         }
     }
 }

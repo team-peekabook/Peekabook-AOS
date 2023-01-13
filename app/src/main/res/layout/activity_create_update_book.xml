@@ -68,147 +68,162 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_create_update_book_create_title" />
 
-        <ImageView
-            android:id="@+id/iv_create_update_book_image"
-            setImage="@{vm.uiState.bookData.bookImage}"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="27dp"
-            android:background="@color/peeka_beige"
-            android:elevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_create_title"
-            tools:src="@color/peeka_g_1" />
-
-        <TextView
-            android:id="@+id/tv_create_update_book_title"
-            style="@style/H3Bd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@{vm.uiState.bookData.bookTitle}"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_create_update_book_image"
-            tools:text="아무튼, 여름" />
-
-        <TextView
-            android:id="@+id/tv_create_update_book_author"
-            style="@style/H2Md"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@{vm.uiState.bookData.author}"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_title"
-            app:layout_constraintStart_toStartOf="@id/tv_create_update_book_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_title"
-            tools:text="김신회" />
-
-        <TextView
-            android:id="@+id/tv_create_update_book_comment"
-            style="@style/H1Bd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/peeka_red"
-            android:paddingVertical="8dp"
-            android:paddingStart="14dp"
-            android:text="@string/createUpdate_book_comment"
-            android:textColor="@color/peeka_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_author"
-            tools:ignore="RtlSymmetry" />
-
-        <EditText
-            android:id="@+id/et_create_update_book_comment"
-            style="@style/H2Md"
-            android:layout_width="0dp"
+        <ScrollView
+            android:id="@+id/sv_create_update"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/shape_whitefill_redline_0_rect"
-            android:gravity="top"
-            android:hint="@string/createUpdate_book_comment_hint"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:maxLength="200"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="12dp"
-            android:text="@={vm.description}"
-            android:textColor="@color/peeka_red"
-            android:textColorHint="@color/peeka_g_1"
-            app:layout_constraintDimensionRatio="1.6"
-            app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_comment"
-            app:layout_constraintStart_toStartOf="@id/tv_create_update_book_comment"
-            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_comment" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_create_update_book_save">
 
-        <TextView
-            android:id="@+id/tv_create_update_book_comment_count"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{@string/createUpdate_book_comment_count(vm.description.length())}"
-            android:textColor="@color/peeka_g_2"
-            app:layout_constraintEnd_toEndOf="@id/et_create_update_book_comment"
-            app:layout_constraintTop_toBottomOf="@id/et_create_update_book_comment"
-            tools:text="0/200" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
 
-        <TextView
-            android:id="@+id/tv_create_update_book_memo"
-            style="@style/H1Bd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/peeka_red"
-            android:paddingVertical="8dp"
-            android:paddingStart="14dp"
-            android:text="@string/createUpdate_book_memo"
-            android:textColor="@color/peeka_white"
-            app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_comment"
-            app:layout_constraintStart_toStartOf="@id/tv_create_update_book_comment"
-            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_comment_count"
-            tools:ignore="RtlSymmetry" />
+                <ImageView
+                    android:id="@+id/iv_create_update_book_image"
+                    setImage="@{vm.uiState.bookData.bookImage}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="27dp"
+                    android:background="@color/peeka_beige"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@color/peeka_g_1" />
 
-        <EditText
-            android:id="@+id/et_create_update_book_memo"
-            style="@style/H2Md"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/shape_whitefill_redline_0_rect"
-            android:gravity="top"
-            android:hint="@string/createUpdate_book_memo_hint"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:maxLength="50"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="12dp"
-            android:text="@={vm.memo}"
-            android:textColor="@color/peeka_red"
-            android:textColorHint="@color/peeka_g_1"
-            app:layout_constraintDimensionRatio="5"
-            app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_memo"
-            app:layout_constraintStart_toStartOf="@id/tv_create_update_book_memo"
-            app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_memo" />
+                <TextView
+                    android:id="@+id/tv_create_update_book_title"
+                    style="@style/H3Bd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@{vm.uiState.bookData.bookTitle}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_create_update_book_image"
+                    tools:text="아무튼, 여름" />
 
-        <TextView
-            android:id="@+id/tv_create_update_book_memo_count"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{@string/createUpdate_book_memo_count(vm.memo.length())}"
-            android:textColor="@color/peeka_g_2"
-            app:layout_constraintEnd_toEndOf="@id/et_create_update_book_memo"
-            app:layout_constraintTop_toBottomOf="@id/et_create_update_book_memo"
-            tools:text="0/200" />
+                <TextView
+                    android:id="@+id/tv_create_update_book_author"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@{vm.uiState.bookData.author}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_title"
+                    app:layout_constraintStart_toStartOf="@id/tv_create_update_book_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_title"
+                    tools:text="김신회" />
+
+                <TextView
+                    android:id="@+id/tv_create_update_book_comment"
+                    style="@style/H1Bd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/peeka_red"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="14dp"
+                    android:text="@string/createUpdate_book_comment"
+                    android:textColor="@color/peeka_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_author"
+                    tools:ignore="RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/et_create_update_book_comment"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/shape_whitefill_redline_0_rect"
+                    android:gravity="top"
+                    android:hint="@string/createUpdate_book_comment_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:maxLength="200"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="12dp"
+                    android:text="@={vm.description}"
+                    android:textColor="@color/peeka_red"
+                    android:textColorHint="@color/peeka_g_1"
+                    app:layout_constraintDimensionRatio="1.8"
+                    app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_comment"
+                    app:layout_constraintStart_toStartOf="@id/tv_create_update_book_comment"
+                    app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_comment" />
+
+                <TextView
+                    android:id="@+id/tv_create_update_book_comment_count"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{@string/createUpdate_book_comment_count(vm.description.length())}"
+                    android:textColor="@color/peeka_g_2"
+                    app:layout_constraintEnd_toEndOf="@id/et_create_update_book_comment"
+                    app:layout_constraintTop_toBottomOf="@id/et_create_update_book_comment"
+                    tools:text="0/200" />
+
+                <TextView
+                    android:id="@+id/tv_create_update_book_memo"
+                    style="@style/H1Bd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/peeka_red"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="14dp"
+                    android:text="@string/createUpdate_book_memo"
+                    android:textColor="@color/peeka_white"
+                    app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_comment"
+                    app:layout_constraintStart_toStartOf="@id/tv_create_update_book_comment"
+                    app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_comment_count"
+                    tools:ignore="RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/et_create_update_book_memo"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/shape_whitefill_redline_0_rect"
+                    android:gravity="top"
+                    android:hint="@string/createUpdate_book_memo_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:maxLength="50"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="12dp"
+                    android:text="@={vm.memo}"
+                    android:textColor="@color/peeka_red"
+                    android:textColorHint="@color/peeka_g_1"
+                    app:layout_constraintDimensionRatio="4"
+                    app:layout_constraintEnd_toEndOf="@id/tv_create_update_book_memo"
+                    app:layout_constraintStart_toStartOf="@id/tv_create_update_book_memo"
+                    app:layout_constraintTop_toBottomOf="@id/tv_create_update_book_memo" />
+
+                <TextView
+                    android:id="@+id/tv_create_update_book_memo_count"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{@string/createUpdate_book_memo_count(vm.memo.length())}"
+                    android:textColor="@color/peeka_g_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/et_create_update_book_memo"
+                    app:layout_constraintTop_toBottomOf="@id/et_create_update_book_memo"
+                    tools:text="0/200" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
