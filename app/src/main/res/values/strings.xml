@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Peekabook AOS</string>
+    <string name="app_name">PEEKABOOK</string>
 
     <!-- Util -->
     <string name="binding_error">Binding not initialized to reference the view.</string>
