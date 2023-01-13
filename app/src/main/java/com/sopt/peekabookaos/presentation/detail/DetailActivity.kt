@@ -17,7 +17,6 @@ import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_detail) {
@@ -25,7 +24,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     override fun onResume() {
         super.onResume()
-        Timber.tag("kang").e("detail 시작")
         detailViewModel.initBookId(intent.getIntExtra(BOOK_INFO, DEFAULT))
     }
 
@@ -69,6 +67,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                     )
                 }
             }
+
             if (bookComment.memo.isNullOrBlank()) {
                 with(binding) {
                     tvDetailGetMemo.text = getString(R.string.text_detail_memo_is_null)
@@ -97,13 +96,11 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
         when (intent.getStringExtra(LOCATION)) {
             MY_SHELF -> {
                 detailViewModel.initIsMyDetailView(true)
-                Timber.tag("kang").e("detail my:${intent.getIntExtra(BOOK_INFO, DEFAULT)} ")
                 detailViewModel.initBookId(
                     intent.getIntExtra(BOOK_INFO, DEFAULT)
                 )
             }
             FRIEND_SHELF -> {
-                Timber.tag("kang").e("detail friend:${intent.getIntExtra(BOOK_INFO, DEFAULT)} ")
                 detailViewModel.initIsMyDetailView(false)
                 detailViewModel.initBookId(
                     intent.getIntExtra(BOOK_INFO, DEFAULT)

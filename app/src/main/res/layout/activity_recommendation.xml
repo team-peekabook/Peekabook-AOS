@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_recommendation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige"
@@ -41,7 +42,6 @@
             app:layout_constraintStart_toEndOf="@id/btn_recommendation_close"
             app:layout_constraintTop_toTopOf="@id/btn_recommendation_close" />
 
-
         <ImageButton
             android:id="@+id/btn_recommendation_check"
             android:layout_width="wrap_content"
@@ -53,129 +53,146 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_recommendation_book_cover"
-            setImage="@{vm.bookData.bookImage}"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/peeka_white"
-            android:elevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_recommendation_close"
-            tools:src="@color/black" />
-
-        <TextView
-            android:id="@+id/tv_recommendation_book_title"
-            style="@style/H3Bd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@{vm.bookData.bookTitle}"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_recommendation_book_cover"
-            tools:text="아무튼, 여름" />
-
-        <TextView
-            android:id="@+id/tv_recommendation_book_author"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="80dp"
-            android:layout_marginTop="4dp"
-            android:text="@{vm.bookData.author}"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recommendation_book_title"
-            tools:text="김신회" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_recommendation_redRect"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/peeka_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recommendation_book_author">
-
-            <TextView
-                android:id="@+id/tv_item_recommend_title"
-                style="@style/H1Bd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:paddingVertical="5dp"
-                android:text="@string/recommendation_to_name"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/cl_recommendation_redRect"
-                app:layout_constraintStart_toStartOf="@id/cl_recommendation_redRect"
-                app:layout_constraintTop_toTopOf="@id/cl_recommendation_redRect" />
-
-            <View
-                android:id="@+id/view_recommendation_line_title"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/peeka_white"
-                app:layout_constraintBottom_toBottomOf="@id/tv_recommendation_toName"
-                app:layout_constraintStart_toEndOf="@+id/tv_item_recommend_title"
-                app:layout_constraintTop_toTopOf="@id/tv_recommendation_toName" />
-
-            <TextView
-                android:id="@+id/tv_recommendation_toName"
-                style="@style/S3Md"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:text="@{vm.friendData.nickname}"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_title"
-                app:layout_constraintStart_toEndOf="@+id/view_recommendation_line_title"
-                app:layout_constraintTop_toTopOf="@id/tv_item_recommend_title"
-                tools:text="문새연" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <EditText
-            android:id="@+id/et_recommendation_get_content"
-            style="@style/H2Md"
-            android:layout_width="0dp"
+        <ScrollView
+            android:id="@+id/sv_recomendation"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/shape_whitefill_redline_0_rect"
-            android:gravity="top"
-            android:hint="@string/recommendation_hint"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="12dp"
-            android:text="@={vm.comment}"
-            android:textColor="@color/peeka_red"
-            android:textColorHint="@color/peeka_g_1"
-            app:layout_constraintDimensionRatio="1.6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_recommendation_redRect" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_recommendation_check">
 
-        <TextView
-            android:id="@+id/tv_recommendation_book_comment_count"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{@string/recommendation_book_comment_count(vm.comment.length())}"
-            android:textColor="@color/peeka_g_2"
-            app:layout_constraintEnd_toEndOf="@id/et_recommendation_get_content"
-            app:layout_constraintTop_toBottomOf="@id/et_recommendation_get_content"
-            tools:text="0/200" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
 
+                <ImageView
+                    android:id="@+id/iv_recommendation_book_cover"
+                    setImage="@{vm.bookData.bookImage}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/peeka_white"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_recommendation_book_title"
+                    style="@style/H3Bd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@{vm.bookData.bookTitle}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_recommendation_book_cover"
+                    tools:text="아무튼, 여름" />
+
+                <TextView
+                    android:id="@+id/tv_recommendation_book_author"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="80dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@{vm.bookData.author}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommendation_book_title"
+                    tools:text="김신회" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_recommendation_redRect"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommendation_book_author">
+
+                    <TextView
+                        android:id="@+id/tv_item_recommend_title"
+                        style="@style/H1Bd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:paddingVertical="5dp"
+                        android:text="@string/recommendation_to_name"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/cl_recommendation_redRect"
+                        app:layout_constraintStart_toStartOf="@id/cl_recommendation_redRect"
+                        app:layout_constraintTop_toTopOf="@id/cl_recommendation_redRect" />
+
+                    <View
+                        android:id="@+id/view_recommendation_line_title"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@color/peeka_white"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_recommendation_toName"
+                        app:layout_constraintStart_toEndOf="@+id/tv_item_recommend_title"
+                        app:layout_constraintTop_toTopOf="@id/tv_recommendation_toName" />
+
+                    <TextView
+                        android:id="@+id/tv_recommendation_toName"
+                        style="@style/S3Md"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:text="@{vm.friendData.nickname}"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_item_recommend_title"
+                        app:layout_constraintStart_toEndOf="@+id/view_recommendation_line_title"
+                        app:layout_constraintTop_toTopOf="@id/tv_item_recommend_title"
+                        tools:text="문새연" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/et_recommendation_get_content"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/shape_whitefill_redline_0_rect"
+                    android:gravity="top"
+                    android:hint="@string/recommendation_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:maxLength="200"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="12dp"
+                    android:text="@={vm.comment}"
+                    android:textColor="@color/peeka_red"
+                    android:textColorHint="@color/peeka_g_1"
+                    app:layout_constraintDimensionRatio="1.6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_recommendation_redRect" />
+
+                <TextView
+                    android:id="@+id/tv_recommendation_book_comment_count"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{@string/recommendation_book_comment_count(vm.comment.length())}"
+                    android:textColor="@color/peeka_g_2"
+                    app:layout_constraintEnd_toEndOf="@id/et_recommendation_get_content"
+                    app:layout_constraintTop_toBottomOf="@id/et_recommendation_get_content"
+                    tools:text="0/200" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

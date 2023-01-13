@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.presentation.createUpdateBook
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,7 +10,9 @@ import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -24,9 +27,23 @@ class CreateUpdateBookActivity :
         super.onCreate(savedInstanceState)
         binding.vm = createUpdateBookViewModel
         initUiState()
+        initEditTextClearFocus()
         initCloseBtnOnClickListener()
         isPatchCollect()
         isPostCollect()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditTextClearFocus() {
+        binding.clCreateUpdate.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
+
+        binding.btnCreateUpdateBookSave.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
     }
 
     private fun initUiState() {
@@ -58,6 +75,8 @@ class CreateUpdateBookActivity :
         repeatOnStarted {
             createUpdateBookViewModel.isPatch.collect { success ->
                 if (success) {
+                    val activity = SearchBookActivity()
+                    activity.finish()
                     finish()
                 }
             }
@@ -73,8 +92,8 @@ class CreateUpdateBookActivity :
                         BOOK_INFO,
                         createUpdateBookViewModel.uiState.value.bookData.id
                     )
-                    startActivity(toDetail)
                     finish()
+                    startActivity(toDetail)
                 }
             }
         }

@@ -31,7 +31,8 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         get() = binding.rvBookshelfPick.adapter as? BookShelfPickAdapter
     private val friendAdapter: BookShelfFriendAdapter?
         get() = binding.rvBookshelfFriendList.adapter as? BookShelfFriendAdapter
-    private lateinit var itemDeco: BookshelfShelfDecoration
+    private lateinit var shelfItemDeco: BookshelfShelfDecoration
+    private lateinit var pickItemDeco: BookshelfPickDecoration
     private val viewModel by viewModels<BookShelfViewModel>()
 
     override fun onResume() {
@@ -98,8 +99,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initItemDecoration() {
-        itemDeco = BookshelfShelfDecoration(requireContext())
-        binding.rvBookshelfBottomViewShelf.addItemDecoration(itemDeco)
+        shelfItemDeco = BookshelfShelfDecoration(requireContext())
+        binding.rvBookshelfBottomViewShelf.addItemDecoration(shelfItemDeco)
+        pickItemDeco = BookshelfPickDecoration(requireContext())
+        binding.rvBookshelfPick.addItemDecoration(pickItemDeco)
     }
 
     private fun initUserClickListener() {
@@ -164,6 +167,13 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         viewModel.pickData.observe(viewLifecycleOwner) {
             pickAdapter?.submitList(viewModel.pickData.value)
+            if (viewModel.pickData.value?.isEmpty() == true) {
+                binding.rvBookshelfPick.visibility = View.INVISIBLE
+                binding.tvBookshelfPickEmpty.visibility = View.VISIBLE
+            } else {
+                binding.rvBookshelfPick.visibility = View.VISIBLE
+                binding.tvBookshelfPickEmpty.visibility = View.INVISIBLE
+            }
         }
         viewModel.friendData.observe(viewLifecycleOwner) {
             updateFriendShelfText()

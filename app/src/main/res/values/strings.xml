@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Peekabook AOS</string>
+    <string name="app_name">PEEKABOOK</string>
 
     <!-- Util -->
     <string name="binding_error">Binding not initialized to reference the view.</string>
-    <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르시면 종료됩니다.</string>
+    <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르면 종료됩니다</string>
     <string name="null_point_exception">NullPointException occurs..</string>
     <string name="null_point_exception_warning_dialog_argument">"WarningDialogFragment에 필요한 arguments에 안들어옴"</string>
 
@@ -36,6 +36,8 @@
     <string name="bookshelf_recommend_book">책 추천하기</string>
     <string name="bookshelf_myshelf_title">%d Books</string>
     <string name="bookshelf_pick_index">%d</string>
+    <string name="bookshelf_pick_empty_my">잠깐! PICK 한 책이 없어요.\nPICK 수정하기 버튼을 눌러\n추천하고 싶은 책을 PICK 해보세요!</string>
+    <string name="bookshelf_pick_empty_friend">앗! 친구가 Pick한 책이 없어요.\n책 추천하기 버튼을 눌러\n친구에게 책을 추천 해보세요!</string>
 
     <!-- BookRecommend-->
     <string name="recommend_recommended">추천받은 책</string>
@@ -70,7 +72,7 @@
 
     <!-- Search Book -->
     <string name="search_book_title">책 검색하기</string>
-    <string name="search_book_hint">책 제목 또는 작가명을 입력해주세요.</string>
+    <string name="search_book_hint">책 제목을 입력해주세요.</string>
     <string name="search_book_add">내 책장에 추가하기</string>
     <string name="search_book_recommend">친구에게 추천하기</string>
     <string name="search_book_error">앗! 검색어에 해당되는 책이 없는 것 같아요.\n다른 검색어를 입력해 보세요.</string>

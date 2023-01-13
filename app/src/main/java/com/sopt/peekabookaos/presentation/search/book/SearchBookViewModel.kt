@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,8 +44,9 @@ class SearchBookViewModel @Inject constructor(
                         _uiState.value = response
                         _isSearch.emit(true)
                     }
-                }.onFailure {
+                }.onFailure { throwable ->
                     _isSearch.emit(false)
+                    Timber.e("$throwable")
                 }
         }
     }

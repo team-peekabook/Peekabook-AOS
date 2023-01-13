@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_white88fill_redline_0_rect_1"
-        android:layout_marginStart="20dp">
+        android:layout_marginEnd="20dp">
 
         <LinearLayout
             android:id="@+id/ll_item_bookshelf_pick"
@@ -87,7 +87,7 @@
             android:paddingVertical="10dp"
             android:text="@{data.description}"
             android:textColor="@color/peeka_red"
-            android:visibility="@{data.description == null ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{data.description.isEmpty ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

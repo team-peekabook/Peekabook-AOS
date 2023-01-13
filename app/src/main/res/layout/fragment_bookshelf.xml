@@ -274,6 +274,20 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_bookshelf_pick"
                     tools:listitem="@layout/item_bookshelf_pick" />
 
+                <TextView
+                    android:id="@+id/tv_bookshelf_pick_empty"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{vm.friendShelf == true ? @string/bookshelf_pick_empty_friend:@string/bookshelf_pick_empty_my}"
+                    android:textColor="@color/peeka_red_60"
+                    android:layout_marginTop="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bookshelf_pick"
+                    tools:text="앗! 친구가 Pick한 책이 없어요.\n책 추천하기 버튼을 눌러 \n친구에게 책을 추천 해보세요!" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

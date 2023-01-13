@@ -67,7 +67,6 @@ class SearchBookActivity :
                 putExtra(LOCATION, CREATE)
             }.also { intent ->
                 startActivity(intent)
-                finish()
             }
         } else {
             Intent(this, RecommendationActivity::class.java).apply {
@@ -75,7 +74,6 @@ class SearchBookActivity :
                 putExtra(FRIEND_INFO, searchBookViewModel.friendInfo.value)
             }.also { intent ->
                 startActivity(intent)
-                finish()
             }
         }
     }

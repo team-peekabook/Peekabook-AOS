@@ -146,7 +146,7 @@
                 android:id="@+id/iv_search_profile_outline"
                 android:layout_width="56dp"
                 android:layout_height="0dp"
-                android:src="@drawable/shape_red_line_0_circle"
+                android:src="@{vm.isFollowed==true ? @drawable/shape_red_line_0_circle : @drawable/shape_g1_line_circle}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_search_user_profile"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="@id/iv_search_user_profile"
