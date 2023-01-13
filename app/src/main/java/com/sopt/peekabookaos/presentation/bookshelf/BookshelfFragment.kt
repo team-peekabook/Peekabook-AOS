@@ -172,6 +172,13 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         viewModel.pickData.observe(viewLifecycleOwner) {
             pickAdapter?.submitList(viewModel.pickData.value)
+            if (viewModel.pickData.value?.isEmpty() == true) {
+                binding.rvBookshelfPick.visibility = View.INVISIBLE
+                binding.tvBookshelfPickEmpty.visibility = View.VISIBLE
+            } else {
+                binding.rvBookshelfPick.visibility = View.VISIBLE
+                binding.tvBookshelfPickEmpty.visibility = View.INVISIBLE
+            }
         }
         viewModel.friendData.observe(viewLifecycleOwner) {
             updateFriendShelfText()
