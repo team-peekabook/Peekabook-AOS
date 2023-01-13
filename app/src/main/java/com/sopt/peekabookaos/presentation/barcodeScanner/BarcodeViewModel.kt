@@ -31,7 +31,6 @@ class BarcodeViewModel @Inject constructor(
                     } else {
                         _uiState.value = response
                         _serverStatus.emit(BarcodeState.SUCCESS)
-                        Thread.sleep(1)
                     }
                 }.onFailure { throwable ->
                     _serverStatus.emit(BarcodeState.ERROR)
