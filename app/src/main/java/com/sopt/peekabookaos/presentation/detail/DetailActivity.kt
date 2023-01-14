@@ -124,7 +124,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
                 putExtra(BOOK_COMMENT, detailViewModel.bookComment.value)
             }.also { intent ->
                 startActivity(intent)
-                finish()
             }
         }
     }
