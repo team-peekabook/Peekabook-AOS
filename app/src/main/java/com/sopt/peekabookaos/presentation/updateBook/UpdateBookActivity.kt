@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.createUpdateBook
+package com.sopt.peekabookaos.presentation.updateBook
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.BookComment
-import com.sopt.peekabookaos.databinding.ActivityCreateUpdateBookBinding
+import com.sopt.peekabookaos.databinding.LayoutCreateUpdateBookBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
@@ -19,13 +19,13 @@ import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateUpdateBookActivity :
-    BindingActivity<ActivityCreateUpdateBookBinding>(R.layout.activity_create_update_book) {
-    private val createUpdateBookViewModel: CreateUpdateBookViewModel by viewModels()
+class UpdateBookActivity :
+    BindingActivity<LayoutCreateUpdateBookBinding>(R.layout.layout_create_update_book) {
+    private val updateBookViewModel: UpdateBookViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = createUpdateBookViewModel
+        binding.vm = updateBookViewModel
         initUiState()
         initEditTextClearFocus()
         initCloseBtnOnClickListener()
@@ -49,14 +49,14 @@ class CreateUpdateBookActivity :
     private fun initUiState() {
         when (intent.getStringExtra(LOCATION)) {
             UPDATE -> {
-                createUpdateBookViewModel.initUiState(
+                updateBookViewModel.initUiState(
                     bookData = intent.getParcelable(BOOK, Book::class.java)!!,
                     bookComment = intent.getParcelable(BOOK_COMMENT, BookComment::class.java)!!,
                     update = true
                 )
             }
             else -> {
-                createUpdateBookViewModel.initUiState(
+                updateBookViewModel.initUiState(
                     bookData = intent.getParcelable(BOOK, Book::class.java)!!,
                     bookComment = BookComment("", ""),
                     update = false
@@ -73,7 +73,7 @@ class CreateUpdateBookActivity :
 
     private fun isPatchCollect() {
         repeatOnStarted {
-            createUpdateBookViewModel.isPatch.collect { success ->
+            updateBookViewModel.isPatch.collect { success ->
                 if (success) {
                     val activity = SearchBookActivity()
                     activity.finish()
@@ -85,12 +85,12 @@ class CreateUpdateBookActivity :
 
     private fun isPostCollect() {
         repeatOnStarted {
-            createUpdateBookViewModel.isPost.collect { success ->
+            updateBookViewModel.isPost.collect { success ->
                 if (success) {
-                    val toDetail = Intent(this@CreateUpdateBookActivity, DetailActivity::class.java)
+                    val toDetail = Intent(this@UpdateBookActivity, DetailActivity::class.java)
                     toDetail.putExtra(
                         BOOK_INFO,
-                        createUpdateBookViewModel.uiState.value.bookData.id
+                        updateBookViewModel.uiState.value.bookData.id
                     )
                     finish()
                     startActivity(toDetail)

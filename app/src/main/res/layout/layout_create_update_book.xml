@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookViewModel" />
+            type="com.sopt.peekabookaos.presentation.updateBook.UpdateBookViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige"
-        tools:context=".presentation.createUpdateBook.CreateUpdateBookActivity">
+        tools:context=".presentation.updateBook.UpdateBookActivity">
 
         <ImageButton
             android:id="@+id/btn_create_update_book_close"

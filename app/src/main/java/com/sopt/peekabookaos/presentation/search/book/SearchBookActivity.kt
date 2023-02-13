@@ -10,13 +10,13 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.databinding.ActivitySearchBookBinding
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelable
@@ -62,7 +62,7 @@ class SearchBookActivity :
 
     private fun onClickBook(book: Book) {
         if (searchBookViewModel.uiState.value.isCreateView) {
-            Intent(this, CreateUpdateBookActivity::class.java).apply {
+            Intent(this, UpdateBookActivity::class.java).apply {
                 putExtra(BOOK, book)
                 putExtra(LOCATION, CREATE)
             }.also { intent ->

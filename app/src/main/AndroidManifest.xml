@@ -18,7 +18,7 @@
         android:theme="@style/Theme.PeekabookAOS"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        
+
         <activity
             android:name=".presentation.splash.SplashActivity"
             android:exported="true"
@@ -63,7 +63,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.createUpdateBook.CreateUpdateBookActivity"
+            android:name=".presentation.updateBook.UpdateBookActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
