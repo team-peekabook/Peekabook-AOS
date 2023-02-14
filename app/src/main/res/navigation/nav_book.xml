@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_book">
+
+    <fragment
+        android:id="@+id/barcodeScannerFragment"
+        android:name="com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerFragment"
+        android:label="BarcodeScannerFragment"
+        tools:layout="@layout/fragment_barcode_scanner">
+        <action
+            android:id="@+id/action_barcodeScannerFragment_to_searchBookFragment"
+            app:destination="@id/searchBookFragment" />
+
+        <action
+            android:id="@+id/action_barcodeScannerFragment_to_createBookFragment"
+            app:destination="@id/createBookFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchBookFragment"
+        android:name="com.sopt.peekabookaos.presentation.search.book.SearchBookFragment"
+        android:label="SearchBookFragment"
+        tools:layout="@layout/fragment_search_book">
+        <action
+            android:id="@+id/action_searchBookFragment_to_createBookFragment"
+            app:destination="@id/createBookFragment" />
+
+        <action
+            android:id="@+id/action_searchBookFragment_to_recommendationFragment"
+            app:destination="@id/recommendationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createBookFragment"
+        android:name="com.sopt.peekabookaos.presentation.createBook.CreateBookFragment"
+        android:label="CreateBookFragment"
+        tools:layout="@layout/layout_create_update_book" />
+
+    <fragment
+        android:id="@+id/recommendationFragment"
+        android:name="com.sopt.peekabookaos.presentation.recommendation.RecommendationFragment"
+        android:label="RecommendationFragment"
+        tools:layout="@layout/fragment_recommendation" />
+
+</navigation>
