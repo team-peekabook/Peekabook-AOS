@@ -10,10 +10,10 @@ import com.sopt.peekabookaos.data.repository.NotificationRepository
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
 import com.sopt.peekabookaos.data.repository.RecommendRepository
 import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
-import com.sopt.peekabookaos.data.repository.SearchRepository
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ShelfRepository
 import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
+import com.sopt.peekabookaos.domain.repository.SearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

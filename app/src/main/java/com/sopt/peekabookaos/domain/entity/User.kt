@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.data.entity
+package com.sopt.peekabookaos.domain.entity
 
 import kotlinx.serialization.Serializable
 
