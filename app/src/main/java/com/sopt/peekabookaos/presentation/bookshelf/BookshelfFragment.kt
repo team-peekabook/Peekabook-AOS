@@ -7,8 +7,6 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.CREATE
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND_SHELF
@@ -19,6 +17,8 @@ import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.
 import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
