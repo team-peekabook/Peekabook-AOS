@@ -60,7 +60,7 @@
             android:id="@+id/iv_item_bookshelf_pick"
             setImage="@{data.book.bookImage}"
             android:layout_width="0dp"
-            android:layout_height="190dp"
+            android:layout_height="@dimen/iv_item_bookshelf_pick_height"
             android:layout_marginHorizontal="14dp"
             android:layout_marginVertical="9dp"
             android:scaleType="centerCrop"
