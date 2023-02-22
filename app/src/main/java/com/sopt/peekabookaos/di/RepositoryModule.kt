@@ -10,50 +10,58 @@ import com.sopt.peekabookaos.data.repository.NotificationRepository
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
 import com.sopt.peekabookaos.data.repository.RecommendRepository
 import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
-import com.sopt.peekabookaos.data.repository.SearchRepository
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ShelfRepository
 import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
+import com.sopt.peekabookaos.domain.repository.SearchRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
-    @Provides
-    fun providesSearchRepository(
+abstract class RepositoryModule {
+    @Binds
+    @Singleton
+    abstract fun bindToSearchRepository(
         searchRepositoryImpl: SearchRepositoryImpl
-    ): SearchRepository = searchRepositoryImpl
+    ): SearchRepository
 
-    @Provides
-    fun providesCreateUpdateRepository(
+    @Binds
+    @Singleton
+    abstract fun bindToCreateUpdateRepository(
         createUpdateRepositoryImpl: CreateUpdateRepositoryImpl
-    ): CreateUpdateRepository = createUpdateRepositoryImpl
+    ): CreateUpdateRepository
 
-    @Provides
-    fun providesDetailRepository(
+    @Binds
+    @Singleton
+    abstract fun bindToDetailRepository(
         detailRepositoryImpl: DetailRepositoryImpl
-    ): DetailRepository = detailRepositoryImpl
+    ): DetailRepository
 
-    @Provides
-    fun providesNotificationRepository(
+    @Binds
+    @Singleton
+    abstract fun bindToNotificationRepository(
         notificationRepositoryImpl: NotificationRepositoryImpl
-    ): NotificationRepository = notificationRepositoryImpl
+    ): NotificationRepository
 
-    @Provides
-    fun providesRecommendRepository(
+    @Binds
+    @Singleton
+    abstract fun bindToRecommendRepository(
         recommendRepositoryImpl: RecommendRepositoryImpl
-    ): RecommendRepository = recommendRepositoryImpl
+    ): RecommendRepository
 
-    @Provides
-    fun providesShelfRepository(
+    @Binds
+    @Singleton
+    abstract fun bindToShelfRepository(
         shelfRepositoryImpl: ShelfRepositoryImpl
-    ): ShelfRepository = shelfRepositoryImpl
+    ): ShelfRepository
 
-    @Provides
-    fun providesNaverRepository(
+    @Binds
+    @Singleton
+    abstract fun bindToNaverRepository(
         naverRepositoryImpl: NaverRepositoryImpl
-    ): NaverRepository = naverRepositoryImpl
+    ): NaverRepository
 }
