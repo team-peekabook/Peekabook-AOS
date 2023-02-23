@@ -184,6 +184,7 @@
                         android:maxEms="2"
                         android:maxLines="2"
                         android:minEms="2"
+                        android:text="@{vm.isMyServerStatus == true? vm.userData.nickname : vm.friendData.nickname}"
                         android:textAlignment="center"
                         android:textColor="@color/peeka_red"
                         tools:text="수빈은문수빈" />
@@ -198,6 +199,7 @@
                         android:layout_marginEnd="23dp"
                         android:ellipsize="end"
                         android:maxLines="2"
+                        android:text="@{vm.isMyServerStatus == true? vm.userData.intro : vm.friendData.intro}"
                         android:textColor="@color/peeka_red"
                         tools:text="안녕하세요, 저는 한줄소개 입니다! 제 책장을 둘러보세요! 만약에 최대를 넘어가게 되면 어떤 일이?" />
 
@@ -279,10 +281,11 @@
                     style="@style/H2Md"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tv_bookshelf_pick_empty_top_margin"
                     android:gravity="center"
                     android:text="@{vm.friendShelf == true ? @string/bookshelf_pick_empty_friend:@string/bookshelf_pick_empty_my}"
                     android:textColor="@color/peeka_red_60"
-                    android:layout_marginTop="@dimen/tv_bookshelf_pick_empty_top_margin"
+                    android:visibility="@{vm.pickData.isEmpty? View.VISIBLE: View.INVISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_bookshelf_pick"
