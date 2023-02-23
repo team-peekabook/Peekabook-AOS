@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.createUpdateBook
+package com.sopt.peekabookaos.presentation.updateBook
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateUpdateBookViewModel @Inject constructor(
+class UpdateBookViewModel @Inject constructor(
     private val createUpdateRepository: CreateUpdateRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CreateUpdateUiState())

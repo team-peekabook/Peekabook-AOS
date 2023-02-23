@@ -20,11 +20,11 @@ import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeErrorDialog.Companion.TAG
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.CREATE
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -179,7 +179,7 @@ class BarcodeScannerActivity :
             barcodeViewModel.serverStatus.collect { uiState ->
                 when (uiState) {
                     BarcodeState.SUCCESS -> {
-                        Intent(this, CreateUpdateBookActivity::class.java).apply {
+                        Intent(this, UpdateBookActivity::class.java).apply {
                             putExtra(BOOK, barcodeViewModel.uiState.value[0])
                             putExtra(LOCATION, CREATE)
                         }.also { intent ->

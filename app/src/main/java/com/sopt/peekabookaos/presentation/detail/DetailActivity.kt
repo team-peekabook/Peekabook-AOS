@@ -6,11 +6,11 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.BOOK_COMMENT
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.LOCATION
-import com.sopt.peekabookaos.presentation.createUpdateBook.CreateUpdateBookActivity.Companion.UPDATE
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.BOOK_COMMENT
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
@@ -118,7 +118,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private fun initEditBtnClickListener() {
         binding.btnDetailEdit.setSingleOnClickListener {
             detailViewModel.updateBookData()
-            Intent(this, CreateUpdateBookActivity::class.java).apply {
+            Intent(this, UpdateBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
                 putExtra(BOOK, detailViewModel.bookData.value)
                 putExtra(BOOK_COMMENT, detailViewModel.bookComment.value)
