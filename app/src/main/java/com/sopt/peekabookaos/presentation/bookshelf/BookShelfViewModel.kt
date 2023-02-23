@@ -42,10 +42,10 @@ class BookShelfViewModel @Inject constructor(
     private val _lastSelectedItem: MutableLiveData<Int> = MutableLiveData()
     var lastSelectedItem: LiveData<Int> = _lastSelectedItem
 
-    private val _bookTotalNum: MutableLiveData<Int> = MutableLiveData()
+    private val _bookTotalNum: MutableLiveData<Int> = MutableLiveData(0)
     var bookTotalNum: LiveData<Int> = _bookTotalNum
 
-    private val _isMyServerStatus = MutableLiveData<Boolean>(true)
+    private val _isMyServerStatus = MutableLiveData<Boolean>()
     val isMyServerStatus: LiveData<Boolean> = _isMyServerStatus
 
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
