@@ -43,7 +43,7 @@ class DetailViewModel @Inject constructor(
 
     fun getDetail(bookId: Int) {
         viewModelScope.launch {
-            getDetailUseCase.invoke(bookId)
+            getDetailUseCase.invoke(requireNotNull(_bookId.value))
                 .onSuccess { response ->
                     _bookComment.value = BookComment(
                         response.description,
