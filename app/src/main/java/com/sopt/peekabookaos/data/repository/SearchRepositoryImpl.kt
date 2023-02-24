@@ -11,7 +11,7 @@ class SearchRepositoryImpl @Inject constructor(
 ) : SearchRepository {
     override suspend fun getSearchUser(nickname: String): Result<User> =
         kotlin.runCatching { searchDataSource.getSearchUser(nickname) }.map { response ->
-            response.data!!.toUser()
+            requireNotNull(response.data).toUser()
         }
 
     override suspend fun postFollow(friendId: Int): Result<Unit> =
