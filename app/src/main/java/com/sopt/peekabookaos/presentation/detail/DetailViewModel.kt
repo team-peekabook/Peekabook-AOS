@@ -58,7 +58,7 @@ class DetailViewModel @Inject constructor(
 
     fun deleteDetail() {
         viewModelScope.launch {
-            deleteDetailUseCase.invoke(bookId.value!!)
+            deleteDetailUseCase.invoke(requireNotNull(_bookId.value!!))
                 .onSuccess {
                     _isDeleted.value = true
                 }.onFailure { throwable ->
