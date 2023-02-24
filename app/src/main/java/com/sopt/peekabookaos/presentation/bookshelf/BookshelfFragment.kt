@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
-import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
+import com.sopt.peekabookaos.presentation.book.BookActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND_SHELF
@@ -148,7 +148,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initCreateBookClickListener() {
         binding.btnBookshelfAddBook.setSingleOnClickListener {
-            val toBarcodeScanner = Intent(requireActivity(), BarcodeScannerActivity::class.java)
+            val toBarcodeScanner = Intent(requireActivity(), BookActivity::class.java)
             startActivity(toBarcodeScanner)
         }
     }
