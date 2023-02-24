@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -7,13 +9,81 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/peeka_beige"
+        tools:context=".presentation.barcodeScanner.BarcodeScannerActivity">
+
+        <ImageButton
+            android:id="@+id/btn_barcode_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:src="@drawable/ic_peeka_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="바코드스캐너 프래그먼트" />
+            android:id="@+id/tv_barcode_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/barcode_title"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintBottom_toBottomOf="@id/btn_barcode_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_barcode_close" />
 
+        <androidx.camera.view.PreviewView
+            android:id="@+id/pv_barcode"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_barcode_close" />
+
+        <com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeGuideView
+            android:id="@+id/preview_barcode_custom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/peeka_black_99"
+            app:layout_constraintBottom_toBottomOf="@id/pv_barcode"
+            app:layout_constraintEnd_toEndOf="@id/pv_barcode"
+            app:layout_constraintStart_toStartOf="@id/pv_barcode"
+            app:layout_constraintTop_toTopOf="@id/pv_barcode" />
+
+        <LinearLayout
+            android:id="@+id/ll_barcode_hard_detected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="31dp"
+            android:paddingBottom="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_barcode_hard_detected"
+                style="@style/C2Md"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/barcode_hard_detected"
+                android:textColor="@color/peeka_white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/ic_barcode_line" />
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
