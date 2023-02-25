@@ -148,7 +148,7 @@ class BarcodeScannerFragment :
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
         if (barcodes.isNotEmpty() && barcodeViewModel.serverState.value == BarcodeState.IDLE) {
-            barcodeViewModel.postBarcode(barcodes[0].rawValue!!)
+            barcodeViewModel.postBarcode(requireNotNull(barcodes[0].rawValue))
         }
     }
 
