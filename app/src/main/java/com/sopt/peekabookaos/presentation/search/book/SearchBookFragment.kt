@@ -28,16 +28,35 @@ class SearchBookFragment :
     private val searchBookViewModel: SearchBookViewModel by viewModels()
     private var searchBookAdapter: SearchBookAdapter? = null
     private val bundle = Bundle()
+    private var loadedBooks: List<Book>? = null
+    private var isViewCreated = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = searchBookViewModel
+        isViewCreated = true
         initLayout()
         initSearchBookAdapter()
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
         collectServerState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isViewCreated) {
+            if (loadedBooks != null) {
+                binding.llSearchBookError.visibility = View.INVISIBLE
+                binding.rvSearchBook.visibility = View.VISIBLE
+                searchBookAdapter?.submitList(loadedBooks)
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(LOADED_BOOKS, ArrayList(requireNotNull(loadedBooks)))
     }
 
     private fun initLayout() {
@@ -132,6 +151,7 @@ class SearchBookFragment :
                     binding.llSearchBookError.visibility = View.INVISIBLE
                     binding.rvSearchBook.visibility = View.VISIBLE
                     searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
+                    loadedBooks = searchBookViewModel.uiState.value.book
                 } else {
                     binding.llSearchBookError.visibility = View.VISIBLE
                     binding.rvSearchBook.visibility = View.INVISIBLE
@@ -143,5 +163,9 @@ class SearchBookFragment :
     override fun onDestroyView() {
         super.onDestroyView()
         searchBookAdapter = null
+    }
+
+    companion object {
+        private const val LOADED_BOOKS = "loaded_books"
     }
 }
