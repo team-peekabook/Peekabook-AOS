@@ -22,11 +22,18 @@ class BookActivity : BindingActivity<ActivityBookBinding>(R.layout.activity_book
         when (intent.getStringExtra(LOCATION) ?: CREATE) {
             RECOMMEND -> {
                 navController.navigate(R.id.action_barcodeScannerFragment_to_searchBookFragment)
+                overridePendingTransition(R.animator.anim_from_right, R.animator.anim_to_left)
             }
             else -> {
                 navController.navigate(R.id.barcodeScannerFragment)
+                overridePendingTransition(R.animator.anim_from_bottom, R.animator.anim_to_top)
             }
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.animator.anim_from_left, R.animator.anim_to_right)
     }
 
     companion object {
