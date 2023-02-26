@@ -37,7 +37,7 @@ class SearchBookFragment :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
-        collectServerStatusState()
+        collectServerState()
     }
 
     private fun initLayout() {
@@ -125,7 +125,7 @@ class SearchBookFragment :
         }
     }
 
-    private fun collectServerStatusState() {
+    private fun collectServerState() {
         repeatOnStarted {
             searchBookViewModel.isSearch.collect { success ->
                 if (success) {
