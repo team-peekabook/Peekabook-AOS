@@ -14,7 +14,6 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
-import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelable
@@ -79,9 +78,7 @@ class UpdateBookActivity :
         repeatOnStarted {
             updateBookViewModel.isPatch.collect { success ->
                 if (success) {
-                    val activity = SearchBookActivity()
-                    activity.finish()
-                    finish()
+                    /** 수정 성공시 로직 */
                 }
             }
         }
