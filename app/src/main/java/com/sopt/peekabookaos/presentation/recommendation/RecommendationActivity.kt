@@ -7,6 +7,8 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.databinding.ActivityRecommendationBinding
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
@@ -84,10 +86,5 @@ class RecommendationActivity :
                 finish()
             }
         }
-    }
-
-    companion object {
-        const val BOOK_INFO = "book_info"
-        const val FRIEND_INFO = "friend_info"
     }
 }

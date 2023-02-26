@@ -8,8 +8,12 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.databinding.LayoutCreateUpdateBookBinding
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
-import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
@@ -97,13 +101,5 @@ class UpdateBookActivity :
                 }
             }
         }
-    }
-
-    companion object {
-        const val LOCATION = "location"
-        const val UPDATE = "update"
-        const val CREATE = "create"
-        const val BOOK = "book"
-        const val BOOK_COMMENT = "book_comment"
     }
 }

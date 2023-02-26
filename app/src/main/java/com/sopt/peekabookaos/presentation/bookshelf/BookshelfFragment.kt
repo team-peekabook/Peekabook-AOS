@@ -7,18 +7,17 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.presentation.book.BookActivity
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
-import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND_SHELF
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHELF
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
-import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
-import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
-import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.CREATE
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -180,7 +179,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     companion object {
-        const val FRIEND = true
-        const val USER = false
+        private const val FRIEND = true
+        private const val USER = false
     }
 }

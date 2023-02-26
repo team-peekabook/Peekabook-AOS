@@ -6,11 +6,12 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.BOOK
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.BOOK_COMMENT
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
@@ -157,7 +158,6 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     companion object {
         const val MY_SHELF = "my"
         const val FRIEND_SHELF = "friend"
-        const val BOOK_INFO = "book_info"
         const val DEFAULT = -1
     }
 }
