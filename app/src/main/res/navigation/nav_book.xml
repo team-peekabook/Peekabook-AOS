@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_book"
-    app:startDestination="@id/barcodeScannerFragment">
+    app:startDestination="@id/searchBookFragment">
 
     <fragment
         android:id="@+id/barcodeScannerFragment"
