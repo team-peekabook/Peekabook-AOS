@@ -38,6 +38,5 @@ class BookActivity : BindingActivity<ActivityBookBinding>(R.layout.activity_book
         const val LOCATION = "location"
         const val BOOK_INFO = "book_info"
         const val FRIEND_INFO = "friend_info"
-        const val BUNDLE = "bundle"
     }
 }
