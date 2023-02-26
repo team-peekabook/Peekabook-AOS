@@ -21,7 +21,7 @@ class BookActivity : BindingActivity<ActivityBookBinding>(R.layout.activity_book
 
         when (intent.getStringExtra(LOCATION) ?: CREATE) {
             RECOMMEND -> {
-                navController.navigate(R.id.searchBookFragment)
+                navController.navigate(R.id.action_barcodeScannerFragment_to_searchBookFragment)
             }
             else -> {
                 navController.navigate(R.id.barcodeScannerFragment)
