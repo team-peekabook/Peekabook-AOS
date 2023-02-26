@@ -13,7 +13,7 @@
         tools:context=".presentation.book.BookActivity">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fc_book"
+            android:id="@+id/fcv_book"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

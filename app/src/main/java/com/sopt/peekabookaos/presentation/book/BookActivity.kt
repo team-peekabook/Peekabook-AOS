@@ -16,7 +16,7 @@ class BookActivity : BindingActivity<ActivityBookBinding>(R.layout.activity_book
 
     private fun initSearchFragmentView() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fc_book) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.fcv_book) as NavHostFragment
         val navController = navHostFragment.navController
 
         when (intent.getStringExtra(LOCATION) ?: CREATE) {
