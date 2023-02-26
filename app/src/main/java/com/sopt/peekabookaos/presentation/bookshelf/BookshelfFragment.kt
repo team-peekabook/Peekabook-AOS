@@ -81,6 +81,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             }
         }
     }
+
     private fun initDataObserver() {
         viewModel.shelfData.observe(viewLifecycleOwner) {
             myShelfAdapter?.submitList(viewModel.shelfData.value)
@@ -157,9 +158,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initRecommendClickListener() {
         binding.btnBookshelfRecommend.setSingleOnClickListener {
-            val toSearchBook = Intent(requireActivity(), SearchBookActivity::class.java)
-            toSearchBook.putExtra(FRIEND_INFO, viewModel.friendData.value)
-            toSearchBook.putExtra(LOCATION, RECOMMEND)
+            val toSearchBook = Intent(requireActivity(), BookActivity::class.java).apply {
+                putExtra(FRIEND_INFO, viewModel.friendData.value)
+                putExtra(LOCATION, RECOMMEND)
+            }
             startActivity(toSearchBook)
         }
     }
