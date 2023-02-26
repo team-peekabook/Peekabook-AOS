@@ -27,16 +27,13 @@ class BookshelfShelfDecoration(val context: Context) : RecyclerView.ItemDecorati
         val spanIndex = lp.spanIndex
         if (spanIndex != 0) {
             if (spanIndex == 1) {
-                // 가운데 아이템
                 outRect.left = sizeInSide
                 outRect.right = sizeInSide
             } else if (spanIndex == 2) {
-                // 오른쪽 아이템
                 outRect.left = sizeInSide
                 outRect.right = sizeOutSide
             }
         } else {
-            // 왼쪽 아이템
             outRect.left = sizeOutSide
             outRect.right = sizeInSide
         }
