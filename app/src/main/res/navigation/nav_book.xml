@@ -12,11 +12,16 @@
         tools:layout="@layout/fragment_barcode_scanner">
         <action
             android:id="@+id/action_barcodeScannerFragment_to_searchBookFragment"
-            app:destination="@id/searchBookFragment" />
+            app:destination="@id/searchBookFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/nav_book" />
 
         <action
             android:id="@+id/action_barcodeScannerFragment_to_createBookFragment"
-            app:destination="@id/createBookFragment" />
+            app:destination="@id/createBookFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
@@ -26,11 +31,16 @@
         tools:layout="@layout/fragment_search_book">
         <action
             android:id="@+id/action_searchBookFragment_to_createBookFragment"
-            app:destination="@id/createBookFragment" />
+            app:destination="@id/createBookFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
 
         <action
             android:id="@+id/action_searchBookFragment_to_recommendationFragment"
-            app:destination="@id/recommendationFragment" />
+            app:destination="@id/recommendationFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+
     </fragment>
 
     <fragment
