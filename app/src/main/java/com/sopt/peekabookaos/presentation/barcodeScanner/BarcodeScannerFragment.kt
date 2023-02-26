@@ -20,6 +20,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBarcodeScannerBinding
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -40,6 +43,7 @@ typealias BarcodeAnalyzerListener = (barcode: MutableList<Barcode>) -> Unit
 class BarcodeScannerFragment :
     BindingFragment<FragmentBarcodeScannerBinding>(R.layout.fragment_barcode_scanner) {
     private val barcodeViewModel: BarcodeViewModel by viewModels()
+    private val bundle = Bundle()
 
     private var processingBarcode = AtomicBoolean(false)
     private lateinit var cameraInfo: CameraInfo
@@ -161,8 +165,11 @@ class BarcodeScannerFragment :
 
     private fun initHardDetectedClickListener() {
         binding.llBarcodeHardDetected.setSingleOnClickListener {
-            /** LOCATION 키워드로 "create" 보내기 */
-            findNavController().navigate(R.id.action_barcodeScannerFragment_to_searchBookFragment)
+            bundle.putString(LOCATION, CREATE)
+            findNavController().navigate(
+                R.id.action_barcodeScannerFragment_to_searchBookFragment,
+                bundle
+            )
         }
     }
 
@@ -171,9 +178,14 @@ class BarcodeScannerFragment :
             barcodeViewModel.serverState.collect { uiState ->
                 when (uiState) {
                     BarcodeState.SUCCESS -> {
-                        /** Book 키워드로 barcodeViewModel.uiState.value[0] 보내기 */
-                        /** LOCATION 키워드로 "create" 보내기 */
-                        findNavController().navigate(R.id.action_barcodeScannerFragment_to_createBookFragment)
+                        bundle.apply {
+                            putString(LOCATION, CREATE)
+                            putParcelable(BOOK, barcodeViewModel.uiState.value[0])
+                        }
+                        findNavController().navigate(
+                            R.id.action_barcodeScannerFragment_to_createBookFragment,
+                            bundle
+                        )
                     }
                     BarcodeState.ERROR -> {
                         BarcodeErrorDialog().show(childFragmentManager, BarcodeErrorDialog.TAG)
