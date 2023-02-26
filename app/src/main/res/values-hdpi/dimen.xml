@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="iv_bookshelf_logo_top_margin">16dp</dimen>
+    <dimen name="btn_bookshelf_notification_top_margin">5dp</dimen>
+    <dimen name="sliding_up_panel_top_margin">13dp</dimen>
+    <dimen name="sliding_up_panel_height">160dp</dimen>
+    <dimen name="iv_bookshelf_user_profile_top_margin">9dp</dimen>
+    <dimen name="tv_bookshelf_user_profile_name_top_margin">3dp</dimen>
+    <dimen name="view_bookshelf_friend_list_bottom_top_margin">6dp</dimen>
+    <dimen name="introduce_top_margin">18dp</dimen>
+    <dimen name="tv_pick_top_margin">17dp</dimen>
+    <dimen name="btn_bookshelf_recommend_top_margin">18dp</dimen>
+    <dimen name="rv_bookshelf_pick_top_margin">12dp</dimen>
+    <dimen name="tv_bookshelf_pick_empty_top_margin">75dp</dimen>
+    <dimen name="iv_item_bookshelf_pick_height">170dp</dimen>
+</resources>

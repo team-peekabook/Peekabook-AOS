@@ -9,5 +9,5 @@ data class Picks(
     val pickIndex: Int,
     @SerialName("Book")
     val book: Book,
-    val description: String
+    val description: String?
 )

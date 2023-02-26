@@ -39,7 +39,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         super.onResume()
         if (viewModel.isMyServerStatus.value == true) {
             viewModel.getMyShelfData()
-            binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
             friendAdapter?.clearSelection()
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
@@ -47,7 +46,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             viewModel.getFriendShelfData()
             friendAdapter?.submitList(viewModel.friendUserData.value)
             friendAdapter?.updateSelectedPosition(viewModel.lastSelectedItem.value!!)
-            binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
     }
@@ -56,6 +54,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
         initIsServerObserver()
+        initDataObserver()
         initAdapter()
         initItemDecoration()
         initUserClickListener()
@@ -64,6 +63,35 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         initRecommendClickListener()
         initPickModifyClickListener()
         initCreateBookClickListener()
+    }
+
+    private fun initIsServerObserver() {
+        viewModel.isMyServerStatus.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                myShelfAdapter?.submitList(viewModel.shelfData.value)
+                pickAdapter?.submitList(viewModel.pickData.value)
+                friendAdapter?.submitList(viewModel.friendUserData.value)
+            }
+        }
+        viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
+            if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
+                viewModel.getMyShelfData()
+                viewModel.updateShelfState(USER)
+                friendAdapter?.clearSelection()
+                binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+            }
+        }
+    }
+    private fun initDataObserver() {
+        viewModel.shelfData.observe(viewLifecycleOwner) {
+            myShelfAdapter?.submitList(viewModel.shelfData.value)
+        }
+        viewModel.pickData.observe(viewLifecycleOwner) {
+            pickAdapter?.submitList(viewModel.pickData.value)
+        }
+        viewModel.friendUserData.observe(viewLifecycleOwner) {
+            friendAdapter?.submitList(viewModel.friendUserData.value)
+        }
     }
 
     private fun initAdapter() {
@@ -93,7 +121,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             viewModel.updateLastSelectedItem(pos)
             viewModel.updateShelfState(FRIEND)
             friendAdapter?.updateSelectedPosition(pos)
-            binding.ivBookshelfUserProfileRedline.visibility = View.INVISIBLE
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S2Md)
         }
     }
@@ -108,7 +135,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initUserClickListener() {
         binding.ivBookshelfUserProfile.setSingleOnClickListener {
             viewModel.getMyShelfData()
-            binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
             viewModel.updateShelfState(USER)
             friendAdapter?.clearSelection()
             binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
@@ -151,55 +177,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             val toBarcodeScanner = Intent(requireActivity(), BarcodeScannerActivity::class.java)
             startActivity(toBarcodeScanner)
         }
-    }
-
-    private fun initIsServerObserver() {
-        viewModel.isMyServerStatus.observe(viewLifecycleOwner) { success ->
-            if (success) {
-                myShelfAdapter?.submitList(viewModel.shelfData.value)
-                pickAdapter?.submitList(viewModel.pickData.value)
-                friendAdapter?.submitList(viewModel.friendUserData.value)
-                updateMyShelfText()
-            }
-        }
-        viewModel.shelfData.observe(viewLifecycleOwner) {
-            myShelfAdapter?.submitList(viewModel.shelfData.value)
-        }
-        viewModel.pickData.observe(viewLifecycleOwner) {
-            pickAdapter?.submitList(viewModel.pickData.value)
-            if (viewModel.pickData.value?.isEmpty() == true) {
-                binding.rvBookshelfPick.visibility = View.INVISIBLE
-                binding.tvBookshelfPickEmpty.visibility = View.VISIBLE
-            } else {
-                binding.rvBookshelfPick.visibility = View.VISIBLE
-                binding.tvBookshelfPickEmpty.visibility = View.INVISIBLE
-            }
-        }
-        viewModel.friendData.observe(viewLifecycleOwner) {
-            updateFriendShelfText()
-        }
-        viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
-            if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
-                viewModel.getMyShelfData()
-                binding.ivBookshelfUserProfileRedline.visibility = View.VISIBLE
-                viewModel.updateShelfState(USER)
-                friendAdapter?.clearSelection()
-                binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
-            }
-        }
-        viewModel.friendUserData.observe(viewLifecycleOwner) {
-            friendAdapter?.submitList(viewModel.friendUserData.value)
-        }
-    }
-
-    private fun updateFriendShelfText() {
-        binding.tvBookshelfSelfIntroName.text = viewModel.friendData.value?.nickname ?: ""
-        binding.tvBookshelfSelfIntroNameComment.text = viewModel.friendData.value?.intro ?: ""
-    }
-
-    private fun updateMyShelfText() {
-        binding.tvBookshelfSelfIntroName.text = viewModel.userData.value?.nickname ?: ""
-        binding.tvBookshelfSelfIntroNameComment.text = viewModel.userData.value?.intro ?: ""
     }
 
     companion object {
