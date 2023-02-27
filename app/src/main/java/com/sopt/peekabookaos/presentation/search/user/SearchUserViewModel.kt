@@ -34,7 +34,7 @@ class SearchUserViewModel @Inject constructor(
     fun searchBtnClickListener() {
         viewModelScope.launch {
             _searchState.emit(UiState.IDLE)
-            getSearchUserUseCase.invoke(nickname.value)
+            getSearchUserUseCase(nickname.value)
                 .onSuccess { response ->
                     _uiState.emit(response)
                     _isFollowed.emit(response.isFollowed)
@@ -48,15 +48,15 @@ class SearchUserViewModel @Inject constructor(
 
     fun followBtnClickListener() {
         if (_isFollowed.value) {
-            deleteFollow(_uiState.value.id)
+            deleteFollow()
         } else {
-            postFollow(_uiState.value.id)
+            postFollow()
         }
     }
 
-    private fun deleteFollow(id: Int) {
+    private fun deleteFollow() {
         viewModelScope.launch {
-            deleteFollowUseCase.invoke(id)
+            deleteFollowUseCase(_uiState.value.id)
                 .onSuccess {
                     _isFollowed.emit(false)
                 }.onFailure { throwable ->
@@ -66,9 +66,9 @@ class SearchUserViewModel @Inject constructor(
         }
     }
 
-    private fun postFollow(id: Int) {
+    private fun postFollow() {
         viewModelScope.launch {
-            postFollowUseCase.invoke(id)
+            postFollowUseCase(_uiState.value.id)
                 .onSuccess {
                     _isFollowed.emit(true)
                 }.onFailure { throwable ->

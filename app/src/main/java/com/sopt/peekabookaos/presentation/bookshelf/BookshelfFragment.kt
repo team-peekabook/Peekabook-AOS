@@ -6,19 +6,18 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
-import com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerActivity
+import com.sopt.peekabookaos.presentation.book.BookActivity
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
-import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND_SHELF
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHELF
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
-import com.sopt.peekabookaos.presentation.recommendation.RecommendationActivity.Companion.FRIEND_INFO
-import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity
-import com.sopt.peekabookaos.presentation.search.book.SearchBookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.CREATE
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -82,6 +81,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             }
         }
     }
+
     private fun initDataObserver() {
         viewModel.shelfData.observe(viewLifecycleOwner) {
             myShelfAdapter?.submitList(viewModel.shelfData.value)
@@ -158,9 +158,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initRecommendClickListener() {
         binding.btnBookshelfRecommend.setSingleOnClickListener {
-            val toSearchBook = Intent(requireActivity(), SearchBookActivity::class.java)
-            toSearchBook.putExtra(FRIEND_INFO, viewModel.friendData.value)
-            toSearchBook.putExtra(LOCATION, RECOMMEND)
+            val toSearchBook = Intent(requireActivity(), BookActivity::class.java).apply {
+                putExtra(FRIEND_INFO, viewModel.friendData.value)
+                putExtra(LOCATION, RECOMMEND)
+            }
             startActivity(toSearchBook)
         }
     }
@@ -174,13 +175,13 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initCreateBookClickListener() {
         binding.btnBookshelfAddBook.setSingleOnClickListener {
-            val toBarcodeScanner = Intent(requireActivity(), BarcodeScannerActivity::class.java)
+            val toBarcodeScanner = Intent(requireActivity(), BookActivity::class.java)
             startActivity(toBarcodeScanner)
         }
     }
 
     companion object {
-        const val FRIEND = true
-        const val USER = false
+        private const val FRIEND = true
+        private const val USER = false
     }
 }

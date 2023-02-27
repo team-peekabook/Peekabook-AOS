@@ -12,11 +12,22 @@
         tools:layout="@layout/fragment_barcode_scanner">
         <action
             android:id="@+id/action_barcodeScannerFragment_to_searchBookFragment"
-            app:destination="@id/searchBookFragment" />
+            app:destination="@id/searchBookFragment"
+            app:enterAnim="@animator/anim_from_right"
+            app:exitAnim="@animator/anim_to_left"
+            app:popEnterAnim="@animator/anim_from_left"
+            app:popExitAnim="@animator/anim_to_right"
+            app:popUpTo="@id/nav_book" />
 
         <action
             android:id="@+id/action_barcodeScannerFragment_to_createBookFragment"
-            app:destination="@id/createBookFragment" />
+            app:destination="@id/createBookFragment"
+            app:enterAnim="@animator/anim_from_right"
+            app:exitAnim="@animator/anim_to_left"
+            app:popEnterAnim="@animator/anim_from_left"
+            app:popExitAnim="@animator/anim_to_right"
+            app:popUpTo="@id/barcodeScannerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -26,11 +37,21 @@
         tools:layout="@layout/fragment_search_book">
         <action
             android:id="@+id/action_searchBookFragment_to_createBookFragment"
-            app:destination="@id/createBookFragment" />
+            app:destination="@id/createBookFragment"
+            app:enterAnim="@animator/anim_from_right"
+            app:exitAnim="@animator/anim_to_left"
+            app:popEnterAnim="@animator/anim_from_left"
+            app:popExitAnim="@animator/anim_to_right"
+            app:popUpTo="@id/searchBookFragment"
+            app:popUpToInclusive="false" />
 
         <action
             android:id="@+id/action_searchBookFragment_to_recommendationFragment"
-            app:destination="@id/recommendationFragment" />
+            app:destination="@id/recommendationFragment"
+            app:enterAnim="@animator/anim_from_right"
+            app:exitAnim="@animator/anim_to_left"
+            app:popEnterAnim="@animator/anim_from_left"
+            app:popExitAnim="@animator/anim_to_right" />
     </fragment>
 
     <fragment
