@@ -39,8 +39,8 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initBookIdObserve() {
-        detailViewModel.bookId.observe(this) { bookId ->
-            detailViewModel.getDetail(bookId)
+        detailViewModel.bookId.observe(this) {
+            detailViewModel.getDetail()
         }
     }
 
