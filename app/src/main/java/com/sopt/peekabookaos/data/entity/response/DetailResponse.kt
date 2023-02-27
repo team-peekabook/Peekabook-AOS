@@ -15,7 +15,7 @@ data class DetailResponse(
     @SerialName("Book")
     val book: Book
 ) : Parcelable {
-    fun detail(): Detail = Detail(
+    fun toDetail(): Detail = Detail(
         description = this.description,
         memo = this.memo,
         book = this.book
