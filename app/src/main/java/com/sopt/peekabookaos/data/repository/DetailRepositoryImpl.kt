@@ -11,7 +11,7 @@ class DetailRepositoryImpl @Inject constructor(
 ) : DetailRepository {
     override suspend fun getDetail(bookId: Int): Result<Detail> =
         kotlin.runCatching { detailDataSource.getDetail(bookId) }.map { response ->
-            response.data!!.detail()
+            requireNotNull(response.data).toDetail()
         }
 
     override suspend fun deleteDetail(bookId: Int): Result<NoResponse> =
