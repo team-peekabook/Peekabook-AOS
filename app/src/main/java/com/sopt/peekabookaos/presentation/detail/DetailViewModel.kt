@@ -41,9 +41,9 @@ class DetailViewModel @Inject constructor(
         _bookId.value = id
     }
 
-    fun getDetail(bookId: Int) {
+    fun getDetail() {
         viewModelScope.launch {
-            getDetailUseCase.invoke(requireNotNull(_bookId.value))
+            getDetailUseCase(requireNotNull(_bookId.value))
                 .onSuccess { response ->
                     _bookComment.value = BookComment(
                         response.description,
@@ -58,7 +58,7 @@ class DetailViewModel @Inject constructor(
 
     fun deleteDetail() {
         viewModelScope.launch {
-            deleteDetailUseCase.invoke(requireNotNull(_bookId.value))
+            deleteDetailUseCase(requireNotNull(_bookId.value))
                 .onSuccess {
                     _isDeleted.value = true
                 }.onFailure { throwable ->
