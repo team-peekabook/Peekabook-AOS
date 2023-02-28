@@ -2,7 +2,8 @@ package com.sopt.peekabookaos.data.entity.response
 
 import android.os.Parcelable
 import com.sopt.peekabookaos.data.entity.Book
-import kotlinx.android.parcel.Parcelize
+import com.sopt.peekabookaos.domain.entity.Detail
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,4 +14,10 @@ data class DetailResponse(
     val memo: String?,
     @SerialName("Book")
     val book: Book
-) : Parcelable
+) : Parcelable {
+    fun toDetail(): Detail = Detail(
+        description = this.description,
+        memo = this.memo,
+        book = this.book
+    )
+}

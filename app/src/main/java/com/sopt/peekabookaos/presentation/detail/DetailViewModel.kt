@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.BookComment
-import com.sopt.peekabookaos.data.repository.DetailRepository
+import com.sopt.peekabookaos.domain.usecase.DeleteDetailUseCase
+import com.sopt.peekabookaos.domain.usecase.GetDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val detailRepository: DetailRepository
+    private val getDetailUseCase: GetDetailUseCase,
+    private val deleteDetailUseCase: DeleteDetailUseCase
 ) : ViewModel() {
     private val _bookData = MutableLiveData<Book>()
     val bookData: LiveData<Book> = _bookData
@@ -39,9 +41,9 @@ class DetailViewModel @Inject constructor(
         _bookId.value = id
     }
 
-    fun getDetail(bookId: Int) {
+    fun getDetail() {
         viewModelScope.launch {
-            detailRepository.getDetail(bookId)
+            getDetailUseCase(requireNotNull(_bookId.value))
                 .onSuccess { response ->
                     _bookComment.value = BookComment(
                         response.description,
@@ -56,7 +58,7 @@ class DetailViewModel @Inject constructor(
 
     fun deleteDetail() {
         viewModelScope.launch {
-            detailRepository.deleteDetail(bookId.value!!)
+            deleteDetailUseCase(requireNotNull(_bookId.value))
                 .onSuccess {
                     _isDeleted.value = true
                 }.onFailure { throwable ->
