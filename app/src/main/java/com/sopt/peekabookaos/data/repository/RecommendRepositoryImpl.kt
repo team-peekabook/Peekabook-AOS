@@ -2,8 +2,9 @@ package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
 import com.sopt.peekabookaos.data.entity.response.RecommendResponse
-import com.sopt.peekabookaos.data.entity.response.RecommendationResponse
 import com.sopt.peekabookaos.data.source.remote.RecommendDataSource
+import com.sopt.peekabookaos.domain.entity.Recommendation
+import com.sopt.peekabookaos.domain.repository.RecommendRepository
 import javax.inject.Inject
 
 class RecommendRepositoryImpl @Inject constructor(
@@ -17,7 +18,7 @@ class RecommendRepositoryImpl @Inject constructor(
     override suspend fun postRecommendation(
         recommendationRequest: RecommendationRequest,
         friendId: Int
-    ): Result<RecommendationResponse> =
+    ): Result<Recommendation> =
         kotlin.runCatching {
             recommendDataSource.postRecommendation(
                 recommendationRequest,
@@ -25,6 +26,6 @@ class RecommendRepositoryImpl @Inject constructor(
             )
         }
             .map { response ->
-                response.data!!
+                requireNotNull(response.data).toRecommendation()
             }
 }

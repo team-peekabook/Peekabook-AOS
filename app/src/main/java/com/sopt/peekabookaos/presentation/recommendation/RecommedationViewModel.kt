@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
-import com.sopt.peekabookaos.data.repository.RecommendRepository
+import com.sopt.peekabookaos.domain.usecase.PostRecommendationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecommedationViewModel @Inject constructor(
-    private val recommendRepository: RecommendRepository
+    private val postRecommendationUseCase: PostRecommendationUseCase
 ) : ViewModel() {
     private val _bookData = MutableLiveData<Book>()
     val bookData: LiveData<Book> = _bookData
@@ -35,7 +35,7 @@ class RecommedationViewModel @Inject constructor(
 
     fun postRecommendation() {
         viewModelScope.launch {
-            recommendRepository.postRecommendation(
+            postRecommendationUseCase(
                 RecommendationRequest(
                     recommendDesc = comment.value,
                     bookTitle = _bookData.value!!.bookTitle,

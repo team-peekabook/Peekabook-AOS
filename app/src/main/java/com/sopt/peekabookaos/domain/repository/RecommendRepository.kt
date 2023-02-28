@@ -1,8 +1,8 @@
-package com.sopt.peekabookaos.data.repository
+package com.sopt.peekabookaos.domain.repository
 
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
 import com.sopt.peekabookaos.data.entity.response.RecommendResponse
-import com.sopt.peekabookaos.data.entity.response.RecommendationResponse
+import com.sopt.peekabookaos.domain.entity.Recommendation
 
 interface RecommendRepository {
     suspend fun getRecommend(): Result<RecommendResponse>
@@ -10,5 +10,5 @@ interface RecommendRepository {
     suspend fun postRecommendation(
         recommendationRequest: RecommendationRequest,
         friendId: Int
-    ): Result<RecommendationResponse>
+    ): Result<Recommendation>
 }
