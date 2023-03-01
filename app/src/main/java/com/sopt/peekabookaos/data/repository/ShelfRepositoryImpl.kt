@@ -6,6 +6,8 @@ import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.data.entity.response.FriendShelfResponse
 import com.sopt.peekabookaos.data.entity.response.MyShelfResponse
 import com.sopt.peekabookaos.data.source.remote.ShelfDataSource
+import com.sopt.peekabookaos.domain.entity.MyShelf
+import com.sopt.peekabookaos.domain.repository.ShelfRepository
 import javax.inject.Inject
 
 class ShelfRepositoryImpl @Inject constructor(
@@ -16,9 +18,9 @@ class ShelfRepositoryImpl @Inject constructor(
             response.data!!
         }
 
-    override suspend fun getMyShelf(): Result<MyShelfResponse> =
+    override suspend fun getMyShelf(): Result<MyShelf> =
         kotlin.runCatching { shelfDataSource.getMyShelf() }.map { response ->
-            response.data!!
+            response.data!!.toMyShelf()
         }
 
     override suspend fun getPick(): Result<List<PickModify>> =

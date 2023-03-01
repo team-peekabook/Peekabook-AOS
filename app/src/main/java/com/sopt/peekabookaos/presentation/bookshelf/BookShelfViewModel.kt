@@ -8,7 +8,9 @@ import com.sopt.peekabookaos.data.entity.Books
 import com.sopt.peekabookaos.data.entity.FriendList
 import com.sopt.peekabookaos.data.entity.Picks
 import com.sopt.peekabookaos.data.entity.SelfIntro
-import com.sopt.peekabookaos.data.repository.ShelfRepository
+import com.sopt.peekabookaos.domain.repository.ShelfRepository
+import com.sopt.peekabookaos.domain.usecase.GetMyShelfUseCase
+import com.sopt.peekabookaos.domain.usecase.PatchPickUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -16,7 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookShelfViewModel @Inject constructor(
-    private val shelfRepository: ShelfRepository
+    private val shelfRepository: ShelfRepository,
+    private val getMyshelfUseCase: GetMyShelfUseCase,
+    private val patchPickUseCase: PatchPickUseCase
 ) : ViewModel() {
     private val _pickData: MutableLiveData<List<Picks>> = MutableLiveData()
     val pickData: LiveData<List<Picks>> = _pickData
@@ -69,7 +73,7 @@ class BookShelfViewModel @Inject constructor(
 
     fun getMyShelfData() {
         viewModelScope.launch {
-            shelfRepository.getMyShelf()
+            getMyshelfUseCase()
                 .onSuccess { response ->
                     _pickData.value = response.picks
                     _bookTotalNum.value = response.bookTotalNum
