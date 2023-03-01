@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.PickModify
 import com.sopt.peekabookaos.data.entity.request.PickRequest
-import com.sopt.peekabookaos.data.repository.ShelfRepository
+import com.sopt.peekabookaos.domain.usecase.GetPickUseCase
+import com.sopt.peekabookaos.domain.usecase.PatchPickUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PickModifyViewModel @Inject constructor(
-    private val shelfRepository: ShelfRepository
+    private val patchPickUseCase: PatchPickUseCase,
+    private val getPickUseCase: GetPickUseCase
 ) : ViewModel() {
     private val _pickModifyData: MutableLiveData<List<PickModify>> = MutableLiveData()
     val pickModifyData: LiveData<List<PickModify>> = _pickModifyData
@@ -94,7 +96,7 @@ class PickModifyViewModel @Inject constructor(
 
     private fun getPick() {
         viewModelScope.launch {
-            shelfRepository.getPick()
+            getPickUseCase()
                 .onSuccess { response ->
                     _pickModifyData.value = response
                     initSelectedItemList(response)
@@ -108,17 +110,16 @@ class PickModifyViewModel @Inject constructor(
 
     fun patchPick() {
         viewModelScope.launch {
-            shelfRepository.patchPick(
+            patchPickUseCase(
                 PickRequest(
                     selectItemIdList[0] ?: 0,
                     selectItemIdList[1] ?: 0,
                     selectItemIdList[2] ?: 0
                 )
-            )
-                .onSuccess {
-                }.onFailure { throwable ->
-                    Timber.e("$throwable")
-                }
+            ).onSuccess {
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+            }
         }
     }
 }
