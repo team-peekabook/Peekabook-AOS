@@ -1,8 +1,8 @@
 package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
-import com.sopt.peekabookaos.data.entity.response.RecommendResponse
 import com.sopt.peekabookaos.data.source.remote.RecommendDataSource
+import com.sopt.peekabookaos.domain.entity.Recommend
 import com.sopt.peekabookaos.domain.entity.Recommendation
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
 import javax.inject.Inject
@@ -10,9 +10,9 @@ import javax.inject.Inject
 class RecommendRepositoryImpl @Inject constructor(
     private val recommendDataSource: RecommendDataSource
 ) : RecommendRepository {
-    override suspend fun getRecommend(): Result<RecommendResponse> =
+    override suspend fun getRecommend(): Result<Recommend> =
         kotlin.runCatching { recommendDataSource.getRecommend() }.map { response ->
-            response.data!!
+            requireNotNull(response.data).toRecommend()
         }
 
     override suspend fun postRecommendation(
