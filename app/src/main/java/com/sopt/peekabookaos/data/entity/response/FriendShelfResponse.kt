@@ -15,7 +15,7 @@ data class FriendShelfResponse(
     val picks: List<Picks>,
     val bookTotalNum: Int,
     val books: List<Books>
-){
+) {
     fun toFriendShelf(): FriendShelf = FriendShelf(
         myIntro = this.myIntro,
         friendList = this.friendList,
