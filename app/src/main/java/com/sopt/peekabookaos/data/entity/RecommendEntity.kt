@@ -3,7 +3,7 @@ package com.sopt.peekabookaos.data.entity
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Recommend(
+data class RecommendEntity(
     val recommendId: Int,
     val recommendDesc: String?,
     val createdAt: String,

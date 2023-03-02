@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.Recommend" />
+            type="com.sopt.peekabookaos.data.entity.RecommendEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

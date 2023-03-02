@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.Recommend
+import com.sopt.peekabookaos.data.entity.RecommendEntity
 import com.sopt.peekabookaos.databinding.ItemRecommendBinding
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookRecommendAdapter :
-    ListAdapter<Recommend, BookRecommendAdapter.BookRecommendationViewHolder>(
+    ListAdapter<RecommendEntity, BookRecommendAdapter.BookRecommendationViewHolder>(
         recommendationDiffUtil
     ) {
 
@@ -34,13 +34,13 @@ class BookRecommendAdapter :
 
     class BookRecommendationViewHolder(private val binding: ItemRecommendBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(bookRecommendation: Recommend) {
+        fun onBind(bookRecommendation: RecommendEntity) {
             binding.data = bookRecommendation
         }
     }
 
     companion object {
-        private val recommendationDiffUtil = ItemDiffCallback<Recommend>(
+        private val recommendationDiffUtil = ItemDiffCallback<RecommendEntity>(
             onItemsTheSame = { old, new -> old.bookTitle == new.bookTitle },
             onContentsTheSame = { old, new -> old == new }
         )
