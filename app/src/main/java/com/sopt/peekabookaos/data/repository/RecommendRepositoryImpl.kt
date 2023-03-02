@@ -1,8 +1,8 @@
 package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
-import com.sopt.peekabookaos.data.source.remote.RecommendDataSource
 import com.sopt.peekabookaos.data.entity.response.Recommend
+import com.sopt.peekabookaos.data.source.remote.RecommendDataSource
 import com.sopt.peekabookaos.domain.entity.Recommendation
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
 import javax.inject.Inject
