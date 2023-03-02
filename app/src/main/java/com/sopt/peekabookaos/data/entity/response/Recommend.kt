@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.domain.entity
+package com.sopt.peekabookaos.data.entity.response
 
 import com.sopt.peekabookaos.data.entity.RecommendEntity
 
