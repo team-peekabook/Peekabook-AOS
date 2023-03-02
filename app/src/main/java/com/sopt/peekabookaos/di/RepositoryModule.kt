@@ -1,6 +1,6 @@
 package com.sopt.peekabookaos.di
 
-import com.sopt.peekabookaos.data.repository.CreateUpdateRepositoryImpl
+import com.sopt.peekabookaos.data.repository.BookRepositoryImpl
 import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NotificationRepository
@@ -9,7 +9,7 @@ import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ShelfRepository
 import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
-import com.sopt.peekabookaos.domain.repository.CreateUpdateRepository
+import com.sopt.peekabookaos.domain.repository.BookRepository
 import com.sopt.peekabookaos.domain.repository.DetailRepository
 import com.sopt.peekabookaos.domain.repository.NaverRepository
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
@@ -32,8 +32,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindToCreateUpdateRepository(
-        createUpdateRepositoryImpl: CreateUpdateRepositoryImpl
-    ): CreateUpdateRepository
+        bookRepositoryImpl: BookRepositoryImpl
+    ): BookRepository
 
     @Binds
     @Singleton

@@ -2,7 +2,7 @@ package com.sopt.peekabookaos.domain.repository
 
 import com.sopt.peekabookaos.domain.entity.Book
 
-interface CreateUpdateRepository {
+interface BookRepository {
     suspend fun postCreateBook(
         bookImage: String,
         bookTitle: String,
@@ -11,5 +11,5 @@ interface CreateUpdateRepository {
         memo: String?
     ): Result<Book>
 
-    suspend fun patchBook(bookId: Int, description: String?, memo: String?): Result<Boolean>
+    suspend fun patchEditBook(bookId: Int, description: String?, memo: String?): Result<Boolean>
 }
