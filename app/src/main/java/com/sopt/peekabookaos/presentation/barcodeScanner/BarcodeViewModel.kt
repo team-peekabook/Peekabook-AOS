@@ -2,8 +2,8 @@ package com.sopt.peekabookaos.presentation.barcodeScanner
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Book
-import com.sopt.peekabookaos.data.repository.NaverRepository
+import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.usecase.GetBookToBarcodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BarcodeViewModel @Inject constructor(
-    private val naverRepository: NaverRepository
+    private val getBookToBarcodeUseCase: GetBookToBarcodeUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(emptyList<Book>())
     val uiState = _uiState.asStateFlow()
@@ -24,7 +24,7 @@ class BarcodeViewModel @Inject constructor(
     fun postBarcode(barcodeString: String) {
         viewModelScope.launch {
             _serverState.emit(BarcodeState.IDLE)
-            naverRepository.getBookToBarcode(barcodeString)
+            getBookToBarcodeUseCase(barcodeString)
                 .onSuccess { response ->
                     if (response.isEmpty()) {
                         _serverState.emit(BarcodeState.ERROR)
