@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.entity.BookComment
 import com.sopt.peekabookaos.domain.usecase.DeleteDetailUseCase
 import com.sopt.peekabookaos.domain.usecase.GetDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -70,6 +70,7 @@ class DetailViewModel @Inject constructor(
     }
 
     fun updateBookData() {
+        /** requireNotNull 사용하기 */
         _bookData.value = _bookData.value!!.copy(id = _bookId.value!!)
     }
 }
