@@ -2,8 +2,8 @@ package com.sopt.peekabookaos.data.source.remote
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
 import com.sopt.peekabookaos.data.entity.NoResponse
-import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.entity.request.BookCommentRequest
+import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.entity.response.CreateBookResponse
 import com.sopt.peekabookaos.data.service.CreateUpdateService
 import javax.inject.Inject
