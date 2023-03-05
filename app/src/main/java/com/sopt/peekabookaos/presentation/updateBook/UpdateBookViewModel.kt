@@ -2,10 +2,10 @@ package com.sopt.peekabookaos.presentation.updateBook
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.BookComment
-import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
-import com.sopt.peekabookaos.data.repository.CreateUpdateRepository
 import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.entity.BookComment
+import com.sopt.peekabookaos.domain.usecase.PatchBookUseCase
+import com.sopt.peekabookaos.domain.usecase.PostCreateBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UpdateBookViewModel @Inject constructor(
-    private val createUpdateRepository: CreateUpdateRepository
+    private val patchBookUseCase: PatchBookUseCase,
+    private val postCreateBookUseCase: PostCreateBookUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CreateUpdateUiState())
     val uiState = _uiState.asStateFlow()
@@ -42,12 +43,10 @@ class UpdateBookViewModel @Inject constructor(
 
     private fun patchBook() {
         viewModelScope.launch {
-            createUpdateRepository.patchBook(
-                _uiState.value.bookData.id,
-                BookComment(
-                    description = description.value,
-                    memo = memo.value
-                )
+            patchBookUseCase(
+                bookId = _uiState.value.bookData.id,
+                description = description.value,
+                memo = memo.value
             ).onSuccess {
                 _isPatch.emit(true)
             }.onFailure { throwable ->
@@ -58,24 +57,21 @@ class UpdateBookViewModel @Inject constructor(
 
     private fun postCreateBook() {
         viewModelScope.launch {
-            createUpdateRepository.postCreateBook(
-                CreateBookRequest(
-                    bookImage = _uiState.value.bookData.bookImage,
-                    bookTitle = _uiState.value.bookData.bookTitle,
-                    author = _uiState.value.bookData.author,
-                    description = description.value,
-                    memo = memo.value
+            postCreateBookUseCase(
+                bookImage = _uiState.value.bookData.bookImage,
+                bookTitle = _uiState.value.bookData.bookTitle,
+                author = _uiState.value.bookData.author,
+                description = description.value,
+                memo = memo.value
+            ).onSuccess { response ->
+                _uiState.value = _uiState.value.copy(
+                    bookData = Book(id = response.id)
                 )
-            )
-                .onSuccess { response ->
-                    _uiState.value = _uiState.value.copy(
-                        bookData = Book(id = response.bookId)
-                    )
-                    _isPost.emit(true)
-                }.onFailure { throwable ->
-                    _isPost.emit(false)
-                    Timber.e("$throwable")
-                }
+                _isPost.emit(true)
+            }.onFailure { throwable ->
+                _isPost.emit(false)
+                Timber.e("$throwable")
+            }
         }
     }
 
