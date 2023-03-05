@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.BookComment
+import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.usecase.DeleteDetailUseCase
 import com.sopt.peekabookaos.domain.usecase.GetDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,7 +49,8 @@ class DetailViewModel @Inject constructor(
                         response.description,
                         response.memo
                     )
-                    _bookData.value = response.book
+                    /** 하정이 추후에 여기 수정하기 (현재 response.book의 타입은 BookEntity인 상태) */
+                    // _bookData.value = response.book
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }

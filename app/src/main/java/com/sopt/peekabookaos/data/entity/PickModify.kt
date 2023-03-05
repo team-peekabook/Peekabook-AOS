@@ -8,5 +8,5 @@ data class PickModify(
     var id: Int,
     var pickIndex: Int,
     @SerialName("Book")
-    val book: Book
+    val book: BookEntity
 )

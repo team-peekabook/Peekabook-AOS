@@ -9,5 +9,5 @@ data class Books(
     val bookId: Int,
     val pickIndex: Int,
     @SerialName("Book")
-    val book: Book
+    val book: BookEntity
 )

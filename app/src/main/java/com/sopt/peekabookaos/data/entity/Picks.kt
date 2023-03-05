@@ -8,6 +8,6 @@ data class Picks(
     val id: Int,
     val pickIndex: Int,
     @SerialName("Book")
-    val book: Book,
+    val book: BookEntity,
     val description: String?
 )
