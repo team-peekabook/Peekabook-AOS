@@ -2,10 +2,10 @@ package com.sopt.peekabookaos.presentation.updateBook
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.repository.CreateUpdateRepository
+import com.sopt.peekabookaos.domain.entity.Book
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

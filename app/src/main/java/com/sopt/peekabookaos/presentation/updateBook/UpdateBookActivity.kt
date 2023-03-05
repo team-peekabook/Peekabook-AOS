@@ -5,9 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.BookComment
 import com.sopt.peekabookaos.databinding.LayoutCreateUpdateBookBinding
+import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
