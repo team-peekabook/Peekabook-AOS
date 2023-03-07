@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.updateBook
+package com.sopt.peekabookaos.presentation.editBook
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class UpdateBookViewModel @Inject constructor(
+class EditBookViewModel @Inject constructor(
     private val patchEditBookUseCase: PatchEditBookUseCase,
     private val postCreateBookUseCase: PostCreateBookUseCase
 ) : ViewModel() {

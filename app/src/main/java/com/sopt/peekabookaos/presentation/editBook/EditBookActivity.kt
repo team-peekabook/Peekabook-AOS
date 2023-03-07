@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.updateBook
+package com.sopt.peekabookaos.presentation.editBook
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -22,13 +22,13 @@ import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UpdateBookActivity :
+class EditBookActivity :
     BindingActivity<LayoutCreateUpdateBookBinding>(R.layout.layout_create_update_book) {
-    private val updateBookViewModel: UpdateBookViewModel by viewModels()
+    private val editBookViewModel: EditBookViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = updateBookViewModel
+        binding.vm = editBookViewModel
         initUiState()
         initEditTextClearFocus()
         initCloseBtnOnClickListener()
@@ -52,14 +52,14 @@ class UpdateBookActivity :
     private fun initUiState() {
         when (intent.getStringExtra(LOCATION)) {
             UPDATE -> {
-                updateBookViewModel.initUiState(
+                editBookViewModel.initUiState(
                     bookData = intent.getParcelable(BOOK, Book::class.java)!!,
                     bookComment = intent.getParcelable(BOOK_COMMENT, BookComment::class.java)!!,
                     update = true
                 )
             }
             else -> {
-                updateBookViewModel.initUiState(
+                editBookViewModel.initUiState(
                     bookData = intent.getParcelable(BOOK, Book::class.java)!!,
                     bookComment = BookComment("", ""),
                     update = false
@@ -76,7 +76,7 @@ class UpdateBookActivity :
 
     private fun isPatchCollect() {
         repeatOnStarted {
-            updateBookViewModel.isPatch.collect { success ->
+            editBookViewModel.isPatch.collect { success ->
                 if (success) {
                     /** 수정 성공시 로직 */
                 }
@@ -86,12 +86,12 @@ class UpdateBookActivity :
 
     private fun isPostCollect() {
         repeatOnStarted {
-            updateBookViewModel.isPost.collect { success ->
+            editBookViewModel.isPost.collect { success ->
                 if (success) {
-                    val toDetail = Intent(this@UpdateBookActivity, DetailActivity::class.java)
+                    val toDetail = Intent(this@EditBookActivity, DetailActivity::class.java)
                     toDetail.putExtra(
                         BOOK_INFO,
-                        updateBookViewModel.uiState.value.bookData.id
+                        editBookViewModel.uiState.value.bookData.id
                     )
                     finish()
                     startActivity(toDetail)

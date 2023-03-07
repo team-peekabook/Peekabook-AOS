@@ -11,7 +11,7 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMME
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.UPDATE
-import com.sopt.peekabookaos.presentation.updateBook.UpdateBookActivity
+import com.sopt.peekabookaos.presentation.editBook.EditBookActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
@@ -119,7 +119,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     private fun initEditBtnClickListener() {
         binding.btnDetailEdit.setSingleOnClickListener {
             detailViewModel.updateBookData()
-            Intent(this, UpdateBookActivity::class.java).apply {
+            Intent(this, EditBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
                 putExtra(BOOK, detailViewModel.bookData.value)
                 putExtra(BOOK_COMMENT, detailViewModel.bookComment.value)
