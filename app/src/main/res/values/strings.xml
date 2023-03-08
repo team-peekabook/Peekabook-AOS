@@ -20,15 +20,19 @@
     <string name="bottom_recommend">추천</string>
     <string name="bottom_my_page">MY</string>
 
-    <!-- Create Update Book -->
-    <string name="createUpdate_book_create_title">책 등록하기</string>
-    <string name="createUpdate_book_comment">한 마디</string>
-    <string name="createUpdate_book_memo">메모</string>
-    <string name="createUpdate_book_comment_hint">한 마디를 남겨주세요.</string>
-    <string name="createUpdate_book_memo_hint">메모를 남겨주세요.</string>
-    <string name="createUpdate_book_comment_count">%d/200</string>
-    <string name="createUpdate_book_memo_count">%d/50</string>
-    <string name="createUpdate_book_update_title">책 수정하기</string>
+    <!-- Create Book & Edit Book & Book Detail-->
+    <string name="book_comment">한 마디</string>
+    <string name="book_memo">메모</string>
+    <string name="book_comment_hint">한 마디를 남겨주세요.</string>
+    <string name="book_memo_hint">메모를 남겨주세요.</string>
+    <string name="book_comment_count">%d/200</string>
+    <string name="book_memo_count">%d/50</string>
+
+    <string name="create_book_title">책 등록하기</string>
+    <string name="edit_book_update_title">책 수정하기</string>
+
+    <string name="detail_description_empty">작성된 한 마디가 없습니다</string>
+    <string name="detail_memo_empty">작성된 메모가 없습니다</string>
 
     <!-- BookShelf-->
     <string name="bookshelf_pick">PICK!</string>
@@ -53,12 +57,6 @@
     <string name="tv_my_page_4">개발자 정보</string>
     <string name="tv_my_page_5">로그아웃</string>
     <string name="tv_my_page_6">서비스 탈퇴하기</string>
-
-    <!-- Book Detail-->
-    <string name="text_detail_description_is_null">작성된 한 마디가 없습니다</string>
-    <string name="text_detail_memo_is_null">작성된 메모가 없습니다</string>
-    <string name="tv_detail_content">한 마디</string>
-    <string name="tv_detail_memo">메모</string>
 
     <!-- Book Recommendation-->
     <string name="recommendation_book_comment_count">%d/200</string>
