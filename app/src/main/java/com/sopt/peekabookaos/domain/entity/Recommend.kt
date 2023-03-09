@@ -1,9 +1,6 @@
-package com.sopt.peekabookaos.data.entity
+package com.sopt.peekabookaos.domain.entity
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class RecommendEntity(
+data class Recommend(
     val recommendId: Int,
     val recommendDesc: String?,
     val createdAt: String,
