@@ -10,6 +10,5 @@ class PostRecommendationUseCase @Inject constructor(
     suspend operator fun invoke(
         recommendationRequest: RecommendationRequest,
         friendId: Int
-    ) =
-        recommendRepository.postRecommendation(recommendationRequest, friendId)
+    ) = recommendRepository.postRecommendation(recommendationRequest, friendId)
 }
