@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Books
-import com.sopt.peekabookaos.data.entity.FriendList
-import com.sopt.peekabookaos.data.entity.Picks
-import com.sopt.peekabookaos.data.entity.SelfIntro
+import com.sopt.peekabookaos.domain.entity.Books
+import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.Picks
+import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
 import com.sopt.peekabookaos.domain.usecase.GetMyShelfUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
