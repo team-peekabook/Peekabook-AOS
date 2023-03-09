@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.domain.entity.Recommend
 import com.sopt.peekabookaos.databinding.ItemRecommendBinding
+import com.sopt.peekabookaos.domain.entity.Recommend
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookRecommendAdapter :
