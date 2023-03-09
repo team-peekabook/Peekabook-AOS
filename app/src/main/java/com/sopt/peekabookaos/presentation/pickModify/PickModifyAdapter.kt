@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.PickModify
+import com.sopt.peekabookaos.data.entity.PickModifyEntity
 import com.sopt.peekabookaos.databinding.ItemPickModifyBinding
 import com.sopt.peekabookaos.presentation.bookshelf.ItemClickListener
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class PickModifyAdapter(
-    private val clickListener: ItemClickListener<PickModify>
+    private val clickListener: ItemClickListener<PickModifyEntity>
 ) :
-    androidx.recyclerview.widget.ListAdapter<PickModify, PickModifyAdapter.PickShelfViewHolder>(
+    androidx.recyclerview.widget.ListAdapter<PickModifyEntity, PickModifyAdapter.PickShelfViewHolder>(
         DIFF_CALLBACK
     ) {
     private var selectedPositionSet: LinkedHashSet<Int>? = linkedSetOf()
@@ -49,7 +49,7 @@ class PickModifyAdapter(
         }
     }
 
-    private fun initSelectedPositionSet(item: PickModify, position: Int) {
+    private fun initSelectedPositionSet(item: PickModifyEntity, position: Int) {
         if (item.pickIndex != 0) {
             selectedPositionSet?.add(position)
         }
@@ -57,7 +57,7 @@ class PickModifyAdapter(
 
     class PickShelfViewHolder(val binding: ItemPickModifyBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: PickModify, itemClickListener: ItemClickListener<PickModify>) {
+        fun onBind(data: PickModifyEntity, itemClickListener: ItemClickListener<PickModifyEntity>) {
             binding.data = data
             binding.root.setOnClickListener {
                 itemClickListener.onClick(absoluteAdapterPosition, data)
@@ -67,7 +67,7 @@ class PickModifyAdapter(
 
     companion object {
         private val DIFF_CALLBACK =
-            ItemDiffCallback<PickModify>(
+            ItemDiffCallback<PickModifyEntity>(
                 onItemsTheSame = { old, new -> old.id == new.id },
                 onContentsTheSame = { old, new -> old == new }
             )

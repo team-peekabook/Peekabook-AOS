@@ -1,26 +1,31 @@
 package com.sopt.peekabookaos.data.entity.response
 
-import com.sopt.peekabookaos.data.entity.Books
-import com.sopt.peekabookaos.data.entity.FriendList
-import com.sopt.peekabookaos.data.entity.Picks
-import com.sopt.peekabookaos.data.entity.SelfIntro
+import com.sopt.peekabookaos.data.entity.BooksEntity
+import com.sopt.peekabookaos.data.entity.FriendListEntity
+import com.sopt.peekabookaos.data.entity.PicksEntity
+import com.sopt.peekabookaos.data.entity.SelfIntroEntity
 import com.sopt.peekabookaos.domain.entity.MyShelf
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MyShelfResponse(
-    val friendList: List<FriendList>,
-    val myIntro: SelfIntro,
-    val picks: List<Picks>,
+    val friendList: List<FriendListEntity>,
+    val myIntro: SelfIntroEntity,
+    val picks: List<PicksEntity>,
     val bookTotalNum: Int,
-    val books: List<Books>
+    val books: List<BooksEntity>
 ) {
     fun toMyShelf(): MyShelf = MyShelf(
-        friendList = this.friendList,
-        myIntro = this.myIntro,
-        picks = this.picks,
+        friendList = this.friendList.map { friendListEntity ->
+            friendListEntity.toFriendList()
+        },
+        myIntro = this.myIntro.toSelfIntro(),
+        picks = this.picks.map { picksEntity ->
+            picksEntity.toPicks()
+        },
         bookTotalNum = this.bookTotalNum,
-        books = this.books
-
+        books = this.books.map { booksEntity ->
+            booksEntity.toBooks()
+        }
     )
 }

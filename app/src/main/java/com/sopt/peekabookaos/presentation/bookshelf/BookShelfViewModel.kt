@@ -19,7 +19,6 @@ import javax.inject.Inject
 class BookShelfViewModel @Inject constructor(
     private val getMyshelfUseCase: GetMyShelfUseCase,
     private val getFriendShelfUseCase: GetFriendShelfUseCase
-
 ) : ViewModel() {
     private val _pickData: MutableLiveData<List<Picks>> = MutableLiveData()
     val pickData: LiveData<List<Picks>> = _pickData
@@ -91,7 +90,7 @@ class BookShelfViewModel @Inject constructor(
 
     fun getFriendShelfData() {
         viewModelScope.launch {
-            getFriendShelfUseCase(userId.value!!)
+            getFriendShelfUseCase(requireNotNull(userId.value))
                 .onSuccess { response ->
                     _friendUserData.value = response.friendList
                     _friendData.value = response.friendIntro

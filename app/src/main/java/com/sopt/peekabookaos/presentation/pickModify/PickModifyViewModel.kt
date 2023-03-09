@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.PickModify
+import com.sopt.peekabookaos.data.entity.PickModifyEntity
 import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.domain.usecase.GetPickUseCase
 import com.sopt.peekabookaos.domain.usecase.PatchPickUseCase
@@ -18,8 +18,8 @@ class PickModifyViewModel @Inject constructor(
     private val patchPickUseCase: PatchPickUseCase,
     private val getPickUseCase: GetPickUseCase
 ) : ViewModel() {
-    private val _pickModifyData: MutableLiveData<List<PickModify>> = MutableLiveData()
-    val pickModifyData: LiveData<List<PickModify>> = _pickModifyData
+    private val _pickModifyData: MutableLiveData<List<PickModifyEntity>> = MutableLiveData()
+    val pickModifyData: LiveData<List<PickModifyEntity>> = _pickModifyData
 
     private val _selectedItemList: MutableLiveData<LinkedHashSet<Int>> = MutableLiveData(
         linkedSetOf()
@@ -42,7 +42,7 @@ class PickModifyViewModel @Inject constructor(
         getPick()
     }
 
-    fun updateSelectedItemState(item: PickModify) {
+    fun updateSelectedItemState(item: PickModifyEntity) {
         preListState = _selectedItemList.value?.size!! >= 3
         if (item.pickIndex == 0 && _selectedItemList.value?.size!! < 3) {
             item.pickIndex = _selectedItemList.value?.size!! + 1
@@ -57,7 +57,7 @@ class PickModifyViewModel @Inject constructor(
         _overListState.value = (_selectedItemList.value?.size!! >= 3 && preListState == true)
     }
 
-    private fun initSelectedItemList(data: List<PickModify>) {
+    private fun initSelectedItemList(data: List<PickModifyEntity>) {
         for (item in data) {
             if (item.pickIndex != 0) {
                 _selectedItemList.value?.add(item.id)
@@ -82,7 +82,7 @@ class PickModifyViewModel @Inject constructor(
         }
     }
 
-    private fun getSelectedItemIndex(item: PickModify): Int {
+    private fun getSelectedItemIndex(item: PickModifyEntity): Int {
         val iterator = _selectedItemList.value!!.iterator()
         var count = 0
         while (iterator.hasNext()) {
@@ -117,9 +117,7 @@ class PickModifyViewModel @Inject constructor(
                     selectItemIdList[2] ?: 0
                 )
             ).onSuccess {
-            }.onFailure { throwable ->
-                Timber.e("$throwable")
-            }
+            }.onFailure(Timber::e)
         }
     }
 }
