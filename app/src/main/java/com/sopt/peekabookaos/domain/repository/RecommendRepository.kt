@@ -1,11 +1,11 @@
 package com.sopt.peekabookaos.domain.repository
 
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
-import com.sopt.peekabookaos.data.entity.response.Recommend
+import com.sopt.peekabookaos.domain.entity.RecommendBookList
 import com.sopt.peekabookaos.domain.entity.Recommendation
 
 interface RecommendRepository {
-    suspend fun getRecommend(): Result<Recommend>
+    suspend fun getRecommend(): Result<RecommendBookList>
 
     suspend fun postRecommendation(
         recommendationRequest: RecommendationRequest,
