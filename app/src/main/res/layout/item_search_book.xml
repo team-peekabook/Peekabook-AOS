@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.Book" />
+            type="com.sopt.peekabookaos.domain.entity.Book" />
 
     </data>
 

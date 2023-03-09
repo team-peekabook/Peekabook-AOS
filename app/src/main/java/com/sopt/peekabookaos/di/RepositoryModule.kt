@@ -1,9 +1,7 @@
 package com.sopt.peekabookaos.di
 
-import com.sopt.peekabookaos.data.repository.CreateUpdateRepository
 import com.sopt.peekabookaos.data.repository.CreateUpdateRepositoryImpl
 import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
-import com.sopt.peekabookaos.data.repository.NaverRepository
 import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NotificationRepository
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
@@ -11,7 +9,9 @@ import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ShelfRepository
 import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
+import com.sopt.peekabookaos.domain.repository.CreateUpdateRepository
 import com.sopt.peekabookaos.domain.repository.DetailRepository
+import com.sopt.peekabookaos.domain.repository.NaverRepository
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
 import com.sopt.peekabookaos.domain.repository.SearchRepository
 import dagger.Binds

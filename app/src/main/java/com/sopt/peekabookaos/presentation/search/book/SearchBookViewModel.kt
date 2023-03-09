@@ -2,9 +2,9 @@ package com.sopt.peekabookaos.presentation.search.book
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.SelfIntro
-import com.sopt.peekabookaos.data.repository.NaverRepository
+import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.usecase.GetBookToTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchBookViewModel @Inject constructor(
-    private val naverRepository: NaverRepository
+    private val getBookToTitleUseCase: GetBookToTitleUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SearchBookUiState())
     val uiState = _uiState.asStateFlow()
@@ -28,7 +28,7 @@ class SearchBookViewModel @Inject constructor(
 
     fun searchBtnClickListener() {
         viewModelScope.launch {
-            naverRepository.getBookToTitle(bookTitle.value)
+            getBookToTitleUseCase(bookTitle.value)
                 .onSuccess { response ->
                     if (response.isEmpty()) {
                         _isSearch.emit(false)
