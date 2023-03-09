@@ -1,6 +1,6 @@
-package com.sopt.peekabookaos.data.repository
+package com.sopt.peekabookaos.domain.repository
 
-import com.sopt.peekabookaos.data.entity.Book
+import com.sopt.peekabookaos.domain.entity.Book
 
 interface NaverRepository {
     suspend fun getBookToTitle(title: String): Result<List<Book>>

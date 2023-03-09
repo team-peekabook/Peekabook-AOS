@@ -1,9 +1,10 @@
 package com.sopt.peekabookaos.data.entity
 
+import com.sopt.peekabookaos.domain.entity.Book
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NaverBookItem(
+data class NaverBookEntity(
     val title: String = "",
     val link: String = "",
     val image: String = "",

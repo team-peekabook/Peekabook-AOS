@@ -4,8 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Detail(
-    val description: String?,
-    val memo: String?,
-    val book: Book
+data class BookComment(
+    val description: String? = "",
+    val memo: String? = ""
 ) : Parcelable

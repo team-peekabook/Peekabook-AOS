@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
+import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.usecase.PostRecommendationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
