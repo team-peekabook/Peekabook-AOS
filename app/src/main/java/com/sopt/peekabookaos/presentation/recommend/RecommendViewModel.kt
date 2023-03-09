@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.RecommendEntity
+import com.sopt.peekabookaos.domain.entity.Recommend
 import com.sopt.peekabookaos.domain.usecase.GetRecommendUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,11 +15,11 @@ import javax.inject.Inject
 class RecommendViewModel @Inject constructor(
     private val getRecommendUseCase: GetRecommendUseCase
 ) : ViewModel() {
-    private val _recommendedBook = MutableLiveData<List<RecommendEntity>>()
-    val recommendedBook: LiveData<List<RecommendEntity>> = _recommendedBook
+    private val _recommendedBook = MutableLiveData<List<Recommend>>()
+    val recommendedBook: LiveData<List<Recommend>> = _recommendedBook
 
-    private val _recommendingBook = MutableLiveData<List<RecommendEntity>>()
-    val recommendingBook: LiveData<List<RecommendEntity>> = _recommendingBook
+    private val _recommendingBook = MutableLiveData<List<Recommend>>()
+    val recommendingBook: LiveData<List<Recommend>> = _recommendingBook
 
     fun getRecommend() {
         viewModelScope.launch {
