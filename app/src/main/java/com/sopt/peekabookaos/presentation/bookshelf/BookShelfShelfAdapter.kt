@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.Books
 import com.sopt.peekabookaos.databinding.ItemBookshelfShelfBinding
+import com.sopt.peekabookaos.domain.entity.Books
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookShelfShelfAdapter(private val clickListener: ItemClickListener<Books>) :

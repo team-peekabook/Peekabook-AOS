@@ -1,12 +1,13 @@
 package com.sopt.peekabookaos.presentation.notification
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.Notification
 import com.sopt.peekabookaos.databinding.ItemNotificationBinding
+import com.sopt.peekabookaos.domain.entity.Notification
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class NotificationAdapter(
@@ -21,6 +22,7 @@ class NotificationAdapter(
         return NotificationViewHolder(itemNotificationBinding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         holder.onBind(getItem(position), itemStringListener)
         when (getItem(position).typeId) {
