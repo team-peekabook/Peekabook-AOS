@@ -16,6 +16,6 @@ data class BooksEntity(
         id = this.id,
         bookId = this.bookId,
         pickIndex = this.pickIndex,
-        book = this.book
+        book = this.book.toBook()
     )
 }

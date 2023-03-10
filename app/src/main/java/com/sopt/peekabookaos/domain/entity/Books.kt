@@ -1,10 +1,8 @@
 package com.sopt.peekabookaos.domain.entity
 
-import com.sopt.peekabookaos.data.entity.BookEntity
-
 data class Books(
-    val id: Int,
-    val bookId: Int,
-    val pickIndex: Int,
-    val book: BookEntity
+    val id: Int = -1,
+    val bookId: Int = -1,
+    val pickIndex: Int = -1,
+    val book: Book
 )

@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.domain.entity.PickModify" />
+            type="com.sopt.peekabookaos.domain.entity.Picks" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

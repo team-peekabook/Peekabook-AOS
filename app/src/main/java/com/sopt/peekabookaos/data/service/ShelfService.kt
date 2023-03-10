@@ -2,7 +2,7 @@ package com.sopt.peekabookaos.data.service
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
 import com.sopt.peekabookaos.data.entity.NoResponse
-import com.sopt.peekabookaos.data.entity.PickModifyEntity
+import com.sopt.peekabookaos.data.entity.PicksEntity
 import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.data.entity.response.FriendShelfResponse
 import com.sopt.peekabookaos.data.entity.response.MyShelfResponse
@@ -19,7 +19,7 @@ interface ShelfService {
     suspend fun getMyShelf(): BaseResponse<MyShelfResponse>
 
     @GET("pick/all")
-    suspend fun getPick(): BaseResponse<List<PickModifyEntity>>
+    suspend fun getPick(): BaseResponse<List<PicksEntity>>
 
     @PATCH("pick")
     suspend fun patchPick(@Body pickRequest: PickRequest): NoResponse

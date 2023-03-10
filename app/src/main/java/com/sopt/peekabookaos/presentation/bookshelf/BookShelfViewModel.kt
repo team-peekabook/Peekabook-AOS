@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookShelfViewModel @Inject constructor(
-    private val getMyshelfUseCase: GetMyShelfUseCase,
+    private val getMyShelfUseCase: GetMyShelfUseCase,
     private val getFriendShelfUseCase: GetFriendShelfUseCase
 ) : ViewModel() {
     private val _pickData: MutableLiveData<List<Picks>> = MutableLiveData()
@@ -71,7 +71,7 @@ class BookShelfViewModel @Inject constructor(
 
     fun getMyShelfData() {
         viewModelScope.launch {
-            getMyshelfUseCase()
+            getMyShelfUseCase()
                 .onSuccess { response ->
                     _pickData.value = response.picks
                     _bookTotalNum.value = response.bookTotalNum
