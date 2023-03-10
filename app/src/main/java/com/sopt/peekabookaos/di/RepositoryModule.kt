@@ -9,8 +9,8 @@ import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
 import com.sopt.peekabookaos.domain.repository.CreateUpdateRepository
 import com.sopt.peekabookaos.domain.repository.DetailRepository
-import com.sopt.peekabookaos.domain.repository.NotificationRepository
 import com.sopt.peekabookaos.domain.repository.NaverRepository
+import com.sopt.peekabookaos.domain.repository.NotificationRepository
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
 import com.sopt.peekabookaos.domain.repository.SearchRepository
 import com.sopt.peekabookaos.domain.repository.ShelfRepository
