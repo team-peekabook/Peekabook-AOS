@@ -36,10 +36,10 @@ class RecommedationViewModel @Inject constructor(
         viewModelScope.launch {
             postRecommendationUseCase(
                 recommendDesc = comment.value,
-                bookTitle = _bookData.value!!.bookTitle,
-                bookImage = _bookData.value!!.bookImage,
-                author = _bookData.value!!.author,
-                _friendData.value!!.id
+                bookTitle = requireNotNull(_bookData.value).bookTitle,
+                bookImage = requireNotNull(_bookData.value).bookImage,
+                author = requireNotNull(_bookData.value).author,
+                requireNotNull(_friendData.value).id
             ).onSuccess {
                 _isRecommendation.value = true
             }.onFailure { throwable ->
