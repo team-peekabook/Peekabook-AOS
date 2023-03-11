@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.BookComment
 import com.sopt.peekabookaos.domain.usecase.PatchEditBookUseCase
-import com.sopt.peekabookaos.domain.usecase.PostCreateBookUseCase
+import com.sopt.peekabookaos.util.extensions.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,77 +17,36 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditBookViewModel @Inject constructor(
-    private val patchEditBookUseCase: PatchEditBookUseCase,
-    private val postCreateBookUseCase: PostCreateBookUseCase
+    private val patchEditBookUseCase: PatchEditBookUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(CreateUpdateUiState())
-    val uiState = _uiState.asStateFlow()
+    private val _bookInfo = MutableStateFlow(Book())
+    val bookInfo = _bookInfo.asStateFlow()
 
-    private val _isPost = MutableSharedFlow<Boolean>()
-    val isPost = _isPost.asSharedFlow()
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
 
-    private val _isPatch = MutableSharedFlow<Boolean>()
-    val isPatch = _isPatch.asSharedFlow()
+    val comment = MutableStateFlow("")
 
-    val description = MutableStateFlow<String?>("")
+    val memo = MutableStateFlow("")
 
-    val memo = MutableStateFlow<String?>("")
-
-    fun initSaveClickListener() {
-        if (_uiState.value.isUpdateView) {
-            patchBook()
-        } else {
-            postCreateBook()
-        }
-    }
-
-    private fun patchBook() {
+    fun patchEditBook() {
         viewModelScope.launch {
             patchEditBookUseCase(
-                bookId = _uiState.value.bookData.id,
-                description = description.value,
+                bookId = _bookInfo.value.id,
+                description = comment.value,
                 memo = memo.value
             ).onSuccess {
-                _isPatch.emit(true)
+                _uiEvent.emit(UiEvent.SUCCESS)
             }.onFailure { throwable ->
+                _uiEvent.emit(UiEvent.ERROR)
                 Timber.e("$throwable")
             }
         }
     }
 
-    private fun postCreateBook() {
-        viewModelScope.launch {
-            postCreateBookUseCase(
-                bookImage = _uiState.value.bookData.bookImage,
-                bookTitle = _uiState.value.bookData.bookTitle,
-                author = _uiState.value.bookData.author,
-                description = description.value,
-                memo = memo.value
-            ).onSuccess { response ->
-                _uiState.value = _uiState.value.copy(
-                    bookData = Book(id = response.id)
-                )
-                _isPost.emit(true)
-            }.onFailure { throwable ->
-                _isPost.emit(false)
-                Timber.e("$throwable")
-            }
-        }
+    fun setPreviousBook(bookInfo: Book, bookComment: BookComment) {
+        _bookInfo.value = bookInfo
+        comment.value = bookComment.description ?: ""
+        memo.value = bookComment.memo ?: ""
     }
-
-    fun initUiState(bookData: Book, bookComment: BookComment, update: Boolean) {
-        _uiState.value = CreateUpdateUiState().copy(
-            bookData = bookData,
-            bookComment = bookComment,
-            isUpdateView = update
-        )
-        description.value = _uiState.value.bookComment.description
-        memo.value = _uiState.value.bookComment.memo
-    }
-
-    data class CreateUpdateUiState(
-        val bookData: Book = Book(),
-        val bookComment: BookComment = BookComment("", ""),
-        val isUpdateView: Boolean = false
-    )
 }
