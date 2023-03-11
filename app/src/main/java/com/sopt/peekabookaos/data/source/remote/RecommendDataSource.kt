@@ -14,8 +14,19 @@ data class RecommendDataSource @Inject constructor(
         recommendService.getRecommend()
 
     suspend fun postRecommendation(
-        recommendationRequest: RecommendationRequest,
+        recommendDesc: String?,
+        bookTitle: String,
+        bookImage: String,
+        author: String,
         friendId: Int
     ): BaseResponse<RecommendationResponse> =
-        recommendService.postRecommendation(recommendationRequest, friendId)
+        recommendService.postRecommendation(
+            RecommendationRequest(
+                recommendDesc = recommendDesc,
+                bookTitle = bookTitle,
+                bookImage = bookImage,
+                author = author
+            ),
+            friendId
+        )
 }

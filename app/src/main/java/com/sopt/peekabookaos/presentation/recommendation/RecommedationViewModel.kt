@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.data.entity.SelfIntro
-import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
 import com.sopt.peekabookaos.domain.usecase.PostRecommendationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -36,12 +35,10 @@ class RecommedationViewModel @Inject constructor(
     fun postRecommendation() {
         viewModelScope.launch {
             postRecommendationUseCase(
-                RecommendationRequest(
-                    recommendDesc = comment.value,
-                    bookTitle = _bookData.value!!.bookTitle,
-                    bookImage = _bookData.value!!.bookImage,
-                    author = _bookData.value!!.author
-                ),
+                recommendDesc = comment.value,
+                bookTitle = _bookData.value!!.bookTitle,
+                bookImage = _bookData.value!!.bookImage,
+                author = _bookData.value!!.author,
                 _friendData.value!!.id
             ).onSuccess {
                 _isRecommendation.value = true

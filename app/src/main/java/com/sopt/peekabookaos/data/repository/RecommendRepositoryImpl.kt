@@ -1,6 +1,5 @@
 package com.sopt.peekabookaos.data.repository
 
-import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
 import com.sopt.peekabookaos.data.entity.response.RecommendResponse
 import com.sopt.peekabookaos.data.source.remote.RecommendDataSource
 import com.sopt.peekabookaos.domain.entity.Recommendation
@@ -16,12 +15,18 @@ class RecommendRepositoryImpl @Inject constructor(
         }
 
     override suspend fun postRecommendation(
-        recommendationRequest: RecommendationRequest,
+        recommendDesc: String?,
+        bookTitle: String,
+        bookImage: String,
+        author: String,
         friendId: Int
     ): Result<Recommendation> =
         kotlin.runCatching {
             recommendDataSource.postRecommendation(
-                recommendationRequest,
+                recommendDesc,
+                bookTitle,
+                bookImage,
+                author,
                 friendId
             )
         }
