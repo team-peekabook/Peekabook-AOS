@@ -19,7 +19,7 @@ data class NotificationEntity(
         senderId = this.senderId,
         senderName = this.senderName,
         profileImage = this.profileImage,
-        createdAt = this.createdAt,
+        createdAt = this.createdAt.split("-")[1] + "월 " + this.createdAt.split("-")[2] + "일",
         bookTitle = this.bookTitle
     )
 }

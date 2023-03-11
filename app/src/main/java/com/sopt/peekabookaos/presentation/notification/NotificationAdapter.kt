@@ -56,9 +56,7 @@ class NotificationAdapter(
                 getItem(position).senderName
             )
             tvNotificationDate.text =
-                getItem(position).createdAt.split("-")[1] + "월 " + getItem(position).createdAt.split(
-                "-"
-            )[2] + "일"
+                getItem(position).createdAt
         }
     }
 
