@@ -29,6 +29,7 @@ class RecommendRepositoryImpl @Inject constructor(
                 friendId
             )
         }
-            .map { response -> response.success
+            .map { response ->
+                response.success
             }
 }
