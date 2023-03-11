@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.Book
 import com.sopt.peekabookaos.databinding.ItemSearchBookBinding
+import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class SearchBookAdapter(

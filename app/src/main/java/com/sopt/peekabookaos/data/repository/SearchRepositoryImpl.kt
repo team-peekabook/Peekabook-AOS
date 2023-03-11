@@ -1,6 +1,5 @@
 package com.sopt.peekabookaos.data.repository
 
-import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.source.remote.SearchDataSource
 import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.repository.SearchRepository
@@ -14,9 +13,11 @@ class SearchRepositoryImpl @Inject constructor(
             requireNotNull(response.data).toUser()
         }
 
-    override suspend fun postFollow(friendId: Int): Result<Unit> =
+    override suspend fun postFollow(friendId: Int): Result<Boolean> =
         kotlin.runCatching { searchDataSource.postFollow(friendId) }
+            .map { response -> response.success }
 
-    override suspend fun deleteFollow(friendId: Int): Result<NoResponse> =
+    override suspend fun deleteFollow(friendId: Int): Result<Boolean> =
         kotlin.runCatching { searchDataSource.deleteFollow(friendId) }
+            .map { response -> response.success }
 }
