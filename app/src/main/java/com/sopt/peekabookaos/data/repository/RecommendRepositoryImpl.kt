@@ -2,7 +2,6 @@ package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.source.remote.RecommendDataSource
 import com.sopt.peekabookaos.domain.entity.RecommendBookList
-import com.sopt.peekabookaos.domain.entity.Recommendation
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ class RecommendRepositoryImpl @Inject constructor(
         bookImage: String,
         author: String,
         friendId: Int
-    ): Result<Recommendation> =
+    ): Result<Boolean> =
         kotlin.runCatching {
             recommendDataSource.postRecommendation(
                 recommendDesc,
@@ -30,7 +29,6 @@ class RecommendRepositoryImpl @Inject constructor(
                 friendId
             )
         }
-            .map { response ->
-                requireNotNull(response.data).toRecommendation()
+            .map { response -> response.success
             }
 }
