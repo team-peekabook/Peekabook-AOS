@@ -41,7 +41,7 @@ class BookActivity : BindingActivity<ActivityBookBinding>(R.layout.activity_book
         const val BOOK_COMMENT = "book_comment"
         const val RECOMMEND = "recommend"
         const val CREATE = "create"
-        const val BOOK_INFO = "book"
+        const val BOOK_INFO = "book_info"
         const val LOCATION = "location"
         const val FRIEND_INFO = "friend_info"
         const val BOOK_ID = "book_id"
