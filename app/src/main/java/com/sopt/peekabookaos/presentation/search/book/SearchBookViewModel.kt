@@ -2,8 +2,8 @@ package com.sopt.peekabookaos.presentation.search.book
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.GetBookToTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

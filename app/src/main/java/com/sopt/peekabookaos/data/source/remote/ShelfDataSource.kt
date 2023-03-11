@@ -2,7 +2,7 @@ package com.sopt.peekabookaos.data.source.remote
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
 import com.sopt.peekabookaos.data.entity.NoResponse
-import com.sopt.peekabookaos.data.entity.PickModify
+import com.sopt.peekabookaos.data.entity.PicksEntity
 import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.data.entity.response.FriendShelfResponse
 import com.sopt.peekabookaos.data.entity.response.MyShelfResponse
@@ -15,7 +15,7 @@ data class ShelfDataSource @Inject constructor(
     suspend fun getFriendShelf(friendId: Int): BaseResponse<FriendShelfResponse> =
         shelfService.getFriendShelf(friendId)
 
-    suspend fun getPick(): BaseResponse<List<PickModify>> = shelfService.getPick()
+    suspend fun getPick(): BaseResponse<List<PicksEntity>> = shelfService.getPick()
 
     suspend fun getMyShelf(): BaseResponse<MyShelfResponse> = shelfService.getMyShelf()
 

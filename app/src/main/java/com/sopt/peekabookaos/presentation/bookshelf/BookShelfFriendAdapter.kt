@@ -6,8 +6,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.FriendList
 import com.sopt.peekabookaos.databinding.ItemBookshelfUserProfileBinding
+import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class BookShelfFriendAdapter(

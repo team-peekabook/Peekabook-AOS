@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.databinding.ActivityRecommendationBinding
 import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.util.binding.BindingActivity

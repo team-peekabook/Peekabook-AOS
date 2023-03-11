@@ -49,14 +49,14 @@ class DetailViewModel @Inject constructor(
                         response.description,
                         response.memo
                     )
-                    /** 하정이 추후에 여기 수정하기 (현재 response.book의 타입은 BookEntity인 상태) */
-                    // _bookData.value = response.book
+                    _bookData.value = response.book
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
         }
     }
 
+    /**NoResponse 수정하기 */
     fun deleteDetail() {
         viewModelScope.launch {
             deleteDetailUseCase(requireNotNull(_bookId.value))

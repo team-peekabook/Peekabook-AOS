@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.Books
-import com.sopt.peekabookaos.data.entity.FriendList
-import com.sopt.peekabookaos.data.entity.Picks
-import com.sopt.peekabookaos.data.entity.SelfIntro
-import com.sopt.peekabookaos.data.repository.ShelfRepository
+import com.sopt.peekabookaos.domain.entity.Books
+import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.Picks
+import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
+import com.sopt.peekabookaos.domain.usecase.GetMyShelfUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookShelfViewModel @Inject constructor(
-    private val shelfRepository: ShelfRepository
+    private val getMyShelfUseCase: GetMyShelfUseCase,
+    private val getFriendShelfUseCase: GetFriendShelfUseCase
 ) : ViewModel() {
     private val _pickData: MutableLiveData<List<Picks>> = MutableLiveData()
     val pickData: LiveData<List<Picks>> = _pickData
@@ -69,7 +71,7 @@ class BookShelfViewModel @Inject constructor(
 
     fun getMyShelfData() {
         viewModelScope.launch {
-            shelfRepository.getMyShelf()
+            getMyShelfUseCase()
                 .onSuccess { response ->
                     _pickData.value = response.picks
                     _bookTotalNum.value = response.bookTotalNum
@@ -88,7 +90,7 @@ class BookShelfViewModel @Inject constructor(
 
     fun getFriendShelfData() {
         viewModelScope.launch {
-            shelfRepository.getFriendShelf(userId.value!!)
+            getFriendShelfUseCase(requireNotNull(userId.value))
                 .onSuccess { response ->
                     _friendUserData.value = response.friendList
                     _friendData.value = response.friendIntro

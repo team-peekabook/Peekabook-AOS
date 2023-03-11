@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.peekabookaos.data.entity.Notification
 import com.sopt.peekabookaos.databinding.ItemNotificationBinding
+import com.sopt.peekabookaos.domain.entity.Notification
 import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
 
 class NotificationAdapter(
@@ -56,9 +56,7 @@ class NotificationAdapter(
                 getItem(position).senderName
             )
             tvNotificationDate.text =
-                getItem(position).createdAt.split("-")[1] + "월 " + getItem(position).createdAt.split(
-                "-"
-            )[2] + "일"
+                getItem(position).createdAt
         }
     }
 
