@@ -178,13 +178,11 @@ class BarcodeScannerFragment :
             barcodeViewModel.serverState.collect { uiState ->
                 when (uiState) {
                     BarcodeState.SUCCESS -> {
-                        bundle.apply {
-                            putString(LOCATION, CREATE)
-                            putParcelable(BOOK, barcodeViewModel.uiState.value[0])
-                        }
                         findNavController().navigate(
                             R.id.action_barcodeScannerFragment_to_createBookFragment,
-                            bundle
+                            bundle.apply {
+                                putParcelable(BOOK_INFO, barcodeViewModel.uiState.value[0])
+                            }
                         )
                     }
                     BarcodeState.ERROR -> {

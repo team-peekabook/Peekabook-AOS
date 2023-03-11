@@ -10,7 +10,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.databinding.FragmentSearchBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
@@ -85,15 +85,14 @@ class SearchBookFragment :
             findNavController().navigate(
                 R.id.action_searchBookFragment_to_createBookFragment,
                 bundle.apply {
-                    putParcelable(BOOK, book)
-                    putString(LOCATION, CREATE)
+                    putParcelable(BOOK_INFO, book)
                 }
             )
         } else {
             findNavController().navigate(
                 R.id.action_searchBookFragment_to_recommendationFragment,
                 bundle.apply {
-                    putParcelable(BOOK, book)
+                    putParcelable(BOOK_INFO, book)
                     putParcelable(FRIEND_INFO, searchBookViewModel.uiState.value.friendInfo)
                 }
             )

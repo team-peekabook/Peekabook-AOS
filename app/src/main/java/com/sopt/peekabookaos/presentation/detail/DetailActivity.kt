@@ -6,8 +6,8 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityDetailBinding
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.UPDATE
@@ -25,7 +25,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     override fun onResume() {
         super.onResume()
-        detailViewModel.initBookId(intent.getIntExtra(BOOK_INFO, DEFAULT))
+        detailViewModel.initBookId(intent.getIntExtra(BOOK_ID, DEFAULT))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,13 +98,13 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             MY_SHELF -> {
                 detailViewModel.initIsMyDetailView(true)
                 detailViewModel.initBookId(
-                    intent.getIntExtra(BOOK_INFO, DEFAULT)
+                    intent.getIntExtra(BOOK_ID, DEFAULT)
                 )
             }
             FRIEND_SHELF -> {
                 detailViewModel.initIsMyDetailView(false)
                 detailViewModel.initBookId(
-                    intent.getIntExtra(BOOK_INFO, DEFAULT)
+                    intent.getIntExtra(BOOK_ID, DEFAULT)
                 )
             }
         }
@@ -121,7 +121,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             detailViewModel.updateBookData()
             Intent(this, EditBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
-                putExtra(BOOK, detailViewModel.bookData.value)
+                putExtra(BOOK_INFO, detailViewModel.bookData.value)
                 putExtra(BOOK_COMMENT, detailViewModel.bookComment.value)
             }.also { intent ->
                 startActivity(intent)

@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentCreateBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
@@ -47,7 +47,7 @@ class CreateBookFragment :
 
     private fun initBookInfo() {
         createBookViewModel.initBookInfo(
-            bookInfo = arguments?.getParcelableCompat(BOOK, Book::class.java) ?: Book()
+            bookInfo = arguments?.getParcelableCompat(BOOK_INFO, Book::class.java) ?: Book()
         )
     }
 
