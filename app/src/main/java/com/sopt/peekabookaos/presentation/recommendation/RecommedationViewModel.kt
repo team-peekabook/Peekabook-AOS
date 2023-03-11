@@ -40,7 +40,7 @@ class RecommedationViewModel @Inject constructor(
                 bookImage = requireNotNull(_bookData.value).bookImage,
                 author = requireNotNull(_bookData.value).author,
                 requireNotNull(_friendData.value).id
-            ).onSuccess { success->
+            ).onSuccess { success ->
                 _isRecommendation.value = success
             }.onFailure { throwable ->
                 _isRecommendation.value = false
