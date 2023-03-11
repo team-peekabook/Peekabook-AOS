@@ -58,7 +58,7 @@
         android:id="@+id/createBookFragment"
         android:name="com.sopt.peekabookaos.presentation.createBook.CreateBookFragment"
         android:label="CreateBookFragment"
-        tools:layout="@layout/layout_create_update_book" />
+        tools:layout="@layout/fragment_create_book" />
 
     <fragment
         android:id="@+id/recommendationFragment"
