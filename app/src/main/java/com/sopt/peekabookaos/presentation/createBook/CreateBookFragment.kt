@@ -29,7 +29,7 @@ class CreateBookFragment :
         initBookInfo()
         initEditTextClearFocus()
         initCloseBtnOnClickListener()
-        isPostCollect()
+        collectUiEvent()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -47,7 +47,7 @@ class CreateBookFragment :
 
     private fun initBookInfo() {
         createBookViewModel.initBookInfo(
-            bookInfo = arguments?.getParcelableCompat(BOOK_INFO, Book::class.java) ?: Book()
+            arguments?.getParcelableCompat(BOOK_INFO, Book::class.java) ?: Book()
         )
     }
 
@@ -57,7 +57,7 @@ class CreateBookFragment :
         }
     }
 
-    private fun isPostCollect() {
+    private fun collectUiEvent() {
         repeatOnStarted {
             createBookViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
@@ -66,7 +66,7 @@ class CreateBookFragment :
                             Intent(requireActivity(), DetailActivity::class.java).apply {
                                 putExtra(
                                     BOOK_ID,
-                                    createBookViewModel.uiState.value.bookInfo.id
+                                    createBookViewModel.bookInfo.value.id
                                 )
                             }
                         )
