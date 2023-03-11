@@ -20,7 +20,6 @@ import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchBookFragment :
@@ -139,7 +138,7 @@ class SearchBookFragment :
 
     private fun initCloseBtnClickListener() {
         binding.btnSearchBookClose.setOnClickListener {
-            activity?.finish() ?: Timber.e(getString(R.string.null_point_exception))
+            activity?.finish()
         }
     }
 

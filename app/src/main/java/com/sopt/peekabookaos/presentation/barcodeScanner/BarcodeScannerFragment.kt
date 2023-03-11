@@ -27,7 +27,6 @@ import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
@@ -159,7 +158,7 @@ class BarcodeScannerFragment :
 
     private fun initCloseBtnClickListener() {
         binding.btnBarcodeClose.setOnClickListener {
-            activity?.finish() ?: Timber.e(getString(R.string.null_point_exception))
+            activity?.finish()
         }
     }
 
