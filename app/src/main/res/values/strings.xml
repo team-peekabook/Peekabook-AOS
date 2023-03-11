@@ -29,7 +29,7 @@
     <string name="book_memo_count">%d/50</string>
 
     <string name="create_book_title">책 등록하기</string>
-    <string name="edit_book_update_title">책 수정하기</string>
+    <string name="edit_book_title">책 수정하기</string>
 
     <string name="detail_description_empty">작성된 한 마디가 없습니다</string>
     <string name="detail_memo_empty">작성된 메모가 없습니다</string>
