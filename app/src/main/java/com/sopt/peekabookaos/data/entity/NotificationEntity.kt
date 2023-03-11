@@ -10,8 +10,8 @@ data class NotificationEntity(
     val senderId: Int,
     val senderName: String,
     val profileImage: String,
-    val createdAt: String,
-    val bookTitle: String
+    val bookTitle: String = "",
+    val createdAt: String
 ) {
     fun toNotification(): Notification = Notification(
         alarmId = this.alarmId,
