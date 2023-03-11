@@ -3,8 +3,8 @@ package com.sopt.peekabookaos.presentation.notification
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.Notification
 import com.sopt.peekabookaos.databinding.ActivityNotificationBinding
+import com.sopt.peekabookaos.domain.entity.Notification
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint

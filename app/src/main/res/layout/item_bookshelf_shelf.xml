@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.data.entity.Books" />
+            type="com.sopt.peekabookaos.domain.entity.Books" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
