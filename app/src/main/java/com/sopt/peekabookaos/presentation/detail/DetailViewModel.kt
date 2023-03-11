@@ -70,7 +70,6 @@ class DetailViewModel @Inject constructor(
     }
 
     fun updateBookData() {
-        /** requireNotNull 사용하기 */
-        _bookData.value = _bookData.value!!.copy(id = _bookId.value!!)
+        _bookData.value = requireNotNull(_bookData.value).copy(id = _bookId.value!!)
     }
 }
