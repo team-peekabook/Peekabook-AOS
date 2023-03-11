@@ -7,9 +7,9 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.entity.SelfIntro
 import com.sopt.peekabookaos.databinding.FragmentSearchBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
