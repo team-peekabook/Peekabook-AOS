@@ -1,10 +1,8 @@
-package com.sopt.peekabookaos.data.entity
+package com.sopt.peekabookaos.domain.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 
-@Serializable
 @Parcelize
 data class SelfIntro(
     val id: Int = -1,
