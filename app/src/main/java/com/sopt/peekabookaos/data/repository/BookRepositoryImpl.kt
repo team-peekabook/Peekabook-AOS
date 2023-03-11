@@ -1,7 +1,6 @@
 package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.source.remote.BookDataSource
-import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.repository.BookRepository
 import javax.inject.Inject
 
@@ -14,7 +13,7 @@ class BookRepositoryImpl @Inject constructor(
         author: String,
         description: String?,
         memo: String?
-    ): Result<Book> = kotlin.runCatching {
+    ): Result<Int> = kotlin.runCatching {
         bookDataSource.postCreateBook(
             bookImage,
             bookTitle,
@@ -23,14 +22,12 @@ class BookRepositoryImpl @Inject constructor(
             memo
         )
     }.map { response ->
-        requireNotNull(response.data).toBook()
+        requireNotNull(response.data).bookId
     }
 
     override suspend fun patchEditBook(
         bookId: Int,
         description: String?,
         memo: String?
-    ): Result<Boolean> = kotlin.runCatching {
-        bookDataSource.patchEditBook(bookId, description, memo)
-    }.map { response -> response.success }
+    ): Result<Unit> = kotlin.runCatching { bookDataSource.patchEditBook(bookId, description, memo) }
 }
