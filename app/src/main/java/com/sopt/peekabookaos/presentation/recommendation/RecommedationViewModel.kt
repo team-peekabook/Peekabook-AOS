@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.PostRecommendationUseCase
@@ -36,15 +35,13 @@ class RecommedationViewModel @Inject constructor(
     fun postRecommendation() {
         viewModelScope.launch {
             postRecommendationUseCase(
-                RecommendationRequest(
-                    recommendDesc = comment.value,
-                    bookTitle = _bookData.value!!.bookTitle,
-                    bookImage = _bookData.value!!.bookImage,
-                    author = _bookData.value!!.author
-                ),
-                _friendData.value!!.id
-            ).onSuccess {
-                _isRecommendation.value = true
+                recommendDesc = comment.value,
+                bookTitle = requireNotNull(_bookData.value).bookTitle,
+                bookImage = requireNotNull(_bookData.value).bookImage,
+                author = requireNotNull(_bookData.value).author,
+                requireNotNull(_friendData.value).id
+            ).onSuccess { success ->
+                _isRecommendation.value = success
             }.onFailure { throwable ->
                 _isRecommendation.value = false
                 Timber.e("$throwable")

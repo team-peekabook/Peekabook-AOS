@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class Detail(
     val description: String? = "",
     val memo: String? = "",
-    val book: Book
+    val book: Book = Book()
 ) : Parcelable
