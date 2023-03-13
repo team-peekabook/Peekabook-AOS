@@ -63,18 +63,15 @@ class PickModifyActivity :
     }
 
     private fun initObserver() {
-        viewModel.overListState.observe(
-            this
-        ) { overListState ->
-            if (overListState == true) ToastMessageUtil.showToast(
-                this,
-                getString(R.string.pick_modify_notice)
-            )
+        viewModel.overListState.observe(this) { overList ->
+            if (overList) {
+                ToastMessageUtil.showToast(this, getString(R.string.pick_modify_notice))
+            }
         }
-        viewModel.isPatchPickServerStatus.observe(
-            this
-        ) { isPatchPickServerStatus ->
-            if (isPatchPickServerStatus) finish()
+        viewModel.isPatchPickServerStatus.observe(this) { success ->
+            if (success) {
+                finish()
+            }
         }
     }
 }
