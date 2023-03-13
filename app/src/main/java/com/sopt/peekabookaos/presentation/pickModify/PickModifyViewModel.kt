@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.domain.entity.Picks
 import com.sopt.peekabookaos.domain.usecase.GetPickUseCase
 import com.sopt.peekabookaos.domain.usecase.PatchPickUseCase
@@ -114,11 +113,9 @@ class PickModifyViewModel @Inject constructor(
     fun patchPick() {
         viewModelScope.launch {
             patchPickUseCase(
-                PickRequest(
-                    selectItemIdList[0] ?: 0,
-                    selectItemIdList[1] ?: 0,
-                    selectItemIdList[2] ?: 0
-                )
+                selectItemIdList[0] ?: 0,
+                selectItemIdList[1] ?: 0,
+                selectItemIdList[2] ?: 0
             ).onSuccess { success ->
                 _isPatchPickServerStatus.value = success
             }.onFailure(Timber::e)
