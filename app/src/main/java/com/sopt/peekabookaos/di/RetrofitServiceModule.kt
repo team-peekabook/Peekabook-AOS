@@ -1,6 +1,6 @@
 package com.sopt.peekabookaos.di
 
-import com.sopt.peekabookaos.data.service.CreateUpdateService
+import com.sopt.peekabookaos.data.service.BookService
 import com.sopt.peekabookaos.data.service.DetailService
 import com.sopt.peekabookaos.data.service.NaverService
 import com.sopt.peekabookaos.data.service.NotificationService
@@ -39,8 +39,8 @@ object RetrofitServiceModule {
         retrofit.create(ShelfService::class.java)
 
     @Provides
-    fun providesCreateUpdateService(@PeekaType retrofit: Retrofit): CreateUpdateService =
-        retrofit.create(CreateUpdateService::class.java)
+    fun providesCreateUpdateService(@PeekaType retrofit: Retrofit): BookService =
+        retrofit.create(BookService::class.java)
 
     @Provides
     fun providesNaverService(@NaverType retrofit: Retrofit): NaverService =
