@@ -1,6 +1,5 @@
 package com.sopt.peekabookaos.data.repository
 
-import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.source.remote.DetailDataSource
 import com.sopt.peekabookaos.domain.entity.Detail
 import com.sopt.peekabookaos.domain.repository.DetailRepository
@@ -14,6 +13,7 @@ class DetailRepositoryImpl @Inject constructor(
             requireNotNull(response.data).toDetail()
         }
 
-    override suspend fun deleteDetail(bookId: Int): Result<NoResponse> =
+    override suspend fun deleteDetail(bookId: Int): Result<Boolean> =
         kotlin.runCatching { detailDataSource.deleteDetail(bookId) }
+            .map { response -> response.success }
 }
