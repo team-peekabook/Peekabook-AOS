@@ -20,14 +20,13 @@ import androidx.navigation.fragment.findNavController
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBarcodeScannerBinding
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.abs
@@ -159,7 +158,7 @@ class BarcodeScannerFragment :
 
     private fun initCloseBtnClickListener() {
         binding.btnBarcodeClose.setOnClickListener {
-            activity?.finish() ?: Timber.e(getString(R.string.null_point_exception))
+            activity?.finish()
         }
     }
 
@@ -178,13 +177,11 @@ class BarcodeScannerFragment :
             barcodeViewModel.serverState.collect { uiState ->
                 when (uiState) {
                     BarcodeState.SUCCESS -> {
-                        bundle.apply {
-                            putString(LOCATION, CREATE)
-                            putParcelable(BOOK, barcodeViewModel.uiState.value[0])
-                        }
                         findNavController().navigate(
                             R.id.action_barcodeScannerFragment_to_createBookFragment,
-                            bundle
+                            bundle.apply {
+                                putParcelable(BOOK_INFO, barcodeViewModel.uiState.value[0])
+                            }
                         )
                     }
                     BarcodeState.ERROR -> {

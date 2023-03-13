@@ -1,10 +1,10 @@
 package com.sopt.peekabookaos.domain.usecase
 
-import com.sopt.peekabookaos.domain.repository.CreateUpdateRepository
+import com.sopt.peekabookaos.domain.repository.BookRepository
 import javax.inject.Inject
 
 class PostCreateBookUseCase @Inject constructor(
-    private val createUpdateRepository: CreateUpdateRepository
+    private val bookRepository: BookRepository
 ) {
     suspend operator fun invoke(
         bookImage: String,
@@ -12,5 +12,5 @@ class PostCreateBookUseCase @Inject constructor(
         author: String,
         description: String?,
         memo: String?
-    ) = createUpdateRepository.postCreateBook(bookImage, bookTitle, author, description, memo)
+    ) = bookRepository.postCreateBook(bookImage, bookTitle, author, description, memo)
 }

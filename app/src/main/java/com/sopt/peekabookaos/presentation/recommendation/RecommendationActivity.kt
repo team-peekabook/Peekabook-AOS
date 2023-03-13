@@ -7,7 +7,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityRecommendationBinding
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.SelfIntro
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
@@ -50,7 +50,7 @@ class RecommendationActivity :
 
     private fun initView() {
         recommendationViewModel.initRecommendData(
-            intent.getParcelable(BOOK, Book::class.java)!!,
+            intent.getParcelable(BOOK_INFO, Book::class.java)!!,
             intent.getParcelable(FRIEND_INFO, SelfIntro::class.java)!!
         )
     }
