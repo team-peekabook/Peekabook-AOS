@@ -2,7 +2,6 @@ package com.sopt.peekabookaos.presentation.pickModify
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
@@ -29,7 +28,7 @@ class PickModifyActivity :
     }
 
     private fun initIsServerObserve() {
-        viewModel.isServerStatus.observe(this) { success ->
+        viewModel.isGetPickServerStatus.observe(this) { success ->
             if (success) {
                 pickShelfAdapter.submitList(viewModel.pickModifyData.value)
             }
@@ -66,13 +65,12 @@ class PickModifyActivity :
 
     private fun initObserver() {
         viewModel.overListState.observe(
-            this,
-            Observer {
-                if (viewModel.overListState.value == true) ToastMessageUtil.showToast(
-                    this,
-                    getString(R.string.pick_modify_notice)
-                )
-            }
-        )
+            this
+        ) {
+            if (viewModel.overListState.value == true) ToastMessageUtil.showToast(
+                this,
+                getString(R.string.pick_modify_notice)
+            )
+        }
     }
 }
