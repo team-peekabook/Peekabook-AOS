@@ -59,18 +59,22 @@ class PickModifyActivity :
         binding.ivPickModifyCheck.setSingleOnClickListener {
             viewModel.changeHashToPickRequest()
             viewModel.patchPick()
-            finish()
         }
     }
 
     private fun initObserver() {
         viewModel.overListState.observe(
             this
-        ) {
-            if (viewModel.overListState.value == true) ToastMessageUtil.showToast(
+        ) { overListState ->
+            if (overListState == true) ToastMessageUtil.showToast(
                 this,
                 getString(R.string.pick_modify_notice)
             )
+        }
+        viewModel.isPatchPickServerStatus.observe(
+            this
+        ) { isPatchPickServerStatus ->
+            if (isPatchPickServerStatus) finish()
         }
     }
 }
