@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
 import com.sopt.peekabookaos.presentation.book.BookActivity
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
@@ -97,7 +97,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initAdapter() {
         binding.rvBookshelfBottomViewShelf.adapter = BookShelfShelfAdapter { _, item ->
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
-            toDetail.putExtra(BOOK_INFO, item.id)
+            toDetail.putExtra(BOOK_ID, item.id)
             if (viewModel.isMyServerStatus.value == true) {
                 toDetail.putExtra(LOCATION, MY_SHELF)
             } else if (viewModel.isFriendServerStatus.value == true) {
@@ -107,7 +107,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         binding.rvBookshelfPick.adapter = BookShelfPickAdapter { _, item ->
             val toDetail = Intent(requireActivity(), DetailActivity::class.java)
-            toDetail.putExtra(BOOK_INFO, item.id)
+            toDetail.putExtra(BOOK_ID, item.id)
             if (viewModel.isMyServerStatus.value == true) {
                 toDetail.putExtra(LOCATION, MY_SHELF)
             } else if (viewModel.isFriendServerStatus.value == true) {

@@ -19,6 +19,16 @@ data class ShelfDataSource @Inject constructor(
 
     suspend fun getMyShelf(): BaseResponse<MyShelfResponse> = shelfService.getMyShelf()
 
-    suspend fun patchPick(pickRequest: PickRequest): NoResponse =
-        shelfService.patchPick(pickRequest)
+    suspend fun patchPick(
+        firstPick: Int?,
+        secondPick: Int?,
+        thirdPick: Int?
+    ): NoResponse =
+        shelfService.patchPick(
+            PickRequest(
+                firstPick = firstPick,
+                secondPick = secondPick,
+                thirdPick = thirdPick
+            )
+        )
 }

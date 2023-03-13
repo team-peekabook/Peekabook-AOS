@@ -1,7 +1,5 @@
 package com.sopt.peekabookaos.data.repository
 
-import com.sopt.peekabookaos.data.entity.NoResponse
-import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.data.source.remote.ShelfDataSource
 import com.sopt.peekabookaos.domain.entity.FriendShelf
 import com.sopt.peekabookaos.domain.entity.MyShelf
@@ -29,6 +27,11 @@ class ShelfRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun patchPick(pickRequest: PickRequest): Result<NoResponse> =
-        kotlin.runCatching { shelfDataSource.patchPick(pickRequest) }.map { response -> response }
+    override suspend fun patchPick(
+        firstPick: Int?,
+        secondPick: Int?,
+        thirdPick: Int?
+    ): Result<Boolean> =
+        kotlin.runCatching { shelfDataSource.patchPick(firstPick, secondPick, thirdPick) }
+            .map { response -> response.success }
 }
