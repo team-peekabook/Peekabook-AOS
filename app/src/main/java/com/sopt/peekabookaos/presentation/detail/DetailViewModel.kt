@@ -56,12 +56,11 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    /**NoResponse 수정하기 */
     fun deleteDetail() {
         viewModelScope.launch {
             deleteDetailUseCase(requireNotNull(_bookId.value))
-                .onSuccess {
-                    _isDeleted.value = true
+                .onSuccess { success ->
+                    _isDeleted.value = success
                 }.onFailure { throwable ->
                     _isDeleted.value = false
                     Timber.e("$throwable")
