@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.domain.entity.Picks
 import com.sopt.peekabookaos.domain.usecase.GetPickUseCase
 import com.sopt.peekabookaos.domain.usecase.PatchPickUseCase
@@ -33,8 +32,11 @@ class PickModifyViewModel @Inject constructor(
 
     var preListState = _overListState.value
 
-    private val _isServerStatus = MutableLiveData<Boolean>()
-    val isServerStatus: LiveData<Boolean> = _isServerStatus
+    private val _isGetPickServerStatus = MutableLiveData<Boolean>()
+    val isGetPickServerStatus: LiveData<Boolean> = _isGetPickServerStatus
+
+    private val _isPatchPickServerStatus = MutableLiveData<Boolean>()
+    val isPatchPickServerStatus: LiveData<Boolean> = _isPatchPickServerStatus
 
     var selectItemIdList = arrayOfNulls<Int>(3)
 
@@ -100,9 +102,9 @@ class PickModifyViewModel @Inject constructor(
                 .onSuccess { response ->
                     _pickModifyData.value = response
                     initSelectedItemList(response)
-                    _isServerStatus.value = true
+                    _isGetPickServerStatus.value = true
                 }.onFailure { throwable ->
-                    _isServerStatus.value = false
+                    _isGetPickServerStatus.value = false
                     Timber.e("$throwable")
                 }
         }
@@ -111,12 +113,11 @@ class PickModifyViewModel @Inject constructor(
     fun patchPick() {
         viewModelScope.launch {
             patchPickUseCase(
-                PickRequest(
-                    selectItemIdList[0] ?: 0,
-                    selectItemIdList[1] ?: 0,
-                    selectItemIdList[2] ?: 0
-                )
-            ).onSuccess {
+                selectItemIdList[0] ?: 0,
+                selectItemIdList[1] ?: 0,
+                selectItemIdList[2] ?: 0
+            ).onSuccess { success ->
+                _isPatchPickServerStatus.value = success
             }.onFailure(Timber::e)
         }
     }
