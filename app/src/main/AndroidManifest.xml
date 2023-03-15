@@ -32,6 +32,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".presentation.login.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".presentation.book.BookActivity"
             android:exported="false"
             android:screenOrientation="portrait"
