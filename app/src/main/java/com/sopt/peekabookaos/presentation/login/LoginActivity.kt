@@ -11,6 +11,7 @@ import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -47,7 +48,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
     }
 
     private fun initKakaoLoginBtnClickListener() {
-        binding.btnKakaoLogin.setOnClickListener {
+        binding.btnKakaoLogin.setSingleOnClickListener {
             startKakaoLogin()
         }
     }
