@@ -10,7 +10,8 @@ class PostCreateBookUseCase @Inject constructor(
         bookImage: String,
         bookTitle: String,
         author: String,
+        publisher: String,
         description: String?,
         memo: String?
-    ) = bookRepository.postCreateBook(bookImage, bookTitle, author, description, memo)
+    ) = bookRepository.postCreateBook(bookImage, bookTitle, author, publisher, description, memo)
 }
