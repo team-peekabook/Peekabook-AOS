@@ -64,10 +64,7 @@ class CreateBookFragment :
                     UiEvent.SUCCESS -> {
                         startActivity(
                             Intent(requireActivity(), DetailActivity::class.java).apply {
-                                putExtra(
-                                    BOOK_ID,
-                                    createBookViewModel.bookInfo.value.id
-                                )
+                                putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
                             }
                         )
                         activity?.finish()
