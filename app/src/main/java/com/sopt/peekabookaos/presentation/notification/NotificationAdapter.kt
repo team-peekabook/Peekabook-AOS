@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemNotificationBinding
 import com.sopt.peekabookaos.domain.entity.Notification
-import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class NotificationAdapter(
     private val itemStringListener: ItemStringListener<Notification>

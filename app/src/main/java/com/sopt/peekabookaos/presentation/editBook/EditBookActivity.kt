@@ -9,9 +9,9 @@ import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.BookComment
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.util.KeyBoardUtil
+import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
-import com.sopt.peekabookaos.util.extensions.UiEvent
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
