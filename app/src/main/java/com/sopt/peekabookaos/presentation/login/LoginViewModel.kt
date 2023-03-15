@@ -3,7 +3,7 @@ package com.sopt.peekabookaos.presentation.login
 import androidx.lifecycle.ViewModel
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.sopt.peekabookaos.util.extensions.Event
+import com.sopt.peekabookaos.util.Event
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow

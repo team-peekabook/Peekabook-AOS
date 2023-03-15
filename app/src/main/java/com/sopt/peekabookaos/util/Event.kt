@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.util.extensions
+package com.sopt.peekabookaos.util
 
 class Event<T>(private val content: T) {
     var hasBeenHandled = false
