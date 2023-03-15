@@ -54,6 +54,18 @@ jobs:
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       run: |
         echo CLIENT_SECRET=\"$CLIENT_SECRET\" >> local.properties
+        
+    - name: Access KAKAO_NATIVE_APP_KEY
+      env:
+        CLIENT_SECRET: ${{ secrets.KAKAO_NATIVE_APP_KEY }}
+      run: |
+        echo KAKAO_NATIVE_APP_KEY=\"KAKAO_NATIVE_APP_KEY\" >> local.properties
+
+    - name: Access KAKAO_REDIRECT_SCHEME
+      env:
+        CLIENT_SECRET: ${{ secrets.KAKAO_REDIRECT_SCHEME }}
+      run: |
+        echo KAKAO_REDIRECT_SCHEME=\"KAKAO_REDIRECT_SCHEME\" >> local.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
