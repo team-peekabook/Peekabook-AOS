@@ -7,5 +7,6 @@ data class RecommendationRequest(
     val recommendDesc: String?,
     val bookTitle: String,
     val bookImage: String,
-    val author: String
+    val author: String,
+    val publisher: String
 )
