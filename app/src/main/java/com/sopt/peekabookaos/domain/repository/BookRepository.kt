@@ -5,6 +5,7 @@ interface BookRepository {
         bookImage: String,
         bookTitle: String,
         author: String,
+        publisher: String,
         description: String?,
         memo: String?
     ): Result<Int>

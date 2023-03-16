@@ -11,6 +11,7 @@ class BookRepositoryImpl @Inject constructor(
         bookImage: String,
         bookTitle: String,
         author: String,
+        publisher: String,
         description: String?,
         memo: String?
     ): Result<Int> = kotlin.runCatching {
@@ -18,6 +19,7 @@ class BookRepositoryImpl @Inject constructor(
             bookImage,
             bookTitle,
             author,
+            publisher,
             description,
             memo
         )

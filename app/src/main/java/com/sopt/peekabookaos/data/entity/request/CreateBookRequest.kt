@@ -7,6 +7,7 @@ data class CreateBookRequest(
     val bookImage: String,
     val bookTitle: String,
     val author: String,
+    val publisher: String,
     val description: String?,
     val memo: String?
 )

@@ -15,6 +15,7 @@ data class BookDataSource @Inject constructor(
         bookImage: String,
         bookTitle: String,
         author: String,
+        publisher: String,
         description: String?,
         memo: String?
     ): BaseResponse<CreateBookResponse> = bookService.postCreateBook(
@@ -22,6 +23,7 @@ data class BookDataSource @Inject constructor(
             bookImage = bookImage,
             bookTitle = bookTitle,
             author = author,
+            publisher = publisher,
             description = description,
             memo = memo
         )
