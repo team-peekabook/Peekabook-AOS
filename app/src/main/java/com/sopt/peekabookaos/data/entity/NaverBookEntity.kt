@@ -18,6 +18,7 @@ data class NaverBookEntity(
     fun toBook(): Book = Book(
         bookTitle = this.title,
         bookImage = this.image,
-        author = this.author.replace("^", ", ")
+        author = this.author.replace("^", ", "),
+        publisher = this.publisher
     )
 }
