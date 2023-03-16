@@ -17,7 +17,9 @@ import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelableCompat
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import com.sopt.peekabookaos.util.extensions.withArgs
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecommendationFragment :
     BindingFragment<FragmentRecommendationBinding>(R.layout.fragment_recommendation) {
     private val recommendationViewModel: RecommedationViewModel by viewModels()
