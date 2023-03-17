@@ -1,202 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/peeka_beige">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_user_input_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/ic_detail_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
+        <import type="android.view.View" />
 
-    <ImageView
-        android:id="@+id/iv_user_input_profile"
-        android:layout_width="83dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/ic_user_input_profile"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.userInput.UserInputViewModel" />
+    </data>
 
-    <ImageView
-        android:id="@+id/iv_user_input_add"
-        android:layout_width="24dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/ic_user_input_add"
-        app:layout_constraintBottom_toBottomOf="@id/iv_user_input_profile"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@id/iv_user_input_profile" />
-
-    <TextView
-        android:id="@+id/tv_user_input_nickname"
-        style="@style/H1Bd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="56dp"
-        android:background="@color/peeka_red"
-        android:paddingVertical="8dp"
-        android:paddingStart="14dp"
-        android:text="@string/user_input_nickname"
-        android:textColor="@color/peeka_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_user_input_profile"
-        app:layout_goneMarginTop="30dp" />
-
-    <EditText
-        android:id="@+id/et_user_input_nickname"
-        style="@style/H2Md"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/shape_white60fill_redline_0_rect"
-        android:gravity="top"
-        android:hint="@string/user_input_nickname_hint"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine"
-        android:maxLength="6"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="12dp"
-        android:text="@={vm.comment}"
-        android:textColor="@color/peeka_red"
-        android:textColorHint="@color/peeka_g_1"
-        app:layout_constraintDimensionRatio="8.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_user_input_nickname" />
-
-    <TextView
-        android:id="@+id/tv_user_input_nickname_deplication_warning"
-        style="@style/H2Md"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="@string/iser_input_duplication_warning_message"
-        android:textColor="@color/peeka_red"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="@id/et_user_input_nickname"
-        app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
-        tools:text="@string/iser_input_duplication_warning_message" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_user_input_duplication_check"
-        style="@style/CBd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/shape_red_fill_0_rect"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="6dp"
-        android:text="중복확인"
-        android:textColor="@color/peeka_white"
-        app:layout_constraintBottom_toBottomOf="@+id/et_user_input_nickname"
-        app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
-        app:layout_constraintTop_toTopOf="@id/et_user_input_nickname" />
-
-
-    <TextView
-        android:id="@+id/tv_user_input_nickname_count"
-        style="@style/H2Md"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/peeka_g_2"
-        app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
-        app:layout_constraintTop_toBottomOf="@id/et_user_input_nickname"
-        tools:text="0/6" />
-
-    <TextView
-        android:id="@+id/tv_user_input_introduce"
-        style="@style/H1Bd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="48dp"
-        android:background="@color/peeka_red"
-        android:paddingVertical="8dp"
-        android:paddingStart="14dp"
-        android:text="@string/user_input_introduce"
-        android:textColor="@color/peeka_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
-        app:layout_goneMarginTop="30dp" />
-
-    <EditText
-        android:id="@+id/et_user_input_introduce"
-        style="@style/H2Md"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/shape_white60fill_redline_0_rect"
-        android:gravity="top"
-        android:hint="@string/user_input_introduce_hint"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine"
-        android:maxLength="6"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="12dp"
-        android:text="@={vm.comment}"
-        android:textColor="@color/peeka_red"
-        android:textColorHint="@color/peeka_g_1"
-        app:layout_constraintDimensionRatio="5.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_user_input_introduce" />
-
-    <TextView
-        android:id="@+id/tv_user_input_introduce_count"
-        style="@style/H2Md"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/peeka_g_2"
-        app:layout_constraintEnd_toEndOf="@id/et_user_input_introduce"
-        app:layout_constraintTop_toBottomOf="@id/et_user_input_introduce"
-        tools:text="0/40" />
-
-    <TextView
-        android:id="@+id/tv_user_input_duplicaiton_notify_message"
-        style="@style/H2Md"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="@string/iser_input_duplication_notify_message"
-        android:textColor="@color/peeka_red"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/btn_user_input_check"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/iser_input_duplication_notify_message" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_user_input_check"
-        style="@style/NameBd"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/shape_red_fill_0_rect"
-        android:paddingVertical="19dp"
-        android:text="@string/user_input_check_button"
-        android:textColor="@color/peeka_white"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@color/peeka_beige">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/iv_user_input_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_detail_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_user_input_profile"
+            android:layout_width="83dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_user_input_profile"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_user_input_add"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_user_input_add"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_input_profile"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@id/iv_user_input_profile" />
+
+        <TextView
+            android:id="@+id/tv_user_input_nickname"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="56dp"
+            android:background="@color/peeka_red"
+            android:paddingVertical="8dp"
+            android:paddingStart="14dp"
+            android:text="@string/user_input_nickname"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_input_profile"
+            app:layout_goneMarginTop="30dp" />
+
+        <EditText
+            android:id="@+id/et_user_input_nickname"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="@string/user_input_nickname_hint"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:maxLength="6"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="@={vm.nickname}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintDimensionRatio="8.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_input_nickname" />
+
+        <TextView
+            android:id="@+id/tv_user_input_nickname_deplication_warning"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@string/iser_input_duplication_warning_message"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isNicknameDuplicate == true? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/et_user_input_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
+            tools:text="@string/iser_input_duplication_warning_message" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_user_input_duplication_check"
+            style="@style/CBd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_gray_fill_0_rect"
+            android:enabled="false"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:text="중복확인"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_input_nickname"
+            app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
+            app:layout_constraintTop_toTopOf="@id/et_user_input_nickname" />
+
+
+        <TextView
+            android:id="@+id/tv_user_input_nickname_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
+            app:layout_constraintTop_toBottomOf="@id/et_user_input_nickname"
+            tools:text="0/6" />
+
+        <TextView
+            android:id="@+id/tv_user_input_introduce"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="48dp"
+            android:background="@color/peeka_red"
+            android:paddingVertical="8dp"
+            android:paddingStart="14dp"
+            android:text="@string/user_input_introduce"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
+            app:layout_goneMarginTop="30dp" />
+
+        <EditText
+            android:id="@+id/et_user_input_introduce"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="@string/user_input_introduce_hint"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:maxLength="6"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="@={vm.introduce}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintDimensionRatio="5.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_input_introduce" />
+
+        <TextView
+            android:id="@+id/tv_user_input_introduce_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_user_input_introduce"
+            app:layout_constraintTop_toBottomOf="@id/et_user_input_introduce"
+            tools:text="0/40" />
+
+        <TextView
+            android:id="@+id/tv_user_input_duplicaiton_notify_message"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/iser_input_duplication_notify_message"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isNicknameCheck == true? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/btn_user_input_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/iser_input_duplication_notify_message" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_user_input_check"
+            style="@style/NameBd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/shape_gray_fill_0_rect"
+            android:enabled="false"
+            android:paddingVertical="19dp"
+            android:text="@string/user_input_check_button"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

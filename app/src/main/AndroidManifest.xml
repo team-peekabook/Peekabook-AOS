@@ -37,6 +37,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".presentation.userInput.UserInputActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".presentation.notification.NotificationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
