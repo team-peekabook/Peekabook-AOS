@@ -95,4 +95,14 @@
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+
+    <!--User Input-->
+    '<string name="user_input_nickname">닉네임</string>
+    <string name="user_input_nickname_hint">닉네임은 6자까지 쓸 수 있어요!</string>
+    <string name="user_input_duplication_check">중복확인</string>
+    <string name="iser_input_duplication_warning_message">이미 사용 중인 닉네임 입니다</string>
+    <string name="user_input_introduce">한 줄 소개</string>
+    <string name="user_input_introduce_hint">한 줄 소개는 40자까지 쓸 수 있어요!</string>
+    <string name="iser_input_duplication_notify_message">닉네임 중복확인을 해주세요</string>
+    <string name="user_input_check_button">확인</string>
 </resources>
