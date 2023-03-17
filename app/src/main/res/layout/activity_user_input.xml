@@ -140,8 +140,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="@color/peeka_g_2"
             android:text="@{@string/user_input_nickname_count(vm.nickname.length())}"
+            android:textColor="@color/peeka_g_2"
             app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
             app:layout_constraintTop_toBottomOf="@id/et_user_input_nickname"
             tools:text="0/6" />
@@ -184,7 +184,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_user_input_introduce"
-            tools:text="40자까지만 들어갔으면 합니다. 이 텍스트는 글자수 체크를 위한 개발자용 줄글입니다."/>
+            tools:text="40자까지만 들어갔으면 합니다. 이 텍스트는 글자수 체크를 위한 개발자용 줄글입니다." />
 
         <TextView
             android:id="@+id/tv_user_input_introduce_count"
@@ -192,10 +192,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@{@string/user_input_introduce_count(vm.introduce.length())}"
             android:textColor="@color/peeka_g_2"
             app:layout_constraintEnd_toEndOf="@id/et_user_input_introduce"
             app:layout_constraintTop_toBottomOf="@id/et_user_input_introduce"
-            android:text="@{@string/user_input_introduce_count(vm.introduce.length())}"
             tools:text="0/40" />
 
         <TextView
