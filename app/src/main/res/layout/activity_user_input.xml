@@ -28,13 +28,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <ImageView
-            android:id="@+id/iv_user_input_profile"
+            android:id="@+id/iv_user_input_profile_basic"
             android:layout_width="83dp"
             android:layout_height="0dp"
             android:layout_marginTop="70dp"
             android:src="@drawable/ic_user_input_profile"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_user_input_profile"
+            setCircleImage="@{vm.profileImage}"
+            android:layout_width="83dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="70dp"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
