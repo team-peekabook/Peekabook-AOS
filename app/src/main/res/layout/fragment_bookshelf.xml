@@ -53,9 +53,10 @@
             android:id="@+id/sliding_up_panel_bookshelf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sliding_up_panel_top_margin"
+            android:layout_marginTop="20dp"
             android:gravity="bottom"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_bookshelf_logo"
             app:umanoDragView="@id/cl_bookshelf_bottom_view"
@@ -289,7 +290,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_bookshelf_pick"
-                    tools:text="앗! 친구가 Pick한 책이 없어요.\n책 추천하기 버튼을 눌러 \n친구에게 책을 추천 해보세요!" />
+                    tools:text="@string/bookshelf_pick_empty_friend" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
