@@ -20,15 +20,15 @@ class SocialLoginViewModel @Inject constructor(
     private val postLoginUseCase: PostLoginUseCase,
     private val initTokenUseCase: InitTokenUseCase
 ) : ViewModel() {
-    private val _isTokenAvailability = MutableStateFlow(false)
-    val isTokenAvailability = _isTokenAvailability.asStateFlow()
+    private val _isKakaoLogin = MutableStateFlow(false)
+    val isKakaoLogin = _isKakaoLogin.asStateFlow()
 
     private val _isSignedUp = MutableSharedFlow<Boolean>()
     val isSignedUp = _isSignedUp.asSharedFlow()
 
     val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         KakaoLoginCallback { accessToken ->
-            _isTokenAvailability.value = true
+            _isKakaoLogin.value = true
             initTokenUseCase(accessToken = accessToken, refreshToken = "")
         }.handleResult(token, error)
     }

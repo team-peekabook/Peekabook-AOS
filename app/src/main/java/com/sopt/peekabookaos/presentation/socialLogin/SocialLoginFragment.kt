@@ -94,11 +94,11 @@ class SocialLoginFragment :
 
     private fun collectIsTokenAvailability() {
         repeatOnStarted {
-            socialLoginViewModel.isTokenAvailability.collect { tokenAvailable ->
-                if (tokenAvailable) {
+            socialLoginViewModel.isKakaoLogin.collect { success ->
+                if (success) {
                     socialLoginViewModel.postLogin()
                 } else {
-                    Timber.e("Token is not available")
+                    Timber.e("카카오 로그인 실패")
                 }
             }
         }
