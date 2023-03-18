@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.di
 
+import com.sopt.peekabookaos.data.service.AuthService
 import com.sopt.peekabookaos.data.service.BookService
 import com.sopt.peekabookaos.data.service.DetailService
 import com.sopt.peekabookaos.data.service.NaverService
@@ -18,6 +19,10 @@ import retrofit2.Retrofit
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitServiceModule {
+    @Provides
+    fun providesAuthService(@PeekaType retrofit: Retrofit): AuthService =
+        retrofit.create(AuthService::class.java)
+
     @Provides
     fun providesDetailService(@PeekaType retrofit: Retrofit): DetailService =
         retrofit.create(DetailService::class.java)
