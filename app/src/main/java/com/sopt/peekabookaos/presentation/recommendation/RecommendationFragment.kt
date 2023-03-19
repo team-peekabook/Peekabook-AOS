@@ -50,13 +50,23 @@ class RecommendationFragment :
 
     private fun initView() {
         recommendationViewModel.initRecommendData(
-            arguments?.getParcelableCompat(BookActivity.BOOK_INFO, Book::class.java)!!,
-            arguments?.getParcelableCompat(BookActivity.FRIEND_INFO, SelfIntro::class.java)!!
+            requireNotNull(
+                arguments?.getParcelableCompat(
+                    BookActivity.BOOK_INFO,
+                    Book::class.java
+                )
+            ),
+            requireNotNull(
+                arguments?.getParcelableCompat(
+                    BookActivity.FRIEND_INFO,
+                    SelfIntro::class.java
+                )
+            )
         )
     }
 
     private fun initCloseBtnOnClickListener() {
-        binding.btnRecommendationClose.setSingleOnClickListener {
+        binding.btnRecommendationClose.setOnClickListener {
             activity?.finish()
         }
     }
