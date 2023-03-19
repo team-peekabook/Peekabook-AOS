@@ -95,4 +95,14 @@
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+
+    <!-- Report -->
+    <string name="tv_report_title">사용자 신고하기</string>
+    <string name="tv_report_reason">신고 사유 선택</string>
+    <string name="tv_report_inadequate">부적절한 게시물</string>
+    <string name="tv_report_curse">욕설 및 비하 발언</string>
+    <string name="tv_report_promote">홍보성 컨텐츠</string>
+    <string name="tv_report_nickname">닉네임 신고</string>
+    <string name="tv_report_etc">기타</string>
+    <string name="tv_report_report">신고하기</string>
 </resources>
