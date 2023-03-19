@@ -19,6 +19,12 @@ class UserInputViewModel : ViewModel() {
 
     val introduce = MutableLiveData<String>()
 
+    private val _isDuplicate: MutableLiveData<Boolean> = MutableLiveData()
+    val isDuplicate: LiveData<Boolean> = _isDuplicate
+
+    private val _isCheck: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isCheck: LiveData<Boolean> = _isCheck
+
     var nicknameList = listOf("문수빈", "한새연", "텽", "a")
 
     fun getDuplication() {
@@ -29,11 +35,12 @@ class UserInputViewModel : ViewModel() {
         _isNicknameCheck.value = _isNicknameDuplicate.value
     }
 
-    fun updateInputState(): Boolean {
-        return introduce.value.isNullOrBlank() || nickname.value.isNullOrBlank()
-    }
-
     fun updateProfileImage(uri: Uri) {
         _profileImage.value = uri.toString()
+    }
+
+    fun updateButtonState() {
+        _isCheck.value = !(introduce.value.isNullOrBlank() || nickname.value.isNullOrBlank())
+        _isDuplicate.value = !nickname.value.isNullOrBlank()
     }
 }

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.widget.AppCompatButton
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
@@ -22,7 +21,6 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
-        binding.lifecycleOwner = this
         initCheckClickListener()
         initBackClickListener()
         initDuplicateClickListener()
@@ -31,16 +29,17 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
     }
 
     private fun initBackClickListener() {
-        binding.ivUserInputBack.setSingleOnClickListener {
+        binding.btnUserInputBack.setOnClickListener() {
             finish()
         }
     }
 
     private fun initCheckClickListener() {
-        binding.btnUserInputCheck.setSingleOnClickListener {
+        binding.tvUserInputCheck.setSingleOnClickListener {
             if (viewModel.isNicknameDuplicate.value == !DUPLICATION) {
                 val toMainActivity = Intent(this, MainActivity::class.java)
                 startActivity(toMainActivity)
+                finish()
             } else {
                 viewModel.updateNicknameCheck()
             }
@@ -48,35 +47,17 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
     }
 
     private fun initDuplicateClickListener() {
-        binding.btnUserInputDuplicationCheck.setSingleOnClickListener {
+        binding.tvUserInputDuplicationCheck.setSingleOnClickListener {
             viewModel.getDuplication()
         }
     }
 
     private fun initObserver() {
         viewModel.nickname.observe(this) {
-            updateButtonState(binding.btnUserInputCheck, viewModel.updateInputState())
-            updateButtonState(
-                binding.btnUserInputDuplicationCheck,
-                viewModel.nickname.value.isNullOrBlank()
-            )
+            viewModel.updateButtonState()
         }
         viewModel.introduce.observe(this) {
-            updateButtonState(binding.btnUserInputCheck, viewModel.updateInputState())
-        }
-    }
-
-    private fun updateButtonState(button: AppCompatButton, bool: Boolean) {
-        if (bool) {
-            with(button) {
-                isEnabled = false
-                background = getDrawable(R.drawable.shape_gray_fill_0_rect)
-            }
-        } else {
-            with(button) {
-                isEnabled = true
-                background = getDrawable(R.drawable.shape_red_fill_0_rect)
-            }
+            viewModel.updateButtonState()
         }
     }
 

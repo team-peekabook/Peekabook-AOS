@@ -17,13 +17,13 @@
         android:layout_height="match_parent"
         android:background="@color/peeka_beige">
 
-
-        <ImageView
-            android:id="@+id/iv_user_input_back"
+        <ImageButton
+            android:id="@+id/btn_user_input_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
+            android:background="@color/peeka_beige"
             android:src="@drawable/ic_detail_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <ImageView
             android:id="@+id/iv_user_input_profile"
@@ -75,8 +74,7 @@
             android:textColor="@color/peeka_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_user_input_profile"
-            app:layout_goneMarginTop="30dp" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_input_profile" />
 
         <EditText
             android:id="@+id/et_user_input_nickname"
@@ -88,7 +86,6 @@
             android:gravity="top"
             android:hint="@string/user_input_nickname_hint"
             android:importantForAutofill="no"
-            android:inputType="textMultiLine"
             android:maxLength="6"
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
@@ -106,33 +103,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:text="@string/iser_input_duplication_warning_message"
+            android:text="@string/user_input_duplication_warning_message"
             android:textColor="@color/peeka_red"
             android:visibility="@{vm.isNicknameDuplicate == true? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/et_user_input_nickname"
             app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
-            tools:text="@string/iser_input_duplication_warning_message" />
+            tools:text="@string/user_input_duplication_warning_message" />
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_user_input_duplication_check"
+        <TextView
+            android:id="@+id/tv_user_input_duplication_check"
             style="@style/CBd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/shape_gray_fill_0_rect"
-            android:enabled="false"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
+            android:background="@{vm.isDuplicate == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isDuplicate == true? true: false}"
             android:paddingHorizontal="8dp"
             android:paddingVertical="6dp"
-            android:text="중복확인"
+            android:text="@string/user_input_duplication_check"
             android:textColor="@color/peeka_white"
             app:layout_constraintBottom_toBottomOf="@+id/et_user_input_nickname"
             app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
             app:layout_constraintTop_toTopOf="@id/et_user_input_nickname" />
-
 
         <TextView
             android:id="@+id/tv_user_input_nickname_count"
@@ -160,8 +153,7 @@
             android:textColor="@color/peeka_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
-            app:layout_goneMarginTop="30dp" />
+            app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname" />
 
         <EditText
             android:id="@+id/et_user_input_introduce"
@@ -204,28 +196,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="@string/iser_input_duplication_notify_message"
+            android:text="@string/user_input_duplication_notify_message"
             android:textColor="@color/peeka_red"
-            android:visibility="@{vm.isNicknameCheck == true? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toTopOf="@+id/btn_user_input_check"
+            android:visibility="@{vm.isNicknameDuplicate == true? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_input_check"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/iser_input_duplication_notify_message" />
+            tools:text="@string/user_input_duplication_notify_message" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_user_input_check"
+        <TextView
+            android:id="@+id/tv_user_input_check"
             style="@style/NameBd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/shape_gray_fill_0_rect"
-            android:enabled="false"
+            android:background="@{vm.isCheck == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isCheck == true? true: false}"
+            android:gravity="center"
             android:paddingVertical="19dp"
             android:text="@string/user_input_check_button"
             android:textColor="@color/peeka_white"
             app:layout_constraintBottom_toBottomOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
