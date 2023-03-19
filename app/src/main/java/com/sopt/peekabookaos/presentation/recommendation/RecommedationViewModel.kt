@@ -39,6 +39,7 @@ class RecommedationViewModel @Inject constructor(
                 bookTitle = requireNotNull(_bookData.value).bookTitle,
                 bookImage = requireNotNull(_bookData.value).bookImage,
                 author = requireNotNull(_bookData.value).author,
+                publisher = requireNotNull(_bookData.value).publisher,
                 requireNotNull(_friendData.value).id
             ).onSuccess { success ->
                 _isRecommendation.value = success
