@@ -20,8 +20,8 @@ class SocialLoginFragment :
     BindingFragment<FragmentSocialLoginBinding>(R.layout.fragment_social_login) {
     @Inject
     lateinit var kakaoLoginService: KakaoLoginService
-    private val loginViewModel: SocialLoginViewModel by viewModels()
     private var onBackPressedTime = 0L
+    private val socialLoginViewModel: SocialLoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,19 +48,22 @@ class SocialLoginFragment :
 //    }
 
     private fun initKakaoLoginBtnClickListener() {
-        binding.btnLoginKakao.setSingleOnClickListener {
+        binding.btnSocialLoginKakao.setSingleOnClickListener {
             startKakaoLogin()
         }
     }
 
     private fun startKakaoLogin() {
-        kakaoLoginService.startKakaoLogin(loginViewModel.kakaoLoginCallback)
+        kakaoLoginService.startKakaoLogin(socialLoginViewModel.kakaoLoginCallback)
     }
 
     private fun initTermsOfServiceClickListener() {
-        binding.tvLoginTermsOfService.setOnClickListener {
+        binding.tvSocialLoginTermsOfService.setOnClickListener {
             startActivity(
-                Intent(ACTION_VIEW, Uri.parse(getString(R.string.login_terms_of_service_link)))
+                Intent(
+                    ACTION_VIEW,
+                    Uri.parse(getString(R.string.social_login_terms_of_service_link))
+                )
             )
         }
     }
@@ -68,14 +71,14 @@ class SocialLoginFragment :
     private fun initPrivacyPolicyClickListener() {
         binding.tvLoginPrivacyPolicy.setOnClickListener {
             startActivity(
-                Intent(ACTION_VIEW, Uri.parse(getString(R.string.login_privacy_policy_link)))
+                Intent(ACTION_VIEW, Uri.parse(getString(R.string.social_login_privacy_policy_link)))
             )
         }
     }
 
     private fun collectIsTokenAvailability() {
         repeatOnStarted {
-            loginViewModel.uiState.collect { uiState ->
+            socialLoginViewModel.uiState.collect { uiState ->
                 uiState.isTokenAvailability.let { success ->
                     if (success) {
                         // TODO by 이빵주 postLogin 함수 호출 (현재 임의로 MainActivity 넣어둠)
