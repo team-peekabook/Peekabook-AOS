@@ -52,7 +52,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
     }
 
     private fun initKakaoLoginBtnClickListener() {
-        binding.btnKakaoLogin.setSingleOnClickListener {
+        binding.btnLoginKakao.setSingleOnClickListener {
             startKakaoLogin()
         }
     }
