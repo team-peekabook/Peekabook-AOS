@@ -10,6 +10,7 @@ interface RecommendRepository {
         bookTitle: String,
         bookImage: String,
         author: String,
+        publisher: String,
         friendId: Int
     ): Result<Boolean>
 }

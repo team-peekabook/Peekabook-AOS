@@ -34,6 +34,7 @@ class CreateBookViewModel @Inject constructor(
                 bookImage = _bookInfo.value.bookImage,
                 bookTitle = _bookInfo.value.bookTitle,
                 author = _bookInfo.value.author,
+                publisher = _bookInfo.value.publisher,
                 description = comment.value,
                 memo = memo.value
             ).onSuccess { response ->

@@ -11,12 +11,14 @@ class PostRecommendationUseCase @Inject constructor(
         bookTitle: String,
         bookImage: String,
         author: String,
+        publisher: String,
         friendId: Int
     ) = recommendRepository.postRecommendation(
         recommendDesc,
         bookTitle,
         bookImage,
         author,
+        publisher,
         friendId
     )
 }

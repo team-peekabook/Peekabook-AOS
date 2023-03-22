@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.data.entity.response
+package com.sopt.peekabookaos.data.entity
 
 import com.sopt.peekabookaos.domain.entity.Recommend
 import kotlinx.serialization.Serializable
