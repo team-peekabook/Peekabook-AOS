@@ -1,6 +1,8 @@
 package com.sopt.peekabookaos.presentation.login
 
 import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.activity.viewModels
@@ -28,6 +30,8 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         super.onCreate(savedInstanceState)
         initBackPressedCallback()
         initKakaoLoginBtnClickListener()
+        initTermsOfServiceClickListener()
+        initPrivacyPolicyClickListener()
         collectIsTokenAvailability()
     }
 
@@ -48,13 +52,29 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
     }
 
     private fun initKakaoLoginBtnClickListener() {
-        binding.btnKakaoLogin.setSingleOnClickListener {
+        binding.btnLoginKakao.setSingleOnClickListener {
             startKakaoLogin()
         }
     }
 
     private fun startKakaoLogin() {
         kakaoLoginService.startKakaoLogin(loginViewModel.kakaoLoginCallback)
+    }
+
+    private fun initTermsOfServiceClickListener() {
+        binding.tvLoginTermsOfService.setOnClickListener {
+            startActivity(
+                Intent(ACTION_VIEW, Uri.parse(getString(R.string.login_terms_of_service_link)))
+            )
+        }
+    }
+
+    private fun initPrivacyPolicyClickListener() {
+        binding.tvLoginPrivacyPolicy.setOnClickListener {
+            startActivity(
+                Intent(ACTION_VIEW, Uri.parse(getString(R.string.login_privacy_policy_link)))
+            )
+        }
     }
 
     private fun collectIsTokenAvailability() {
