@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemBookshelfShelfBinding
 import com.sopt.peekabookaos.domain.entity.Books
-import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class BookShelfShelfAdapter(private val clickListener: ItemClickListener<Books>) :
     ListAdapter<Books, BookShelfShelfAdapter.MyShelfViewHolder>(DIFF_CALLBACK) {

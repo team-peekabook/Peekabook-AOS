@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.util.extensions
+package com.sopt.peekabookaos.util
 
 enum class UiEvent {
     IDLE, SUCCESS, ERROR

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.BookComment
 import com.sopt.peekabookaos.domain.usecase.PatchEditBookUseCase
-import com.sopt.peekabookaos.util.extensions.UiEvent
+import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

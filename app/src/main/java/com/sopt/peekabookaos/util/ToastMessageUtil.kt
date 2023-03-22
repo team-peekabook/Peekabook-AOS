@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.util.extensions
+package com.sopt.peekabookaos.util
 
 import android.content.Context
 import android.widget.Toast

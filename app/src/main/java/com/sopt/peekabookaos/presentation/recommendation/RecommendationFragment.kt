@@ -9,11 +9,11 @@ import com.sopt.peekabookaos.databinding.FragmentRecommendationBinding
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.presentation.book.BookActivity
+import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.dialog.WarningType
-import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelableCompat
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import com.sopt.peekabookaos.util.extensions.withArgs

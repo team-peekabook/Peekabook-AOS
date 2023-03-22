@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemPickModifyBinding
 import com.sopt.peekabookaos.domain.entity.Picks
 import com.sopt.peekabookaos.presentation.bookshelf.ItemClickListener
-import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class PickModifyAdapter(
     private val clickListener: ItemClickListener<Picks>

@@ -7,6 +7,13 @@
     <string name="null_point_exception">NullPointException occurs..</string>
     <string name="null_point_exception_warning_dialog_argument">"WarningDialogFragment에 필요한 arguments에 안들어옴"</string>
 
+    <!-- login -->
+    <string name="login_inform_agreement">가입 시, PEEKABOOK의 다음 사항에 동의하는 것으로 간주합니다.</string>
+    <string name="login_terms_of_service">서비스 이용약관</string>
+    <string name="login_and">및</string>
+    <string name="login_privacy_policy">개인정보 정책</string>
+    <string name="login_kakao">카카오 로그인</string>
+
     <!-- Barcode -->
     <string name="barcode_permission">휴대폰 앱 설정에서 카메라 권한을 허용해주세요!</string>
     <string name="barcode_title">책 검색하기</string>

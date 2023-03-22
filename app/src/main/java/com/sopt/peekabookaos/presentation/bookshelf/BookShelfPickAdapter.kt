@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemBookshelfPickBinding
 import com.sopt.peekabookaos.domain.entity.Picks
-import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class BookShelfPickAdapter(private val clickListener: ItemClickListener<Picks>) :
     ListAdapter<Picks, BookShelfPickAdapter.PickViewHolder>(DIFF_CALLBACK) {
