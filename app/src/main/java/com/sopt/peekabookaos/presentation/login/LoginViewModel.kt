@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import timber.log.Timber
 
 class LoginViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -38,7 +37,6 @@ class LoginViewModel : ViewModel() {
     )
 
     companion object {
-        /** 추후 서버에 보낼 로그인 타입 */
         private const val SOCIAL_TYPE = "KAKAO"
     }
 }
