@@ -17,17 +17,6 @@
         android:layout_height="match_parent"
         android:background="@color/peeka_beige">
 
-        <ImageButton
-            android:id="@+id/btn_user_input_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="12dp"
-            android:background="@color/peeka_beige"
-            android:src="@drawable/ic_detail_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/iv_user_input_profile_basic"
             android:layout_width="83dp"

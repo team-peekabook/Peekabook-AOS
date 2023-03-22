@@ -2,13 +2,16 @@ package com.sopt.peekabookaos.presentation.userInput
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
+import kotlin.system.exitProcess
 
 class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.activity_user_input) {
     private val viewModel: UserInputViewModel by viewModels()
@@ -17,20 +20,31 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
             viewModel.updateProfileImage(uri)
         }
     }
+    private var onBackPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
         initCheckClickListener()
-        initBackClickListener()
         initDuplicateClickListener()
         initObserver()
         initProfileClickListener()
+        initBackPressedCallback()
     }
 
-    private fun initBackClickListener() {
-        binding.btnUserInputBack.setOnClickListener() {
-            finish()
+    private fun initBackPressedCallback() {
+        onBackPressedDispatcher.addCallback {
+            if (System.currentTimeMillis() - onBackPressedTime >= WAITING_DEADLINE) {
+                onBackPressedTime = System.currentTimeMillis()
+                ToastMessageUtil.showToast(
+                    this@UserInputActivity,
+                    getString(R.string.finish_app_toast_msg)
+                )
+            } else {
+                finishAffinity()
+                System.runFinalization()
+                exitProcess(0)
+            }
         }
     }
 
@@ -69,5 +83,6 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
 
     companion object {
         private const val DUPLICATION = true
+        private const val WAITING_DEADLINE = 2000L
     }
 }
