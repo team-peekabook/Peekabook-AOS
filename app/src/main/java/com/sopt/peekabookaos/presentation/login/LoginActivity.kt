@@ -60,12 +60,11 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
     private fun collectIsTokenAvailability() {
         repeatOnStarted {
             loginViewModel.uiState.collect { uiState ->
-                uiState.isTokenAvailability.getContentIfNotHandled()?.let { success ->
+                uiState.isTokenAvailability.let { success ->
                     if (success) {
-                        /** postLogin 함수 호출 (추후 구현 예정, 현재 임의로 MainActivity 넣어둠) */
+                        // TODO by 이빵주 postLogin 함수 호출 (현재 임의로 MainActivity 넣어둠)
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
-                        Timber.e("postLogin()")
                     } else {
                         Timber.e("Token is not available")
                     }

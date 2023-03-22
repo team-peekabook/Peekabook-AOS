@@ -34,7 +34,7 @@ class LoginViewModel : ViewModel() {
     data class LoginUiState(
         val kakaoToken: String = "",
         val fcmToken: String = "dummy fcm token",
-        val isTokenAvailability: Event<Boolean> = Event(false)
+        val isTokenAvailability: Boolean = false
     )
 
     companion object {
