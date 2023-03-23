@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.peekabookaos.databinding.ActivitySplashBinding
-import com.sopt.peekabookaos.presentation.socialLogin.SocialLoginFragment
+import com.sopt.peekabookaos.presentation.login.LoginActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun collectUiEvent() {
         /** 추후 서버 로그인 로직 구현 시 분기 처리 예정 */
-        startActivity(Intent(this, SocialLoginFragment::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
