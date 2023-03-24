@@ -148,6 +148,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/view_bookshelf_friend_list_top"
                     tools:listitem="@layout/item_bookshelf_user_profile" />
 
+                <TextView
+                    android:id="@+id/tv_bookshelf_empty_friend_list"
+                    style="@style/S3Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bookshelf_empty_friend_list"
+                    android:textColor="@color/peeka_red_60"
+                    android:visibility="@{vm.friendUserData.isEmpty ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_bookshelf_friend_list_bottom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/view_bookshelf_friend_list_vertical"
+                    app:layout_constraintTop_toTopOf="@+id/view_bookshelf_friend_list_top" />
+
                 <View
                     android:id="@+id/view_bookshelf_friend_list_bottom"
                     android:layout_width="match_parent"
@@ -346,6 +359,21 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_bookshelf_bottom_view_title"
                     app:spanCount="3"
                     tools:listitem="@layout/item_bookshelf_shelf" />
+
+                <TextView
+                    android:id="@+id/tv_bookshelf_bottom_view_empty"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bookshelf_bottom_view_empty"
+                    android:textColor="@color/peeka_red_60"
+                    android:visibility="@{vm.bookTotalNum == 0? View.VISIBLE:View.INVISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.sothree.slidinguppanel.SlidingUpPanelLayout>
