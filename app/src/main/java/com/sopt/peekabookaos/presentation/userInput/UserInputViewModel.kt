@@ -28,7 +28,7 @@ class UserInputViewModel : ViewModel() {
 
     val introduce = MutableLiveData<String>()
 
-    var nicknameList = listOf("문수빈", "한새연", "텽", "a")
+    var nicknameList = listOf("문수빈", "한새연", "텽", "a", "bc")
 
     fun getNickNameState() {
         _isNickname.value = nicknameList.contains(nickname.value)
