@@ -6,11 +6,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class UserInputViewModel : ViewModel() {
-    private val _isNicknameDuplicate: MutableLiveData<Boolean> = MutableLiveData()
-    val isNicknameDuplicate: LiveData<Boolean> = _isNicknameDuplicate
+    private val _isNickname: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isNickname: LiveData<Boolean> = _isNickname
 
-    private val _isNicknameCheck: MutableLiveData<Boolean> = MutableLiveData()
-    val isNicknameCheck: LiveData<Boolean> = _isNicknameCheck
+    private val _isNicknameMessage: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isNicknameMessage: LiveData<Boolean> = _isNicknameMessage
+
+    private val _isCheckMessage: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isCheckMessage: LiveData<Boolean> = _isCheckMessage
+
+    private val _isDuplicateButton: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isDuplicateButton: LiveData<Boolean> = _isDuplicateButton
+
+    private val _isCheckButton: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isCheckButton: LiveData<Boolean> = _isCheckButton
 
     private val _profileImage: MutableLiveData<String> = MutableLiveData()
     val profileImage: LiveData<String> = _profileImage
@@ -19,28 +28,38 @@ class UserInputViewModel : ViewModel() {
 
     val introduce = MutableLiveData<String>()
 
-    private val _isDuplicate: MutableLiveData<Boolean> = MutableLiveData()
-    val isDuplicate: LiveData<Boolean> = _isDuplicate
-
-    private val _isCheck: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isCheck: LiveData<Boolean> = _isCheck
-
     var nicknameList = listOf("문수빈", "한새연", "텽", "a")
 
-    fun getDuplication() {
-        _isNicknameDuplicate.value = nicknameList.contains(nickname.value)
+    fun getNickNameState() {
+        _isNickname.value = nicknameList.contains(nickname.value)
+        updateNicknameMessage(true)
+        updateDuplicateButtonState(_isNickname.value!!)
     }
 
-    fun updateNicknameCheck() {
-        _isNicknameCheck.value = _isNicknameDuplicate.value
+    fun updateWritingState() {
+        _isNickname.value = true
+        updateNicknameMessage(false)
+        updateCheckMessage(false)
+        updateDuplicateButtonState(!nickname.value.isNullOrBlank())
+    }
+
+    fun updateCheckMessage(state: Boolean) {
+        _isCheckMessage.value = state
+    }
+
+    private fun updateNicknameMessage(state: Boolean) {
+        _isNicknameMessage.value = state
+    }
+
+    private fun updateDuplicateButtonState(state: Boolean) {
+        _isDuplicateButton.value = state
     }
 
     fun updateProfileImage(uri: Uri) {
         _profileImage.value = uri.toString()
     }
 
-    fun updateButtonState() {
-        _isCheck.value = !(introduce.value.isNullOrBlank() || nickname.value.isNullOrBlank())
-        _isDuplicate.value = !nickname.value.isNullOrBlank()
+    fun updateCheckButtonState() {
+        _isCheckButton.value = !(introduce.value.isNullOrBlank() || nickname.value.isNullOrBlank())
     }
 }

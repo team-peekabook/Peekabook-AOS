@@ -50,28 +50,29 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
 
     private fun initCheckClickListener() {
         binding.tvUserInputCheck.setSingleOnClickListener {
-            if (viewModel.isNicknameDuplicate.value == !DUPLICATION) {
+            if (viewModel.isNickname.value == false) {
                 val toMainActivity = Intent(this, MainActivity::class.java)
                 startActivity(toMainActivity)
                 finish()
             } else {
-                viewModel.updateNicknameCheck()
+                viewModel.updateCheckMessage(viewModel.isNickname.value!!)
             }
         }
     }
 
     private fun initDuplicateClickListener() {
         binding.tvUserInputDuplicationCheck.setSingleOnClickListener {
-            viewModel.getDuplication()
+            viewModel.getNickNameState()
         }
     }
 
     private fun initObserver() {
         viewModel.nickname.observe(this) {
-            viewModel.updateButtonState()
+            viewModel.updateCheckButtonState()
+            viewModel.updateWritingState()
         }
         viewModel.introduce.observe(this) {
-            viewModel.updateButtonState()
+            viewModel.updateCheckButtonState()
         }
     }
 
@@ -82,7 +83,6 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
     }
 
     companion object {
-        private const val DUPLICATION = true
         private const val WAITING_DEADLINE = 2000L
     }
 }

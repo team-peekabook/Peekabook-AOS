@@ -21,12 +21,12 @@
             android:id="@+id/iv_user_input_profile_basic"
             android:layout_width="83dp"
             android:layout_height="0dp"
-            android:layout_marginTop="70dp"
             android:src="@drawable/ic_user_input_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_user_input_profile"
             app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/iv_user_input_profile"
+            app:layout_constraintStart_toStartOf="@+id/iv_user_input_profile"
+            app:layout_constraintTop_toTopOf="@+id/iv_user_input_profile" />
 
         <ImageView
             android:id="@+id/iv_user_input_profile"
@@ -34,10 +34,12 @@
             android:layout_width="83dp"
             android:layout_height="0dp"
             android:layout_marginTop="70dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_input_nickname"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
 
         <ImageView
             android:id="@+id/iv_user_input_add"
@@ -92,12 +94,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:text="@string/user_input_duplication_warning_message"
+            android:text="@{vm.isNickname == true? @string/user_input_unavailable_nickname_message : @string/user_input_available_nickname_message}"
             android:textColor="@color/peeka_red"
-            android:visibility="@{vm.isNicknameDuplicate == true? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{vm.isNicknameMessage == true ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/et_user_input_nickname"
             app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
-            tools:text="@string/user_input_duplication_warning_message" />
+            tools:text="@string/user_input_unavailable_nickname_message" />
 
         <TextView
             android:id="@+id/tv_user_input_duplication_check"
@@ -106,8 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginEnd="10dp"
-            android:background="@{vm.isDuplicate == true? @color/peeka_red: @color/peeka_g_1}"
-            android:clickable="@{vm.isDuplicate == true? true: false}"
+            android:background="@{vm.isDuplicateButton == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isDuplicateButton == true? true: false}"
             android:paddingHorizontal="8dp"
             android:paddingVertical="6dp"
             android:text="@string/user_input_duplication_check"
@@ -161,10 +163,12 @@
             android:text="@={vm.introduce}"
             android:textColor="@color/peeka_red"
             android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_input_duplicaiton_notify_message"
             app:layout_constraintDimensionRatio="5.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_user_input_introduce"
+            app:layout_constraintVertical_bias="0"
             tools:text="40자까지만 들어갔으면 합니다. 이 텍스트는 글자수 체크를 위한 개발자용 줄글입니다." />
 
         <TextView
@@ -185,9 +189,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
+            android:paddingTop="30dp"
             android:text="@string/user_input_duplication_notify_message"
             android:textColor="@color/peeka_red"
-            android:visibility="@{vm.isNicknameDuplicate == true? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{vm.isCheckMessage == true? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toTopOf="@+id/tv_user_input_check"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -200,10 +205,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="32dp"
-            android:background="@{vm.isCheck == true? @color/peeka_red: @color/peeka_g_1}"
-            android:clickable="@{vm.isCheck == true? true: false}"
+            android:background="@{vm.isCheckButton == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isCheckButton == true? true: false}"
             android:gravity="center"
-            android:paddingVertical="19dp"
+            android:paddingVertical="15dp"
             android:text="@string/user_input_check_button"
             android:textColor="@color/peeka_white"
             app:layout_constraintBottom_toBottomOf="parent" />

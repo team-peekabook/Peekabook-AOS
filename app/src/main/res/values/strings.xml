@@ -101,7 +101,8 @@
     <string name="user_input_nickname_hint">닉네임은 6자까지 쓸 수 있어요!</string>
     <string name="user_input_nickname_count">\%d\/6</string>
     <string name="user_input_duplication_check">중복확인</string>
-    <string name="user_input_duplication_warning_message">이미 사용 중인 닉네임 입니다</string>
+    <string name="user_input_unavailable_nickname_message">이미 사용 중인 닉네임 입니다</string>
+    <string name="user_input_available_nickname_message">사용 가능한 닉네임 입니다</string>
     <string name="user_input_introduce">한 줄 소개</string>
     <string name="user_input_introduce_hint">한 줄 소개는 40자까지 쓸 수 있어요!</string>
     <string name="user_input_introduce_count">\%d\/40</string>
