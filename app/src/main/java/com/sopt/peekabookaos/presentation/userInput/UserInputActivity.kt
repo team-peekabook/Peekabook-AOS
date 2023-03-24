@@ -9,7 +9,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import kotlin.system.exitProcess
 
