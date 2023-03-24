@@ -11,9 +11,9 @@ import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
+import com.sopt.peekabookaos.util.KeyBoardUtil
+import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingFragment
-import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
-import com.sopt.peekabookaos.util.extensions.UiEvent
 import com.sopt.peekabookaos.util.extensions.getParcelableCompat
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,10 +64,7 @@ class CreateBookFragment :
                     UiEvent.SUCCESS -> {
                         startActivity(
                             Intent(requireActivity(), DetailActivity::class.java).apply {
-                                putExtra(
-                                    BOOK_ID,
-                                    createBookViewModel.bookInfo.value.id
-                                )
+                                putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
                             }
                         )
                         activity?.finish()

@@ -18,6 +18,7 @@ data class RecommendDataSource @Inject constructor(
         bookTitle: String,
         bookImage: String,
         author: String,
+        publisher: String,
         friendId: Int
     ): BaseResponse<RecommendationResponse> =
         recommendService.postRecommendation(
@@ -25,7 +26,8 @@ data class RecommendDataSource @Inject constructor(
                 recommendDesc = recommendDesc,
                 bookTitle = bookTitle,
                 bookImage = bookImage,
-                author = author
+                author = author,
+                publisher = publisher
             ),
             friendId
         )

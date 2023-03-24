@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityPickModifyBinding
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 

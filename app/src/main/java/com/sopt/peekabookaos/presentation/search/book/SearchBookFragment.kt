@@ -15,8 +15,8 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
+import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
-import com.sopt.peekabookaos.util.extensions.KeyBoardUtil
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint

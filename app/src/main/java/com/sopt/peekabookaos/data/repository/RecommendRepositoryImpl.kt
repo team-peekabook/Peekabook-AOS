@@ -18,6 +18,7 @@ class RecommendRepositoryImpl @Inject constructor(
         bookTitle: String,
         bookImage: String,
         author: String,
+        publisher: String,
         friendId: Int
     ): Result<Boolean> =
         kotlin.runCatching {
@@ -26,6 +27,7 @@ class RecommendRepositoryImpl @Inject constructor(
                 bookTitle,
                 bookImage,
                 author,
+                publisher,
                 friendId
             )
         }.map { response -> response.success }

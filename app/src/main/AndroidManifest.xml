@@ -32,6 +32,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".presentation.login.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".presentation.book.BookActivity"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -65,14 +69,24 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".presentation.recommendation.RecommendationActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name=".presentation.main.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="${KAKAO_REDIRECT_SCHEME}" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

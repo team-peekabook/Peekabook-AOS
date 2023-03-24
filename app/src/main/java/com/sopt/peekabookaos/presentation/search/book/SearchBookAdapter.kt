@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemSearchBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class SearchBookAdapter(
     private val onClickBook: (Book) -> Unit,
