@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.presentation.userInput
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
@@ -8,6 +9,7 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
+import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -25,12 +27,21 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
+        initEditTextClearFocus()
         initCheckClickListener()
         initBackClickListener()
         initDuplicateClickListener()
         initObserver()
         initProfileClickListener()
         initBackPressedCallback()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditTextClearFocus() {
+        binding.clUserInput.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(this)
+            return@setOnTouchListener false
+        }
     }
 
     private fun initBackClickListener() {
