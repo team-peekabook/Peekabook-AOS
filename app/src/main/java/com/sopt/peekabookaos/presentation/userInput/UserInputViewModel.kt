@@ -33,7 +33,7 @@ class UserInputViewModel : ViewModel() {
     fun getNickNameState() {
         _isNickname.value = nicknameList.contains(nickname.value)
         updateNicknameMessage(true)
-        updateDuplicateButtonState(_isNickname.value!!)
+        updateDuplicateButtonState(requireNotNull(_isNickname.value))
     }
 
     fun updateWritingState() {

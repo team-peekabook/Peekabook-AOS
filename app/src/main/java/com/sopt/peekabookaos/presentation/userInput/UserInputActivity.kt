@@ -26,10 +26,17 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
         initCheckClickListener()
+        initBackClickListener()
         initDuplicateClickListener()
         initObserver()
         initProfileClickListener()
         initBackPressedCallback()
+    }
+
+    private fun initBackClickListener() {
+        binding.ivUserInputBack.setSingleOnClickListener {
+            finish()
+        }
     }
 
     private fun initBackPressedCallback() {
@@ -55,7 +62,7 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
                 startActivity(toMainActivity)
                 finish()
             } else {
-                viewModel.updateCheckMessage(viewModel.isNickname.value!!)
+                viewModel.updateCheckMessage(requireNotNull(viewModel.isNickname.value))
             }
         }
     }
