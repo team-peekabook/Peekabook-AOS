@@ -42,7 +42,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.userInput.UserInputActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity

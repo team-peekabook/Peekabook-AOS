@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_user_input"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige">
@@ -50,6 +51,22 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_user_input_profile"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="@id/iv_user_input_profile" />
+
+        <TextView
+            android:id="@+id/tv_user_input_navigation_bar"
+            style="@style/H3Bd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/peeka_beige"
+            android:gravity="center"
+            android:paddingTop="23dp"
+            android:paddingBottom="5dp"
+            android:clickable="true"
+            android:text="@string/user_input_navigation_bar"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_user_input_nickname"
