@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.report.ReportViewModel" />
@@ -166,6 +168,37 @@
                 android:background="@color/peeka_g_1" />
         </RadioGroup>
 
+        <EditText
+            android:id="@+id/et_report_detail_reason"
+            style="@style/H2Md"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="21dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/shape_white88fill_redline_0_rect"
+            android:hint="@string/et_report_detail_reason"
+            android:paddingHorizontal="13dp"
+            android:paddingVertical="14dp"
+            android:gravity="left"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintBottom_toTopOf="@+id/tv_report_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rg_report_radiogroup" />
+
+        <TextView
+            android:id="@+id/tv_report_confirm"
+            style="@style/H2Md"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="21dp"
+            android:layout_marginBottom="17dp"
+            android:gravity="center"
+            android:text="@string/tv_report_confirm"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintBottom_toTopOf="@+id/btn_report_report"
+            tools:layout_editor_absoluteX="21dp" />
+
         <TextView
             android:id="@+id/btn_report_report"
             style="@style/NameBd"
@@ -178,6 +211,7 @@
             android:text="@string/tv_report_report"
             android:textColor="@color/peeka_white"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="17dp"
             app:layout_constraintEnd_toEndOf="@+id/v_report_line_top"
             app:layout_constraintStart_toStartOf="@+id/v_report_line_top" />
 
