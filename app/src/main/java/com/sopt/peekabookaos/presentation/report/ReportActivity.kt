@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.report
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityReportBinding
@@ -16,11 +17,15 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initReportBtnClickListener()
-        /*binding.rgReportRadiogroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.rgReportRadiogroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
-                R.id.rb_report_reason_inadequate ->
+                R.id.rb_report_reason_inadequate -> Log.d("1", "부적절한 게시물")
+                R.id.rb_report_reason_curse -> Log.d("2", "욕설 및 비하 발언")
+                R.id.rb_report_reason_promote -> Log.d("3", "홍보성 컨텐츠")
+                R.id.rb_report_reason_nickname -> Log.d("4", "닉네임 신고")
+                R.id.rb_report_reason_etc -> Log.d("5", "기타")
             }
-        }*/ // 다른 항목 선택하면 각자 다른 데이터가 전달됐음 좋겠는데 잘모르겠음
+        }
         binding.rgReportRadiogroup.check(R.id.rb_report_reason_inadequate)
     }
 
