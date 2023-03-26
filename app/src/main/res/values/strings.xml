@@ -105,4 +105,8 @@
     <string name="tv_report_nickname">닉네임 신고</string>
     <string name="tv_report_etc">기타</string>
     <string name="tv_report_report">신고하기</string>
+    <string name="tv_report_dialog_title">신고가 정상적으로 접수되었습니다.</string>
+    <string name="btn_dialog_report_confirm">홈으로 돌아가기</string>
+    <string name="et_report_detail_reason">구체적인 신고 사유를 작성해 주세요.</string>
+    <string name="tv_report_confirm">신고하신 내용은 검토 후 빠른 시일 내 조치하겠습니다.</string>
 </resources>
