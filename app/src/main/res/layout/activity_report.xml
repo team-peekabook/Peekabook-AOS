@@ -4,6 +4,10 @@
 
     <data>
 
+        <import type="android.view.View" />
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.report.ReportViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,7 +82,6 @@
                 style="@style/H2Md"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:layoutDirection="rtl"
                 android:onClick="onRadioButtonClicked"
                 android:paddingVertical="16dp"
