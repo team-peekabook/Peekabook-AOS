@@ -118,4 +118,6 @@
     <string name="user_input_introduce_count">\%d\/40</string>
     <string name="user_input_duplication_notify_message">닉네임 중복확인을 해주세요</string>
     <string name="user_input_check_button">확인</string>
+    <string name="user_input_choose_album">앨범에서 선택</string>
+    <string name="user_input_camera">카메라</string>
 </resources>
