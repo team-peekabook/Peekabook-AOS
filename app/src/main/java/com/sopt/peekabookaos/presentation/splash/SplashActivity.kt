@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.peekabookaos.databinding.ActivitySplashBinding
-import com.sopt.peekabookaos.presentation.main.MainActivity
+import com.sopt.peekabookaos.presentation.login.LoginActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -17,11 +17,13 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.lottieSplash.playAnimation()
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, DURATION)
+        Handler(Looper.getMainLooper()).postDelayed({ collectUiEvent() }, DURATION)
+    }
+
+    private fun collectUiEvent() {
+        /** 추후 서버 로그인 로직 구현 시 분기 처리 예정 */
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
     companion object {

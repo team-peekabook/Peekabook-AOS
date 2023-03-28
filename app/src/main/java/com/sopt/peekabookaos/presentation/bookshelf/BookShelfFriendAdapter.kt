@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ItemBookshelfUserProfileBinding
 import com.sopt.peekabookaos.domain.entity.FriendList
-import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class BookShelfFriendAdapter(
     private val clickListener: ItemClickListener<FriendList>

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemRecommendBinding
 import com.sopt.peekabookaos.domain.entity.Recommend
-import com.sopt.peekabookaos.util.extensions.ItemDiffCallback
+import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class BookRecommendAdapter :
     ListAdapter<Recommend, BookRecommendAdapter.BookRecommendationViewHolder>(

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/peeka_beige"
+        tools:context=".presentation.login.LoginActivity">
+
+        <ImageView
+            android:id="@+id/iv_login_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:src="@drawable/ic_login_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_login_kakao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="23dp"
+            android:background="@drawable/shape_yellow_fill_8_rect"
+            android:src="@drawable/ic_kakao_login"
+            android:stateListAnimator="@null"
+            android:textColor="@color/kakao_brown"
+            app:layout_constraintBottom_toTopOf="@id/tv_login_inform_agreement"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login_inform_agreement"
+            style="@style/S2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_inform_agreement"
+            android:textColor="@color/peeka_g_1"
+            app:layout_constraintBottom_toTopOf="@id/tv_login_terms_of_service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login_terms_of_service"
+            style="@style/S1Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:layout_marginBottom="41dp"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="11dp"
+            android:text="@string/login_terms_of_service"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_login_and"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login_and"
+            style="@style/S2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="52dp"
+            android:text="@string/login_and"
+            android:textColor="@color/peeka_g_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_login_privacy_policy"
+            app:layout_constraintStart_toEndOf="@id/tv_login_terms_of_service" />
+
+        <TextView
+            android:id="@+id/tv_login_privacy_policy"
+            style="@style/S1Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="96dp"
+            android:paddingHorizontal="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="11dp"
+            android:text="@string/login_privacy_policy"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintBottom_toBottomOf="@id/tv_login_terms_of_service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_login_and"
+            app:layout_constraintTop_toTopOf="@id/tv_login_terms_of_service" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

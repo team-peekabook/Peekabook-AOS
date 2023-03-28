@@ -6,7 +6,7 @@ import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetSearchUserUseCase
 import com.sopt.peekabookaos.domain.usecase.PostFollowUseCase
-import com.sopt.peekabookaos.util.extensions.UiState
+import com.sopt.peekabookaos.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.util.extensions
+package com.sopt.peekabookaos.util
 
 import androidx.recyclerview.widget.DiffUtil
 

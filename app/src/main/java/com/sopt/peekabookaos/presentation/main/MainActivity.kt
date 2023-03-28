@@ -8,8 +8,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityMainBinding
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.ToastMessageUtil
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import kotlin.system.exitProcess
