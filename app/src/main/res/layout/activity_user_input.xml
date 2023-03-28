@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.userInput.UserInputViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_user_input"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/peeka_beige">
+
+        <ImageView
+            android:id="@+id/iv_user_input_profile_basic"
+            android:layout_width="83dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_user_input_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_user_input_profile"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@+id/iv_user_input_profile"
+            app:layout_constraintStart_toStartOf="@+id/iv_user_input_profile"
+            app:layout_constraintTop_toTopOf="@+id/iv_user_input_profile" />
+
+        <ImageView
+            android:id="@+id/iv_user_input_profile"
+            setCircleImage="@{vm.profileImage}"
+            android:layout_width="83dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="70dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_input_nickname"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+        <ImageView
+            android:id="@+id/iv_user_input_add"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/ic_user_input_add"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_input_profile"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@id/iv_user_input_profile" />
+
+        <TextView
+            android:id="@+id/tv_user_input_navigation_bar"
+            style="@style/H3Bd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/peeka_beige"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingTop="23dp"
+            android:paddingBottom="5dp"
+            android:text="@string/user_input_navigation_bar"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/iv_user_input_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_detail_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_input_nickname"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="56dp"
+            android:background="@color/peeka_red"
+            android:paddingVertical="8dp"
+            android:paddingStart="14dp"
+            android:text="@string/user_input_nickname"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_input_profile" />
+
+        <EditText
+            android:id="@+id/et_user_input_nickname"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="@string/user_input_nickname_hint"
+            android:importantForAutofill="no"
+            android:maxLength="6"
+            android:nextFocusDown="@id/et_user_input_introduce"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:singleLine="true"
+            android:text="@={vm.nickname}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintDimensionRatio="8.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_input_nickname" />
+
+        <TextView
+            android:id="@+id/tv_user_input_nickname_deplication_warning"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@{vm.isNickname == true? @string/user_input_unavailable_nickname_message : @string/user_input_available_nickname_message}"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isNicknameMessage == true ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/et_user_input_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname"
+            tools:text="@string/user_input_unavailable_nickname_message" />
+
+        <TextView
+            android:id="@+id/tv_user_input_duplication_check"
+            style="@style/CBd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@{vm.isDuplicateButton == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isDuplicateButton == true? true: false}"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:text="@string/user_input_duplication_check"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_input_nickname"
+            app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
+            app:layout_constraintTop_toTopOf="@id/et_user_input_nickname" />
+
+        <TextView
+            android:id="@+id/tv_user_input_nickname_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/user_input_nickname_count(vm.nickname.length())}"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_user_input_nickname"
+            app:layout_constraintTop_toBottomOf="@id/et_user_input_nickname"
+            tools:text="0/6" />
+
+        <TextView
+            android:id="@+id/tv_user_input_introduce"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="48dp"
+            android:background="@color/peeka_red"
+            android:paddingVertical="8dp"
+            android:paddingStart="14dp"
+            android:text="@string/user_input_introduce"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_user_input_nickname" />
+
+        <EditText
+            android:id="@+id/et_user_input_introduce"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="@string/user_input_introduce_hint"
+            android:importantForAutofill="no"
+            android:maxLength="40"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="@={vm.introduce}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_input_duplicaiton_notify_message"
+            app:layout_constraintDimensionRatio="5.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_input_introduce"
+            app:layout_constraintVertical_bias="0"
+            tools:text="40자까지만 들어갔으면 합니다. 이 텍스트는 글자수 체크를 위한 개발자용 줄글입니다." />
+
+        <TextView
+            android:id="@+id/tv_user_input_introduce_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/user_input_introduce_count(vm.introduce.length())}"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_user_input_introduce"
+            app:layout_constraintTop_toBottomOf="@id/et_user_input_introduce"
+            tools:text="0/40" />
+
+        <TextView
+            android:id="@+id/tv_user_input_duplicaiton_notify_message"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:paddingTop="30dp"
+            android:text="@string/user_input_duplication_notify_message"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isCheckMessage == true? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_input_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/user_input_duplication_notify_message" />
+
+        <TextView
+            android:id="@+id/tv_user_input_check"
+            style="@style/NameBd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="32dp"
+            android:background="@{vm.isCheckButton == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isCheckButton == true? true: false}"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="@string/user_input_check_button"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
