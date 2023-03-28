@@ -104,4 +104,8 @@
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+
+    <!-- block -->
+    <string name="block_title">차단된 계정</string>
+    <string name="block_cancel">차단 해제</string>
 </resources>
