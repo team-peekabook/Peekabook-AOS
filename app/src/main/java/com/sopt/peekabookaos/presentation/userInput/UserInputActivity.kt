@@ -29,7 +29,6 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
         binding.vm = viewModel
         initEditTextClearFocus()
         initCheckClickListener()
-        initBackClickListener()
         initDuplicateClickListener()
         initObserver()
         initProfileClickListener()
@@ -41,12 +40,6 @@ class UserInputActivity : BindingActivity<ActivityUserInputBinding>(R.layout.act
         binding.clUserInput.setOnTouchListener { _, _ ->
             KeyBoardUtil.hide(this)
             return@setOnTouchListener false
-        }
-    }
-
-    private fun initBackClickListener() {
-        binding.ivUserInputBack.setSingleOnClickListener {
-            finish()
         }
     }
 
