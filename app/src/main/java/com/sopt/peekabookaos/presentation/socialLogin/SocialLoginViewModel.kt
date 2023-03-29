@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.login
+package com.sopt.peekabookaos.presentation.socialLogin
 
 import androidx.lifecycle.ViewModel
 import com.kakao.sdk.auth.model.OAuthToken
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class LoginViewModel : ViewModel() {
+class SocialLoginViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState = _uiState.asStateFlow()
 

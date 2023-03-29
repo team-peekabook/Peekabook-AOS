@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige"
-        tools:context=".presentation.login.LoginActivity">
+        tools:context=".presentation.socialLogin.SocialLoginFragment">
 
         <ImageView
             android:id="@+id/iv_login_logo"
