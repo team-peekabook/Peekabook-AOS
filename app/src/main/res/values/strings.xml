@@ -113,9 +113,9 @@
     <string name="report_promote">홍보성 컨텐츠</string>
     <string name="report_nickname">닉네임 신고</string>
     <string name="report_etc">기타</string>
-    <string name="report_report">신고하기</string>
-    <string name="dialog_report_title">신고가 정상적으로 접수되었습니다.</string>
-    <string name="dialog_report_confirm">홈으로 돌아가기</string>
     <string name="report_detail_reason">구체적인 신고 사유를 작성해 주세요.</string>
     <string name="report_confirm">신고하신 내용은 검토 후 빠른 시일 내 조치하겠습니다.</string>
+    <string name="report_report">신고하기</string>
+    <string name="report_dialog_confirm">신고가 정상적으로 접수되었습니다.</string>
+    <string name="report_dialog_home">홈으로 돌아가기</string>
 </resources>
