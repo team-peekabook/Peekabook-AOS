@@ -26,10 +26,6 @@ class SocialLoginViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(isTokenAvailability = isAvailable)
     }
 
-    private fun getFcmToken() {
-        // TODO by 이빵주 fcm 토큰 받아오는 로직
-    }
-
     data class LoginUiState(
         val kakaoToken: String = "",
         val fcmToken: String = "dummy fcm token",
