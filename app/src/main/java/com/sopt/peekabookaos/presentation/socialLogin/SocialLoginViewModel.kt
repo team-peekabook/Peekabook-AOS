@@ -1,18 +1,28 @@
 package com.sopt.peekabookaos.presentation.socialLogin
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kakao.sdk.auth.model.OAuthToken
+import com.sopt.peekabookaos.domain.usecase.InitTokenUseCase
+import com.sopt.peekabookaos.domain.usecase.PostLoginUseCase
 import com.sopt.peekabookaos.util.KakaoLoginCallback
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class SocialLoginViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(LoginUiState())
-    val uiState = _uiState.asStateFlow()
+@HiltViewModel
+class SocialLoginViewModel @Inject constructor(
+    private val postLoginUseCase: PostLoginUseCase,
+    private val initTokenUseCase: InitTokenUseCase
+) : ViewModel() {
+    private val _isTokenAvailability = MutableStateFlow(false)
+    val isTokenAvailability = _isTokenAvailability.asStateFlow()
 
-    /** 회원가입 여부 확인하는 변수 (추후 사용 예정) */
     private val _isSignedUp = MutableSharedFlow<Boolean>()
     val isSignedUp = _isSignedUp.asSharedFlow()
 
