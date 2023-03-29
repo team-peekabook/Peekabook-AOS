@@ -17,22 +17,25 @@ class SocialLoginViewModel : ViewModel() {
     val isSignedUp = _isSignedUp.asSharedFlow()
 
     val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        KakaoLoginCallback(_uiState) { checkTokenAvailability() }.handleResult(token, error)
+        KakaoLoginCallback { accessToken ->
+            _isTokenAvailability.value = true
+            initTokenUseCase(accessToken = accessToken, refreshToken = "")
+        }.handleResult(token, error)
     }
 
-    private fun checkTokenAvailability() {
-        val isAvailable =
-            _uiState.value.kakaoToken.isNotBlank() && _uiState.value.fcmToken.isNotBlank()
-        _uiState.value = _uiState.value.copy(isTokenAvailability = isAvailable)
+    fun postLogin() {
+        viewModelScope.launch {
+            postLoginUseCase(SOCIAL_TYPE)
+                .onSuccess { response ->
+                    initTokenUseCase(response.accessToken, response.refreshToken)
+                    _isSignedUp.emit(response.isSignedUp)
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                }
+        }
     }
-
-    data class LoginUiState(
-        val kakaoToken: String = "",
-        val fcmToken: String = "dummy fcm token",
-        val isTokenAvailability: Boolean = false
-    )
 
     companion object {
-        private const val SOCIAL_TYPE = "KAKAO"
+        private const val SOCIAL_TYPE = "kakao"
     }
 }
