@@ -1,7 +1,9 @@
 package com.sopt.peekabookaos.data.entity.response
 
 import com.sopt.peekabookaos.domain.entity.Login
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class LoginResponse(
     val accessToken: String,
     val refreshToken: String,
