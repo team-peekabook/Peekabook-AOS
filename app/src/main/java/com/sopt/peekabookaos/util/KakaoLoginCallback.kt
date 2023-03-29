@@ -2,7 +2,7 @@ package com.sopt.peekabookaos.util
 
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.sopt.peekabookaos.presentation.login.LoginViewModel.LoginUiState
+import com.sopt.peekabookaos.presentation.socialLogin.SocialLoginViewModel.LoginUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
 

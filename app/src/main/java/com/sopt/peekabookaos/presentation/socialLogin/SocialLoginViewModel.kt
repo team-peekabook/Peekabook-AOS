@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.login
+package com.sopt.peekabookaos.presentation.socialLogin
 
 import androidx.lifecycle.ViewModel
 import com.kakao.sdk.auth.model.OAuthToken
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class LoginViewModel : ViewModel() {
+class SocialLoginViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -24,10 +24,6 @@ class LoginViewModel : ViewModel() {
         val isAvailable =
             _uiState.value.kakaoToken.isNotBlank() && _uiState.value.fcmToken.isNotBlank()
         _uiState.value = _uiState.value.copy(isTokenAvailability = isAvailable)
-    }
-
-    private fun getFcmToken() {
-        // TODO by 이빵주 fcm 토큰 받아오는 로직
     }
 
     data class LoginUiState(
