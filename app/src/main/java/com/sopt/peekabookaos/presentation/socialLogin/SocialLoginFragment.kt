@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.service.KakaoLoginService
 import com.sopt.peekabookaos.databinding.FragmentSocialLoginBinding
@@ -94,7 +95,8 @@ class SocialLoginFragment :
             socialLoginViewModel.uiState.collect { uiState ->
                 uiState.isTokenAvailability.let { success ->
                     if (success) {
-                        // TODO by 이빵주 postLogin 함수 호출 (현재 임의로 MainActivity 넣어둠)
+                        // TODO by 이빵주 postLogin 함수 호출 (UserInput으로 넘어가게 구현함)
+                        findNavController().navigate(R.id.action_socialLoginFragment_to_userInputFragment)
                     } else {
                         Timber.e("Token is not available")
                     }
