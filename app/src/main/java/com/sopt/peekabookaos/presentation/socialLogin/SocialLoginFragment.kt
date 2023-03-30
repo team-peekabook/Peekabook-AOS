@@ -109,6 +109,7 @@ class SocialLoginFragment :
             socialLoginViewModel.isSignedUp.collect { signedUp ->
                 if (signedUp) {
                     startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    finishAffinity(requireActivity())
                 } else {
                     findNavController().navigate(R.id.action_socialLoginFragment_to_userInputFragment)
                 }
