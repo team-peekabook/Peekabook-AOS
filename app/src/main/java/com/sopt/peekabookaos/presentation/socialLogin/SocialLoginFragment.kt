@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.service.KakaoLoginService
 import com.sopt.peekabookaos.databinding.FragmentSocialLoginBinding
+import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
@@ -36,6 +37,7 @@ class SocialLoginFragment :
         initTermsOfServiceClickListener()
         initPrivacyPolicyClickListener()
         collectIsTokenAvailability()
+        collectIsSignedUp()
     }
 
     private fun initBackPressedCallback() {
@@ -92,14 +94,24 @@ class SocialLoginFragment :
 
     private fun collectIsTokenAvailability() {
         repeatOnStarted {
-            socialLoginViewModel.uiState.collect { uiState ->
-                uiState.isTokenAvailability.let { success ->
-                    if (success) {
-                        // TODO by 이빵주 postLogin 함수 호출 (UserInput으로 넘어가게 구현함)
-                        findNavController().navigate(R.id.action_socialLoginFragment_to_userInputFragment)
-                    } else {
-                        Timber.e("Token is not available")
-                    }
+            socialLoginViewModel.isKakaoLogin.collect { success ->
+                if (success) {
+                    socialLoginViewModel.postLogin()
+                } else {
+                    Timber.e("카카오 로그인 실패")
+                }
+            }
+        }
+    }
+
+    private fun collectIsSignedUp() {
+        repeatOnStarted {
+            socialLoginViewModel.isSignedUp.collect { signedUp ->
+                if (signedUp) {
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    finishAffinity(requireActivity())
+                } else {
+                    findNavController().navigate(R.id.action_socialLoginFragment_to_userInputFragment)
                 }
             }
         }
