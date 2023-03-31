@@ -24,7 +24,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_peeka_close"
+            android:src="@drawable/ic_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
             android:layout_marginEnd="4dp"
             android:background="@null"
             android:onClick="@{() -> vm.postCreateBook()}"
-            android:src="@drawable/ic_peeka_check"
+            android:src="@drawable/ic_check"
             app:layout_constraintBottom_toBottomOf="@id/tv_create_book_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_create_book_header" />

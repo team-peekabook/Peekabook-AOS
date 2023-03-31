@@ -20,7 +20,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_peeka_close"
+            android:src="@drawable/ic_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
