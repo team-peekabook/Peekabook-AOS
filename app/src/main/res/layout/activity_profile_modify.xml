@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.profileModify.ProfileModifyActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.profileModify.ProfileModifyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_profile_modify"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/peeka_beige">
+
+        <ImageButton
+            android:id="@+id/btn_profile_modify_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:src="@drawable/ic_detail_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:text="프로필 수정"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_profile_modify_image"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="39dp"
+            tools:src="@drawable/img"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_modify_title"/>
+
+        <ImageView
+            android:id="@+id/iv_profile_modify_backgroud"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:layout_margin="59dp"
+            android:background="@drawable/shape_red_fill_circle"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="@id/iv_profile_modify_image"
+            app:layout_constraintTop_toTopOf="@id/iv_profile_modify_image"/>
+
+        <ImageButton
+            android:id="@+id/iv_profile_modify_add"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="65dp"
+            android:background="@null"
+            android:src="@drawable/ic_profile_modify_add"
+            app:layout_constraintStart_toStartOf="@id/iv_profile_modify_image"
+            app:layout_constraintTop_toTopOf="@id/iv_profile_modify_image" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_nickname"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="56dp"
+            android:background="@color/peeka_red"
+            app:layout_constraintTop_toBottomOf="@id/iv_profile_modify_image"
+            android:paddingVertical="8dp"
+            android:paddingStart="14dp"
+            android:text="닉네임"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/et_profile_modify_nickname"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="닉네임은 6자까지 쓸 수 있어요!"
+            android:importantForAutofill="no"
+            android:maxLength="6"
+            android:nextFocusDown="@id/et_profile_modify_introduce"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:singleLine="true"
+            android:text="@={vm.nickname}"
+
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintDimensionRatio="8.0"
+            app:layout_constraintStart_toStartOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintEnd_toEndOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_modify_nickname" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_nickname_deplication_warning"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@{vm.isNickname == true? @string/profile_modify_unavailable_nickname_message : @string/profile_modify_available_nickname_message}"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isNicknameMessage == true ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/et_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/et_profile_modify_nickname"
+            tools:text="이미 사용중인 닉네임 입니다" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_duplication_check"
+            style="@style/CBd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@{vm.isDuplicateButton == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isDuplicateButton == true? true: false}"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:text="중복확인"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="@+id/et_profile_modify_nickname"
+            app:layout_constraintEnd_toEndOf="@id/et_profile_modify_nickname"
+            app:layout_constraintTop_toTopOf="@id/et_profile_modify_nickname" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_nickname_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/profile_modify_nickname_count(vm.nickname.length())}"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@id/et_profile_modify_nickname"
+            tools:text="0/6" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_introduce"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:background="@color/peeka_red"
+            android:paddingVertical="8dp"
+            android:paddingStart="14dp"
+            android:text="한 줄 소개"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintStart_toStartOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintEnd_toEndOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/et_profile_modify_nickname" />
+
+        <EditText
+            android:id="@+id/et_profile_modify_introduce"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="한 줄 소개는 40자까지 쓸 수 있어요!"
+            android:importantForAutofill="no"
+            android:maxLength="40"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="@={vm.modify}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintDimensionRatio="5.0"
+            app:layout_constraintStart_toStartOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintEnd_toEndOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_modify_introduce"
+            app:layout_constraintVertical_bias="0"
+            tools:text="40자까지만 들어갔으면 합니다. 이 텍스트는 글자수 체크를 위한 개발자용 줄글입니다." />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_introduce_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/profile_modify_introduce_count(vm.modify.length())}"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_profile_modify_introduce"
+            app:layout_constraintTop_toBottomOf="@id/et_profile_modify_introduce"
+            tools:text="0/40" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_check"
+            style="@style/NameBd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{vm.isCheckButton == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isCheckButton == true? true: false}"
+            android:text="확인"
+            android:padding="12dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/peeka_white" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
