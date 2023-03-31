@@ -32,7 +32,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="19dp"
-            android:src="@drawable/img"
+            android:src="@drawable/shape_yellow_fill_8_rect"
             app:layout_constraintBottom_toBottomOf="@id/iv_my_page_rect"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
@@ -69,11 +69,11 @@
             android:layout_marginTop="3dp"
             android:layout_marginEnd="15dp"
             android:maxLines="2"
+            android:text="@string/tv_my_page_intro"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_my_page_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_page_name"
-            android:text="@string/tv_my_page_intro" />
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
