@@ -104,4 +104,9 @@
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+
+    <string name="profile_modify_nickname_count">%d/6</string>
+    <string name="profile_modify_introduce_count">%d/40</string>
+    <string name="profile_modify_unavailable_nickname_message">이미 사용중인 닉네임 입니다</string>
+    <string name="profile_modify_available_nickname_message">사용 가능한 닉네임 입니다</string>
 </resources>
