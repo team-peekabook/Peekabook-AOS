@@ -19,7 +19,11 @@ import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
+import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
+import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
+import com.sopt.peekabookaos.util.dialog.WarningType
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
+import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -178,6 +182,56 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             val toBarcodeScanner = Intent(requireActivity(), BookActivity::class.java)
             startActivity(toBarcodeScanner)
         }
+    }
+
+    private fun initKebabClickListener() {
+        binding.btnBookshelfMore.setSingleOnClickListener {
+            val bookShelfBottomSheetFragment = BookShelfBottomSheetFragment {
+                when (it) {
+                    0 -> initUnfollow()
+                    //       1 -> 하정이의 신고뷰로 넘어가기
+                    2 -> initBlock()
+                }
+            }
+            bookShelfBottomSheetFragment.show(
+                parentFragmentManager,
+                bookShelfBottomSheetFragment.tag
+            )
+        }
+    }
+
+    private fun initUnfollow() {
+        WarningDialogFragment().withArgs {
+            putString(
+                WarningDialogFragment.FOLLOWER,
+                viewModel.friendData.value!!.nickname
+            )
+            putSerializable(
+                WarningDialogFragment.WARNING_TYPE,
+                WarningType.WARNING_UNFOLLOW
+            )
+            putParcelable(
+                WarningDialogFragment.CONFIRM_ACTION,
+                ConfirmClickListener(confirmAction = { viewModel.postUnfollow() })
+            )
+        }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
+    }
+
+    private fun initBlock() {
+        WarningDialogFragment().withArgs {
+            putString(
+                WarningDialogFragment.FOLLOWER,
+                viewModel.friendData.value!!.nickname
+            )
+            putSerializable(
+                WarningDialogFragment.WARNING_TYPE,
+                WarningType.WARNING_BLOCK
+            )
+            putParcelable(
+                WarningDialogFragment.CONFIRM_ACTION,
+                ConfirmClickListener(confirmAction = { viewModel.postBlock() })
+            )
+        }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
     }
 
     companion object {
