@@ -26,7 +26,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_peeka_close"
+            android:src="@drawable/ic_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,7 +146,7 @@
                 android:id="@+id/iv_search_profile_outline"
                 android:layout_width="56dp"
                 android:layout_height="0dp"
-                android:src="@{vm.isFollowed==false ? @drawable/shape_red_line_0_circle : @drawable/shape_g1_line_circle}"
+                android:src="@{vm.isFollowed==false ? @drawable/shape_red_line_circle : @drawable/shape_g1_line_circle}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_search_user_profile"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="@id/iv_search_user_profile"
