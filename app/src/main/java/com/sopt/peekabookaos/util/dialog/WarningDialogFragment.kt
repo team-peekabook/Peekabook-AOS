@@ -47,8 +47,6 @@ class WarningDialogFragment : DialogFragment() {
                     WarningDialogContent().getWarningDeleteFollow(requireContext(), follower)
                 WarningType.WARNING_UNFOLLOW ->
                     WarningDialogContent().getWarningUnfollow(requireContext(), follower)
-                WarningType.WARNING_BLOCK ->
-                    WarningDialogContent().getWarningBlock(requireContext(), follower)
             }
         }
     }

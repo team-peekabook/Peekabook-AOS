@@ -54,6 +54,11 @@
     <string name="bookshelf_bottom_sheet_unfollow">언팔로우</string>
     <string name="bookshelf_bottom_sheet_report">신고</string>
     <string name="bookshelf_bottom_sheet_block">차단</string>
+    <string name="bookshelf_dialog_block_title">%s님을 차단하시겠어요?</string>
+    <string name="bookshelf_dialog_block_content">서로에게 추천한 책이 삭제되며,\n서로의 프로필을 볼 수 없게 돼요.</string>
+    <string name="bookshelf_dialog_block">차단하기</string>
+    <string name="bookshelf_dialog_cancel">취소하기</string>
+
 
     <!-- BookRecommend-->
     <string name="recommend_recommended">추천받은 책</string>
@@ -105,10 +110,8 @@
     <string name="warning_dialog_delete_follower_title">%s님을\n정말 삭제하시겠어요?</string>
     <string name="warning_dialog_delete_book_title">해당 책을\n정말 삭제하시겠습니까?</string>
     <string name="warning_dialog_unfollow_title">%s님을\n 언팔로우 하시겠어요?</string>
-    <string name="warning_dialog_block_title">%s님을 차단하시겠어요?</string>
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
     <string name="warning_dialog_unfollow">언팔로우</string>
-    <string name="warning_dialog_block">차단하기</string>
 </resources>
