@@ -4,6 +4,10 @@ buildscript {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
         classpath 'com.android.tools.build:gradle:7.0.4'
     }
+
+    repositories {
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+    }
 }
 
 plugins {
@@ -15,3 +19,5 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+

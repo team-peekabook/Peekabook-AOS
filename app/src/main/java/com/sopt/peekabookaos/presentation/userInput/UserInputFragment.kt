@@ -26,7 +26,7 @@ import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 @AndroidEntryPoint
 class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fragment_user_input) {
@@ -133,7 +133,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
     private fun dispatchTakePictureIntentEx() {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val uri: Uri? = createImageUri("JPEG_${timeStamp}_", "image/*")
+        val uri: Uri? = createImageUri("JPEG_${timeStamp}_", "image/jpeg")
         photoURI = uri
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
         startActivityForResult(takePictureIntent, REQUEST_CREATE_EX)
