@@ -5,45 +5,45 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemBlockBinding
-import com.sopt.peekabookaos.domain.entity.Recommend
+import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class FriendBlockAdapter :
-    ListAdapter<Recommend, FriendBlockAdapter.FriendBlockViewHolder>(
-        recommendationDiffUtil
+    ListAdapter<FriendList, FriendBlockAdapter.FriendBlockViewHolder>(
+        blockDiffUtil
     ) {
-    class FriendBlockViewHolder(private val binding: ItemBlockBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun onBind(bookRecommendation: Recommend) {
-            binding.data = bookRecommendation
-        }
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FriendBlockAdapter.FriendBlockViewHolder {
-        val itemRecommendRecommendedBinding =
+    ): FriendBlockViewHolder {
+        val binding =
             ItemBlockBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-        return FriendBlockAdapter.FriendBlockViewHolder(
-            itemRecommendRecommendedBinding
+        return FriendBlockViewHolder(
+            binding
         )
     }
 
     override fun onBindViewHolder(
-        holder: FriendBlockAdapter.FriendBlockViewHolder,
+        holder: FriendBlockViewHolder,
         position: Int
     ) {
         holder.onBind(getItem(position))
     }
 
+    class FriendBlockViewHolder(private val binding: ItemBlockBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun onBind(blockFriend: FriendList) {
+            binding.friend = blockFriend
+        }
+    }
+
     companion object {
-        private val recommendationDiffUtil = ItemDiffCallback<Recommend>(
-            onItemsTheSame = { old, new -> old.bookTitle == new.bookTitle },
+        private val blockDiffUtil = ItemDiffCallback<FriendList>(
+            onItemsTheSame = { old, new -> old.id == new.id },
             onContentsTheSame = { old, new -> old == new }
         )
     }
