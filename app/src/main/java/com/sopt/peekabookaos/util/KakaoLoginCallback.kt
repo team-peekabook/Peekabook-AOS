@@ -2,13 +2,10 @@ package com.sopt.peekabookaos.util
 
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
-import com.sopt.peekabookaos.presentation.login.LoginViewModel.LoginUiState
-import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
 
 class KakaoLoginCallback(
-    private val uiState: MutableStateFlow<LoginUiState>,
-    private val checkTokenAvailability: () -> Unit
+    private val onSuccess: (accessToken: String) -> Unit
 ) {
     fun handleResult(token: OAuthToken?, error: Throwable?) {
         if (error != null) {
@@ -43,8 +40,7 @@ class KakaoLoginCallback(
             }
         } else if (token != null) {
             Timber.d("카카오 로그인 성공 ${token.accessToken}")
-            uiState.value = uiState.value.copy(kakaoToken = token.accessToken)
-            checkTokenAvailability()
+            onSuccess(token.accessToken)
         }
     }
 }
