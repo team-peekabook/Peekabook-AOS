@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_login"
+    app:startDestination="@id/socialLoginFragment">
+
+    <fragment
+        android:id="@+id/socialLoginFragment"
+        android:name="com.sopt.peekabookaos.presentation.socialLogin.SocialLoginFragment"
+        android:label="SocialLoginFragment"
+        tools:layout="@layout/fragment_social_login">
+        <action
+            android:id="@+id/action_socialLoginFragment_to_userInputFragment"
+            app:destination="@id/userInputFragment"
+            app:enterAnim="@animator/anim_from_right"
+            app:exitAnim="@animator/anim_to_left"
+            app:popEnterAnim="@animator/anim_from_left"
+            app:popExitAnim="@animator/anim_to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userInputFragment"
+        android:name="com.sopt.peekabookaos.presentation.userInput.UserInputFragment"
+        android:label="UserInputFragment"
+        tools:layout="@layout/fragment_user_input">
+        <action
+            android:id="@+id/action_userInputFragment_to_socialLoginFragment"
+            app:destination="@id/socialLoginFragment"
+            app:enterAnim="@animator/anim_from_left"
+            app:exitAnim="@animator/anim_to_right"
+            app:popEnterAnim="@animator/anim_from_right"
+            app:popExitAnim="@animator/anim_to_left"
+            app:popUpTo="@id/socialLoginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>
