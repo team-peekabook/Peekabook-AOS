@@ -104,4 +104,12 @@
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+
+    <!-- Withdraw -->
+    <string name="withdraw_title">서비스 탈퇴</string>
+    <string name="withdraw_content">서비스 탈퇴 시,\n사용자의 데이터는 복구되지 않습니다.\n사용자의 개인 정보는 \‘개인정보 보호방침\'에 따라\n일정 기간 보관 후 파기됩니다. </string>
+    <string name="withdraw_confirm">탈퇴하기</string>
+    <string name="withdraw_dialog_title">서비스 탈퇴 완료</string>
+    <string name="withdraw_dialog_content">이용해주셔서 감사합니다.</string>
+    <string name="withdraw_dialog_confirm">확인</string>
 </resources>
