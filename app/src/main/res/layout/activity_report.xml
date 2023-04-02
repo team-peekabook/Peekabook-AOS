@@ -24,7 +24,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_detail_back"
+            android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/v_report_line_top"
+            android:id="@+id/view_report_line_top"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="21dp"
@@ -59,8 +59,8 @@
             android:layout_marginTop="46dp"
             android:text="@string/report_reason"
             android:textColor="@color/peeka_red"
-            app:layout_constraintStart_toStartOf="@+id/v_report_line_top"
-            app:layout_constraintTop_toBottomOf="@+id/v_report_line_top" />
+            app:layout_constraintStart_toStartOf="@+id/view_report_line_top"
+            app:layout_constraintTop_toBottomOf="@+id/view_report_line_top" />
 
         <RadioGroup
             android:id="@+id/rg_report_radiogroup"
@@ -74,7 +74,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_report_reason">
 
             <View
-                android:id="@+id/v_report_line_middle_first"
+                android:id="@+id/view_report_line_middle_first"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/peeka_g_1" />
@@ -90,7 +90,7 @@
                 android:text="@string/report_inadequate" />
 
             <View
-                android:id="@+id/v_report_line_middle_second"
+                android:id="@+id/view_report_line_middle_second"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/peeka_g_1" />
@@ -103,16 +103,16 @@
                 android:layoutDirection="rtl"
                 android:paddingVertical="16dp"
                 android:text="@string/report_curse"
-                app:layout_constraintEnd_toEndOf="@id/v_report_line_middle_second"
-                app:layout_constraintStart_toStartOf="@id/v_report_line_middle_second"
-                app:layout_constraintTop_toBottomOf="@id/v_report_line_middle_second" />
+                app:layout_constraintEnd_toEndOf="@id/view_report_line_middle_second"
+                app:layout_constraintStart_toStartOf="@id/view_report_line_middle_second"
+                app:layout_constraintTop_toBottomOf="@id/view_report_line_middle_second" />
 
             <View
-                android:id="@+id/v_report_line_middle_third"
+                android:id="@+id/view_report_line_middle_third"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/peeka_g_1"
-                app:layout_constraintEnd_toEndOf="@+id/v_report_line_top"
+                app:layout_constraintEnd_toEndOf="@+id/view_report_line_top"
                 app:layout_constraintStart_toStartOf="@+id/tv_report_reason"
                 app:layout_constraintTop_toBottomOf="@+id/rb_report_reason_curse" />
 
@@ -126,7 +126,7 @@
                 android:text="@string/report_promote" />
 
             <View
-                android:id="@+id/v_report_line_middle_fourth"
+                android:id="@+id/view_report_line_middle_fourth"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/peeka_g_1" />
@@ -139,11 +139,11 @@
                 android:layoutDirection="rtl"
                 android:paddingVertical="16dp"
                 android:text="@string/report_nickname"
-                app:layout_constraintEnd_toEndOf="@id/v_report_line_middle_fourth"
-                app:layout_constraintTop_toBottomOf="@id/v_report_line_middle_fourth" />
+                app:layout_constraintEnd_toEndOf="@id/view_report_line_middle_fourth"
+                app:layout_constraintTop_toBottomOf="@id/view_report_line_middle_fourth" />
 
             <View
-                android:id="@+id/v_report_line_middle_fifth"
+                android:id="@+id/view_report_line_middle_fifth"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/peeka_g_1" />
@@ -158,7 +158,7 @@
                 android:text="@string/report_etc" />
 
             <View
-                android:id="@+id/v_report_line_middle_sixth"
+                android:id="@+id/view_report_line_middle_sixth"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/peeka_g_1" />
@@ -178,6 +178,7 @@
             android:paddingHorizontal="13dp"
             android:paddingVertical="14dp"
             android:text="@={vm.reason}"
+            android:textColor="@color/peeka_red"
             android:textColorHint="@color/peeka_g_1"
             app:layout_constraintBottom_toTopOf="@+id/tv_report_confirm"
             app:layout_constraintStart_toStartOf="parent"
@@ -193,11 +194,10 @@
             android:gravity="center"
             android:text="@string/report_confirm"
             android:textColor="@color/peeka_red"
-            app:layout_constraintBottom_toTopOf="@+id/btn_report_report"
-            tools:layout_editor_absoluteX="21dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tv_report_report" />
 
         <TextView
-            android:id="@+id/btn_report_report"
+            android:id="@+id/tv_report_report"
             style="@style/NameBd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -209,9 +209,8 @@
             android:text="@string/report_report"
             android:textColor="@color/peeka_white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/v_report_line_top"
-            app:layout_constraintStart_toStartOf="@+id/v_report_line_top" />
-
+            app:layout_constraintEnd_toEndOf="@+id/view_report_line_top"
+            app:layout_constraintStart_toStartOf="@+id/view_report_line_top" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
