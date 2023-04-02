@@ -22,7 +22,7 @@ object RetrofitModule {
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
     private const val AUTH = "auth"
-    private const val USER_ID = "2"
+    private const val USER_ID = "18"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)

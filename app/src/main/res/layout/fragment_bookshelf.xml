@@ -378,20 +378,19 @@
                     android:id="@+id/iv_bookshelf_bottom_empty_friend"
                     android:layout_width="48dp"
                     android:layout_height="0dp"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginBottom="14dp"
                     android:src="@drawable/ic_bookshelf_bottom_empty_friend"
                     android:visibility="@{(vm.bookTotalNum == 0) &amp;&amp; (vm.friendShelf == true) ? View.VISIBLE:View.INVISIBLE}"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_bookshelf_indicator" />
+                    app:layout_constraintBottom_toTopOf="@id/tv_bookshelf_bottom_view_empty_friend"/>
 
                 <TextView
                     android:id="@+id/tv_bookshelf_bottom_view_empty_friend"
                     style="@style/H2Md"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
                     android:gravity="center"
                     android:text="@string/bookshelf_bottom_view_empty_friend"
                     android:textColor="@color/peeka_red_60"
@@ -399,7 +398,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_bookshelf_bottom_empty_friend" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
