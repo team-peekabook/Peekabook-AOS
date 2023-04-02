@@ -23,6 +23,8 @@ object RetrofitModule {
     private const val APPLICATION_JSON = "application/json"
     private const val AUTH = "auth"
     private const val USER_ID = "18"
+    private const val BEARER = "Bearer "
+    private const val ACCESS_TOKEN = "accessToken"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
