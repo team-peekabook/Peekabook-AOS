@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view1_user_input_bottom_sheet"
+        android:id="@+id/view_user_input_bottom_sheet_1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="19dp"
@@ -41,13 +41,13 @@
         android:gravity="center"
         android:text="@string/bookshelf_bottom_sheet_report"
         android:textColor="@color/peeka_red"
-        app:layout_constraintBottom_toBottomOf="@id/view2_user_input_bottom_sheet"
+        app:layout_constraintBottom_toBottomOf="@id/view_user_input_bottom_sheet_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view1_user_input_bottom_sheet" />
+        app:layout_constraintTop_toTopOf="@+id/view_user_input_bottom_sheet_1" />
 
     <View
-        android:id="@+id/view2_user_input_bottom_sheet"
+        android:id="@+id/view_user_input_bottom_sheet_2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="19dp"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view2_user_input_bottom_sheet" />
+        app:layout_constraintTop_toTopOf="@+id/view_user_input_bottom_sheet_2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

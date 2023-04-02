@@ -188,11 +188,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initKebabClickListener() {
         binding.btnBookshelfMore.setSingleOnClickListener {
             val bookShelfBottomSheetFragment =
-                BookShelfBottomSheetFragment.newInstance { itemClick ->
+                BookShelfBottomSheetFragment.onItemClick { itemClick ->
                     when (itemClick) {
-                        0 -> initUnfollow()
+                        0 -> initUnfollowDialog()
                         //       1 -> 하정이의 신고뷰로 넘어가기
-                        2 -> initBlock()
+                        2 -> initBlockDialog()
                     }
                 }
             bookShelfBottomSheetFragment.show(
@@ -202,11 +202,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
     }
 
-    private fun initUnfollow() {
+    private fun initUnfollowDialog() {
         WarningDialogFragment().withArgs {
             putString(
                 WarningDialogFragment.FOLLOWER,
-                viewModel.friendData.value!!.nickname
+                requireNotNull(viewModel.friendData.value).nickname
             )
             putSerializable(
                 WarningDialogFragment.WARNING_TYPE,
@@ -219,11 +219,11 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
     }
 
-    private fun initBlock() {
+    private fun initBlockDialog() {
         BlockDialog().withArgs {
             putString(
                 BlockDialog.FOLLOWER,
-                viewModel.friendData.value!!.nickname
+                requireNotNull(viewModel.friendData.value).nickname
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,

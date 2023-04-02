@@ -26,7 +26,7 @@ import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 @AndroidEntryPoint
 class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fragment_user_input) {
@@ -77,7 +77,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
 
     private fun initAddClickListener() {
         binding.btnUserInputAdd.setOnClickListener {
-            val userInputBottomSheetFragment = UserInputBottomSheetFragment.newInstance {
+            val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
                 when (it) {
                     0 -> launcher.launch("image/*")
                     1 -> if (checkPermission()) {

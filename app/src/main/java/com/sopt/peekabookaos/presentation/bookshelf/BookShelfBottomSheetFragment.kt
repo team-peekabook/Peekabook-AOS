@@ -36,7 +36,7 @@ class BookShelfBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         lateinit var itemClick: (Int) -> Unit
-        fun newInstance(
+        fun onItemClick(
             itemClick: (Int) -> Unit
         ): BookShelfBottomSheetFragment {
             this.itemClick = itemClick

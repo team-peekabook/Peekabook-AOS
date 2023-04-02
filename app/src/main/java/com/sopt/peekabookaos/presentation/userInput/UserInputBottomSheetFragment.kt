@@ -32,7 +32,7 @@ class UserInputBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         lateinit var itemClick: (Int) -> Unit
-        fun newInstance(
+        fun onItemClick(
             itemClick: (Int) -> Unit
         ): UserInputBottomSheetFragment {
             this.itemClick = itemClick
