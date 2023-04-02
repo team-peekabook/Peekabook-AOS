@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogReportConfirmBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
@@ -16,8 +15,6 @@ import com.sopt.peekabookaos.presentation.main.MainActivity
 class ReportConfirmDialog : DialogFragment() {
     private var _binding: DialogReportConfirmBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
-
-    private val reportViewModel by activityViewModels<ReportViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +28,6 @@ class ReportConfirmDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = reportViewModel
         initLayout()
         initReportBtnClickListener()
     }
@@ -47,9 +43,9 @@ class ReportConfirmDialog : DialogFragment() {
 
     private fun initReportBtnClickListener() {
         binding.btnDialogReportHome.setOnClickListener {
-            startActivity(
-                Intent(requireContext(), MainActivity::class.java)
-            )
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
             requireActivity().finish()
         }
     }
