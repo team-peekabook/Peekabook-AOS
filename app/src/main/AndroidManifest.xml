@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".presentation.withdraw.WithdrawActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.login.LoginActivity"
