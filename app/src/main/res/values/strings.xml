@@ -51,6 +51,9 @@
     <string name="bookshelf_pick_index">%d</string>
     <string name="bookshelf_pick_empty_my">잠깐! PICK 한 책이 없어요.\nPICK 수정하기 버튼을 눌러\n추천하고 싶은 책을 PICK 해보세요!</string>
     <string name="bookshelf_pick_empty_friend">앗! 친구가 Pick한 책이 없어요.\n책 추천하기 버튼을 눌러\n친구에게 책을 추천 해보세요!</string>
+    <string name="bookshelf_empty_friend_list">친구추가 버튼을 눌러 친구를 추가해보세요!</string>
+    <string name="bookshelf_bottom_view_empty_my">아직 책장에 책이 없어요.\n+버튼을 눌러 좋아하는 책을 추가해볼까요?</string>
+    <string name="bookshelf_bottom_view_empty_friend">친구 책장이 텅 비어있어요!</string>
 
     <!-- BookRecommend-->
     <string name="recommend_recommended">추천받은 책</string>
