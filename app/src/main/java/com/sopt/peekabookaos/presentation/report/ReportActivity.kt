@@ -20,19 +20,23 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
         initReportBtnClickListener()
         binding.rgReportRadiogroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.rb_report_reason_inadequate -> reportViewModel.setSelectedReasonId(1)
-                R.id.rb_report_reason_curse -> reportViewModel.setSelectedReasonId(2)
-                R.id.rb_report_reason_promote -> reportViewModel.setSelectedReasonId(3)
-                R.id.rb_report_reason_nickname -> reportViewModel.setSelectedReasonId(4)
-                R.id.rb_report_reason_etc -> reportViewModel.setSelectedReasonId(5)
-            }
+            setSelectedReasonId(checkedId)
         }
     }
 
     private fun initReportBtnClickListener() {
-        binding.btnReportReport.setSingleOnClickListener {
+        binding.tvReportReport.setSingleOnClickListener {
             ReportConfirmDialog().show(supportFragmentManager, TAG)
+        }
+    }
+
+    private fun setSelectedReasonId(checkedId: Int) {
+        when (checkedId) {
+            R.id.rb_report_reason_inadequate -> reportViewModel.setSelectedReasonId(1)
+            R.id.rb_report_reason_curse -> reportViewModel.setSelectedReasonId(2)
+            R.id.rb_report_reason_promote -> reportViewModel.setSelectedReasonId(3)
+            R.id.rb_report_reason_nickname -> reportViewModel.setSelectedReasonId(4)
+            R.id.rb_report_reason_etc -> reportViewModel.setSelectedReasonId(5)
         }
     }
 }
