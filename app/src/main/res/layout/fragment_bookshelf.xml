@@ -201,7 +201,7 @@
                         android:maxLines="2"
                         android:text="@{vm.isMyServerStatus == true? vm.userData.intro : vm.friendData.intro}"
                         android:textColor="@color/peeka_red"
-                        tools:text="안녕하세요, 저는 한줄소개 입니다! 제 책장을 둘러보세요! 만약에 최대를 넘어가게 되면 어떤 일이?" />
+                        tools:text="안녕하세요, 저는 한줄소개 입니다! " />
 
                 </LinearLayout>
 

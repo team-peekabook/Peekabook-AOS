@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sopt.peekabookaos.databinding.DialogBookshelfBottomSheetBinding
 
-class BookShelfBottomSheetFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragment() {
+class BookShelfBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: DialogBookshelfBottomSheetBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +31,16 @@ class BookShelfBottomSheetFragment(val itemClick: (Int) -> Unit) : BottomSheetDi
         binding.tvBookshelfBottomSheetBlock.setOnClickListener {
             itemClick(2)
             dialog?.dismiss()
+        }
+    }
+
+    companion object {
+        lateinit var itemClick: (Int) -> Unit
+        fun newInstance(
+            itemClick: (Int) -> Unit
+        ): BookShelfBottomSheetFragment {
+            this.itemClick = itemClick
+            return BookShelfBottomSheetFragment()
         }
     }
 }

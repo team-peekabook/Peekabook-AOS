@@ -66,6 +66,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         initRecommendClickListener()
         initPickModifyClickListener()
         initCreateBookClickListener()
+        initKebabClickListener()
     }
 
     private fun initIsServerObserver() {
@@ -186,13 +187,14 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initKebabClickListener() {
         binding.btnBookshelfMore.setSingleOnClickListener {
-            val bookShelfBottomSheetFragment = BookShelfBottomSheetFragment {
-                when (it) {
-                    0 -> initUnfollow()
-                    //       1 -> 하정이의 신고뷰로 넘어가기
-                    2 -> initBlock()
+            val bookShelfBottomSheetFragment =
+                BookShelfBottomSheetFragment.newInstance { itemClick ->
+                    when (itemClick) {
+                        0 -> initUnfollow()
+                        //       1 -> 하정이의 신고뷰로 넘어가기
+                        2 -> initBlock()
+                    }
                 }
-            }
             bookShelfBottomSheetFragment.show(
                 parentFragmentManager,
                 bookShelfBottomSheetFragment.tag
