@@ -24,7 +24,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_detail_back"
+            android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
