@@ -15,9 +15,17 @@
         <!-- Customize your theme here. -->
         <item name="android:includeFontPadding">false</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.PeekabookAOS.RemoveSplash" parent="Theme.PeekabookAOS">
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+    <!-- Bottom sheet dialog Style -->
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomRoundedBackgroundBottomSheet</item>
+    </style>
+    <style name="CustomRoundedBackgroundBottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>
