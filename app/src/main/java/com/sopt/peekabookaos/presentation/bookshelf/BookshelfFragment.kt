@@ -220,7 +220,16 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     }
 
     private fun initBlock() {
-        TODO("차단 다이얼로그 구현")
+        BlockDialog().withArgs {
+            putString(
+                BlockDialog.FOLLOWER,
+                viewModel.friendData.value!!.nickname
+            )
+            putParcelable(
+                WarningDialogFragment.CONFIRM_ACTION,
+                ConfirmClickListener(confirmAction = { viewModel.postBlock() })
+            )
+        }.show(childFragmentManager, BlockDialog.TAG)
     }
 
     companion object {

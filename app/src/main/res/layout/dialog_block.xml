@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="vm"
-            type="com.sopt.peekabookaos.presentation.bookshelf.BookShelfViewModel" />
+            name="block"
+            type="com.sopt.peekabookaos.presentation.bookshelf.BlockDialogContent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:text="@string/bookshelf_dialog_block_title"
+            android:text="@{block.title}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             style="@style/S3Md"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/bookshelf_dialog_block_content"
+            android:text="@{block.content}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/tv_block_dialog_title"
             app:layout_constraintStart_toStartOf="@id/tv_block_dialog_title"

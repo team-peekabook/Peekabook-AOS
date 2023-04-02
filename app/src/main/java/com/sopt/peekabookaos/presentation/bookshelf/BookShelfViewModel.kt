@@ -108,10 +108,10 @@ class BookShelfViewModel @Inject constructor(
     }
 
     fun postUnfollow() {
-        TODO("언팔로우 api")
+        // TODO("언팔로우 api")
     }
 
     fun postBlock() {
-        TODO("언팔로우 api")
+        // TODO("차단 api")
     }
 }
