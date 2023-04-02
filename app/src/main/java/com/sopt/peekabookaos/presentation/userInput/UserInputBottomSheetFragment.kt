@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sopt.peekabookaos.databinding.DialogUserInputBottomSheetBinding
 
-class UserInputBottomSheetFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragment() {
+class UserInputBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: DialogUserInputBottomSheetBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +27,16 @@ class UserInputBottomSheetFragment(val itemClick: (Int) -> Unit) : BottomSheetDi
         binding.tvUserInputBottomSheetCamera.setOnClickListener {
             itemClick(1)
             dialog?.dismiss()
+        }
+    }
+
+    companion object {
+        lateinit var itemClick: (Int) -> Unit
+        fun newInstance(
+            itemClick: (Int) -> Unit
+        ): UserInputBottomSheetFragment {
+            this.itemClick = itemClick
+            return UserInputBottomSheetFragment()
         }
     }
 }

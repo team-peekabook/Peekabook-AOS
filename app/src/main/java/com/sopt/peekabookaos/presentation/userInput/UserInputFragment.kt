@@ -26,7 +26,7 @@ import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 @AndroidEntryPoint
 class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fragment_user_input) {
@@ -52,11 +52,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
 
     private fun initBackClickListener() {
         binding.btnUserInputBack.setSingleOnClickListener {
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.action_userInputFragment_to_socialLoginFragment)
-                }
-            }
+            findNavController().navigate(R.id.action_userInputFragment_to_socialLoginFragment)
         }
     }
 
@@ -81,7 +77,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
 
     private fun initAddClickListener() {
         binding.btnUserInputAdd.setOnClickListener {
-            val userInputBottomSheetFragment = UserInputBottomSheetFragment {
+            val userInputBottomSheetFragment = UserInputBottomSheetFragment.newInstance {
                 when (it) {
                     0 -> launcher.launch("image/*")
                     1 -> if (checkPermission()) {
