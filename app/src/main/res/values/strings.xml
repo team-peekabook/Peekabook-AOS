@@ -6,6 +6,7 @@
     <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르면 종료됩니다</string>
     <string name="null_point_exception">NullPointException occurs..</string>
     <string name="null_point_exception_warning_dialog_argument">"WarningDialogFragment에 필요한 arguments에 안들어옴"</string>
+    <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
 
     <!-- login -->
     <string name="social_login_inform_agreement">가입 시, PEEKABOOK의 다음 사항에 동의하는 것으로 간주합니다.</string>
