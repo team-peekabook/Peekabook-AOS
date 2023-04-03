@@ -6,7 +6,6 @@
     <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르면 종료됩니다</string>
     <string name="null_point_exception">NullPointException occurs..</string>
     <string name="null_point_exception_warning_dialog_argument">"WarningDialogFragment에 필요한 arguments에 안들어옴"</string>
-    <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
 
     <!-- login -->
     <string name="social_login_inform_agreement">가입 시, PEEKABOOK의 다음 사항에 동의하는 것으로 간주합니다.</string>
@@ -105,4 +104,9 @@
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+
+    <!-- Network Error -->
+    <string name="network_error_content">앗! 네트워크 연결에 실패했어요.\n확인 후 다시 시도해주세요.</string>
+    <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
+    <string name="network_error_retry">다시 시도하기</string>
 </resources>
