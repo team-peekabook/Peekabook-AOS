@@ -45,6 +45,8 @@ class WarningDialogFragment : DialogFragment() {
                     WarningDialogContent().getWarningDeleteBook(requireContext())
                 WarningType.WARNING_DELETE_FOLLOWER ->
                     WarningDialogContent().getWarningDeleteFollow(requireContext(), follower)
+                WarningType.WARNING_UNFOLLOW ->
+                    WarningDialogContent().getWarningUnfollow(requireContext(), follower)
             }
         }
     }
