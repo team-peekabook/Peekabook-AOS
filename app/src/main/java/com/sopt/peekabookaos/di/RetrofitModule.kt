@@ -60,6 +60,7 @@ object RetrofitModule {
                     .build()
             )
         }
+    }
 
     @PeekaType
     @Provides
