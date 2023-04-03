@@ -6,4 +6,6 @@ interface AuthRepository {
     suspend fun postLogin(socialPlatform: String): Result<Login>
 
     fun initToken(accessToken: String, refreshToken: String)
+
+    fun clearLocalPref()
 }

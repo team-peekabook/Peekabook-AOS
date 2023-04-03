@@ -17,6 +17,13 @@ class LocalPrefDataSource @Inject constructor(
         set(value) = prefs.edit { putString(REFRESH_TOKEN, value) }
         get() = prefs.getString(REFRESH_TOKEN, "") ?: ""
 
+    fun clearLocalPref() {
+        with(prefs.edit()) {
+            clear()
+            commit()
+        }
+    }
+
     companion object {
         const val ACCESS_TOKEN = "access_token"
         const val REFRESH_TOKEN = "refresh_token"
