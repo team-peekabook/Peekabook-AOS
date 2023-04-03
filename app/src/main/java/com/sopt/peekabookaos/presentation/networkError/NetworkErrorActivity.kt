@@ -22,7 +22,7 @@ class NetworkErrorActivity :
     private fun checkNetworkConnect() {
         binding.btnNetworkErrorRetry.setOnClickListener {
             if (isNetworkConnected()) {
-                // TODO by 이빵주 : 온보딩 or 메인으로 분기처리하기
+                // TODO by 이빵주 : 로그인 or 메인으로 분기처리하기
                 startActivity(Intent(this, MainActivity::class.java))
                 overridePendingTransition(0, 0)
                 finish()

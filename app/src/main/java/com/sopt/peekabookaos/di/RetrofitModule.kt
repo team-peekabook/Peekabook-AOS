@@ -55,8 +55,8 @@ object RetrofitModule {
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
                     /** 로그인, 회원정보입력 구현할 때에는 45번째 줄을, 나머지는 44번째 줄을 살려서 사용하세요! */
-                    .addHeader(AUTH, USER_ID)
-                    // .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
+                    // .addHeader(AUTH, USER_ID)
+                    .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
                     .build()
             )
         }
