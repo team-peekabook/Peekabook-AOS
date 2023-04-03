@@ -1,31 +1,39 @@
-package com.sopt.peekabookaos.presentation.userInput
+package com.sopt.peekabookaos.presentation.bookshelf
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sopt.peekabookaos.databinding.DialogUserInputBottomSheetBinding
+import com.sopt.peekabookaos.databinding.DialogBookshelfBottomSheetBinding
 
-class UserInputBottomSheetFragment : BottomSheetDialogFragment() {
-    private lateinit var binding: DialogUserInputBottomSheetBinding
+class BookShelfBottomSheetFragment : BottomSheetDialogFragment() {
+    private lateinit var binding: DialogBookshelfBottomSheetBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogUserInputBottomSheetBinding.inflate(inflater, container, false)
+        binding = DialogBookshelfBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvUserInputBottomSheetChooseAlbum.setOnClickListener {
+        bottomSheetClickListener()
+    }
+
+    private fun bottomSheetClickListener() {
+        binding.tvBookshelfBottomSheetUnfollow.setOnClickListener {
             itemClick(0)
             dialog?.dismiss()
         }
-        binding.tvUserInputBottomSheetCamera.setOnClickListener {
+        binding.tvBookshelfBottomSheetReport.setOnClickListener {
             itemClick(1)
+            dialog?.dismiss()
+        }
+        binding.tvBookshelfBottomSheetBlock.setOnClickListener {
+            itemClick(2)
             dialog?.dismiss()
         }
     }
@@ -34,9 +42,9 @@ class UserInputBottomSheetFragment : BottomSheetDialogFragment() {
         lateinit var itemClick: (Int) -> Unit
         fun onItemClick(
             itemClick: (Int) -> Unit
-        ): UserInputBottomSheetFragment {
+        ): BookShelfBottomSheetFragment {
             this.itemClick = itemClick
-            return UserInputBottomSheetFragment()
+            return BookShelfBottomSheetFragment()
         }
     }
 }
