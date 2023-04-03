@@ -20,6 +20,10 @@ class BookShelfBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bottomSheetClickListener()
+    }
+
+    private fun bottomSheetClickListener() {
         binding.tvBookshelfBottomSheetUnfollow.setOnClickListener {
             itemClick(0)
             dialog?.dismiss()
