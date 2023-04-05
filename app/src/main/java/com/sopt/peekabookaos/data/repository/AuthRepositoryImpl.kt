@@ -14,7 +14,6 @@ class AuthRepositoryImpl @Inject constructor(
         kotlin.runCatching { authDataSource.postLogin(socialPlatform) }.map { response ->
             requireNotNull(response.data).toToken()
         }
-        }
 
     override fun initToken(accessToken: String, refreshToken: String) {
         localPrefDataSource.accessToken = accessToken
