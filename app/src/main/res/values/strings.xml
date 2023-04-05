@@ -121,6 +121,20 @@
     <string name="block_title">차단된 계정</string>
     <string name="block_cancel">차단 해제</string>
 
+    <!-- Report -->
+    <string name="report_title">사용자 신고하기</string>
+    <string name="report_reason">신고 사유 선택</string>
+    <string name="report_inadequate">부적절한 게시물</string>
+    <string name="report_curse">욕설 및 비하 발언</string>
+    <string name="report_promote">홍보성 컨텐츠</string>
+    <string name="report_nickname">닉네임 신고</string>
+    <string name="report_etc">기타</string>
+    <string name="report_detail_reason">구체적인 신고 사유를 작성해 주세요.</string>
+    <string name="report_confirm">신고하신 내용은 검토 후 빠른 시일 내 조치하겠습니다.</string>
+    <string name="report_report">신고하기</string>
+    <string name="report_dialog_confirm">신고가 정상적으로 접수되었습니다.</string>
+    <string name="report_dialog_home">홈으로 돌아가기</string>
+
     <!--User Input-->
     <string name="user_input_navigation_bar">회원 가입</string>
     <string name="user_input_nickname">닉네임</string>
