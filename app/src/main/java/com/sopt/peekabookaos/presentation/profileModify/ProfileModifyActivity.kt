@@ -44,8 +44,8 @@ class ProfileModifyActivity :
         initObserver()
         initAddClickListener()
         initProfileClickListener()
-        goToMyPageFragment()
         initBackPressedCallback()
+        goToMyPageFragment()
     }
 
     private fun initBackClickListener() {
