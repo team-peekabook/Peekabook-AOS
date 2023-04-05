@@ -54,6 +54,13 @@
     <string name="bookshelf_empty_friend_list">친구추가 버튼을 눌러 친구를 추가해보세요!</string>
     <string name="bookshelf_bottom_view_empty_my">아직 책장에 책이 없어요.\n+버튼을 눌러 좋아하는 책을 추가해볼까요?</string>
     <string name="bookshelf_bottom_view_empty_friend">친구 책장이 텅 비어있어요!</string>
+    <string name="bookshelf_bottom_sheet_unfollow">언팔로우</string>
+    <string name="bookshelf_bottom_sheet_report">신고</string>
+    <string name="bookshelf_bottom_sheet_block">차단</string>
+    <string name="bookshelf_dialog_block_title">%s님을 차단하시겠어요?</string>
+    <string name="bookshelf_dialog_block_content">서로에게 추천한 책이 삭제되며,\n서로의 프로필을 볼 수 없게 돼요.</string>
+    <string name="bookshelf_dialog_block">차단하기</string>
+    <string name="bookshelf_dialog_cancel">취소하기</string>
 
     <!-- BookRecommend-->
     <string name="recommend_recommended">추천받은 책</string>
@@ -104,9 +111,11 @@
     <string name="warning_dialog_recommend_title">%s님에게\n책을 추천하시겠어요?</string>
     <string name="warning_dialog_delete_follower_title">%s님을\n정말 삭제하시겠어요?</string>
     <string name="warning_dialog_delete_book_title">해당 책을\n정말 삭제하시겠습니까?</string>
+    <string name="warning_dialog_unfollow_title">%s님을\n 언팔로우 하시겠어요?</string>
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
+    <string name="warning_dialog_unfollow">언팔로우</string>
 
     <!--User Input-->
     <string name="user_input_navigation_bar">회원 가입</string>
@@ -139,4 +148,13 @@
     <string name="profile_modify_album">앨범에서 선택</string>
     <string name="profile_modify_camera">카메라</string>
     <string name="profile_modify_delete">프로필 사진 삭제</string>
+
+    <!-- Withdraw -->
+    <string name="withdraw_title">서비스 탈퇴</string>
+    <string name="withdraw_content">서비스 탈퇴 시,\n사용자의 데이터는 복구되지 않습니다.\n사용자의 개인 정보는 \‘개인정보 보호방침\'에 따라\n일정 기간 보관 후 파기됩니다. </string>
+    <string name="withdraw_confirm">탈퇴하기</string>
+    <string name="withdraw_dialog_title">서비스 탈퇴 완료</string>
+    <string name="withdraw_dialog_content">이용해주셔서 감사합니다.</string>
+    <string name="withdraw_dialog_confirm">확인</string>
+
 </resources>

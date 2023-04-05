@@ -77,7 +77,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
 
     private fun initAddClickListener() {
         binding.btnUserInputAdd.setOnClickListener {
-            val userInputBottomSheetFragment = UserInputBottomSheetFragment.newInstance {
+            val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
                 when (it) {
                     0 -> launcher.launch("image/*")
                     1 -> if (checkPermission()) {

@@ -19,4 +19,8 @@ class AuthRepositoryImpl @Inject constructor(
         localPrefDataSource.accessToken = accessToken
         localPrefDataSource.refreshToken = refreshToken
     }
+
+    override fun clearLocalPref() {
+        localPrefDataSource.clearLocalPref()
+    }
 }
