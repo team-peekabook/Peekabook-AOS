@@ -117,6 +117,10 @@
     <string name="warning_dialog_delete">삭제하기</string>
     <string name="warning_dialog_unfollow">언팔로우</string>
 
+    <!-- block -->
+    <string name="block_title">차단된 계정</string>
+    <string name="block_cancel">차단 해제</string>
+
     <!--User Input-->
     <string name="user_input_navigation_bar">회원 가입</string>
     <string name="user_input_nickname">닉네임</string>
