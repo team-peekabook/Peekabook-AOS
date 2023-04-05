@@ -17,4 +17,5 @@
     <color name="peeka_black_99">#FC000000</color>
     <color name="kakao_brown">#4e2a00</color>
     <color name="kakao_yellow">#fee400</color>
+    <color name="network_background">#6A6964</color>
 </resources>
