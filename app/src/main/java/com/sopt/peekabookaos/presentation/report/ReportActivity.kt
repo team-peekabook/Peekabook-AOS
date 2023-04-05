@@ -15,18 +15,20 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
         binding.vm = reportViewModel
-
         initReportBtnClickListener()
-        binding.rgReportRadiogroup.setOnCheckedChangeListener { _, checkedId ->
-            setSelectedReasonId(checkedId)
-        }
+        initReportRadioClickListener()
     }
 
     private fun initReportBtnClickListener() {
         binding.tvReportReport.setSingleOnClickListener {
             ReportConfirmDialog().show(supportFragmentManager, TAG)
+        }
+    }
+
+    private fun initReportRadioClickListener() {
+        binding.rgReportRadiogroup.setOnCheckedChangeListener { _, checkedId ->
+            setSelectedReasonId(checkedId)
         }
     }
 
