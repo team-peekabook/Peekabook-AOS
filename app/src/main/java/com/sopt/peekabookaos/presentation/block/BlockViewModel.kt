@@ -1,19 +1,39 @@
 package com.sopt.peekabookaos.presentation.block
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.usecase.GetBlockUseCase
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class BlockViewModel : ViewModel() {
-    val blockList =
-        listOf(
-            FriendList(0, "문수빈", "https://nhim.splf.in/image/acnh/animal/Poppy.png"),
-            FriendList(1, "이현우", "https://nhim.splf.in/image/acnh/animal/Bluebear.png"),
-            FriendList(2, "박강희", "https://nhim.splf.in/image/acnh/animal/Ketchup.png"),
-            FriendList(3, "김하정", "https://nhim.splf.in/image/acnlanimal/Marshal.png"),
-            FriendList(4, "이영주", "https://nhim.splf.in/image/acnh/animal/Agent%20S.png")
-        )
+class BlockViewModel @Inject constructor(
+    private val getBlockUseCase: GetBlockUseCase
+) : ViewModel() {
+    private val _blockData = MutableLiveData<List<FriendList>>()
+    val blockData: LiveData<List<FriendList>> = _blockData
 
-    fun getBlockData() {
-        // 서버연결시 사용
+    private val _isServerStatus = MutableLiveData(false)
+    val isServerStatus: LiveData<Boolean> = _isServerStatus
+
+    init {
+        getBlock()
+    }
+
+    private fun getBlock() {
+        viewModelScope.launch {
+            getBlockUseCase()
+                .onSuccess { response ->
+                    _blockData.value = response
+                    _isServerStatus.value = true
+                }
+                .onFailure { throwable ->
+                    _isServerStatus.value = false
+                    Timber.e("$throwable")
+                }
+        }
     }
 }
