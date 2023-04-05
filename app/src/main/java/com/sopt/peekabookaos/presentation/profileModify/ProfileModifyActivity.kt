@@ -1,11 +1,19 @@
 package com.sopt.peekabookaos.presentation.profileModify
 
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.app.ActivityCompat
+import com.sopt.peekabookaos.Manifest
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityProfileModifyBinding
 import com.sopt.peekabookaos.presentation.myPage.MyPageFragment
@@ -13,8 +21,12 @@ import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
-import kotlin.system.exitProcess
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
+@AndroidEntryPoint
 class ProfileModifyActivity :
     BindingActivity<ActivityProfileModifyBinding>(R.layout.activity_profile_modify) {
     private val viewModel: ProfileModifyViewModel by viewModels()
@@ -23,7 +35,7 @@ class ProfileModifyActivity :
             viewModel.updateProfileImage(uri)
         }
     }
-    private var onBackPressedTime = 0L
+    private var photoURI: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +46,31 @@ class ProfileModifyActivity :
         initDuplicateClickListener()
         initObserver()
         initProfileClickListener()
+        goToMyPageFragment()
         initBackPressedCallback()
+    }
+
+    private fun initBackClickListener() {
+        binding.btnProfileModifyBack.setSingleOnClickListener {
+            finish()
+        }
+    }
+
+    private fun goToMyPageFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.cl_profile_modify, MyPageFragment())
+            .commit()
+    }
+
+    private fun initBackPressedCallback() {
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    goToMyPageFragment()
+                }
+            }
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -45,25 +81,80 @@ class ProfileModifyActivity :
         }
     }
 
-    private fun initBackClickListener() {
-        binding.btnProfileModifyBack.setSingleOnClickListener {
-            finish()
+    private fun initAddClickListener() {
+        binding.btnProfileModifyAdd.setOnClickListener {
+            val profileModifyBottomSheetFragment = ProfileModifyBottomSheetFragment.onItemClick {
+                when (it) {
+                    0 -> launcher.launch("image/*")
+                    1 -> if (checkPermission()) {
+                        dispatchTakePictureIntentEx()
+                    } else {
+                        requestPermission()
+                    }
+                }
+            }
+            profileModifyBottomSheetFragment.show(
+                supportFragmentManager,
+                profileModifyBottomSheetFragment.tag
+            )
         }
     }
 
-    private fun initBackPressedCallback() {
-        onBackPressedDispatcher.addCallback {
-            if (System.currentTimeMillis() - onBackPressedTime >= WAITING_DEADLINE) {
-                onBackPressedTime = System.currentTimeMillis()
-                ToastMessageUtil.showToast(
-                    this@ProfileModifyActivity,
-                    getString(R.string.finish_app_toast_msg)
-                )
-            } else {
-                finishAffinity()
-                System.runFinalization()
-                exitProcess(0)
-            }
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, CAMERA, READ_EXTERNAL_STORAGE),
+            1
+        )
+    }
+
+    private fun checkPermission(): Boolean {
+        return (
+            ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+            )
+    }
+
+    @Override
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            ToastMessageUtil.showToast(requireActivity(), "권한 설정되었습니다.")
+        } else {
+            ToastMessageUtil.showToast(requireActivity(), "권한 허용이 거부되었습니다.")
+        }
+    }
+
+    private fun dispatchTakePictureIntentEx() {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val uri: Uri? = createImageUri("JPEG_${timeStamp}_", "image/jpeg")
+        photoURI = uri
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+        startActivityForResult(takePictureIntent, REQUEST_CREATE_EX)
+    }
+
+    private fun createImageUri(filename: String, mimeType: String): Uri? {
+        var values = ContentValues()
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, filename)
+        values.put(MediaStore.Images.Media.MIME_TYPE, mimeType)
+        return context?.contentResolver?.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            values
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CREATE_EX) {
+            photoURI?.let { viewModel.updateProfileImage(it) }
         }
     }
 
@@ -96,13 +187,12 @@ class ProfileModifyActivity :
     }
 
     private fun initProfileClickListener() {
-        binding.ivProfileModifyAdd.setSingleOnClickListener {
+        binding.btnProfileModifyAdd.setSingleOnClickListener {
             launcher.launch("image/*")
         }
     }
 
     companion object {
-        private const val WAITING_DEADLINE = 2000L
+        private const val REQUEST_CREATE_EX = 3
     }
 }
-

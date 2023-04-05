@@ -25,7 +25,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_detail_back"
+            android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
-            android:text="프로필 수정"
+            android:text="@string/profile_modify_title"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
             android:layout_width="80dp"
             android:layout_height="0dp"
             android:layout_marginTop="39dp"
-            tools:src="@drawable/img"
+            tools:src="@color/black"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
             app:layout_constraintTop_toTopOf="@id/iv_profile_modify_image"/>
 
         <ImageButton
-            android:id="@+id/iv_profile_modify_add"
+            android:id="@+id/btn_profile_modify_add"
             android:layout_width="12dp"
             android:layout_height="wrap_content"
             android:layout_margin="65dp"
@@ -83,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@id/iv_profile_modify_image"
             android:paddingVertical="8dp"
             android:paddingStart="14dp"
-            android:text="닉네임"
+            android:text="@string/profile_modify_nickname"
             android:textColor="@color/peeka_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -135,7 +135,7 @@
             android:clickable="@{vm.isDuplicateButton == true? true: false}"
             android:paddingHorizontal="8dp"
             android:paddingVertical="6dp"
-            android:text="중복확인"
+            android:text="@string/profile_modify_duplication"
             android:textColor="@color/peeka_white"
             app:layout_constraintBottom_toBottomOf="@+id/et_profile_modify_nickname"
             app:layout_constraintEnd_toEndOf="@id/et_profile_modify_nickname"
@@ -162,7 +162,7 @@
             android:background="@color/peeka_red"
             android:paddingVertical="8dp"
             android:paddingStart="14dp"
-            android:text="한 줄 소개"
+            android:text="@string/profile_modify_introduce"
             android:textColor="@color/peeka_white"
             app:layout_constraintStart_toStartOf="@id/tv_profile_modify_nickname"
             app:layout_constraintEnd_toEndOf="@id/tv_profile_modify_nickname"
@@ -209,7 +209,7 @@
             android:layout_height="wrap_content"
             android:background="@{vm.isCheckButton == true? @color/peeka_red: @color/peeka_g_1}"
             android:clickable="@{vm.isCheckButton == true? true: false}"
-            android:text="확인"
+            android:text="@string/profile_modify_check"
             android:padding="12dp"
             android:layout_marginEnd="3dp"
             android:layout_marginTop="12dp"

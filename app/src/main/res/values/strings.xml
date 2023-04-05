@@ -108,11 +108,6 @@
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
 
-    <string name="profile_modify_nickname_count">%d/6</string>
-    <string name="profile_modify_introduce_count">%d/40</string>
-    <string name="profile_modify_unavailable_nickname_message">이미 사용중인 닉네임 입니다</string>
-    <string name="profile_modify_available_nickname_message">사용 가능한 닉네임 입니다</string>
-
     <!--User Input-->
     <string name="user_input_navigation_bar">회원 가입</string>
     <string name="user_input_nickname">닉네임</string>
@@ -128,4 +123,20 @@
     <string name="user_input_check_button">확인</string>
     <string name="user_input_choose_album">앨범에서 선택</string>
     <string name="user_input_camera">카메라</string>
+
+    <!--Profile Modify-->
+    <string name="profile_modify_nickname">닉네임</string>
+    <string name="profile_modify_title">프로필 수정</string>
+    <string name="profile_modify_duplication">중복확인</string>
+    <string name="profile_modify_introduce">한 줄 소개</string>
+    <string name="profile_modify_check">확인</string>
+    <string name="profile_modify_nickname_count">%d/6</string>
+    <string name="profile_modify_introduce_count">%d/40</string>
+    <string name="profile_modify_unavailable_nickname_message">이미 사용중인 닉네임 입니다</string>
+    <string name="profile_modify_available_nickname_message">사용 가능한 닉네임 입니다</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_modify_album">앨범에서 선택</string>
+    <string name="profile_modify_camera">카메라</string>
+    <string name="profile_modify_delete">프로필 사진 삭제</string>
 </resources>
