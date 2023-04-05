@@ -37,7 +37,7 @@ class FriendBlockAdapter :
     class FriendBlockViewHolder(private val binding: ItemBlockBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(blockFriend: FriendList) {
-            binding.friend = blockFriend
+            binding.data = blockFriend
         }
     }
 
