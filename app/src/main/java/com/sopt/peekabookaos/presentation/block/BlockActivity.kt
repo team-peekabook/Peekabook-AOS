@@ -21,6 +21,10 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
 
     private fun initAdapter() {
         binding.rvBlock.adapter = FriendBlockAdapter()
-        blockAdapter?.submitList(blockViewModel.blockList)
+        blockViewModel.isServerStatus.observe(this) { success ->
+            if (success) {
+                blockAdapter?.submitList(blockViewModel.blockData.value)
+            }
+        }
     }
 }
