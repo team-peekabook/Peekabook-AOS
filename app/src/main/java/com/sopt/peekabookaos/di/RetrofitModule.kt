@@ -23,7 +23,7 @@ object RetrofitModule {
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
     private const val AUTH = "auth"
-    private const val USER_ID = "18"
+    private const val USER_ID = "19"
     private const val BEARER = "Bearer "
     private const val ACCESS_TOKEN = "accessToken"
 
@@ -33,20 +33,29 @@ object RetrofitModule {
 
     @PeekaType
     @Provides
-    fun providesPeekaInterceptor(localPrefDataSource: LocalPrefDataSource): Interceptor =
-        Interceptor { chain ->
-            with(chain) {
-                proceed(
-                    request()
-                        .newBuilder()
-                        .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        /** 로그인, 회원정보입력 구현할 때에는 45번째 줄을, 나머지는 44번째 줄을 살려서 사용하세요! */
-//                        .addHeader(AUTH, USER_ID)
-                        .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
-                        .build()
-                )
-            }
+    fun providesPeekaInterceptor(
+        @ApplicationContext context: Context,
+        localPrefDataSource: LocalPrefDataSource
+    ): Interceptor = Interceptor { chain ->
+        if (!context.isNetworkConnected()) {
+            context.startActivity(
+                Intent(context, NetworkErrorActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
+            )
         }
+        with(chain) {
+            proceed(
+                request()
+                    .newBuilder()
+                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
+                    /** 로그인, 회원정보입력 구현할 때에는 45번째 줄을, 나머지는 44번째 줄을 살려서 사용하세요! */
+                    // .addHeader(AUTH, USER_ID)
+                    .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
+                    .build()
+            )
+        }
+    }
 
     @PeekaType
     @Provides

@@ -38,6 +38,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".presentation.networkError.NetworkErrorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
