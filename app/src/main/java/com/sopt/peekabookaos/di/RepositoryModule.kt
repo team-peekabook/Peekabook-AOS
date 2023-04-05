@@ -1,21 +1,7 @@
 package com.sopt.peekabookaos.di
 
-import com.sopt.peekabookaos.data.repository.AuthRepositoryImpl
-import com.sopt.peekabookaos.data.repository.BookRepositoryImpl
-import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
-import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
-import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
-import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
-import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
-import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
-import com.sopt.peekabookaos.domain.repository.AuthRepository
-import com.sopt.peekabookaos.domain.repository.BookRepository
-import com.sopt.peekabookaos.domain.repository.DetailRepository
-import com.sopt.peekabookaos.domain.repository.NaverRepository
-import com.sopt.peekabookaos.domain.repository.NotificationRepository
-import com.sopt.peekabookaos.domain.repository.RecommendRepository
-import com.sopt.peekabookaos.domain.repository.SearchRepository
-import com.sopt.peekabookaos.domain.repository.ShelfRepository
+import com.sopt.peekabookaos.data.repository.*
+import com.sopt.peekabookaos.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -72,4 +58,10 @@ abstract class RepositoryModule {
     abstract fun bindToNaverRepository(
         naverRepositoryImpl: NaverRepositoryImpl
     ): NaverRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindToUserInputRepository(
+        userInputRepositoryImpl: UserInputRepositoryImpl
+    ): UserInputRepository
 }

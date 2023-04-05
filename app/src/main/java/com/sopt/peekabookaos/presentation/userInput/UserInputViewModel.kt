@@ -4,8 +4,17 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class UserInputViewModel : ViewModel() {
+@HiltViewModel
+class UserInputViewModel @Inject constructor(
+    private val postDuplicateUseCase: PostDuplicateUseCase
+) : ViewModel() {
     private val _isNickname: MutableLiveData<Boolean> = MutableLiveData(true)
     val isNickname: LiveData<Boolean> = _isNickname
 
@@ -28,12 +37,19 @@ class UserInputViewModel : ViewModel() {
 
     val introduce = MutableLiveData<String>()
 
-    private var nicknameList = listOf("문수빈", "한새연", "텽", "a", "bc")
-
     fun getNickNameState() {
-        _isNickname.value = nicknameList.contains(nickname.value)
-        updateNicknameMessage(true)
-        updateDuplicateButtonState(requireNotNull(_isNickname.value))
+        viewModelScope.launch {
+            postDuplicateUseCase(requireNotNull(nickname.value)).onSuccess { check ->
+                _isNickname.value = (check == 1)
+                updateNicknameMessage(true)
+                updateDuplicateButtonState(requireNotNull(_isNickname.value))
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+            }
+        }
+//        _isNickname.value = false
+//        updateNicknameMessage(true)
+//        updateDuplicateButtonState(requireNotNull(_isNickname.value))
     }
 
     fun updateWritingState() {
