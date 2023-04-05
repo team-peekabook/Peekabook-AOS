@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ReportViewModel : ViewModel() {
-    private val _selectedReasonId = MutableLiveData(1)
+    private val selectedReasonId = MutableLiveData(1)
 
     val reason = MutableLiveData("")
 
     fun setSelectedReasonId(id: Int) {
-        _selectedReasonId.value = id
+        selectedReasonId.value = id
     }
 }
