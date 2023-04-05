@@ -72,5 +72,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_profile_modify_bottom_sheet_2" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
