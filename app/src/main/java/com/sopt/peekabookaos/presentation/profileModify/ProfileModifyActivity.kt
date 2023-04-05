@@ -1,6 +1,5 @@
 package com.sopt.peekabookaos.presentation.profileModify
 
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
@@ -9,11 +8,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
-import com.sopt.peekabookaos.Manifest
+import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityProfileModifyBinding
 import com.sopt.peekabookaos.presentation.myPage.MyPageFragment
@@ -24,7 +22,6 @@ import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 @AndroidEntryPoint
 class ProfileModifyActivity :
@@ -45,6 +42,7 @@ class ProfileModifyActivity :
         initBackClickListener()
         initDuplicateClickListener()
         initObserver()
+        initAddClickListener()
         initProfileClickListener()
         goToMyPageFragment()
         initBackPressedCallback()
@@ -102,18 +100,22 @@ class ProfileModifyActivity :
 
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, CAMERA, READ_EXTERNAL_STORAGE),
+            this,
+            arrayOf(
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ),
             1
         )
     }
 
     private fun checkPermission(): Boolean {
         return (
-            ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA)
+            ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED
             )
     }
@@ -126,9 +128,9 @@ class ProfileModifyActivity :
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            ToastMessageUtil.showToast(requireActivity(), "권한 설정되었습니다.")
+            ToastMessageUtil.showToast(this, "권한 설정되었습니다.")
         } else {
-            ToastMessageUtil.showToast(requireActivity(), "권한 허용이 거부되었습니다.")
+            ToastMessageUtil.showToast(this, "권한 허용이 거부되었습니다.")
         }
     }
 
@@ -145,7 +147,7 @@ class ProfileModifyActivity :
         var values = ContentValues()
         values.put(MediaStore.Images.Media.DISPLAY_NAME, filename)
         values.put(MediaStore.Images.Media.MIME_TYPE, mimeType)
-        return context?.contentResolver?.insert(
+        return contentResolver?.insert(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             values
         )
