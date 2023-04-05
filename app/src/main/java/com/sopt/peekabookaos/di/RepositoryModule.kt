@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.di
 
 import com.sopt.peekabookaos.data.repository.AuthRepositoryImpl
+import com.sopt.peekabookaos.data.repository.BlockRepositoryImpl
 import com.sopt.peekabookaos.data.repository.BookRepositoryImpl
 import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
@@ -9,6 +10,7 @@ import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
 import com.sopt.peekabookaos.domain.repository.AuthRepository
+import com.sopt.peekabookaos.domain.repository.BlockRepository
 import com.sopt.peekabookaos.domain.repository.BookRepository
 import com.sopt.peekabookaos.domain.repository.DetailRepository
 import com.sopt.peekabookaos.domain.repository.NaverRepository
@@ -72,4 +74,10 @@ abstract class RepositoryModule {
     abstract fun bindToNaverRepository(
         naverRepositoryImpl: NaverRepositoryImpl
     ): NaverRepository
+
+    @Binds
+    @Singleton
+    abstract fun blockRepository(
+        blockRepositoryImpl: BlockRepositoryImpl
+    ): BlockRepository
 }
