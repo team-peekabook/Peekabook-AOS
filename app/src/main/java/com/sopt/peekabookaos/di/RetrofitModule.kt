@@ -1,11 +1,16 @@
 package com.sopt.peekabookaos.di
 
+import android.content.Context
+import android.content.Intent
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.peekabookaos.BuildConfig
 import com.sopt.peekabookaos.data.source.local.LocalPrefDataSource
+import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity
+import com.sopt.peekabookaos.util.extensions.isNetworkConnected
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -22,8 +27,6 @@ object RetrofitModule {
     private val json = Json { ignoreUnknownKeys = true }
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
-    private const val AUTH = "auth"
-    private const val USER_ID = "19"
     private const val BEARER = "Bearer "
     private const val ACCESS_TOKEN = "accessToken"
 
@@ -49,8 +52,6 @@ object RetrofitModule {
                 request()
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                    /** 로그인, 회원정보입력 구현할 때에는 45번째 줄을, 나머지는 44번째 줄을 살려서 사용하세요! */
-                    // .addHeader(AUTH, USER_ID)
                     .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
                     .build()
             )
