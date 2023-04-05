@@ -47,9 +47,6 @@ class UserInputViewModel @Inject constructor(
                 Timber.e("$throwable")
             }
         }
-//        _isNickname.value = false
-//        updateNicknameMessage(true)
-//        updateDuplicateButtonState(requireNotNull(_isNickname.value))
     }
 
     fun updateWritingState() {
