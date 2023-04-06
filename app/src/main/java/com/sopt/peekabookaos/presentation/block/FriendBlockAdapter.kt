@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.block
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +33,20 @@ class FriendBlockAdapter :
         position: Int
     ) {
         holder.onBind(getItem(position))
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
     }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+
+    private lateinit var itemClickListener: OnItemClickListener
 
     class FriendBlockViewHolder(private val binding: ItemBlockBinding) :
         RecyclerView.ViewHolder(binding.root) {
