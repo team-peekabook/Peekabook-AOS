@@ -2,6 +2,8 @@ package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.source.remote.UserInputDataSource
 import com.sopt.peekabookaos.domain.repository.UserInputRepository
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class UserInputRepositoryImpl @Inject constructor(
@@ -15,4 +17,13 @@ class UserInputRepositoryImpl @Inject constructor(
                 nickname
             )
         }.map { response -> requireNotNull(response.data).check }
+
+    override suspend fun patchSignUp(
+        profileImage: MultipartBody.Part,
+        requestBodyMap: HashMap<String, RequestBody>
+    ): Result<Boolean> =
+        kotlin.runCatching { userInputDataSource.patchSignUp(profileImage, requestBodyMap) }
+            .map { response ->
+                response.success
+            }
 }

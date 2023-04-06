@@ -28,7 +28,7 @@ object RetrofitModule {
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
     private const val BEARER = "Bearer "
-    private const val ACCESS_TOKEN = "accessToken"
+    private const val ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI2LCJpYXQiOjE2ODA2ODExNTIsImV4cCI6MTY4MTExMzE1Mn0.Oy1YfNsio6fHKguaLh1wly4f-QElc8G_FBF0CEFvrD0"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
