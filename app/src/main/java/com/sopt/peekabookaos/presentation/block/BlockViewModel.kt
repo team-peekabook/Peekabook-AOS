@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.GetBlockUseCase
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,6 +16,9 @@ class BlockViewModel @Inject constructor(
 ) : ViewModel() {
     private val _blockData = MutableLiveData<List<FriendList>>()
     val blockData: LiveData<List<FriendList>> = _blockData
+
+    private val _friendData: MutableLiveData<SelfIntro> = MutableLiveData()
+    val friendData: LiveData<SelfIntro> = _friendData
 
     private val _isServerStatus = MutableLiveData(false)
     val isServerStatus: LiveData<Boolean> = _isServerStatus
@@ -35,5 +39,8 @@ class BlockViewModel @Inject constructor(
                     Timber.e("$throwable")
                 }
         }
+    }
+    fun deleteBlock() {
+        // TODO("차단 api")
     }
 }
