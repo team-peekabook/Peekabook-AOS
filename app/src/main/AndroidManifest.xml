@@ -83,7 +83,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.main.MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"

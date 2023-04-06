@@ -27,10 +27,8 @@ object RetrofitModule {
     private val json = Json { ignoreUnknownKeys = true }
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
-    private const val AUTH = "auth"
-    private const val USER_ID = "19"
     private const val BEARER = "Bearer "
-    private const val ACCESS_TOKEN = "accessToken"
+    private const val ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI2LCJpYXQiOjE2ODA2ODExNTIsImV4cCI6MTY4MTExMzE1Mn0.Oy1YfNsio6fHKguaLh1wly4f-QElc8G_FBF0CEFvrD0"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
@@ -54,8 +52,6 @@ object RetrofitModule {
                 request()
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                    /** 로그인, 회원정보입력 구현할 때에는 45번째 줄을, 나머지는 44번째 줄을 살려서 사용하세요! */
-                    // .addHeader(AUTH, USER_ID)
                     .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
                     .build()
             )
