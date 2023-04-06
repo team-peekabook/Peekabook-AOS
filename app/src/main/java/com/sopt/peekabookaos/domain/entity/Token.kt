@@ -1,6 +1,6 @@
 package com.sopt.peekabookaos.domain.entity
 
-data class Login(
+data class Token(
     val accessToken: String = "",
     val refreshToken: String = "",
     val isSignedUp: Boolean = false
