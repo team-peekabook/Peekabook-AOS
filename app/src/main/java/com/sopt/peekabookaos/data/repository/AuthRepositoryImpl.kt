@@ -2,7 +2,7 @@ package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.source.local.LocalPrefDataSource
 import com.sopt.peekabookaos.data.source.remote.AuthDataSource
-import com.sopt.peekabookaos.domain.entity.Login
+import com.sopt.peekabookaos.domain.entity.Token
 import com.sopt.peekabookaos.domain.repository.AuthRepository
 import javax.inject.Inject
 
@@ -10,9 +10,9 @@ class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource,
     private val localPrefDataSource: LocalPrefDataSource
 ) : AuthRepository {
-    override suspend fun postLogin(socialPlatform: String): Result<Login> =
+    override suspend fun postLogin(socialPlatform: String): Result<Token> =
         kotlin.runCatching { authDataSource.postLogin(socialPlatform) }.map { response ->
-            requireNotNull(response.data).toLogin()
+            requireNotNull(response.data).toToken()
         }
 
     override fun initToken(accessToken: String, refreshToken: String) {
