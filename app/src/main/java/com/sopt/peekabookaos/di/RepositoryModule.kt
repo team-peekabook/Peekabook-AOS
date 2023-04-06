@@ -7,6 +7,7 @@ import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
 import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
+import com.sopt.peekabookaos.data.repository.RefreshRepositoryImpl
 import com.sopt.peekabookaos.data.repository.SearchRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ShelfRepositoryImpl
 import com.sopt.peekabookaos.domain.repository.AuthRepository
@@ -16,6 +17,7 @@ import com.sopt.peekabookaos.domain.repository.DetailRepository
 import com.sopt.peekabookaos.domain.repository.NaverRepository
 import com.sopt.peekabookaos.domain.repository.NotificationRepository
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
+import com.sopt.peekabookaos.domain.repository.RefreshRepository
 import com.sopt.peekabookaos.domain.repository.SearchRepository
 import com.sopt.peekabookaos.domain.repository.ShelfRepository
 import dagger.Binds
@@ -27,6 +29,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+    @Binds
+    @Singleton
+    abstract fun bindToRefreshRepository(
+        refreshRepositoryImpl: RefreshRepositoryImpl
+    ): RefreshRepository
+
     @Binds
     @Singleton
     abstract fun bindToAuthRepository(
