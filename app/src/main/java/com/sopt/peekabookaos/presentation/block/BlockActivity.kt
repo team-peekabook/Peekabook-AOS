@@ -48,7 +48,7 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
     }
 
     private fun initBlockDialog() {
-        BlockDialog().withArgs {
+        BlockDeleteDialog().withArgs {
             putString(
                 BlockDialog.FOLLOWER,
                 requireNotNull(blockViewModel.friendData.value).nickname
