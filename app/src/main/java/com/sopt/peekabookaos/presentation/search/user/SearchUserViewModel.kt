@@ -3,6 +3,7 @@ package com.sopt.peekabookaos.presentation.search.user
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.User
+import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetSearchUserUseCase
 import com.sopt.peekabookaos.domain.usecase.PostFollowUseCase
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class SearchUserViewModel @Inject constructor(
     private val getSearchUserUseCase: GetSearchUserUseCase,
     private val deleteFollowUseCase: DeleteFollowUseCase,
-    private val postFollowUseCase: PostFollowUseCase
+    private val postFollowUseCase: PostFollowUseCase,
+    private val deleteBlockUseCase: DeleteBlockUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(User())
     val uiState = _uiState.asStateFlow()
@@ -29,6 +31,9 @@ class SearchUserViewModel @Inject constructor(
     private val _isFollowed = MutableStateFlow(false)
     val isFollowed = _isFollowed.asStateFlow()
 
+    private val _isBlocked = MutableStateFlow(false)
+    val isBlocked = _isBlocked.asStateFlow()
+
     val nickname = MutableStateFlow("")
 
     fun searchBtnClickListener() {
@@ -36,8 +41,9 @@ class SearchUserViewModel @Inject constructor(
             _searchState.emit(UiState.IDLE)
             getSearchUserUseCase(nickname.value)
                 .onSuccess { response ->
-                    _uiState.emit(response)
-                    _isFollowed.emit(response.isFollowed)
+                    _uiState.value = response
+                    _isFollowed.value = response.isFollowed
+                    _isBlocked.value = response.isBlocked
                     _searchState.emit(UiState.SUCCESS)
                 }.onFailure { throwable ->
                     _searchState.emit(UiState.ERROR)
@@ -47,20 +53,35 @@ class SearchUserViewModel @Inject constructor(
     }
 
     fun followBtnClickListener() {
-        if (_isFollowed.value) {
-            deleteFollow()
+        if (_isBlocked.value) {
+            blockUser()
         } else {
-            postFollow()
+            if (_isFollowed.value) {
+                deleteFollow()
+            } else {
+                postFollow()
+            }
+        }
+    }
+
+    private fun blockUser() {
+        viewModelScope.launch {
+            deleteBlockUseCase(_uiState.value.id)
+                .onSuccess { isBlocked ->
+                    _isBlocked.value = !isBlocked
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                }
         }
     }
 
     private fun deleteFollow() {
         viewModelScope.launch {
             deleteFollowUseCase(_uiState.value.id)
-                .onSuccess {
-                    _isFollowed.emit(false)
+                .onSuccess { isFollowed ->
+                    _isFollowed.value = !isFollowed
                 }.onFailure { throwable ->
-                    _isFollowed.emit(true)
+                    _isFollowed.value = true
                     Timber.e("$throwable")
                 }
         }
@@ -69,10 +90,10 @@ class SearchUserViewModel @Inject constructor(
     private fun postFollow() {
         viewModelScope.launch {
             postFollowUseCase(_uiState.value.id)
-                .onSuccess {
-                    _isFollowed.emit(true)
+                .onSuccess { isFollowed ->
+                    _isFollowed.value = isFollowed
                 }.onFailure { throwable ->
-                    _isFollowed.emit(false)
+                    _isFollowed.value = false
                     Timber.e("$throwable")
                 }
         }
