@@ -88,10 +88,4 @@ abstract class RepositoryModule {
     abstract fun bindToNaverRepository(
         naverRepositoryImpl: NaverRepositoryImpl
     ): NaverRepository
-
-    @Binds
-    @Singleton
-    abstract fun blockRepository(
-        blockRepositoryImpl: BlockRepositoryImpl
-    ): BlockRepository
 }
