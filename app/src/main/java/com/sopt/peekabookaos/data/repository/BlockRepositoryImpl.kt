@@ -7,7 +7,7 @@ import javax.inject.Inject
 class BlockRepositoryImpl @Inject constructor(
     private val blockDataSource: BlockDataSource
 ) : BlockRepository {
-    override suspend fun deleteUnblock(friendId: Int): Result<Boolean> =
+    override suspend fun deleteBlock(friendId: Int): Result<Boolean> =
         kotlin.runCatching { blockDataSource.deleteBlock(friendId) }.map { response ->
             response.success
         }

@@ -1,5 +1,5 @@
 package com.sopt.peekabookaos.domain.repository
 
 interface BlockRepository {
-    suspend fun deleteUnblock(friendId: Int): Result<Boolean>
+    suspend fun deleteBlock(friendId: Int): Result<Boolean>
 }
