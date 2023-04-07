@@ -1,7 +1,6 @@
 package com.sopt.peekabookaos.presentation.block
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBlockBinding
@@ -16,27 +15,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_block) {
     private val blockViewModel: BlockViewModel by viewModels()
-    private val blockAdapter: FriendBlockAdapter?
-        get() = binding.rvBlock.adapter as? FriendBlockAdapter
+    private val blockAdapter = FriendBlockAdapter(::initBlockDialog)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = blockViewModel
-
-        blockAdapter?.setItemClickListener(object : FriendBlockAdapter.OnItemClickListener {
-            override fun onClick(v: View, position: Int) {
-                initBlockDialog()
-            }
-        })
         initAdapter()
         initBackBtnOnClickListener()
     }
 
     private fun initAdapter() {
-        binding.rvBlock.adapter = FriendBlockAdapter()
+        binding.rvBlock.adapter = blockAdapter
         blockViewModel.isServerStatus.observe(this) { success ->
             if (success) {
-                blockAdapter?.submitList(blockViewModel.blockData.value)
+                blockAdapter.submitList(blockViewModel.blockData.value)
             }
         }
     }
@@ -58,5 +50,14 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
                 ConfirmClickListener(confirmAction = { blockViewModel.deleteBlock() })
             )
         }.show(supportFragmentManager, BlockDialog.TAG)
+        initIsDeletedObserve()
+    }
+
+    private fun initIsDeletedObserve() {
+        blockViewModel.isDeleted.observe(this) { success ->
+            if (success) {
+                finish()
+            }
+        }
     }
 }
