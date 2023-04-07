@@ -106,6 +106,7 @@
     <string name="search_user_error">앗! 해당 사용자가 존재하지 않는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
     <string name="search_user_following">팔로잉</string>
     <string name="search_user_follow">팔로우</string>
+    <string name="search_user_unblock">차단 해제</string>
 
     <!-- Warning Dialog -->
     <string name="warning_dialog_recommend_title">%s님에게\n책을 추천하시겠어요?</string>
