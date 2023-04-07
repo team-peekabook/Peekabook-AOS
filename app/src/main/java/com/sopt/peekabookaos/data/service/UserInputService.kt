@@ -15,7 +15,7 @@ interface UserInputService {
     @Multipart
     @PATCH("auth/signup")
     suspend fun patchSignUp(
-        @Part profileImage: MultipartBody.Part,
+        @Part file: MultipartBody.Part,
         @PartMap body: HashMap<String, RequestBody>
     ): NoResponse
 }

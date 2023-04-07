@@ -1,22 +1,26 @@
 package com.sopt.peekabookaos.presentation.userInput
 
 import android.app.Application
-import android.content.ContentResolver
-import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.domain.usecase.PatchSignUpUseCase
 import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
 import com.sopt.peekabookaos.util.ContentUriRequestBody
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -50,7 +54,7 @@ class UserInputViewModel @Inject constructor(
 
     val introduce = MutableLiveData<String>()
 
-    lateinit var profileImageUri: Uri
+    private lateinit var profileImageUri: Uri
 
     fun getNickNameState() {
         viewModelScope.launch {
@@ -65,15 +69,20 @@ class UserInputViewModel @Inject constructor(
     }
 
     fun patchSignUp() {
-        val imageMultipartBody = ContentUriRequestBody(
-            application.baseContext,
-            "image",
-            profileImageUri
-        ).toFormData()
+        val imageMultipartBody =
+            if (::profileImageUri.isInitialized) {
+                ContentUriRequestBody(
+                    application.baseContext,
+                    "file",
+                    profileImageUri
+                ).compressBitmap()
+            } else {
+                basicProfileToMultiPart()
+            }
 
         viewModelScope.launch {
             patchSignUpUseCase(
-                profileImage = imageMultipartBody,
+                file = imageMultipartBody,
                 requestBodyMap = hashMapOf(
                     "nickname" to nickname.value!!.toRequestBody(),
                     "intro" to introduce.value!!.toRequestBody()
@@ -116,15 +125,37 @@ class UserInputViewModel @Inject constructor(
     }
 
     private fun String.toRequestBody(): RequestBody {
-        return this.toRequestBody("text/plain".toMediaTypeOrNull())
+        return this.toRequestBody("application/json".toMediaTypeOrNull())
     }
 
-    private fun Context.resourceUri(resourceId: Int): Uri = with(resources) {
-        Uri.Builder()
-            .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-            .authority(getResourcePackageName(resourceId))
-            .appendPath(getResourceTypeName(resourceId))
-            .appendPath(getResourceEntryName(resourceId))
-            .build()
+    private fun basicProfileToMultiPart(): MultipartBody.Part {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val resId = R.drawable.ic_user_input_profile
+        val drawable = ContextCompat.getDrawable(application.baseContext, resId)
+        val bitmap: Bitmap = Bitmap.createBitmap(
+            drawable?.intrinsicWidth ?: 0,
+            drawable?.intrinsicHeight ?: 0,
+            Bitmap.Config.ARGB_8888
+        )
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val canvas = Canvas(bitmap)
+        requireNotNull(drawable).setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmapToMultipart(bitmap, "file", "basic_profile.jpg")
+    }
+
+    private fun bitmapToMultipart(
+        bitmap: Bitmap,
+        paramName: String,
+        fileName: String
+    ): MultipartBody.Part {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
+
+        val requestBody = RequestBody.Companion.create(
+            "multipart/form-data".toMediaTypeOrNull(),
+            byteArrayOutputStream.toByteArray()
+        )
+        return MultipartBody.Part.createFormData(paramName, fileName, requestBody)
     }
 }

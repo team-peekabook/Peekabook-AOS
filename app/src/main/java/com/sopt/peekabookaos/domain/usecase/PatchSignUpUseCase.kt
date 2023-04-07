@@ -9,7 +9,7 @@ class PatchSignUpUseCase @Inject constructor(
     private val userInputRepository: UserInputRepository
 ) {
     suspend operator fun invoke(
-        profileImage: MultipartBody.Part,
+        file: MultipartBody.Part,
         requestBodyMap: HashMap<String, RequestBody>
-    ) = userInputRepository.patchSignUp(profileImage, requestBodyMap)
+    ) = userInputRepository.patchSignUp(file, requestBodyMap)
 }
