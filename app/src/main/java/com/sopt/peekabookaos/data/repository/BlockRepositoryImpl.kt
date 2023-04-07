@@ -14,4 +14,9 @@ class BlockRepositoryImpl @Inject constructor(
                 blockEntity.toFriendList()
             }
         }
+
+    override suspend fun deleteBlock(friendId: Int): Result<Boolean> =
+        kotlin.runCatching { blockDataSource.deleteBlock(friendId) }.map { response ->
+            response.success
+        }
 }
