@@ -112,7 +112,7 @@ class BookShelfViewModel @Inject constructor(
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isFriendServerStatus.value = false
-                    _isMyServerStatus.value = false
+                    _isMyServerStatus.value = true
                 }
         }
     }

@@ -79,10 +79,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
             if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
-                viewModel.getMyShelfData()
-                viewModel.updateShelfState(USER)
-                friendAdapter?.clearSelection()
-                binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+                updateToMyShelf()
             }
         }
     }
@@ -139,10 +136,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initUserClickListener() {
         binding.ivBookshelfUserProfile.setSingleOnClickListener {
-            viewModel.getMyShelfData()
-            viewModel.updateShelfState(USER)
-            friendAdapter?.clearSelection()
-            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+            updateToMyShelf()
         }
     }
 
@@ -214,7 +208,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,
-                ConfirmClickListener(confirmAction = { viewModel.postUnfollow() })
+                ConfirmClickListener(confirmAction = {
+                    viewModel.postUnfollow()
+                    updateToMyShelf()
+                })
             )
         }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
     }
@@ -227,9 +224,19 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,
-                ConfirmClickListener(confirmAction = { viewModel.postBlock() })
+                ConfirmClickListener(confirmAction = {
+                    viewModel.postBlock()
+                    updateToMyShelf()
+                })
             )
         }.show(childFragmentManager, BlockDialog.TAG)
+    }
+
+    private fun updateToMyShelf() {
+        viewModel.getMyShelfData()
+        viewModel.updateShelfState(USER)
+        friendAdapter?.clearSelection()
+        binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
     }
 
     companion object {
