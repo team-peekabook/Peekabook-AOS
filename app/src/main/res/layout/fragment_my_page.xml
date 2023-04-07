@@ -39,11 +39,11 @@
 
             <ImageView
                 android:id="@+id/iv_my_page_image"
+                setImage="@{vm.userData.profileImage}"
                 android:layout_width="64dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="16dp"
-                setImage="@{vm.userData.profileImage}"
                 android:layout_marginBottom="19dp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_my_page_rect"
                 app:layout_constraintDimensionRatio="1"
@@ -75,6 +75,7 @@
                 app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
 
             <TextView
+                android:id="@+id/tv_my_page_intro"
                 style="@style/S3Md"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
