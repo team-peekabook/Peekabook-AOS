@@ -6,13 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.GetBlockUseCase
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 class BlockViewModel @Inject constructor(
-    private val getBlockUseCase: GetBlockUseCase
+    private val getBlockUseCase: GetBlockUseCase,
+    private val deleteBlockUseCase: DeleteBlockUseCase
 ) : ViewModel() {
     private val _blockData = MutableLiveData<List<FriendList>>()
     val blockData: LiveData<List<FriendList>> = _blockData
@@ -22,6 +24,12 @@ class BlockViewModel @Inject constructor(
 
     private val _isServerStatus = MutableLiveData(false)
     val isServerStatus: LiveData<Boolean> = _isServerStatus
+
+    private val _friendId = MutableLiveData<Int>()
+    val friendId: LiveData<Int> = _friendId
+
+    private val _isDeleted = MutableLiveData<Boolean>()
+    val isDeleted: LiveData<Boolean> = _isDeleted
 
     init {
         getBlock()
@@ -41,6 +49,14 @@ class BlockViewModel @Inject constructor(
         }
     }
     fun deleteBlock() {
-        // TODO("차단 api")
+        viewModelScope.launch {
+            deleteBlockUseCase(requireNotNull(_friendId.value))
+                .onSuccess { success ->
+                    _isDeleted.value = success
+                }.onFailure { throwable ->
+                    _isDeleted.value = false
+                    Timber.e("$throwable")
+                }
+        }
     }
 }
