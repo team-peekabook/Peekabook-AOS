@@ -5,5 +5,6 @@ data class User(
     val nickname: String = "",
     val profileImage: String = "",
     val intro: String = "",
-    val isFollowed: Boolean = false
+    val isFollowed: Boolean = false,
+    val isBlocked: Boolean = false
 )
