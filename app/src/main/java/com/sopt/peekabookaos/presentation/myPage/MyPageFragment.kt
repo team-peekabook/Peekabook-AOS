@@ -16,8 +16,8 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
     }
 
-    /*private val setModifyClickListener(){
-        binding.ivMyPageEdit.setOnClickListener {
+    /*private val initModifyClickListener(){
+        binding.ivMyPageEdit.setSingleClickListener {
             //프로필 수정하기가 머지되면 그 화면으로 넘어가기
         }
     }*/
