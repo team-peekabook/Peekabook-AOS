@@ -1,29 +1,24 @@
 package com.sopt.peekabookaos.presentation.myPage
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentMyPageBinding
+import com.sopt.peekabookaos.util.binding.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MyPageFragment : Fragment() {
-    private var _binding: FragmentMyPageBinding? = null
-    private val binding: FragmentMyPageBinding
-        get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMyPageBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
+    private val myPageViewModel: MyPageViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+    /*private val initModifyClickListener(){
+        binding.ivMyPageEdit.setSingleClickListener {
+            //프로필 수정하기가 머지되면 그 화면으로 넘어가기
+        }
+    }*/
 }

@@ -1,16 +1,11 @@
 package com.sopt.peekabookaos.di
 
-import android.content.Context
-import android.content.Intent
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.peekabookaos.BuildConfig
 import com.sopt.peekabookaos.data.source.local.LocalPrefDataSource
-import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity
-import com.sopt.peekabookaos.util.extensions.isNetworkConnected
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -20,65 +15,56 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Qualifier
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitModule {
+object RefreshRetrofitModule {
     private val json = Json { ignoreUnknownKeys = true }
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
-    private const val AUTH = "auth"
-    private const val USER_ID = "19"
     private const val BEARER = "Bearer "
     private const val ACCESS_TOKEN = "accessToken"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class PeekaType
+    annotation class RefreshType
 
-    @PeekaType
     @Provides
-    fun providesPeekaInterceptor(
-        @ApplicationContext context: Context,
+    @RefreshType
+    fun providesRefreshInterceptor(
         localPrefDataSource: LocalPrefDataSource
-    ): Interceptor = Interceptor { chain ->
-        if (!context.isNetworkConnected()) {
-            context.startActivity(
-                Intent(context, NetworkErrorActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                }
-            )
-        }
-        with(chain) {
-            proceed(
-                request()
+    ): Interceptor =
+        Interceptor { chain ->
+            val request = chain.request()
+            val response = chain.proceed(
+                request
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                    /** 로그인, 회원정보입력 구현할 때에는 45번째 줄을, 나머지는 44번째 줄을 살려서 사용하세요! */
-                    // .addHeader(AUTH, USER_ID)
                     .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
                     .build()
             )
+            response
         }
-    }
 
-    @PeekaType
     @Provides
-    fun providesPeekaOkHttpClient(@PeekaType interceptor: Interceptor): OkHttpClient =
+    @Singleton
+    @RefreshType
+    fun providesRefreshOkHttpClient(@RefreshType interceptor: Interceptor): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .addInterceptor(
-                HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                }
-            ).build()
+                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            )
+            .build()
 
-    @PeekaType
     @Provides
-    fun providesPeekaRetrofit(@PeekaType okHttpClient: OkHttpClient): Retrofit =
+    @Singleton
+    @RefreshType
+    fun providesRefreshRetrofit(@RefreshType okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URI)
             .client(okHttpClient)
