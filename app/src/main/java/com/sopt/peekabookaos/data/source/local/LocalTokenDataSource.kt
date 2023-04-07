@@ -3,10 +3,8 @@ package com.sopt.peekabookaos.data.source.local
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class LocalPrefDataSource @Inject constructor(
+class LocalTokenDataSource @Inject constructor(
     private val prefs: SharedPreferences
 ) {
     var accessToken: String
@@ -25,7 +23,7 @@ class LocalPrefDataSource @Inject constructor(
     }
 
     companion object {
-        const val ACCESS_TOKEN = "access_token"
-        const val REFRESH_TOKEN = "refresh_token"
+        private const val ACCESS_TOKEN = "access_token"
+        private const val REFRESH_TOKEN = "refresh_token"
     }
 }
