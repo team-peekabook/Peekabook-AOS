@@ -25,7 +25,6 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             startActivity(Intent(requireActivity(), WithdrawActivity::class.java))
         }
     }
-
     /*private val initModifyClickListener(){
         binding.ivMyPageEdit.setSingleClickListener {
             //프로필 수정하기가 머지되면 그 화면으로 넘어가기
