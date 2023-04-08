@@ -103,12 +103,16 @@ class BookShelfViewModel @Inject constructor(
             getFriendShelfUseCase(requireNotNull(userId.value))
                 .onSuccess { response ->
                     _friendUserData.value = response.friendList
-                    _friendData.value = response.friendIntro
-                    _pickData.value = response.picks
-                    _bookTotalNum.value = response.bookTotalNum
-                    _shelfData.value = response.books
-                    _isFriendServerStatus.value = true
-                    _isMyServerStatus.value = false
+                    if (updateFriendState()) {
+                        _friendData.value = response.friendIntro
+                        _pickData.value = response.picks
+                        _bookTotalNum.value = response.bookTotalNum
+                        _shelfData.value = response.books
+                        _isFriendServerStatus.value = true
+                        _isMyServerStatus.value = false
+                    } else {
+                        getMyShelfData()
+                    }
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isFriendServerStatus.value = false
@@ -139,5 +143,15 @@ class BookShelfViewModel @Inject constructor(
                     _isBlockStatus.value = false
                 }
         }
+    }
+
+    fun updateFriendState(): Boolean {
+        return requireNotNull(_friendUserData.value).contains(
+            FriendList(
+                requireNotNull(_friendData.value).id,
+                requireNotNull(_friendData.value).nickname,
+                requireNotNull(_friendData.value).profileImage
+            )
+        )
     }
 }
