@@ -6,7 +6,11 @@ import com.sopt.peekabookaos.data.entity.PicksEntity
 import com.sopt.peekabookaos.data.entity.request.PickRequest
 import com.sopt.peekabookaos.data.entity.response.FriendShelfResponse
 import com.sopt.peekabookaos.data.entity.response.MyShelfResponse
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ShelfService {
     @GET("bookshelf/friend/{friendId}")
