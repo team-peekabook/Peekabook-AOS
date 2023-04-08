@@ -10,6 +10,7 @@ import com.sopt.peekabookaos.data.service.RecommendService
 import com.sopt.peekabookaos.data.service.RefreshService
 import com.sopt.peekabookaos.data.service.SearchService
 import com.sopt.peekabookaos.data.service.ShelfService
+import com.sopt.peekabookaos.data.service.UserInputService
 import com.sopt.peekabookaos.di.NaverRetrofitModule.NaverType
 import com.sopt.peekabookaos.di.RefreshRetrofitModule.RefreshType
 import com.sopt.peekabookaos.di.RetrofitModule.PeekaType
@@ -61,4 +62,8 @@ object RetrofitServiceModule {
     @Provides
     fun providesNaverService(@NaverType retrofit: Retrofit): NaverService =
         retrofit.create(NaverService::class.java)
+
+    @Provides
+    fun providesUserInputService(@PeekaType retrofit: Retrofit): UserInputService =
+        retrofit.create(UserInputService::class.java)
 }

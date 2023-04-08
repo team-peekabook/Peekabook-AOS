@@ -52,7 +52,7 @@
             style="@style/EngCBd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_red_fill_circle"
+            android:background="@drawable/ic_pick_modify_red_circle"
             android:elevation="4dp"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="5dp"

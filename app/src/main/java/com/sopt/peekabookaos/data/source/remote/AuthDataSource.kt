@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.data.source.remote
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
+import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.entity.request.LoginRequest
 import com.sopt.peekabookaos.data.entity.response.LoginResponse
 import com.sopt.peekabookaos.data.service.AuthService
@@ -11,4 +12,6 @@ class AuthDataSource @Inject constructor(
 ) {
     suspend fun postLogin(socialPlatform: String): BaseResponse<LoginResponse> =
         authService.postLogin(LoginRequest(socialPlatform))
+
+    suspend fun deleteUser(): NoResponse = authService.deleteUser()
 }

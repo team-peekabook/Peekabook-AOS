@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogWithdrawBinding
-import com.sopt.peekabookaos.presentation.login.LoginActivity
+import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
 
 class WithdrawDialog : DialogFragment() {
     private var _binding: DialogWithdrawBinding? = null
@@ -49,8 +49,7 @@ class WithdrawDialog : DialogFragment() {
     private fun initConfirmBtnClickListener() {
         binding.btnWithdrawDialogConfirm.setOnClickListener {
             finishAffinity(requireActivity())
-            // TODO by 이빵주 온보딩으로 가는 로직으로 수정하기
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            startActivity(Intent(requireActivity(), OnboardingActivity::class.java))
         }
     }
 
