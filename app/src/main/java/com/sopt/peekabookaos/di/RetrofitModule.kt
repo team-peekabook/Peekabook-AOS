@@ -8,7 +8,7 @@ import android.os.Looper
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.peekabookaos.BuildConfig
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.data.source.local.LocalPrefDataSource
+import com.sopt.peekabookaos.data.source.local.LocalTokenDataSource
 import com.sopt.peekabookaos.domain.repository.RefreshRepository
 import com.sopt.peekabookaos.presentation.login.LoginActivity
 import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity
@@ -52,7 +52,7 @@ object RetrofitModule {
         @ApplicationContext context: Context,
         localPref: SharedPreferences,
         refreshRepository: RefreshRepository,
-        localPrefDataSource: LocalPrefDataSource
+        localTokenDataSource: LocalTokenDataSource
     ): Interceptor = Interceptor { chain ->
         if (!context.isNetworkConnected()) {
             context.startActivity(
@@ -66,13 +66,13 @@ object RetrofitModule {
             request
                 .newBuilder()
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
+                .addHeader(ACCESS_TOKEN, BEARER + localTokenDataSource.accessToken)
                 .build()
         )
         when (response.code) {
             EXPIRED_TOKEN -> {
                 runBlocking {
-                    refreshRepository.getRefreshToken(localPrefDataSource.refreshToken)
+                    refreshRepository.getRefreshToken(localTokenDataSource.refreshToken)
                         .onSuccess {
                             response = chain.proceed(
                                 request
@@ -80,7 +80,7 @@ object RetrofitModule {
                                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
                                     .addHeader(
                                         ACCESS_TOKEN,
-                                        BEARER + localPrefDataSource.accessToken
+                                        BEARER + localTokenDataSource.accessToken
                                     )
                                     .build()
                             )

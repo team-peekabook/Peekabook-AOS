@@ -2,8 +2,10 @@ package com.sopt.peekabookaos.presentation.withdraw
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.domain.entity.SplashState
 import com.sopt.peekabookaos.domain.usecase.ClearLocalPrefUseCase
 import com.sopt.peekabookaos.domain.usecase.DeleteUserUseCase
+import com.sopt.peekabookaos.domain.usecase.SetSplashStateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -14,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class WithdrawViewModel @Inject constructor(
     private val deleteUserUseCase: DeleteUserUseCase,
-    private val clearLocalPrefUseCase: ClearLocalPrefUseCase
+    private val clearLocalPrefUseCase: ClearLocalPrefUseCase,
+    private val setSplashStateUseCase: SetSplashStateUseCase
 ) : ViewModel() {
     private val _isWithdraw = MutableSharedFlow<Boolean>()
     val isWithdraw = _isWithdraw.asSharedFlow()
@@ -25,7 +28,7 @@ class WithdrawViewModel @Inject constructor(
                 .onSuccess { success ->
                     _isWithdraw.emit(success)
                     clearLocalPrefUseCase()
-                    // TODO by 이빵주 : 온보딩 상태 초기화
+                    setSplashStateUseCase(SplashState.ONBOARDING)
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }

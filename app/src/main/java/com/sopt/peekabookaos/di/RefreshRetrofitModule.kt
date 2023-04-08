@@ -2,7 +2,7 @@ package com.sopt.peekabookaos.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.peekabookaos.BuildConfig
-import com.sopt.peekabookaos.data.source.local.LocalPrefDataSource
+import com.sopt.peekabookaos.data.source.local.LocalTokenDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +33,7 @@ object RefreshRetrofitModule {
     @Provides
     @RefreshType
     fun providesRefreshInterceptor(
-        localPrefDataSource: LocalPrefDataSource
+        localTokenDataSource: LocalTokenDataSource
     ): Interceptor =
         Interceptor { chain ->
             val request = chain.request()
@@ -41,7 +41,7 @@ object RefreshRetrofitModule {
                 request
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                    .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
+                    .addHeader(ACCESS_TOKEN, BEARER + localTokenDataSource.accessToken)
                     .build()
             )
             response

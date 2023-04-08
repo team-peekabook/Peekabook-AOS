@@ -59,4 +59,10 @@ object BindingAdapter {
             }
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("setImageResource")
+    fun ImageView.setImageResource(resId: Int) {
+        setImageResource(resId)
+    }
 }
