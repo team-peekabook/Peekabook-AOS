@@ -63,6 +63,9 @@ class BookShelfViewModel @Inject constructor(
     private val _isBlockStatus = MutableLiveData<Boolean>()
     val isBlockStatus: LiveData<Boolean> = _isBlockStatus
 
+    private lateinit var userNickname: String
+    private lateinit var userProfileImage: String
+
     init {
         getMyShelfData()
     }
@@ -73,6 +76,8 @@ class BookShelfViewModel @Inject constructor(
 
     fun updateUserId(item: FriendList) {
         _userId.value = item.id
+        userNickname = item.nickname
+        userProfileImage = item.profileImage
     }
 
     fun updateLastSelectedItem(position: Int) {
@@ -145,13 +150,15 @@ class BookShelfViewModel @Inject constructor(
         }
     }
 
-    fun updateFriendState(): Boolean {
+    private fun updateFriendState(): Boolean {
         return requireNotNull(_friendUserData.value).contains(
-            FriendList(
-                requireNotNull(_friendData.value).id,
-                requireNotNull(_friendData.value).nickname,
-                requireNotNull(_friendData.value).profileImage
-            )
+            _userId!!.value?.let { userId ->
+                FriendList(
+                    userId,
+                    userNickname,
+                    userProfileImage
+                )
+            }
         )
     }
 }
