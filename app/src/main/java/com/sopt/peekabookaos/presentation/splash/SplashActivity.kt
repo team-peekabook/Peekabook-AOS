@@ -5,24 +5,32 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
+import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySplashBinding
-import com.sopt.peekabookaos.presentation.login.LoginActivity
+import com.sopt.peekabookaos.domain.entity.SplashState
+import com.sopt.peekabookaos.presentation.main.MainActivity
+import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
+import com.sopt.peekabookaos.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
-class SplashActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySplashBinding
+class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {
+    private val splashViewModel: SplashViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         binding.lottieSplash.playAnimation()
-        Handler(Looper.getMainLooper()).postDelayed({ collectUiEvent() }, DURATION)
+        Handler(Looper.getMainLooper()).postDelayed({ checkSplashState() }, DURATION)
     }
 
-    private fun collectUiEvent() {
-        /** 추후 서버 로그인 로직 구현 시 분기 처리 예정 */
-        startActivity(Intent(this, LoginActivity::class.java))
+    private fun checkSplashState() {
+        when (splashViewModel.getSplashState()) {
+            SplashState.ONBOARDING -> startActivity(Intent(this, OnboardingActivity::class.java))
+            SplashState.MAIN -> startActivity(Intent(this, MainActivity::class.java))
+        }
+        overridePendingTransition(0, 0)
         finish()
     }
 

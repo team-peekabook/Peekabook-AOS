@@ -9,6 +9,9 @@
     <string name="refresh_error">자동로그인이 만료되었습니다. 다시 로그인해주시기 바랍니다.</string>
     <string name="sever_500_error_msg">정보를 불러오는 데 실패했어요.</string>
 
+    <!-- onboarding -->
+    <string name="onboarding_next">내 책장 만들러 가기</string>
+
     <!-- login -->
     <string name="social_login_inform_agreement">가입 시, PEEKABOOK의 다음 사항에 동의하는 것으로 간주합니다.</string>
     <string name="social_login_terms_of_service">서비스 이용약관</string>
