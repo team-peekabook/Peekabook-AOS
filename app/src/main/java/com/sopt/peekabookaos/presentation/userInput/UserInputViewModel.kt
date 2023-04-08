@@ -10,8 +10,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.R
+import com.sopt.peekabookaos.domain.entity.SplashState
 import com.sopt.peekabookaos.domain.usecase.PatchSignUpUseCase
 import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
+import com.sopt.peekabookaos.domain.usecase.SetSplashStateUseCase
 import com.sopt.peekabookaos.util.ContentUriRequestBody
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,8 +29,8 @@ import javax.inject.Inject
 class UserInputViewModel @Inject constructor(
     private val application: Application,
     private val postDuplicateUseCase: PostDuplicateUseCase,
-    private val patchSignUpUseCase: PatchSignUpUseCase
-    // private val setSplashStateUseCase: SetSplashStateUseCase
+    private val patchSignUpUseCase: PatchSignUpUseCase,
+    private val setSplashStateUseCase: SetSplashStateUseCase
 ) : ViewModel() {
     private val _isNickname: MutableLiveData<Boolean> = MutableLiveData(true)
     val isNickname: LiveData<Boolean> = _isNickname
@@ -90,7 +92,7 @@ class UserInputViewModel @Inject constructor(
                 )
             ).onSuccess { response ->
                 _isSignUpStatus.value = response
-                // setSplashStateUseCase(SplashState.MAIN)
+                setSplashStateUseCase(SplashState.MAIN)
             }.onFailure { throwable ->
                 _isSignUpStatus.value = false
                 Timber.e("$throwable")

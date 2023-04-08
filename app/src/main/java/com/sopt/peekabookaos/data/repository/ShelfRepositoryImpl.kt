@@ -34,4 +34,8 @@ class ShelfRepositoryImpl @Inject constructor(
     ): Result<Boolean> =
         kotlin.runCatching { shelfDataSource.patchPick(firstPick, secondPick, thirdPick) }
             .map { response -> response.success }
+
+    override suspend fun postBlock(friendId: Int): Result<Boolean> = kotlin.runCatching {
+        shelfDataSource.postBlock(friendId)
+    }.map { response -> response.success }
 }
