@@ -18,11 +18,13 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         binding.vm = reportViewModel
         initReportBtnClickListener()
         initReportRadioClickListener()
+        initIsReportObserve()
     }
 
     private fun initReportBtnClickListener() {
         binding.tvReportReport.setSingleOnClickListener {
             ReportConfirmDialog().show(supportFragmentManager, TAG)
+            reportViewModel.postReport()
         }
     }
 
@@ -39,6 +41,14 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
             R.id.rb_report_reason_promote -> reportViewModel.setSelectedReasonId(3)
             R.id.rb_report_reason_nickname -> reportViewModel.setSelectedReasonId(4)
             R.id.rb_report_reason_etc -> reportViewModel.setSelectedReasonId(5)
+        }
+    }
+
+    private fun initIsReportObserve() {
+        reportViewModel.isReport.observe(this) { success ->
+            if (success) {
+                this.finish()
+            }
         }
     }
 }
