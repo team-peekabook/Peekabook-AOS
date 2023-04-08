@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBlockBinding
+import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.presentation.bookshelf.BlockDialog
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_block) {
     private val blockViewModel: BlockViewModel by viewModels()
-    private val blockAdapter = FriendBlockAdapter(::initBlockDialog)
+    private val blockAdapter = FriendBlockAdapter(showInitBlockDialog = ::initBlockDialog)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,8 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
         }
     }
 
-    private fun initBlockDialog() {
+    private fun initBlockDialog(friendList: FriendList, friendId: Int) {
+        blockViewModel.deleteBlock(friendId)
         BlockDeleteDialog().withArgs {
             putString(
                 BlockDialog.FOLLOWER,
@@ -47,7 +49,7 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,
-                ConfirmClickListener(confirmAction = { blockViewModel.deleteBlock() })
+                ConfirmClickListener(confirmAction = { blockViewModel.deleteBlock(friendId) })
             )
         }.show(supportFragmentManager, BlockDialog.TAG)
         initIsDeletedObserve()

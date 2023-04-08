@@ -8,10 +8,12 @@ import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.GetBlockUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@HiltViewModel
 class BlockViewModel @Inject constructor(
     private val getBlockUseCase: GetBlockUseCase,
     private val deleteBlockUseCase: DeleteBlockUseCase
@@ -48,9 +50,10 @@ class BlockViewModel @Inject constructor(
                 }
         }
     }
-    fun deleteBlock() {
+
+    fun deleteBlock(friendId: Int) {
         viewModelScope.launch {
-            deleteBlockUseCase(requireNotNull(_friendId.value))
+            deleteBlockUseCase(friendId)
                 .onSuccess { success ->
                     _isDeleted.value = success
                 }.onFailure { throwable ->

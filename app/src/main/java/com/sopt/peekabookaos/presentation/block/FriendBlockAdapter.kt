@@ -8,26 +8,32 @@ import com.sopt.peekabookaos.databinding.ItemBlockBinding
 import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.util.ItemDiffCallback
 
-class FriendBlockAdapter(private val showBlockCancelDialog: () -> Unit) :
+class FriendBlockAdapter(private val showInitBlockDialog: (FriendList, Int) -> Unit) :
     ListAdapter<FriendList, FriendBlockAdapter.FriendBlockViewHolder>(blockDiffUtil) {
     class FriendBlockViewHolder(
-        private val binding: ItemBlockBinding
+        private val binding: ItemBlockBinding,
+        private val showInitBlockDialog: (FriendList, Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(blockFriend: FriendList, showBlockCancelDialog: () -> Unit) {
+        fun onBind(blockFriend: FriendList) {
             binding.data = blockFriend
             binding.tvBlockCancel.setOnClickListener {
-                showBlockCancelDialog()
+                showInitBlockDialog(blockFriend, blockFriend.id)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendBlockViewHolder {
-        val binding = ItemBlockBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FriendBlockViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendBlockViewHolder =
+        FriendBlockViewHolder(
+            ItemBlockBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ),
+            showInitBlockDialog
+        )
 
     override fun onBindViewHolder(holder: FriendBlockViewHolder, position: Int) {
-        holder.onBind(getItem(position), showBlockCancelDialog)
+        holder.onBind(getItem(position))
     }
 
     companion object {
