@@ -121,15 +121,6 @@ object RetrofitModule {
             }
         }
         response
-        with(chain) {
-            proceed(
-                request()
-                    .newBuilder()
-                    .addHeader(CONTENT_TYPE, APPLICATION_JSON)
-                    .addHeader(ACCESS_TOKEN, BEARER + localPrefDataSource.accessToken)
-                    .build()
-            )
-        }
     }
 
     @PeekaType
