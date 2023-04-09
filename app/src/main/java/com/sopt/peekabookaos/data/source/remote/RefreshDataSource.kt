@@ -8,6 +8,6 @@ import javax.inject.Inject
 class RefreshDataSource @Inject constructor(
     private val refreshService: RefreshService
 ) {
-    suspend fun getRefreshToken(refreshToken: String): BaseResponse<RefreshResponse> =
-        refreshService.getRefreshToken(refreshToken)
+    suspend fun getRefreshToken(): BaseResponse<RefreshResponse> =
+        refreshService.getRefreshToken()
 }

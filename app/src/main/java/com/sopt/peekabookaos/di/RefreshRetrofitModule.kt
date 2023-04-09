@@ -42,6 +42,7 @@ object RefreshRetrofitModule {
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
                     .addHeader(ACCESS_TOKEN, BEARER + localTokenDataSource.accessToken)
+                    .addHeader(ACCESS_TOKEN, BEARER + localTokenDataSource.refreshToken)
                     .build()
             )
             response
