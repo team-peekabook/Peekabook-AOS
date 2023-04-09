@@ -20,7 +20,6 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
-import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,10 +78,10 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
             val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
                 when (it) {
                     0 -> launcher.launch("image/*")
-                    1 -> if (checkPermission()) { // 카메라 바텀시트 눌렀을 때, 퍼미션 받았는지 체크하고 받았다면
-                        dispatchTakePictureIntentEx() // 카메라 띄우고
+                    1 -> if (checkPermission()) {
+                        dispatchTakePictureIntentEx()
                     } else {
-                        requestCameraPermission() // 안받았으면 권한 요청으로
+                        requestCameraPermission()
                     }
                 }
             }
@@ -93,7 +92,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         }
     }
 
-    private fun requestCameraPermission() { // 권한 요청 함수
+    private fun requestCameraPermission() {
         requestPermissionLauncher.launch(
             arrayOf(
                 CAMERA,
@@ -108,26 +107,17 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions: Map<String, Boolean> ->
             val isCameraPermissionGranted =
-                permissions[CAMERA] != null && permissions[CAMERA]!! // 카메라 권한 여부
+                permissions[CAMERA] != null && permissions[CAMERA]!!
             val isWriteStoragePermissionGranted =
-                permissions[WRITE_EXTERNAL_STORAGE] != null && permissions[WRITE_EXTERNAL_STORAGE]!! // 내부 저장소 쓰기 권한 여부
+                permissions[WRITE_EXTERNAL_STORAGE] != null && permissions[WRITE_EXTERNAL_STORAGE]!!
             val isReadStoragePermissionGranted =
-                permissions[READ_EXTERNAL_STORAGE] != null && permissions[READ_EXTERNAL_STORAGE]!! // 내부 저장소 읽기 권한 여부
-            if (isCameraPermissionGranted && isWriteStoragePermissionGranted && isReadStoragePermissionGranted) { // 전부 다 권한 허가 됐다면
-                ToastMessageUtil.showToast(
-                    requireContext(),
-                    getString(R.string.user_input_permission) // 허가 됐다는 문구
-                )
-                dispatchTakePictureIntentEx() // 카메라 실행
-            } else {
-                ToastMessageUtil.showToast(
-                    requireContext(),
-                    getString(R.string.user_input_request_permission) // 권한 거부되었을 경우
-                )
+                permissions[READ_EXTERNAL_STORAGE] != null && permissions[READ_EXTERNAL_STORAGE]!!
+            if (isCameraPermissionGranted && isWriteStoragePermissionGranted && isReadStoragePermissionGranted) {
+                dispatchTakePictureIntentEx()
             }
         }
 
-    private fun checkPermission(): Boolean { // 권한 요청 함수
+    private fun checkPermission(): Boolean {
         return (
             ContextCompat.checkSelfPermission(requireActivity(), CAMERA)
                 == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
