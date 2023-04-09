@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -56,8 +55,11 @@ class LogoutDialog : DialogFragment() {
     private fun initLogoutBtnClickListener() {
         binding.btnLogoutDialogConfirm.setSingleOnClickListener {
             myPageViewModel.clearLocalPref()
-            finishAffinity(requireActivity())
-            startActivity(Intent(requireActivity(), OnboardingActivity::class.java))
+            startActivity(
+                Intent(requireActivity(), OnboardingActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
+            )
         }
     }
 

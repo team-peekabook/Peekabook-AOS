@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.main
 
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,9 +17,11 @@ import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
+    private val mainViewModel: MainViewModel by viewModels()
     private var onBackPressedTime = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.vm = mainViewModel
         initBottomNavigationView()
         initBackPressedCallback()
     }
