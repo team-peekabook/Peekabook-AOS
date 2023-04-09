@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface MyPageService {
     @GET("mypage/profile")
-    suspend fun getMyPage(): BaseResponse<List<SelfIntroEntity>>
+    suspend fun getMyPage(): BaseResponse<SelfIntroEntity>
 }

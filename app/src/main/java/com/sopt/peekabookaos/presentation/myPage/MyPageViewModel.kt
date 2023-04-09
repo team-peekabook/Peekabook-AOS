@@ -15,8 +15,8 @@ import javax.inject.Inject
 class MyPageViewModel @Inject constructor(
     private val myPageRepository: MyPageRepository
 ) : ViewModel() {
-    private val _userData = MutableLiveData<List<SelfIntro>>()
-    val userData: LiveData<List<SelfIntro>> = _userData
+    private val _userData = MutableLiveData<SelfIntro>()
+    val userData: LiveData<SelfIntro> = _userData
 
     private val _isServerStatus = MutableLiveData(false)
     val isServerStatus: LiveData<Boolean> = _isServerStatus
@@ -31,6 +31,7 @@ class MyPageViewModel @Inject constructor(
                 .onSuccess { response ->
                     _userData.value = response
                     _isServerStatus.value = true
+                    Timber.d("get 서버통신 성공")
                 }
                 .onFailure { throwable ->
                     _isServerStatus.value = false

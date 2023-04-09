@@ -8,10 +8,8 @@ import javax.inject.Inject
 class MyPageRepositoryImpl @Inject constructor(
     private val myPageDataSource: MyPageDataSource
 ) : MyPageRepository {
-    override suspend fun getMyPage(): Result<List<SelfIntro>> =
+    override suspend fun getMyPage(): Result<SelfIntro> =
         kotlin.runCatching { myPageDataSource.getMyPage() }.map { response ->
-            requireNotNull(response.data).map { selfIntroEntity ->
-                selfIntroEntity.toSelfIntro()
-            }
+            requireNotNull(response.data).toSelfIntro()
         }
 }

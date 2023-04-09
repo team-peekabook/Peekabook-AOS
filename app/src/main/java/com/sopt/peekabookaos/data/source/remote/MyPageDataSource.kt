@@ -8,6 +8,6 @@ import javax.inject.Inject
 data class MyPageDataSource @Inject constructor(
     private val myPageService: MyPageService
 ) {
-    suspend fun getMyPage(): BaseResponse<List<SelfIntroEntity>> =
+    suspend fun getMyPage(): BaseResponse<SelfIntroEntity> =
         myPageService.getMyPage()
 }
