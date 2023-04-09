@@ -25,6 +25,7 @@ object RefreshRetrofitModule {
     private const val APPLICATION_JSON = "application/json"
     private const val BEARER = "Bearer "
     private const val ACCESS_TOKEN = "accessToken"
+    private const val REFRESH_TOKEN = "refreshToken"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
@@ -42,7 +43,7 @@ object RefreshRetrofitModule {
                     .newBuilder()
                     .addHeader(CONTENT_TYPE, APPLICATION_JSON)
                     .addHeader(ACCESS_TOKEN, BEARER + localTokenDataSource.accessToken)
-                    .addHeader(ACCESS_TOKEN, BEARER + localTokenDataSource.refreshToken)
+                    .addHeader(REFRESH_TOKEN, BEARER + localTokenDataSource.refreshToken)
                     .build()
             )
             response
