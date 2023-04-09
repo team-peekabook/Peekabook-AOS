@@ -18,29 +18,29 @@ class BarcodeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(emptyList<Book>())
     val uiState = _uiState.asStateFlow()
 
-    private val _serverState = MutableStateFlow<BarcodeState>(BarcodeState.IDLE)
-    val serverState = _serverState.asStateFlow()
+    private val _barcodeState = MutableStateFlow<BarcodeState>(BarcodeState.IDLE)
+    val barcodeState = _barcodeState.asStateFlow()
 
     fun postBarcode(barcodeString: String) {
         viewModelScope.launch {
-            _serverState.emit(BarcodeState.IDLE)
+            _barcodeState.emit(BarcodeState.IDLE)
             getBookToBarcodeUseCase(barcodeString)
                 .onSuccess { response ->
                     if (response.isEmpty()) {
-                        _serverState.emit(BarcodeState.ERROR)
+                        _barcodeState.emit(BarcodeState.ERROR)
                     } else {
                         _uiState.value = response
-                        _serverState.emit(BarcodeState.SUCCESS)
+                        _barcodeState.emit(BarcodeState.SUCCESS)
                     }
                 }.onFailure { throwable ->
-                    _serverState.emit(BarcodeState.ERROR)
+                    _barcodeState.emit(BarcodeState.ERROR)
                     Timber.e("$throwable")
                 }
         }
     }
 
     fun updateServerState() {
-        _serverState.value = BarcodeState.IDLE
+        _barcodeState.value = BarcodeState.IDLE
     }
 }
 
