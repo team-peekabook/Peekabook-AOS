@@ -148,16 +148,16 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CREATE_EX) {
-            photoURI?.let { viewModel.updateProfileImage(it) }
+            photoURI?.let {
+                viewModel.updateProfileImage(it)
+            }
         }
     }
 
     private fun initCheckClickListener() {
         binding.tvUserInputCheck.setSingleOnClickListener {
             if (viewModel.isNickname.value == false) {
-                val toMainActivity = Intent(requireActivity(), MainActivity::class.java)
-                startActivity(toMainActivity)
-                activity?.finish()
+                viewModel.patchSignUp()
             } else {
                 viewModel.updateCheckMessage(requireNotNull(viewModel.isNickname.value))
             }
@@ -177,6 +177,13 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         }
         viewModel.introduce.observe(requireActivity()) {
             viewModel.updateCheckButtonState()
+        }
+        viewModel.isSignUpStatus.observe(requireActivity()) { success ->
+            if (success) {
+                val toMainActivity = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(toMainActivity)
+                activity?.finish()
+            }
         }
     }
 
