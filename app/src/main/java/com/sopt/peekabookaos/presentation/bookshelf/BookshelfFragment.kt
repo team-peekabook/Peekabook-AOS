@@ -17,7 +17,9 @@ import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHELF
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
+import com.sopt.peekabookaos.presentation.report.ReportActivity
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
+import com.sopt.peekabookaos.presentation.withdraw.WithdrawActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
@@ -185,7 +187,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 BookShelfBottomSheetFragment.onItemClick { itemClick ->
                     when (itemClick) {
                         0 -> initUnfollowDialog()
-                        //       1 -> 하정이의 신고뷰로 넘어가기
+                        1 -> startActivity(Intent(requireActivity(), ReportActivity::class.java))
                         2 -> initBlockDialog()
                     }
                 }
