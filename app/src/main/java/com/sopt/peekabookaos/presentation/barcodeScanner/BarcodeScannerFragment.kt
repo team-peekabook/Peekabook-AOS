@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.OnBackPressedCallback
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraControl
 import androidx.camera.core.CameraInfo
@@ -23,6 +23,7 @@ import com.sopt.peekabookaos.databinding.FragmentBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -49,33 +50,29 @@ class BarcodeScannerFragment :
     private lateinit var cameraControl: CameraControl
     private val executor by lazy { Executors.newSingleThreadExecutor() }
 
-    private val multiPermissionCallback =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
-            if (map.entries.isEmpty()) {
-                return@registerForActivityResult
-            } else {
-                binding.pvBarcode.post {
-                    startCamera()
-                }
-            }
-        }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPermissionCallBack()
         collectServerState()
         initCloseBtnClickListener()
         initHardDetectedClickListener()
+        initBackPressedCallback()
     }
 
     private fun initPermissionCallBack() {
-        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
         if (allPermissionsGranted()) {
-            binding.pvBarcode.post {
-                startCamera()
-            }
+            initPreview()
         } else {
-            requestAllPermissions()
+            ToastMessageUtil.showToast(
+                requireActivity(),
+                getString(R.string.barcode_permission)
+            )
+        }
+    }
+
+    private fun initPreview() {
+        binding.pvBarcode.post {
+            startCamera()
         }
     }
 
@@ -119,10 +116,6 @@ class BarcodeScannerFragment :
         )
     }
 
-    private fun requestAllPermissions() {
-        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
-    }
-
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
@@ -151,7 +144,7 @@ class BarcodeScannerFragment :
     }
 
     private fun onBarcodeDetected(barcodes: List<Barcode>) {
-        if (barcodes.isNotEmpty() && barcodeViewModel.serverState.value == BarcodeState.IDLE) {
+        if (barcodes.isNotEmpty() && barcodeViewModel.barcodeState.value == BarcodeState.IDLE) {
             barcodeViewModel.postBarcode(requireNotNull(barcodes[0].rawValue))
         }
     }
@@ -174,7 +167,7 @@ class BarcodeScannerFragment :
 
     private fun collectServerState() {
         repeatOnStarted {
-            barcodeViewModel.serverState.collect { uiState ->
+            barcodeViewModel.barcodeState.collect { uiState ->
                 when (uiState) {
                     BarcodeState.SUCCESS -> {
                         findNavController().navigate(
@@ -193,5 +186,16 @@ class BarcodeScannerFragment :
                 }
             }
         }
+    }
+
+    private fun initBackPressedCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    activity?.finish()
+                }
+            }
+        )
     }
 }
