@@ -18,11 +18,18 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initWithdrawBtnClickListener()
+        initLogoutBtnClickListener()
     }
 
     private fun initWithdrawBtnClickListener() {
         binding.tvMyPageWithdraw.setSingleOnClickListener {
             startActivity(Intent(requireActivity(), WithdrawActivity::class.java))
+        }
+    }
+
+    private fun initLogoutBtnClickListener() {
+        binding.tvMyPageLogout.setSingleOnClickListener {
+            LogoutDialog().show(childFragmentManager, LogoutDialog.TAG)
         }
     }
     /*private val initModifyClickListener(){

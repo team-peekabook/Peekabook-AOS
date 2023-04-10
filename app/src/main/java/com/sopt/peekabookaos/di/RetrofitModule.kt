@@ -72,7 +72,7 @@ object RetrofitModule {
         when (response.code) {
             EXPIRED_TOKEN -> {
                 runBlocking {
-                    refreshRepository.getRefreshToken(localTokenDataSource.refreshToken)
+                    refreshRepository.getRefreshToken()
                         .onSuccess {
                             response = chain.proceed(
                                 request

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.repository.MyPageRepository
+import com.sopt.peekabookaos.domain.usecase.ClearLocalPrefUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyPageViewModel @Inject constructor(
-    private val myPageRepository: MyPageRepository
+    private val myPageRepository: MyPageRepository,
+    private val clearLocalPrefUseCase: ClearLocalPrefUseCase
 ) : ViewModel() {
     private val _userData = MutableLiveData<SelfIntro>()
     val userData: LiveData<SelfIntro> = _userData
@@ -38,5 +40,9 @@ class MyPageViewModel @Inject constructor(
                     Timber.e("$throwable")
                 }
         }
+    }
+
+    fun clearLocalPref() {
+        clearLocalPrefUseCase()
     }
 }

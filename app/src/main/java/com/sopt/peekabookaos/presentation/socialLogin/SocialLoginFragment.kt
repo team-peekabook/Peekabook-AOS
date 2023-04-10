@@ -108,8 +108,11 @@ class SocialLoginFragment :
         repeatOnStarted {
             socialLoginViewModel.isSignedUp.collect { signedUp ->
                 if (signedUp) {
-                    startActivity(Intent(requireActivity(), MainActivity::class.java))
-                    finishAffinity(requireActivity())
+                    startActivity(
+                        Intent(requireActivity(), MainActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        }
+                    )
                 } else {
                     findNavController().navigate(R.id.action_socialLoginFragment_to_userInputFragment)
                 }
