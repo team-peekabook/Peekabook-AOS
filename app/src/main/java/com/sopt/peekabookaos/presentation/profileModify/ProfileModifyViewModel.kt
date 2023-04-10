@@ -12,6 +12,9 @@ class ProfileModifyViewModel : ViewModel() {
     private val _isNicknameMessage: MutableLiveData<Boolean> = MutableLiveData(false)
     val isNicknameMessage: LiveData<Boolean> = _isNicknameMessage
 
+    private val _isSignUpStatus = MutableLiveData<Boolean>()
+    val isSignUpStatus: LiveData<Boolean> = _isSignUpStatus
+
     private val _isCheckMessage: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private val _isDuplicateButton: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -27,7 +30,11 @@ class ProfileModifyViewModel : ViewModel() {
 
     val modify = MutableLiveData<String>()
 
+    val introduce = MutableLiveData<String>()
+
     private var nicknameList = listOf("a", "박강희", "이영주", "김하정", "피카북")
+
+    private lateinit var profileImageUri: Uri
 
     fun getNickNameState() {
         _isNickname.value = nicknameList.contains(nickname.value)
@@ -55,6 +62,7 @@ class ProfileModifyViewModel : ViewModel() {
     }
 
     fun updateProfileImage(uri: Uri) {
+        profileImageUri = uri
         _profileImage.value = uri.toString()
     }
 
