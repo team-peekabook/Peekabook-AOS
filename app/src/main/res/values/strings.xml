@@ -156,6 +156,8 @@
     <string name="user_input_check_button">확인</string>
     <string name="user_input_choose_album">앨범에서 선택</string>
     <string name="user_input_camera">카메라</string>
+    <string name="user_input_request_permission">휴대폰 앱 설정에서 카메라, 내부 저장소 권한을 허용해주세요!</string>
+    <string name="user_input_permission">카메라, 내부 저장소 권한이 허용됐습니다.</string>
 
     <!-- Withdraw -->
     <string name="withdraw_title">서비스 탈퇴</string>
