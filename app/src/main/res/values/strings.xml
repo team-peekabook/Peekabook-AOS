@@ -171,4 +171,8 @@
     <string name="network_error_content">앗! 네트워크 연결에 실패했어요.\n확인 후 다시 시도해주세요.</string>
     <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
     <string name="network_error_retry">다시 시도하기</string>
+
+    <!-- Logout -->
+    <string name="logout_dialog_title">로그아웃 하시겠습니까?</string>
+    <string name="logout_dialog_confirm">로그아웃</string>
 </resources>

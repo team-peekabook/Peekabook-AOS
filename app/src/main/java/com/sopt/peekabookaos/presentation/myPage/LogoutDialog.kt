@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.withdraw
+package com.sopt.peekabookaos.presentation.myPage
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,29 +10,31 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.databinding.DialogWithdrawBinding
+import com.sopt.peekabookaos.databinding.DialogLogoutBinding
 import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
-class WithdrawDialog : DialogFragment() {
-    private var _binding: DialogWithdrawBinding? = null
+class LogoutDialog : DialogFragment() {
+    private var _binding: DialogLogoutBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
 
-    private val withdrawViewModel by activityViewModels<WithdrawViewModel>()
+    private val myPageViewModel by activityViewModels<MyPageViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.dialog_withdraw, container, false)
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.dialog_logout, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = withdrawViewModel
         initLayout()
-        initConfirmBtnClickListener()
+        initCancelBtnClickListener()
+        initLogoutBtnClickListener()
     }
 
     private fun initLayout() {
@@ -44,8 +46,15 @@ class WithdrawDialog : DialogFragment() {
         isCancelable = true
     }
 
-    private fun initConfirmBtnClickListener() {
-        binding.btnWithdrawDialogConfirm.setOnClickListener {
+    private fun initCancelBtnClickListener() {
+        binding.btnLogoutDialogCancel.setOnClickListener {
+            dismiss()
+        }
+    }
+
+    private fun initLogoutBtnClickListener() {
+        binding.btnLogoutDialogConfirm.setSingleOnClickListener {
+            myPageViewModel.clearLocalPref()
             startActivity(
                 Intent(requireActivity(), OnboardingActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -60,6 +69,6 @@ class WithdrawDialog : DialogFragment() {
     }
 
     companion object {
-        const val TAG = "WithdrawDialogFragment"
+        const val TAG = "LogoutDialog"
     }
 }
