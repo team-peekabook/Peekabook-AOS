@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sopt.peekabookaos.databinding.DialogProfileModifyBottonSheetBinding
-import com.sopt.peekabookaos.presentation.userInput.UserInputBottomSheetFragment
 
 class ProfileModifyBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: DialogProfileModifyBottonSheetBinding
@@ -45,4 +44,3 @@ class ProfileModifyBottomSheetFragment : BottomSheetDialogFragment() {
         }
     }
 }
-
