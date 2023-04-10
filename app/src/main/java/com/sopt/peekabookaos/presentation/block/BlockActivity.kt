@@ -41,11 +41,10 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
     }
 
     private fun initBlockDialog(friendList: FriendList, friendId: Int) {
-        blockViewModel.deleteBlock(friendId)
         BlockDeleteDialog().withArgs {
             putString(
                 BlockDialog.FOLLOWER,
-                requireNotNull(blockViewModel.friendData.value).nickname
+                requireNotNull(friendList.nickname)
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,
