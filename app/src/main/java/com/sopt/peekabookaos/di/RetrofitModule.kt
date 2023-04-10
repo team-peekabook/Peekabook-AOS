@@ -38,7 +38,7 @@ object RetrofitModule {
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
     private const val BEARER = "Bearer "
-    private const val ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE2ODA3OTQzMzcsImV4cCI6MTY4MTIyNjMzN30.7riPJ1yQjnB0uu3sMLf4WLqo4NlLQRndeQvRIUOUgls"
+    private const val ACCESS_TOKEN = "accessToken"
     private const val EXPIRED_TOKEN = 401
     private const val SERVER_ERROR = 500
 
