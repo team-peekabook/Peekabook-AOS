@@ -24,7 +24,6 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     private fun initReportBtnClickListener() {
         binding.tvReportReport.setSingleOnClickListener {
             ReportConfirmDialog().show(supportFragmentManager, TAG)
-            reportViewModel.postReport()
         }
     }
 
@@ -47,6 +46,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     private fun initIsReportObserve() {
         reportViewModel.isReport.observe(this) { success ->
             if (success) {
+                reportViewModel.postReport()
                 this.finish()
             }
         }
