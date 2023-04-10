@@ -6,6 +6,11 @@
     <string name="finish_app_toast_msg">뒤로가기를 한 번 더 누르면 종료됩니다</string>
     <string name="null_point_exception">NullPointException occurs..</string>
     <string name="null_point_exception_warning_dialog_argument">"WarningDialogFragment에 필요한 arguments에 안들어옴"</string>
+    <string name="refresh_error">자동로그인이 만료되었습니다. 다시 로그인해주시기 바랍니다.</string>
+    <string name="sever_500_error_msg">정보를 불러오는 데 실패했어요.</string>
+
+    <!-- onboarding -->
+    <string name="onboarding_next">내 책장 만들러 가기</string>
 
     <!-- login -->
     <string name="social_login_inform_agreement">가입 시, PEEKABOOK의 다음 사항에 동의하는 것으로 간주합니다.</string>
@@ -68,14 +73,14 @@
     <string name="recommend_item_peek">%s님의 책장 보러가기 →</string>
 
     <!-- MyPage -->
-    <string name="tv_my_page_name">북과픽</string>
-    <string name="tv_my_page_intro">안녕하세요. 저는 북과픽입니다.</string>
-    <string name="tv_my_page_1">알림 설정</string>
-    <string name="tv_my_page_2"><![CDATA[개인정보 보호 정책 & 서비스 이용 약관]]></string>
-    <string name="tv_my_page_3">문의하기</string>
-    <string name="tv_my_page_4">개발자 정보</string>
-    <string name="tv_my_page_5">로그아웃</string>
-    <string name="tv_my_page_6">서비스 탈퇴하기</string>
+    <string name="my_page_name">북과픽</string>
+    <string name="my_page_intro">안녕하세요. 저는 북과픽입니다.</string>
+    <string name="my_page_block">차단사용자 관리하기</string>
+    <string name="my_page_policy"><![CDATA[개인정보 보호 정책 & 서비스 이용 약관]]></string>
+    <string name="my_page_ask">문의하기</string>
+    <string name="my_page_info">개발자 정보</string>
+    <string name="my_page_logout">로그아웃</string>
+    <string name="my_page_withdraw">서비스 탈퇴하기</string>
 
     <!-- Book Recommendation-->
     <string name="recommendation_book_comment_count">%d/200</string>
@@ -106,6 +111,7 @@
     <string name="search_user_error">앗! 해당 사용자가 존재하지 않는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
     <string name="search_user_following">팔로잉</string>
     <string name="search_user_follow">팔로우</string>
+    <string name="search_user_unblock">차단 해제</string>
 
     <!-- Warning Dialog -->
     <string name="warning_dialog_recommend_title">%s님에게\n책을 추천하시겠어요?</string>
@@ -116,6 +122,24 @@
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
     <string name="warning_dialog_unfollow">언팔로우</string>
+
+    <!-- block -->
+    <string name="block_title">차단된 계정</string>
+    <string name="block_cancel">차단 해제</string>
+
+    <!-- Report -->
+    <string name="report_title">사용자 신고하기</string>
+    <string name="report_reason">신고 사유 선택</string>
+    <string name="report_inadequate">부적절한 게시물</string>
+    <string name="report_curse">욕설 및 비하 발언</string>
+    <string name="report_promote">홍보성 컨텐츠</string>
+    <string name="report_nickname">닉네임 신고</string>
+    <string name="report_etc">기타</string>
+    <string name="report_detail_reason">구체적인 신고 사유를 작성해 주세요.</string>
+    <string name="report_confirm">신고하신 내용은 검토 후 빠른 시일 내 조치하겠습니다.</string>
+    <string name="report_report">신고하기</string>
+    <string name="report_dialog_confirm">신고가 정상적으로 접수되었습니다.</string>
+    <string name="report_dialog_home">홈으로 돌아가기</string>
 
     <!--User Input-->
     <string name="user_input_navigation_bar">회원 가입</string>
@@ -132,6 +156,8 @@
     <string name="user_input_check_button">확인</string>
     <string name="user_input_choose_album">앨범에서 선택</string>
     <string name="user_input_camera">카메라</string>
+    <string name="user_input_request_permission">휴대폰 앱 설정에서 카메라, 내부 저장소 권한을 허용해주세요!</string>
+    <string name="user_input_permission">카메라, 내부 저장소 권한이 허용됐습니다.</string>
 
     <!--Profile Modify-->
     <string name="profile_modify_nickname">닉네임</string>
@@ -157,4 +183,12 @@
     <string name="withdraw_dialog_content">이용해주셔서 감사합니다.</string>
     <string name="withdraw_dialog_confirm">확인</string>
 
+    <!-- Network Error -->
+    <string name="network_error_content">앗! 네트워크 연결에 실패했어요.\n확인 후 다시 시도해주세요.</string>
+    <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
+    <string name="network_error_retry">다시 시도하기</string>
+
+    <!-- Logout -->
+    <string name="logout_dialog_title">로그아웃 하시겠습니까?</string>
+    <string name="logout_dialog_confirm">로그아웃</string>
 </resources>

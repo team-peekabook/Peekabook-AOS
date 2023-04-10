@@ -1,8 +1,10 @@
 package com.sopt.peekabookaos.presentation.bookshelf
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
@@ -26,6 +28,8 @@ import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
+private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+
 @AndroidEntryPoint
 class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fragment_bookshelf) {
     private val myShelfAdapter: BookShelfShelfAdapter?
@@ -37,6 +41,15 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private lateinit var shelfItemDeco: BookshelfShelfDecoration
     private lateinit var pickItemDeco: BookshelfPickDecoration
     private val viewModel by viewModels<BookShelfViewModel>()
+
+    private val multiPermissionCallback =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
+            if (map.entries.isEmpty()) {
+                requestAllPermissions()
+            } else {
+                startActivity(Intent(requireActivity(), BookActivity::class.java))
+            }
+        }
 
     override fun onResume() {
         super.onResume()
@@ -79,10 +92,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
             if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
-                viewModel.getMyShelfData()
-                viewModel.updateShelfState(USER)
-                friendAdapter?.clearSelection()
-                binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+                updateToMyShelf()
             }
         }
     }
@@ -139,10 +149,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initUserClickListener() {
         binding.ivBookshelfUserProfile.setSingleOnClickListener {
-            viewModel.getMyShelfData()
-            viewModel.updateShelfState(USER)
-            friendAdapter?.clearSelection()
-            binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
+            updateToMyShelf()
         }
     }
 
@@ -180,9 +187,12 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initCreateBookClickListener() {
         binding.btnBookshelfAddBook.setSingleOnClickListener {
-            val toBarcodeScanner = Intent(requireActivity(), BookActivity::class.java)
-            startActivity(toBarcodeScanner)
+            requestAllPermissions()
         }
+    }
+
+    private fun requestAllPermissions() {
+        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
     }
 
     private fun initKebabClickListener() {
@@ -214,7 +224,10 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,
-                ConfirmClickListener(confirmAction = { viewModel.postUnfollow() })
+                ConfirmClickListener(confirmAction = {
+                    viewModel.postUnfollow()
+                    updateToMyShelf()
+                })
             )
         }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
     }
@@ -227,9 +240,19 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,
-                ConfirmClickListener(confirmAction = { viewModel.postBlock() })
+                ConfirmClickListener(confirmAction = {
+                    viewModel.postBlock()
+                    updateToMyShelf()
+                })
             )
         }.show(childFragmentManager, BlockDialog.TAG)
+    }
+
+    private fun updateToMyShelf() {
+        viewModel.getMyShelfData()
+        viewModel.updateShelfState(USER)
+        friendAdapter?.clearSelection()
+        binding.tvBookshelfUserProfileName.setTextAppearance(R.style.S1Bd)
     }
 
     companion object {

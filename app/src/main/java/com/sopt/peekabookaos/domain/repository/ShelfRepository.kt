@@ -11,6 +11,8 @@ interface ShelfRepository {
         secondPick: Int?,
         thirdPick: Int?
     ): Result<Boolean>
+
     suspend fun getFriendShelf(friendId: Int): Result<FriendShelf>
     suspend fun getPick(): Result<List<Picks>>
+    suspend fun postBlock(friendId: Int): Result<Boolean>
 }

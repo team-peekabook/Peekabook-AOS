@@ -31,4 +31,7 @@ data class ShelfDataSource @Inject constructor(
                 thirdPick = thirdPick
             )
         )
+
+    suspend fun postBlock(friendId: Int): NoResponse =
+        shelfService.postBlock(friendId)
 }

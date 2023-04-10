@@ -8,8 +8,10 @@ import com.sopt.peekabookaos.domain.entity.Books
 import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.domain.entity.Picks
 import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
 import com.sopt.peekabookaos.domain.usecase.GetMyShelfUseCase
+import com.sopt.peekabookaos.domain.usecase.PostBlockUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -18,7 +20,9 @@ import javax.inject.Inject
 @HiltViewModel
 class BookShelfViewModel @Inject constructor(
     private val getMyShelfUseCase: GetMyShelfUseCase,
-    private val getFriendShelfUseCase: GetFriendShelfUseCase
+    private val getFriendShelfUseCase: GetFriendShelfUseCase,
+    private val postBlockUseCase: PostBlockUseCase,
+    private val deleteFollowUseCase: DeleteFollowUseCase
 ) : ViewModel() {
     private val _pickData: MutableLiveData<List<Picks>> = MutableLiveData()
     val pickData: LiveData<List<Picks>> = _pickData
@@ -53,6 +57,15 @@ class BookShelfViewModel @Inject constructor(
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
+    private val _isUnfollowStatus = MutableLiveData<Boolean>()
+    val isUnfollowStatus: LiveData<Boolean> = _isUnfollowStatus
+
+    private val _isBlockStatus = MutableLiveData<Boolean>()
+    val isBlockStatus: LiveData<Boolean> = _isBlockStatus
+
+    private lateinit var userNickname: String
+    private lateinit var userProfileImage: String
+
     init {
         getMyShelfData()
     }
@@ -63,6 +76,8 @@ class BookShelfViewModel @Inject constructor(
 
     fun updateUserId(item: FriendList) {
         _userId.value = item.id
+        userNickname = item.nickname
+        userProfileImage = item.profileImage
     }
 
     fun updateLastSelectedItem(position: Int) {
@@ -93,25 +108,57 @@ class BookShelfViewModel @Inject constructor(
             getFriendShelfUseCase(requireNotNull(userId.value))
                 .onSuccess { response ->
                     _friendUserData.value = response.friendList
-                    _friendData.value = response.friendIntro
-                    _pickData.value = response.picks
-                    _bookTotalNum.value = response.bookTotalNum
-                    _shelfData.value = response.books
-                    _isFriendServerStatus.value = true
-                    _isMyServerStatus.value = false
+                    if (updateFriendState()) {
+                        _friendData.value = response.friendIntro
+                        _pickData.value = response.picks
+                        _bookTotalNum.value = response.bookTotalNum
+                        _shelfData.value = response.books
+                        _isFriendServerStatus.value = true
+                        _isMyServerStatus.value = false
+                    } else {
+                        getMyShelfData()
+                    }
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isFriendServerStatus.value = false
-                    _isMyServerStatus.value = false
+                    _isMyServerStatus.value = true
                 }
         }
     }
 
     fun postUnfollow() {
-        // TODO("언팔로우 api")
+        viewModelScope.launch {
+            deleteFollowUseCase(requireNotNull(userId.value))
+                .onSuccess { response ->
+                    _isUnfollowStatus.value = response
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                    _isUnfollowStatus.value = false
+                }
+        }
     }
 
     fun postBlock() {
-        // TODO("차단 api")
+        viewModelScope.launch {
+            postBlockUseCase(requireNotNull(userId.value))
+                .onSuccess { response ->
+                    _isBlockStatus.value = response
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                    _isBlockStatus.value = false
+                }
+        }
+    }
+
+    private fun updateFriendState(): Boolean {
+        return requireNotNull(_friendUserData.value).contains(
+            _userId!!.value?.let { userId ->
+                FriendList(
+                    userId,
+                    userNickname,
+                    userProfileImage
+                )
+            }
+        )
     }
 }

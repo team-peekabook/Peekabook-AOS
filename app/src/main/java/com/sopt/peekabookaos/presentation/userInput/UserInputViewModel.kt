@@ -1,11 +1,34 @@
 package com.sopt.peekabookaos.presentation.userInput
 
+import android.app.Application
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.R
+import com.sopt.peekabookaos.domain.usecase.PatchSignUpUseCase
+import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
+import com.sopt.peekabookaos.util.ContentUriRequestBody
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import timber.log.Timber
+import java.io.ByteArrayOutputStream
+import javax.inject.Inject
 
-class UserInputViewModel : ViewModel() {
+@HiltViewModel
+class UserInputViewModel @Inject constructor(
+    private val application: Application,
+    private val postDuplicateUseCase: PostDuplicateUseCase,
+    private val patchSignUpUseCase: PatchSignUpUseCase
+) : ViewModel() {
     private val _isNickname: MutableLiveData<Boolean> = MutableLiveData(true)
     val isNickname: LiveData<Boolean> = _isNickname
 
@@ -24,16 +47,53 @@ class UserInputViewModel : ViewModel() {
     private val _profileImage: MutableLiveData<String> = MutableLiveData()
     val profileImage: LiveData<String> = _profileImage
 
+    private val _isSignUpStatus = MutableLiveData<Boolean>()
+    val isSignUpStatus: LiveData<Boolean> = _isSignUpStatus
+
     val nickname = MutableLiveData<String>()
 
     val introduce = MutableLiveData<String>()
 
-    private var nicknameList = listOf("문수빈", "한새연", "텽", "a", "bc")
+    private lateinit var profileImageUri: Uri
 
     fun getNickNameState() {
-        _isNickname.value = nicknameList.contains(nickname.value)
-        updateNicknameMessage(true)
-        updateDuplicateButtonState(requireNotNull(_isNickname.value))
+        viewModelScope.launch {
+            postDuplicateUseCase(requireNotNull(nickname.value)).onSuccess { check ->
+                _isNickname.value = (check == 1)
+                updateNicknameMessage(true)
+                updateDuplicateButtonState(requireNotNull(_isNickname.value))
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+            }
+        }
+    }
+
+    fun patchSignUp() {
+        val imageMultipartBody =
+            if (::profileImageUri.isInitialized) {
+                ContentUriRequestBody(
+                    application.baseContext,
+                    "file",
+                    profileImageUri
+                ).compressBitmap()
+            } else {
+                basicProfileToMultiPart()
+            }
+
+        viewModelScope.launch {
+            patchSignUpUseCase(
+                file = imageMultipartBody,
+                requestBodyMap = hashMapOf(
+                    "nickname" to nickname.value!!.toRequestBody(),
+                    "intro" to introduce.value!!.toRequestBody()
+                )
+            ).onSuccess { response ->
+                _isSignUpStatus.value = response
+            }.onFailure { throwable ->
+                _isSignUpStatus.value = false
+                Timber.e("$throwable")
+            }
+        }
     }
 
     fun updateWritingState() {
@@ -56,10 +116,46 @@ class UserInputViewModel : ViewModel() {
     }
 
     fun updateProfileImage(uri: Uri) {
+        profileImageUri = uri
         _profileImage.value = uri.toString()
     }
 
     fun updateCheckButtonState() {
         _isCheckButton.value = !(introduce.value.isNullOrBlank() || nickname.value.isNullOrBlank())
+    }
+
+    private fun String.toRequestBody(): RequestBody {
+        return this.toRequestBody("application/json".toMediaTypeOrNull())
+    }
+
+    private fun basicProfileToMultiPart(): MultipartBody.Part {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val resId = R.drawable.ic_user_input_profile
+        val drawable = ContextCompat.getDrawable(application.baseContext, resId)
+        val bitmap: Bitmap = Bitmap.createBitmap(
+            drawable?.intrinsicWidth ?: 0,
+            drawable?.intrinsicHeight ?: 0,
+            Bitmap.Config.ARGB_8888
+        )
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val canvas = Canvas(bitmap)
+        requireNotNull(drawable).setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmapToMultipart(bitmap, "file", "basic_profile.jpg")
+    }
+
+    private fun bitmapToMultipart(
+        bitmap: Bitmap,
+        paramName: String,
+        fileName: String
+    ): MultipartBody.Part {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
+
+        val requestBody = RequestBody.Companion.create(
+            "multipart/form-data".toMediaTypeOrNull(),
+            byteArrayOutputStream.toByteArray()
+        )
+        return MultipartBody.Part.createFormData(paramName, fileName, requestBody)
     }
 }
