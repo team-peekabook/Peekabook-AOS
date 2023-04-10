@@ -57,10 +57,10 @@ class BookShelfViewModel @Inject constructor(
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
-    private val _isUnfollowStatus = MutableLiveData<Boolean>()
+    private val _isUnfollowStatus = MutableLiveData<Boolean>(false)
     val isUnfollowStatus: LiveData<Boolean> = _isUnfollowStatus
 
-    private val _isBlockStatus = MutableLiveData<Boolean>()
+    private val _isBlockStatus = MutableLiveData<Boolean>(false)
     val isBlockStatus: LiveData<Boolean> = _isBlockStatus
 
     private lateinit var userNickname: String
@@ -95,6 +95,8 @@ class BookShelfViewModel @Inject constructor(
                     _userData.value = response.myIntro
                     _isMyServerStatus.value = true
                     _isFriendServerStatus.value = false
+                    _isUnfollowStatus.value = false
+                    _isBlockStatus.value = false
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isMyServerStatus.value = false
@@ -121,7 +123,7 @@ class BookShelfViewModel @Inject constructor(
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                     _isFriendServerStatus.value = false
-                    _isMyServerStatus.value = true
+                    _isMyServerStatus.value = false
                 }
         }
     }
@@ -152,7 +154,7 @@ class BookShelfViewModel @Inject constructor(
 
     private fun updateFriendState(): Boolean {
         return requireNotNull(_friendUserData.value).contains(
-            _userId!!.value?.let { userId ->
+            _userId.value?.let { userId ->
                 FriendList(
                     userId,
                     userNickname,
