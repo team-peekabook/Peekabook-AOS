@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentMyPageBinding
+import com.sopt.peekabookaos.presentation.profileModify.ProfileModifyActivity
 import com.sopt.peekabookaos.presentation.withdraw.WithdrawActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -19,6 +20,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
+        initModifyClickListener()
     }
 
     private fun initWithdrawBtnClickListener() {
@@ -33,9 +35,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
     }
 
-    /*private val initModifyClickListener(){
-        binding.ivMyPageEdit.setSingleClickListener {
-            //프로필 수정하기가 머지되면 그 화면으로 넘어가기
+    private fun initModifyClickListener() {
+        binding.ivMyPageEdit.setSingleOnClickListener {
+            startActivity(Intent(requireActivity(), ProfileModifyActivity::class.java))
         }
-    }*/
+    }
 }
