@@ -19,7 +19,6 @@ import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
 import com.sopt.peekabookaos.presentation.report.ReportActivity
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
-import com.sopt.peekabookaos.presentation.withdraw.WithdrawActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
