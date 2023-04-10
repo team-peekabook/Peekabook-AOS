@@ -17,9 +17,8 @@
     <string name="social_login_terms_of_service">서비스 이용약관</string>
     <string name="social_login_and">및</string>
     <string name="social_login_privacy_policy">개인정보 정책</string>
-    <!-- TODO by 이빵주 링크 url 나오면 수정하기 -->
-    <string name="social_login_terms_of_service_link">https://www.naver.com/</string>
-    <string name="social_login_privacy_policy_link">https://github.com/</string>
+    <string name="social_login_terms_of_service_link">https://interesting-door-b57.notion.site/fcb373d7e53642cfb011bf36ef47b131</string>
+    <string name="social_login_privacy_policy_link">https://interesting-door-b57.notion.site/0875e3fa416042e7b0e5c4f556fdc2c3</string>
 
     <!-- Barcode -->
     <string name="barcode_permission">휴대폰 앱 설정에서 카메라 권한을 허용해주세요!</string>
