@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.presentation.profileModify
 
+import android.Manifest.permission.*
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
@@ -10,7 +11,6 @@ import android.provider.MediaStore
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityProfileModifyBinding
@@ -37,15 +37,13 @@ class ProfileModifyActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
+        initBackPressedCallback()
+        initBackClickListener()
         initEditTextClearFocus()
         initCheckClickListener()
-        initBackClickListener()
         initDuplicateClickListener()
         initObserver()
         initAddClickListener()
-        initProfileClickListener()
-        initBackPressedCallback()
-        goToMyPageFragment()
     }
 
     private fun initBackClickListener() {
@@ -87,7 +85,7 @@ class ProfileModifyActivity :
                     1 -> if (checkPermission()) {
                         dispatchTakePictureIntentEx()
                     } else {
-                        requestPermission()
+                        requestCameraPermission()
                     }
                 }
             }
@@ -98,24 +96,37 @@ class ProfileModifyActivity :
         }
     }
 
-    private fun requestPermission() {
-        ActivityCompat.requestPermissions(
-            this,
+    private fun requestCameraPermission() {
+        requestPermissionLauncher.launch(
             arrayOf(
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            ),
-            1
+                CAMERA,
+                WRITE_EXTERNAL_STORAGE,
+                READ_EXTERNAL_STORAGE
+            )
         )
     }
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions: Map<String, Boolean> ->
+            val isCameraPermissionGranted =
+                permissions[CAMERA] != null && permissions[CAMERA]!!
+            val isWriteStoragePermissionGranted =
+                permissions[WRITE_EXTERNAL_STORAGE] != null && permissions[WRITE_EXTERNAL_STORAGE]!!
+            val isReadStoragePermissionGranted =
+                permissions[READ_EXTERNAL_STORAGE] != null && permissions[READ_EXTERNAL_STORAGE]!!
+            if (isCameraPermissionGranted && isWriteStoragePermissionGranted && isReadStoragePermissionGranted) {
+                dispatchTakePictureIntentEx()
+            }
+        }
+
     private fun checkPermission(): Boolean {
         return (
-            ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+            ContextCompat.checkSelfPermission(this, CAMERA)
                 == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                WRITE_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED
             )
     }
@@ -128,9 +139,9 @@ class ProfileModifyActivity :
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            ToastMessageUtil.showToast(this, "권한 설정되었습니다.")
-        } else {
             ToastMessageUtil.showToast(this, "권한 허용이 거부되었습니다.")
+        } else {
+            ToastMessageUtil.showToast(this, "권한 설정되었습니다.")
         }
     }
 
@@ -161,8 +172,8 @@ class ProfileModifyActivity :
     }
 
     private fun initCheckClickListener() {
-        binding.tvProfileModifyCheck.setSingleOnClickListener {
-            if (viewModel.isNickname.value == false) {
+        binding.btnProfileModifyCheck.setSingleOnClickListener {
+            if (viewModel.isNickname.value == true) {
                 val toMyPageFragment = Intent(this, MyPageFragment::class.java)
                 startActivity(toMyPageFragment)
                 finish()
@@ -173,7 +184,7 @@ class ProfileModifyActivity :
     }
 
     private fun initDuplicateClickListener() {
-        binding.tvProfileModifyCheck.setSingleOnClickListener {
+        binding.tvProfileModifyDuplicationCheck.setSingleOnClickListener {
             viewModel.getNickNameState()
         }
     }
@@ -183,14 +194,14 @@ class ProfileModifyActivity :
             viewModel.updateCheckButtonState()
             viewModel.updateWritingState()
         }
-        viewModel.modify.observe(this) {
+        viewModel.introduce.observe(this) {
             viewModel.updateCheckButtonState()
         }
-    }
-
-    private fun initProfileClickListener() {
-        binding.btnProfileModifyAdd.setSingleOnClickListener {
-            launcher.launch("image/*")
+        viewModel.isSignUpStatus.observe(this) { success ->
+            if (success) {
+                startActivity(Intent(this, ProfileModifyActivity::class.java))
+                finish()
+            }
         }
     }
 
