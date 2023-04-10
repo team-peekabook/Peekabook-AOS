@@ -6,7 +6,6 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityReportBinding
 import com.sopt.peekabookaos.presentation.report.ReportConfirmDialog.Companion.TAG
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,15 +15,8 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = reportViewModel
-        initReportBtnClickListener()
         initReportRadioClickListener()
         initIsReportObserve()
-    }
-
-    private fun initReportBtnClickListener() {
-        binding.tvReportReport.setSingleOnClickListener {
-            ReportConfirmDialog().show(supportFragmentManager, TAG)
-        }
     }
 
     private fun initReportRadioClickListener() {
@@ -46,8 +38,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     private fun initIsReportObserve() {
         reportViewModel.isReport.observe(this) { success ->
             if (success) {
-                reportViewModel.postReport()
-                this.finish()
+                ReportConfirmDialog().show(supportFragmentManager, TAG)
             }
         }
     }

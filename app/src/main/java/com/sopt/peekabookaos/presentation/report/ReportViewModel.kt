@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.PostReportUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,8 +16,8 @@ class ReportViewModel @Inject constructor(
 ) : ViewModel() {
     private val selectedReasonId = MutableLiveData(1)
 
-    private val _friendData = MutableLiveData<SelfIntro>()
-    val friendData: LiveData<SelfIntro> = _friendData
+    private val _friendId = MutableLiveData<Int>()
+    val friendId: LiveData<Int> = _friendId
 
     val reason = MutableLiveData("")
 
@@ -34,7 +33,7 @@ class ReportViewModel @Inject constructor(
             postReportUseCase(
                 reasonIndex = requireNotNull(selectedReasonId.value),
                 etc = reason.value,
-                requireNotNull(_friendData.value).id
+                requireNotNull(_friendId.value)
             ).onSuccess {
                 _isReport.value = true
             }.onFailure { throwable ->
