@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_block) {
     private val blockViewModel: BlockViewModel by viewModels()
-    private val blockAdapter = FriendBlockAdapter(showInitBlockDialog = ::initBlockDialog)
+    private val blockAdapter = FriendBlockAdapter(showBlockDialog = ::initBlockDialog)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +27,8 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
 
     private fun initAdapter() {
         binding.rvBlock.adapter = blockAdapter
-        blockViewModel.isServerStatus.observe(this) { success ->
-            if (success) {
-                blockAdapter.submitList(blockViewModel.blockData.value)
-            }
+        blockViewModel.blockData.observe(this) { blockData ->
+            blockAdapter.submitList(blockData)
         }
     }
 
@@ -57,7 +55,7 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
     private fun initIsDeletedObserve() {
         blockViewModel.isDeleted.observe(this) { success ->
             if (success) {
-                finish()
+                blockViewModel.getBlock()
             }
         }
     }
