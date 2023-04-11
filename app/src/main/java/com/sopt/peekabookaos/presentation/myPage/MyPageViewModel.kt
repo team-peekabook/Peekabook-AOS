@@ -20,9 +20,6 @@ class MyPageViewModel @Inject constructor(
     private val _userData = MutableLiveData<SelfIntro>()
     val userData: LiveData<SelfIntro> = _userData
 
-    private val _isServerStatus = MutableLiveData(false)
-    val isServerStatus: LiveData<Boolean> = _isServerStatus
-
     init {
         getMyPage()
     }
@@ -32,11 +29,9 @@ class MyPageViewModel @Inject constructor(
             getMyPageUseCase()
                 .onSuccess { response ->
                     _userData.value = response
-                    _isServerStatus.value = true
                     Timber.d("get 서버통신 성공")
                 }
                 .onFailure { throwable ->
-                    _isServerStatus.value = false
                     Timber.e("$throwable")
                 }
         }
