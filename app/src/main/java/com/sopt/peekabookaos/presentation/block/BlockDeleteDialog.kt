@@ -29,7 +29,6 @@ class BlockDeleteDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         isCancelable = true
         initLayout()
-        initWarningDialogContent()
         initConfirmBtnClickListener()
         initCancelBtnClickListener()
     }
@@ -40,11 +39,6 @@ class BlockDeleteDialog : DialogFragment() {
         layoutParams.width = (resources.displayMetrics.widthPixels * ratio).toInt()
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
         requireNotNull(dialog).window!!.attributes = layoutParams
-    }
-
-    private fun initWarningDialogContent() {
-        val follower = arguments?.getString(FOLLOWER) ?: DEFAULT
-        binding.block = BlockDeleteDialogContent().deleteBlock(requireContext(), follower)
     }
 
     private fun initConfirmBtnClickListener() {
@@ -70,6 +64,6 @@ class BlockDeleteDialog : DialogFragment() {
     companion object {
         const val TAG = "BlockDeleteDialogFragment"
         const val FOLLOWER = "follower"
-        const val DEFAULT = "default"
+        private const val DEFAULT = "default"
     }
 }
