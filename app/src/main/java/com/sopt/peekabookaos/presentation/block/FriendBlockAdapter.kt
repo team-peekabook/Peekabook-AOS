@@ -7,17 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemBlockBinding
 import com.sopt.peekabookaos.domain.entity.FriendList
 import com.sopt.peekabookaos.util.ItemDiffCallback
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
-class FriendBlockAdapter(private val showInitBlockDialog: (FriendList, Int) -> Unit) :
+class FriendBlockAdapter(private val showBlockDialog: (FriendList, Int) -> Unit) :
     ListAdapter<FriendList, FriendBlockAdapter.FriendBlockViewHolder>(blockDiffUtil) {
     class FriendBlockViewHolder(
         private val binding: ItemBlockBinding,
-        private val showInitBlockDialog: (FriendList, Int) -> Unit
+        private val showBlockDialog: (FriendList, Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(blockFriend: FriendList) {
             binding.data = blockFriend
-            binding.tvBlockCancel.setOnClickListener {
-                showInitBlockDialog(blockFriend, blockFriend.id)
+            binding.tvBlockCancel.setSingleOnClickListener {
+                showBlockDialog(blockFriend, blockFriend.id)
             }
         }
     }
@@ -29,7 +30,7 @@ class FriendBlockAdapter(private val showInitBlockDialog: (FriendList, Int) -> U
                 parent,
                 false
             ),
-            showInitBlockDialog
+            showBlockDialog
         )
 
     override fun onBindViewHolder(holder: FriendBlockViewHolder, position: Int) {
