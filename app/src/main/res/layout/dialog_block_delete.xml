@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="block"
-            type="com.sopt.peekabookaos.presentation.block.BlockDeleteDialogContent" />
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.block.BlockViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:text="@{block.title}"
+            android:text="@{@string/block_dialog_delete_title(vm.nickname)}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
             style="@style/S3Md"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{block.content}"
+            android:text="@string/block_dialog_delete_content"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/tv_block_dialog_title"
             app:layout_constraintStart_toStartOf="@id/tv_block_dialog_title"
