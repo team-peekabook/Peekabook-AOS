@@ -24,8 +24,7 @@ class BlockViewModel @Inject constructor(
     private val _friendData: MutableLiveData<SelfIntro> = MutableLiveData()
     val friendData: LiveData<SelfIntro> = _friendData
 
-    private val _isServerStatus = MutableLiveData(false)
-    val isServerStatus: LiveData<Boolean> = _isServerStatus
+    val nickname = MutableLiveData<String>()
 
     private val _friendId = MutableLiveData<Int>()
     val friendId: LiveData<Int> = _friendId
@@ -37,15 +36,13 @@ class BlockViewModel @Inject constructor(
         getBlock()
     }
 
-    private fun getBlock() {
+    fun getBlock() {
         viewModelScope.launch {
             getBlockUseCase()
                 .onSuccess { response ->
                     _blockData.value = response
-                    _isServerStatus.value = true
                 }
                 .onFailure { throwable ->
-                    _isServerStatus.value = false
                     Timber.e("$throwable")
                 }
         }
