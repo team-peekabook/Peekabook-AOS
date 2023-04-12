@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -204,7 +203,9 @@
             android:layout_marginTop="17dp"
             android:layout_marginBottom="32dp"
             android:background="@color/peeka_red"
+            android:clickable="true"
             android:gravity="center"
+            android:onClick="@{() -> vm.postReport()}"
             android:paddingVertical="21dp"
             android:text="@string/report_report"
             android:textColor="@color/peeka_white"

@@ -3,7 +3,7 @@ package com.sopt.peekabookaos.presentation.search.book
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.GetBookToTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -43,7 +43,7 @@ class SearchBookViewModel @Inject constructor(
         }
     }
 
-    fun updateUiState(friendInfo: SelfIntro, isCreateView: Boolean) {
+    fun updateUiState(friendInfo: User, isCreateView: Boolean) {
         _uiState.value = _uiState.value.copy(
             friendInfo = friendInfo,
             isCreateView = isCreateView
@@ -52,7 +52,7 @@ class SearchBookViewModel @Inject constructor(
 
     data class SearchBookUiState(
         val book: List<Book> = emptyList(),
-        val friendInfo: SelfIntro = SelfIntro(),
+        val friendInfo: User = User(),
         val isCreateView: Boolean = false
     )
 }

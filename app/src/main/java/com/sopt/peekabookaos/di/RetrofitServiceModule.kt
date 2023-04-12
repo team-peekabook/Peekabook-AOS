@@ -9,6 +9,7 @@ import com.sopt.peekabookaos.data.service.NaverService
 import com.sopt.peekabookaos.data.service.NotificationService
 import com.sopt.peekabookaos.data.service.RecommendService
 import com.sopt.peekabookaos.data.service.RefreshService
+import com.sopt.peekabookaos.data.service.ReportService
 import com.sopt.peekabookaos.data.service.SearchService
 import com.sopt.peekabookaos.data.service.ShelfService
 import com.sopt.peekabookaos.data.service.UserInputService
@@ -71,4 +72,8 @@ object RetrofitServiceModule {
     @Provides
     fun providesMyPageService(@PeekaType retrofit: Retrofit): MyPageService =
         retrofit.create(MyPageService::class.java)
+
+    @Provides
+    fun providesReportService(@PeekaType retrofit: Retrofit): ReportService =
+        retrofit.create(ReportService::class.java)
 }

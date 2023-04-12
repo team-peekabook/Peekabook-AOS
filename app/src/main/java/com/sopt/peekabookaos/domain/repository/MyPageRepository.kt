@@ -1,7 +1,7 @@
 package com.sopt.peekabookaos.domain.repository
 
-import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.entity.User
 
 interface MyPageRepository {
-    suspend fun getMyPage(): Result<SelfIntro>
+    suspend fun getMyPage(): Result<User>
 }

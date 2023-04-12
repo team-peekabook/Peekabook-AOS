@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentRecommendationBinding
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.presentation.book.BookActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
@@ -59,7 +59,7 @@ class RecommendationFragment :
             requireNotNull(
                 arguments?.getParcelableCompat(
                     BookActivity.FRIEND_INFO,
-                    SelfIntro::class.java
+                    User::class.java
                 )
             )
         )

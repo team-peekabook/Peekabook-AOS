@@ -25,7 +25,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.block.BlockActivity"
+            android:name=".presentation.block.BlockedUserActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
