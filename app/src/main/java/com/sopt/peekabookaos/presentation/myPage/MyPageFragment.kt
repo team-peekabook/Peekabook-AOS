@@ -46,22 +46,21 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initLinkInfoClickListener() {
-        binding.tvMyPageInfo.setOnClickListener {
-            var intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://interesting-door-b57.notion.site/About-Team-b25424073add46b9a186d69c17815bf2")
+        binding.tvMyPageDeveloperInfo.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(getString(R.string.my_page_developer_info_link))
+                )
             )
-            startActivity(intent)
         }
     }
 
     private fun initLinkPolicyClickListener() {
         binding.tvMyPagePolicy.setOnClickListener {
-            var intent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://interesting-door-b57.notion.site/d00db57d23414511ad8ec1f2f24c230a")
+            startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.my_page_policy_link)))
             )
-            startActivity(intent)
         }
     }
     /*private fun initModifyClickListener(){

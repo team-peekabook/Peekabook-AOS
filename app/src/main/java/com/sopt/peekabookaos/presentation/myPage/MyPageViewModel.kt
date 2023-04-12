@@ -29,7 +29,6 @@ class MyPageViewModel @Inject constructor(
             getMyPageUseCase()
                 .onSuccess { response ->
                     _userData.value = response
-                    Timber.d("get 서버통신 성공")
                 }
                 .onFailure { throwable ->
                     Timber.e("$throwable")
