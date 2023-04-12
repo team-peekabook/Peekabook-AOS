@@ -16,13 +16,17 @@ class ReportViewModel @Inject constructor(
 ) : ViewModel() {
     private val selectedReasonId = MutableLiveData(1)
 
+    val reason = MutableLiveData("")
+
     private val _friendId = MutableLiveData<Int>()
     val friendId: LiveData<Int> = _friendId
 
-    val reason = MutableLiveData("")
-
     fun setSelectedReasonId(id: Int) {
         selectedReasonId.value = id
+    }
+
+    fun initFriendId(id: Int) {
+        _friendId.value = id
     }
 
     private val _isReport = MutableLiveData<Boolean>()
