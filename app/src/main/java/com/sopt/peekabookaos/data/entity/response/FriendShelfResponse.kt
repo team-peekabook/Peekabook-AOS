@@ -18,7 +18,7 @@ data class FriendShelfResponse(
 ) {
     fun toFriendShelf(): FriendShelf = FriendShelf(
         myIntro = this.myIntro.toSelfIntro(),
-        friendList = this.friendList.map { friendListEntity ->
+        friendProfile = this.friendList.map { friendListEntity ->
             friendListEntity.toFriendList()
         },
         friendIntro = this.friendIntro.toSelfIntro(),

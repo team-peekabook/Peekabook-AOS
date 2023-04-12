@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBlockBinding
-import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.FriendProfile
 import com.sopt.peekabookaos.presentation.bookshelf.BlockDialog
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
@@ -38,11 +38,11 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
         }
     }
 
-    private fun initBlockDialog(friendList: FriendList, friendId: Int) {
-        BlockDeleteDialog().withArgs {
+    private fun initBlockDialog(friendProfile: FriendProfile, friendId: Int) {
+        UnblockDialog().withArgs {
             putString(
                 BlockDialog.FOLLOWER,
-                requireNotNull(friendList.nickname)
+                requireNotNull(friendProfile.nickname)
             )
             putParcelable(
                 WarningDialogFragment.CONFIRM_ACTION,

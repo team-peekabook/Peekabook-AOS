@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ItemBookshelfUserProfileBinding
-import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.FriendProfile
 import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class BookShelfFriendAdapter(
-    private val clickListener: ItemClickListener<FriendList>
-) : ListAdapter<FriendList, BookShelfFriendAdapter.FriendProfileViewHolder>(DIFF_CALLBACK) {
+    private val clickListener: ItemClickListener<FriendProfile>
+) : ListAdapter<FriendProfile, BookShelfFriendAdapter.FriendProfileViewHolder>(DIFF_CALLBACK) {
     private var selectedPosition = RecyclerView.NO_POSITION
     private var prePosition = RecyclerView.NO_POSITION
 
@@ -54,7 +54,7 @@ class BookShelfFriendAdapter(
         val binding: ItemBookshelfUserProfileBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(data: FriendList, itemClickListener: ItemClickListener<FriendList>) {
+        fun onBind(data: FriendProfile, itemClickListener: ItemClickListener<FriendProfile>) {
             binding.data = data
             binding.root.setOnClickListener {
                 itemClickListener.onClick(absoluteAdapterPosition, data)
@@ -63,7 +63,7 @@ class BookShelfFriendAdapter(
     }
 
     companion object {
-        private val DIFF_CALLBACK = ItemDiffCallback<FriendList>(
+        private val DIFF_CALLBACK = ItemDiffCallback<FriendProfile>(
             onItemsTheSame = { old, new -> old.id == new.id },
             onContentsTheSame = { old, new -> old == new }
         )

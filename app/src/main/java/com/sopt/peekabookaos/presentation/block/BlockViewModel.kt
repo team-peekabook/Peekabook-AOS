@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.FriendProfile
 import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.GetBlockUseCase
@@ -18,8 +18,8 @@ class BlockViewModel @Inject constructor(
     private val getBlockUseCase: GetBlockUseCase,
     private val deleteBlockUseCase: DeleteBlockUseCase
 ) : ViewModel() {
-    private val _blockData = MutableLiveData<List<FriendList>>()
-    val blockData: LiveData<List<FriendList>> = _blockData
+    private val _blockData = MutableLiveData<List<FriendProfile>>()
+    val blockData: LiveData<List<FriendProfile>> = _blockData
 
     private val _friendData: MutableLiveData<SelfIntro> = MutableLiveData()
     val friendData: LiveData<SelfIntro> = _friendData
@@ -33,10 +33,10 @@ class BlockViewModel @Inject constructor(
     val isDeleted: LiveData<Boolean> = _isDeleted
 
     init {
-        getBlock()
+        getBlockList()
     }
 
-    fun getBlock() {
+    fun getBlockList() {
         viewModelScope.launch {
             getBlockUseCase()
                 .onSuccess { response ->

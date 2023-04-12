@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Books
-import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.FriendProfile
 import com.sopt.peekabookaos.domain.entity.Picks
 import com.sopt.peekabookaos.domain.entity.SelfIntro
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
@@ -30,8 +30,8 @@ class BookShelfViewModel @Inject constructor(
     private val _shelfData: MutableLiveData<List<Books>> = MutableLiveData()
     val shelfData: LiveData<List<Books>> = _shelfData
 
-    private val _friendUserData: MutableLiveData<List<FriendList>> = MutableLiveData()
-    val friendUserData: LiveData<List<FriendList>> = _friendUserData
+    private val _friendUserData: MutableLiveData<List<FriendProfile>> = MutableLiveData()
+    val friendUserData: LiveData<List<FriendProfile>> = _friendUserData
 
     private val _userData: MutableLiveData<SelfIntro> = MutableLiveData()
     val userData: LiveData<SelfIntro> = _userData
@@ -74,7 +74,7 @@ class BookShelfViewModel @Inject constructor(
         _friendShelf.value = state
     }
 
-    fun updateUserId(item: FriendList) {
+    fun updateUserId(item: FriendProfile) {
         _userId.value = item.id
         userNickname = item.nickname
         userProfileImage = item.profileImage
@@ -91,7 +91,7 @@ class BookShelfViewModel @Inject constructor(
                     _pickData.value = response.picks
                     _bookTotalNum.value = response.bookTotalNum
                     _shelfData.value = response.books
-                    _friendUserData.value = response.friendList
+                    _friendUserData.value = response.friendProfile
                     _userData.value = response.myIntro
                     _isMyServerStatus.value = true
                     _isFriendServerStatus.value = false
@@ -109,7 +109,7 @@ class BookShelfViewModel @Inject constructor(
         viewModelScope.launch {
             getFriendShelfUseCase(requireNotNull(userId.value))
                 .onSuccess { response ->
-                    _friendUserData.value = response.friendList
+                    _friendUserData.value = response.friendProfile
                     if (updateFriendState()) {
                         _friendData.value = response.friendIntro
                         _pickData.value = response.picks
@@ -155,7 +155,7 @@ class BookShelfViewModel @Inject constructor(
     private fun updateFriendState(): Boolean {
         return requireNotNull(_friendUserData.value).contains(
             _userId.value?.let { userId ->
-                FriendList(
+                FriendProfile(
                     userId,
                     userNickname,
                     userProfileImage
