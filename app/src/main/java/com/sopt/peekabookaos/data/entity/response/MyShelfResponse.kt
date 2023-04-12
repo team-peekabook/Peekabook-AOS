@@ -16,7 +16,7 @@ data class MyShelfResponse(
     val books: List<BooksEntity>
 ) {
     fun toMyShelf(): MyShelf = MyShelf(
-        friendProfile = this.friendList.map { friendListEntity ->
+        user = this.friendList.map { friendListEntity ->
             friendListEntity.toFriendProfile()
         },
         myIntro = this.myIntro.toProfile(),

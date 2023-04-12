@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.domain.entity.Profile
+import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.PostRecommendationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,15 +19,15 @@ class RecommedationViewModel @Inject constructor(
     private val _bookData = MutableLiveData<Book>()
     val bookData: LiveData<Book> = _bookData
 
-    private val _friendData = MutableLiveData<Profile>()
-    val friendData: LiveData<Profile> = _friendData
+    private val _friendData = MutableLiveData<User>()
+    val friendData: LiveData<User> = _friendData
 
     private val _isRecommendation = MutableLiveData<Boolean>()
     val isRecommendation: LiveData<Boolean> = _isRecommendation
 
     val comment = MutableLiveData("")
 
-    fun initRecommendData(bookData: Book, friendData: Profile) {
+    fun initRecommendData(bookData: Book, friendData: User) {
         _bookData.value = bookData
         _friendData.value = friendData
     }

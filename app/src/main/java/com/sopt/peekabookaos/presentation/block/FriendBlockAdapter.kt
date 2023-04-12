@@ -5,17 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.peekabookaos.databinding.ItemBlockBinding
-import com.sopt.peekabookaos.domain.entity.FriendProfile
+import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.util.ItemDiffCallback
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
-class FriendBlockAdapter(private val showBlockDialog: (FriendProfile, Int) -> Unit) :
-    ListAdapter<FriendProfile, FriendBlockAdapter.FriendBlockViewHolder>(blockDiffUtil) {
+class FriendBlockAdapter(private val showBlockDialog: (User, Int) -> Unit) :
+    ListAdapter<User, FriendBlockAdapter.FriendBlockViewHolder>(blockDiffUtil) {
     class FriendBlockViewHolder(
         private val binding: ItemBlockBinding,
-        private val showBlockDialog: (FriendProfile, Int) -> Unit
+        private val showBlockDialog: (User, Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(blockFriend: FriendProfile) {
+        fun onBind(blockFriend: User) {
             binding.data = blockFriend
             binding.tvBlockCancel.setSingleOnClickListener {
                 showBlockDialog(blockFriend, blockFriend.id)
@@ -38,7 +38,7 @@ class FriendBlockAdapter(private val showBlockDialog: (FriendProfile, Int) -> Un
     }
 
     companion object {
-        private val blockDiffUtil = ItemDiffCallback<FriendProfile>(
+        private val blockDiffUtil = ItemDiffCallback<User>(
             onItemsTheSame = { old, new -> old.id == new.id },
             onContentsTheSame = { old, new -> old == new }
         )

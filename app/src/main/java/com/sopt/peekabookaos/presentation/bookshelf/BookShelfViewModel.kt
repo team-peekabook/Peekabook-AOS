@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Books
-import com.sopt.peekabookaos.domain.entity.FriendProfile
+import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.entity.Picks
-import com.sopt.peekabookaos.domain.entity.Profile
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
 import com.sopt.peekabookaos.domain.usecase.GetMyShelfUseCase
@@ -30,14 +29,14 @@ class BookShelfViewModel @Inject constructor(
     private val _shelfData: MutableLiveData<List<Books>> = MutableLiveData()
     val shelfData: LiveData<List<Books>> = _shelfData
 
-    private val _friendUserData: MutableLiveData<List<FriendProfile>> = MutableLiveData()
-    val friendUserData: LiveData<List<FriendProfile>> = _friendUserData
+    private val _friendUserData: MutableLiveData<List<User>> = MutableLiveData()
+    val friendUserData: LiveData<List<User>> = _friendUserData
 
-    private val _userData: MutableLiveData<Profile> = MutableLiveData()
-    val userData: LiveData<Profile> = _userData
+    private val _userData: MutableLiveData<User> = MutableLiveData()
+    val userData: LiveData<User> = _userData
 
-    private val _friendData: MutableLiveData<Profile> = MutableLiveData()
-    val friendData: LiveData<Profile> = _friendData
+    private val _friendData: MutableLiveData<User> = MutableLiveData()
+    val friendData: LiveData<User> = _friendData
 
     private val _friendShelf: MutableLiveData<Boolean> = MutableLiveData(false)
     var friendShelf: LiveData<Boolean> = _friendShelf
@@ -74,7 +73,7 @@ class BookShelfViewModel @Inject constructor(
         _friendShelf.value = state
     }
 
-    fun updateUserId(item: FriendProfile) {
+    fun updateUserId(item: User) {
         _userId.value = item.id
         userNickname = item.nickname
         userProfileImage = item.profileImage
@@ -91,7 +90,7 @@ class BookShelfViewModel @Inject constructor(
                     _pickData.value = response.picks
                     _bookTotalNum.value = response.bookTotalNum
                     _shelfData.value = response.books
-                    _friendUserData.value = response.friendProfile
+                    _friendUserData.value = response.user
                     _userData.value = response.myIntro
                     _isMyServerStatus.value = true
                     _isFriendServerStatus.value = false
@@ -109,7 +108,7 @@ class BookShelfViewModel @Inject constructor(
         viewModelScope.launch {
             getFriendShelfUseCase(requireNotNull(userId.value))
                 .onSuccess { response ->
-                    _friendUserData.value = response.friendProfile
+                    _friendUserData.value = response.user
                     if (updateFriendState()) {
                         _friendData.value = response.friendIntro
                         _pickData.value = response.picks
@@ -155,7 +154,7 @@ class BookShelfViewModel @Inject constructor(
     private fun updateFriendState(): Boolean {
         return requireNotNull(_friendUserData.value).contains(
             _userId.value?.let { userId ->
-                FriendProfile(
+                User(
                     userId,
                     userNickname,
                     userProfileImage

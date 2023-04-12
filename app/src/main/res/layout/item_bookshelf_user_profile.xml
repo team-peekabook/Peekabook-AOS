@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.domain.entity.FriendProfile" />
+            type="com.sopt.peekabookaos.domain.entity.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
