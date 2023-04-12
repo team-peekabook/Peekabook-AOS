@@ -95,6 +95,18 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 updateToMyShelf()
             }
         }
+
+        viewModel.isBlockStatus.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                updateToMyShelf()
+            }
+        }
+
+        viewModel.isUnfollowStatus.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                updateToMyShelf()
+            }
+        }
     }
 
     private fun initDataObserver() {
@@ -226,7 +238,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 WarningDialogFragment.CONFIRM_ACTION,
                 ConfirmClickListener(confirmAction = {
                     viewModel.postUnfollow()
-                    updateToMyShelf()
                 })
             )
         }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
@@ -242,7 +253,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 WarningDialogFragment.CONFIRM_ACTION,
                 ConfirmClickListener(confirmAction = {
                     viewModel.postBlock()
-                    updateToMyShelf()
                 })
             )
         }.show(childFragmentManager, BlockDialog.TAG)
