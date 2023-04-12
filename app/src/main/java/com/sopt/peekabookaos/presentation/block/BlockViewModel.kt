@@ -1,19 +1,53 @@
 package com.sopt.peekabookaos.presentation.block
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sopt.peekabookaos.domain.entity.FriendList
+import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.domain.entity.User
+import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
+import com.sopt.peekabookaos.domain.usecase.GetBlockUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class BlockViewModel : ViewModel() {
-    val blockList =
-        listOf(
-            FriendList(0, "문수빈", "https://nhim.splf.in/image/acnh/animal/Poppy.png"),
-            FriendList(1, "이현우", "https://nhim.splf.in/image/acnh/animal/Bluebear.png"),
-            FriendList(2, "박강희", "https://nhim.splf.in/image/acnh/animal/Ketchup.png"),
-            FriendList(3, "김하정", "https://nhim.splf.in/image/acnlanimal/Marshal.png"),
-            FriendList(4, "이영주", "https://nhim.splf.in/image/acnh/animal/Agent%20S.png")
-        )
+@HiltViewModel
+class BlockViewModel @Inject constructor(
+    private val getBlockUseCase: GetBlockUseCase,
+    private val deleteBlockUseCase: DeleteBlockUseCase
+) : ViewModel() {
+    private val _blockUser = MutableLiveData<List<User>>()
+    val blockUser: LiveData<List<User>> = _blockUser
 
-    fun getBlockData() {
-        // 서버연결시 사용
+    private val _isDeleted = MutableLiveData<Boolean>()
+    val isDeleted: LiveData<Boolean> = _isDeleted
+
+    init {
+        getBlockList()
+    }
+
+    fun getBlockList() {
+        viewModelScope.launch {
+            getBlockUseCase()
+                .onSuccess { response ->
+                    _blockUser.value = response
+                }
+                .onFailure { throwable ->
+                    Timber.e("$throwable")
+                }
+        }
+    }
+
+    fun deleteBlock(friendId: Int) {
+        viewModelScope.launch {
+            deleteBlockUseCase(friendId)
+                .onSuccess { success ->
+                    _isDeleted.value = success
+                }.onFailure { throwable ->
+                    _isDeleted.value = false
+                    Timber.e("$throwable")
+                }
+        }
     }
 }

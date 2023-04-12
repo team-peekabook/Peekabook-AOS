@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.sopt.peekabookaos.domain.entity.FriendList" />
+            type="com.sopt.peekabookaos.domain.entity.User" />
 
     </data>
 
@@ -45,7 +45,7 @@
             tools:text="이현우" />
 
         <TextView
-            android:id="@+id/tv_block_cancel"
+            android:id="@+id/tv_block_unblock"
             style="@style/S3Md"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

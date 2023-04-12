@@ -125,6 +125,8 @@
     <!-- block -->
     <string name="block_title">차단된 계정</string>
     <string name="block_cancel">차단 해제</string>
+    <string name="block_dialog_delete_title">%s님을 차단 해제하시겠어요?</string>
+    <string name="block_dialog_delete_content">이제 서로에게 책을 추천할 수 있으며,\n서로의 프로필을 볼 수 있게 됩니다.</string>
 
     <!-- Report -->
     <string name="report_title">사용자 신고하기</string>
