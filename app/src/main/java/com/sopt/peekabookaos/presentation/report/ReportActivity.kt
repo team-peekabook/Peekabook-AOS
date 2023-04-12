@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityReportBinding
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.DEFAULT
 import com.sopt.peekabookaos.presentation.report.ReportConfirmDialog.Companion.TAG
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +15,7 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        reportViewModel.initFriendId(intent.getIntExtra("friendId", DEFAULT))
         binding.vm = reportViewModel
         initReportRadioClickListener()
         initIsReportObserve()
