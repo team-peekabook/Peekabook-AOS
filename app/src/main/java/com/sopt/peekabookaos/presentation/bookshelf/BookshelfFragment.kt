@@ -19,6 +19,8 @@ import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHELF
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
+import com.sopt.peekabookaos.presentation.report.ReportActivity
+import com.sopt.peekabookaos.presentation.report.ReportActivity.Companion.FRIEND_ID
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
@@ -92,6 +94,18 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         }
         viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
             if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
+                updateToMyShelf()
+            }
+        }
+
+        viewModel.isBlockStatus.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                updateToMyShelf()
+            }
+        }
+
+        viewModel.isUnfollowStatus.observe(viewLifecycleOwner) { success ->
+            if (success) {
                 updateToMyShelf()
             }
         }
@@ -201,7 +215,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 BookShelfBottomSheetFragment.onItemClick { itemClick ->
                     when (itemClick) {
                         0 -> initUnfollowDialog()
-                        //       1 -> 하정이의 신고뷰로 넘어가기
+                        1 -> initReport()
                         2 -> initBlockDialog()
                     }
                 }
@@ -226,7 +240,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 WarningDialogFragment.CONFIRM_ACTION,
                 ConfirmClickListener(confirmAction = {
                     viewModel.postUnfollow()
-                    updateToMyShelf()
                 })
             )
         }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
@@ -242,10 +255,15 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 WarningDialogFragment.CONFIRM_ACTION,
                 ConfirmClickListener(confirmAction = {
                     viewModel.postBlock()
-                    updateToMyShelf()
                 })
             )
         }.show(childFragmentManager, BlockDialog.TAG)
+    }
+
+    private fun initReport() {
+        val toReport = Intent(requireActivity(), ReportActivity::class.java)
+        toReport.putExtra(FRIEND_ID, requireNotNull(viewModel.friendData.value).id)
+        startActivity(toReport)
     }
 
     private fun updateToMyShelf() {

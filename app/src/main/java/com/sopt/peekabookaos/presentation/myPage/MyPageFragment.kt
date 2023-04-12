@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentMyPageBinding
+import com.sopt.peekabookaos.presentation.block.BlockActivity
 import com.sopt.peekabookaos.presentation.profileModify.ProfileModifyActivity
 import com.sopt.peekabookaos.presentation.withdraw.WithdrawActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
@@ -18,9 +19,16 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBlockBtnClickListener()
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
         initModifyClickListener()
+    }
+
+    private fun initBlockBtnClickListener() {
+        binding.tvMyPageBlock.setSingleOnClickListener {
+            startActivity(Intent(requireActivity(), BlockActivity::class.java))
+        }
     }
 
     private fun initWithdrawBtnClickListener() {

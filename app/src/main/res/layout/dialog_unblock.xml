@@ -1,0 +1,84 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="index"
+            type="Integer" />
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.block.BlockViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/peeka_beige">
+
+        <TextView
+            android:id="@+id/tv_block_dialog_title"
+            style="@style/H4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="@{@string/block_dialog_delete_title(vm.blockUser[index].nickname)}"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="삐까빠까님을 차단 해제하시겠어요?" />
+
+        <TextView
+            android:id="@+id/tv_block_dialog_content"
+            style="@style/S3Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/block_dialog_delete_content"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="@id/tv_block_dialog_title"
+            app:layout_constraintStart_toStartOf="@id/tv_block_dialog_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_block_dialog_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_block_delete_dialog_cancel"
+            style="H2Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/peeka_g_2"
+            android:paddingHorizontal="34dp"
+            android:paddingVertical="10dp"
+            android:text="@string/bookshelf_dialog_cancel"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_block_delete_dialog_confirm"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_block_dialog_content" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_block_delete_dialog_confirm"
+            style="H1Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/peeka_red"
+            android:paddingHorizontal="34dp"
+            android:paddingVertical="10dp"
+            android:text="@string/block_cancel"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="@id/btn_block_delete_dialog_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_block_delete_dialog_cancel"
+            app:layout_constraintTop_toTopOf="@id/btn_block_delete_dialog_cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

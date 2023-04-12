@@ -1,15 +1,15 @@
 package com.sopt.peekabookaos.data.entity
 
-import com.sopt.peekabookaos.domain.entity.FriendList
+import com.sopt.peekabookaos.domain.entity.User
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FriendListEntity(
+data class FriendProfileEntity(
     val id: Int,
     val nickname: String,
     val profileImage: String
 ) {
-    fun toFriendList(): FriendList = FriendList(
+    fun toFriendProfile(): User = User(
         id = this.id,
         nickname = this.nickname,
         profileImage = this.profileImage
