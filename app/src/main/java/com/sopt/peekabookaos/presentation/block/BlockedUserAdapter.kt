@@ -9,9 +9,9 @@ import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.util.ItemDiffCallback
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
-class BlockAdapter(private val showUnblockDialog: (Int) -> Unit) :
-    ListAdapter<User, BlockAdapter.FriendBlockViewHolder>(unblockDiffUtil) {
-    class FriendBlockViewHolder(
+class BlockedUserAdapter(private val showUnblockDialog: (Int) -> Unit) :
+    ListAdapter<User, BlockedUserAdapter.BlockedUserViewHolder>(unblockDiffUtil) {
+    class BlockedUserViewHolder(
         private val binding: ItemBlockBinding,
         private val showUnblockDialog: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -23,8 +23,8 @@ class BlockAdapter(private val showUnblockDialog: (Int) -> Unit) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendBlockViewHolder =
-        FriendBlockViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlockedUserViewHolder =
+        BlockedUserViewHolder(
             ItemBlockBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -33,7 +33,7 @@ class BlockAdapter(private val showUnblockDialog: (Int) -> Unit) :
             showUnblockDialog
         )
 
-    override fun onBindViewHolder(holder: FriendBlockViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BlockedUserViewHolder, position: Int) {
         holder.onBind(getItem(position))
     }
 

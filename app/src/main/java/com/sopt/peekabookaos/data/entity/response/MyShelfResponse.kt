@@ -19,7 +19,7 @@ data class MyShelfResponse(
         user = this.friendList.map { friendListEntity ->
             friendListEntity.toFriendProfile()
         },
-        myIntro = this.myIntro.toProfile(),
+        myIntro = this.myIntro.toUser(),
         picks = this.picks.map { picksEntity ->
             picksEntity.toPicks()
         },

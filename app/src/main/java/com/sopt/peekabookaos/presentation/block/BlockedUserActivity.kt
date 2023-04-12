@@ -3,7 +3,7 @@ package com.sopt.peekabookaos.presentation.block
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.databinding.ActivityBlockBinding
+import com.sopt.peekabookaos.databinding.ActivityBlockedUserBinding
 import com.sopt.peekabookaos.presentation.block.UnblockDialog.Companion.BLOCK_INDEX
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -11,22 +11,23 @@ import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_block) {
-    private val blockViewModel: BlockViewModel by viewModels()
-    private val blockAdapter = BlockAdapter(showUnblockDialog = ::initUnblockDialog)
+class BlockedUserActivity :
+    BindingActivity<ActivityBlockedUserBinding>(R.layout.activity_blocked_user) {
+    private val blockedUserViewModel: BlockedUserViewModel by viewModels()
+    private val blockedUserAdapter = BlockedUserAdapter(showUnblockDialog = ::initUnblockDialog)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = blockViewModel
+        binding.vm = blockedUserViewModel
         initAdapter()
         initBackBtnOnClickListener()
         initIsDeletedObserve()
     }
 
     private fun initAdapter() {
-        binding.rvBlock.adapter = blockAdapter
-        blockViewModel.blockUser.observe(this) { blockData ->
-            blockAdapter.submitList(blockData)
+        binding.rvBlock.adapter = blockedUserAdapter
+        blockedUserViewModel.blockUser.observe(this) { blockData ->
+            blockedUserAdapter.submitList(blockData)
         }
     }
 
@@ -42,9 +43,9 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
     }
 
     private fun initIsDeletedObserve() {
-        blockViewModel.isDeleted.observe(this) { success ->
+        blockedUserViewModel.isDeleted.observe(this) { success ->
             if (success) {
-                blockViewModel.getBlockList()
+                blockedUserViewModel.getBlockList()
             }
         }
     }

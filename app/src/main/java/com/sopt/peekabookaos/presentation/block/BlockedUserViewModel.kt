@@ -13,7 +13,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class BlockViewModel @Inject constructor(
+class BlockedUserViewModel @Inject constructor(
     private val getBlockUseCase: GetBlockUseCase,
     private val deleteBlockUseCase: DeleteBlockUseCase
 ) : ViewModel() {

@@ -4,6 +4,7 @@ import com.sopt.peekabookaos.data.repository.AuthRepositoryImpl
 import com.sopt.peekabookaos.data.repository.BlockRepositoryImpl
 import com.sopt.peekabookaos.data.repository.BookRepositoryImpl
 import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
+import com.sopt.peekabookaos.data.repository.MyPageRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
 import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
@@ -16,6 +17,7 @@ import com.sopt.peekabookaos.domain.repository.AuthRepository
 import com.sopt.peekabookaos.domain.repository.BlockRepository
 import com.sopt.peekabookaos.domain.repository.BookRepository
 import com.sopt.peekabookaos.domain.repository.DetailRepository
+import com.sopt.peekabookaos.domain.repository.MyPageRepository
 import com.sopt.peekabookaos.domain.repository.NaverRepository
 import com.sopt.peekabookaos.domain.repository.NotificationRepository
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
@@ -104,4 +106,10 @@ abstract class RepositoryModule {
     abstract fun bindToReportRepository(
         reportRepositoryImpl: ReportRepositoryImpl
     ): ReportRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindToMyPageRepository(
+        myPageRepositoryImpl: MyPageRepositoryImpl
+    ): MyPageRepository
 }
