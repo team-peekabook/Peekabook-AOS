@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentSearchBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.entity.Profile
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
@@ -63,13 +63,13 @@ class SearchBookFragment :
             RECOMMEND -> {
                 searchBookViewModel.updateUiState(
                     friendInfo = requireNotNull(
-                        requireActivity().intent.getParcelable(FRIEND_INFO, SelfIntro::class.java)
+                        requireActivity().intent.getParcelable(FRIEND_INFO, Profile::class.java)
                     ),
                     isCreateView = false
                 )
             }
             else -> {
-                searchBookViewModel.updateUiState(friendInfo = SelfIntro(), isCreateView = true)
+                searchBookViewModel.updateUiState(friendInfo = Profile(), isCreateView = true)
             }
         }
     }

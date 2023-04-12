@@ -1,9 +1,9 @@
 package com.sopt.peekabookaos.domain.entity
 
 data class FriendShelf(
-    val myIntro: SelfIntro = SelfIntro(),
+    val myIntro: Profile = Profile(),
     val friendProfile: List<FriendProfile> = emptyList(),
-    val friendIntro: SelfIntro = SelfIntro(),
+    val friendIntro: Profile = Profile(),
     val picks: List<Picks> = emptyList(),
     val bookTotalNum: Int = -1,
     val books: List<Books> = emptyList()

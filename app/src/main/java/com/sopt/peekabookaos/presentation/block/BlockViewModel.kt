@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.FriendProfile
-import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.entity.Profile
 import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.GetBlockUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +21,8 @@ class BlockViewModel @Inject constructor(
     private val _blockData = MutableLiveData<List<FriendProfile>>()
     val blockData: LiveData<List<FriendProfile>> = _blockData
 
-    private val _friendData: MutableLiveData<SelfIntro> = MutableLiveData()
-    val friendData: LiveData<SelfIntro> = _friendData
+    private val _friendData: MutableLiveData<Profile> = MutableLiveData()
+    val friendData: LiveData<Profile> = _friendData
 
     val nickname = MutableLiveData<String>()
 

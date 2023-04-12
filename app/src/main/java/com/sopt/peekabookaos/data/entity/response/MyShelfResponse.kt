@@ -3,14 +3,14 @@ package com.sopt.peekabookaos.data.entity.response
 import com.sopt.peekabookaos.data.entity.BooksEntity
 import com.sopt.peekabookaos.data.entity.FriendProfileEntity
 import com.sopt.peekabookaos.data.entity.PicksEntity
-import com.sopt.peekabookaos.data.entity.SelfIntroEntity
+import com.sopt.peekabookaos.data.entity.ProfileEntity
 import com.sopt.peekabookaos.domain.entity.MyShelf
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MyShelfResponse(
     val friendList: List<FriendProfileEntity>,
-    val myIntro: SelfIntroEntity,
+    val myIntro: ProfileEntity,
     val picks: List<PicksEntity>,
     val bookTotalNum: Int,
     val books: List<BooksEntity>
@@ -19,7 +19,7 @@ data class MyShelfResponse(
         friendProfile = this.friendList.map { friendListEntity ->
             friendListEntity.toFriendProfile()
         },
-        myIntro = this.myIntro.toSelfIntro(),
+        myIntro = this.myIntro.toProfile(),
         picks = this.picks.map { picksEntity ->
             picksEntity.toPicks()
         },

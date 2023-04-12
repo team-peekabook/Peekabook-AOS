@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Books
 import com.sopt.peekabookaos.domain.entity.FriendProfile
 import com.sopt.peekabookaos.domain.entity.Picks
-import com.sopt.peekabookaos.domain.entity.SelfIntro
+import com.sopt.peekabookaos.domain.entity.Profile
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
 import com.sopt.peekabookaos.domain.usecase.GetMyShelfUseCase
@@ -33,11 +33,11 @@ class BookShelfViewModel @Inject constructor(
     private val _friendUserData: MutableLiveData<List<FriendProfile>> = MutableLiveData()
     val friendUserData: LiveData<List<FriendProfile>> = _friendUserData
 
-    private val _userData: MutableLiveData<SelfIntro> = MutableLiveData()
-    val userData: LiveData<SelfIntro> = _userData
+    private val _userData: MutableLiveData<Profile> = MutableLiveData()
+    val userData: LiveData<Profile> = _userData
 
-    private val _friendData: MutableLiveData<SelfIntro> = MutableLiveData()
-    val friendData: LiveData<SelfIntro> = _friendData
+    private val _friendData: MutableLiveData<Profile> = MutableLiveData()
+    val friendData: LiveData<Profile> = _friendData
 
     private val _friendShelf: MutableLiveData<Boolean> = MutableLiveData(false)
     var friendShelf: LiveData<Boolean> = _friendShelf
