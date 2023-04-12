@@ -186,7 +186,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 BookShelfBottomSheetFragment.onItemClick { itemClick ->
                     when (itemClick) {
                         0 -> initUnfollowDialog()
-                        1 -> startActivity(Intent(requireActivity(), ReportActivity::class.java))
+                        1 -> initReport()
                         2 -> initBlockDialog()
                     }
                 }
@@ -231,6 +231,12 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 })
             )
         }.show(childFragmentManager, BlockDialog.TAG)
+    }
+
+    private fun initReport() {
+        val toReport = Intent(requireActivity(), ReportActivity::class.java)
+        toReport.putExtra("friendId", requireNotNull(viewModel.friendData.value).id)
+        startActivity(toReport)
     }
 
     private fun updateToMyShelf() {
