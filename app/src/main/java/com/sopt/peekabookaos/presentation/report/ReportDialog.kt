@@ -8,10 +8,10 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.databinding.DialogReportConfirmBinding
+import com.sopt.peekabookaos.databinding.DialogReportBinding
 
-class ReportConfirmDialog : DialogFragment() {
-    private var _binding: DialogReportConfirmBinding? = null
+class ReportDialog : DialogFragment() {
+    private var _binding: DialogReportBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class ReportConfirmDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding =
-            DataBindingUtil.inflate(inflater, R.layout.dialog_report_confirm, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.dialog_report, container, false)
         return binding.root
     }
 

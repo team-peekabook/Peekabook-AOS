@@ -18,6 +18,7 @@ import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHE
 import com.sopt.peekabookaos.presentation.notification.NotificationActivity
 import com.sopt.peekabookaos.presentation.pickModify.PickModifyActivity
 import com.sopt.peekabookaos.presentation.report.ReportActivity
+import com.sopt.peekabookaos.presentation.report.ReportActivity.Companion.FRIEND_ID
 import com.sopt.peekabookaos.presentation.search.user.SearchUserActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
@@ -235,7 +236,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initReport() {
         val toReport = Intent(requireActivity(), ReportActivity::class.java)
-        toReport.putExtra("friendId", requireNotNull(viewModel.friendData.value).id)
+        toReport.putExtra(FRIEND_ID, requireNotNull(viewModel.friendData.value).id)
         startActivity(toReport)
     }
 

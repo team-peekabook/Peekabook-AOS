@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityReportBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.DEFAULT
-import com.sopt.peekabookaos.presentation.report.ReportConfirmDialog.Companion.TAG
+import com.sopt.peekabookaos.presentation.report.ReportDialog.Companion.TAG
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,10 +15,14 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        reportViewModel.initFriendId(intent.getIntExtra("friendId", DEFAULT))
         binding.vm = reportViewModel
+        initFriendId()
         initReportRadioClickListener()
         initIsReportObserve()
+    }
+
+    private fun initFriendId() {
+        reportViewModel.initFriendId(intent.getIntExtra(FRIEND_ID, DEFAULT))
     }
 
     private fun initReportRadioClickListener() {
@@ -40,8 +44,12 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     private fun initIsReportObserve() {
         reportViewModel.isReport.observe(this) { success ->
             if (success) {
-                ReportConfirmDialog().show(supportFragmentManager, TAG)
+                ReportDialog().show(supportFragmentManager, TAG)
             }
         }
+    }
+
+    companion object {
+        const val FRIEND_ID = "friendId"
     }
 }
