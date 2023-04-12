@@ -1,7 +1,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="index"
+            type="Integer" />
 
         <variable
             name="vm"
@@ -19,17 +24,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:text="@{@string/block_dialog_delete_title(vm.nickname)}"
+            android:text="@{@string/block_dialog_delete_title(vm.blockUser[index].nickname)}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="삐까빠까님을 차단 해제하시겠어요?" />
 
         <TextView
             android:id="@+id/tv_block_dialog_content"
             style="@style/S3Md"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/block_dialog_delete_content"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="@id/tv_block_dialog_title"
@@ -38,7 +45,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_block_delete_dialog_cancel"
-            style="H1Bd"
+            style="H2Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

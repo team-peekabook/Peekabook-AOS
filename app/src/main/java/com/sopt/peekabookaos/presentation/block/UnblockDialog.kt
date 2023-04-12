@@ -6,27 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.databinding.DialogBlockDeleteBinding
-import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
-import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
-import timber.log.Timber
+import com.sopt.peekabookaos.databinding.DialogUnblockBinding
 
-class BlockDeleteDialog : DialogFragment() {
-    private var _binding: DialogBlockDeleteBinding? = null
+class UnblockDialog : DialogFragment() {
+    private var _binding: DialogUnblockBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
+
+    private val blockViewModel by activityViewModels<BlockViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogBlockDeleteBinding.inflate(inflater, container, false)
+        _binding = DialogUnblockBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = blockViewModel
+        binding.index = arguments?.getInt(BLOCK_INDEX) ?: DEFAULT
         isCancelable = true
         initLayout()
         initConfirmBtnClickListener()
@@ -42,10 +44,9 @@ class BlockDeleteDialog : DialogFragment() {
     }
 
     private fun initConfirmBtnClickListener() {
+        val index = arguments?.getInt(BLOCK_INDEX) ?: DEFAULT
         binding.btnBlockDeleteDialogConfirm.setOnClickListener {
-            arguments?.getParcelable<ConfirmClickListener>(WarningDialogFragment.CONFIRM_ACTION)
-                ?.onConfirmClick()
-                ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
+            blockViewModel.deleteBlock(requireNotNull(blockViewModel.blockUser.value)[index].id)
             dismiss()
         }
     }
@@ -62,8 +63,8 @@ class BlockDeleteDialog : DialogFragment() {
     }
 
     companion object {
-        const val TAG = "BlockDeleteDialogFragment"
-        const val FOLLOWER = "follower"
-        private const val DEFAULT = "default"
+        const val TAG = "UnblockDialogFragment"
+        const val BLOCK_INDEX = "block_index"
+        private const val DEFAULT = -1
     }
 }

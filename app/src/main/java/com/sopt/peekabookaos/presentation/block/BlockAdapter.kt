@@ -9,16 +9,16 @@ import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.util.ItemDiffCallback
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
-class FriendBlockAdapter(private val showBlockDialog: (User, Int) -> Unit) :
-    ListAdapter<User, FriendBlockAdapter.FriendBlockViewHolder>(blockDiffUtil) {
+class BlockAdapter(private val showUnblockDialog: (Int) -> Unit) :
+    ListAdapter<User, BlockAdapter.FriendBlockViewHolder>(unblockDiffUtil) {
     class FriendBlockViewHolder(
         private val binding: ItemBlockBinding,
-        private val showBlockDialog: (User, Int) -> Unit
+        private val showUnblockDialog: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(blockFriend: User) {
-            binding.data = blockFriend
-            binding.tvBlockCancel.setSingleOnClickListener {
-                showBlockDialog(blockFriend, blockFriend.id)
+        fun onBind(user: User) {
+            binding.data = user
+            binding.tvBlockUnblock.setSingleOnClickListener {
+                showUnblockDialog(absoluteAdapterPosition)
             }
         }
     }
@@ -30,7 +30,7 @@ class FriendBlockAdapter(private val showBlockDialog: (User, Int) -> Unit) :
                 parent,
                 false
             ),
-            showBlockDialog
+            showUnblockDialog
         )
 
     override fun onBindViewHolder(holder: FriendBlockViewHolder, position: Int) {
@@ -38,7 +38,7 @@ class FriendBlockAdapter(private val showBlockDialog: (User, Int) -> Unit) :
     }
 
     companion object {
-        private val blockDiffUtil = ItemDiffCallback<User>(
+        private val unblockDiffUtil = ItemDiffCallback<User>(
             onItemsTheSame = { old, new -> old.id == new.id },
             onContentsTheSame = { old, new -> old == new }
         )

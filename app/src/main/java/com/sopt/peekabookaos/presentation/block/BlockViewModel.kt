@@ -17,16 +17,8 @@ class BlockViewModel @Inject constructor(
     private val getBlockUseCase: GetBlockUseCase,
     private val deleteBlockUseCase: DeleteBlockUseCase
 ) : ViewModel() {
-    private val _blockData = MutableLiveData<List<User>>()
-    val blockData: LiveData<List<User>> = _blockData
-
-    private val _friendData: MutableLiveData<User> = MutableLiveData()
-    val friendData: LiveData<User> = _friendData
-
-    val nickname = MutableLiveData<String>()
-
-    private val _friendId = MutableLiveData<Int>()
-    val friendId: LiveData<Int> = _friendId
+    private val _blockUser = MutableLiveData<List<User>>()
+    val blockUser: LiveData<List<User>> = _blockUser
 
     private val _isDeleted = MutableLiveData<Boolean>()
     val isDeleted: LiveData<Boolean> = _isDeleted
@@ -39,7 +31,7 @@ class BlockViewModel @Inject constructor(
         viewModelScope.launch {
             getBlockUseCase()
                 .onSuccess { response ->
-                    _blockData.value = response
+                    _blockUser.value = response
                 }
                 .onFailure { throwable ->
                     Timber.e("$throwable")

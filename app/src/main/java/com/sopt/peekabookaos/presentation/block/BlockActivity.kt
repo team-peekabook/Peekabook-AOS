@@ -4,11 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBlockBinding
-import com.sopt.peekabookaos.domain.entity.User
-import com.sopt.peekabookaos.presentation.bookshelf.BlockDialog
+import com.sopt.peekabookaos.presentation.block.UnblockDialog.Companion.BLOCK_INDEX
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
-import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,18 +13,19 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_block) {
     private val blockViewModel: BlockViewModel by viewModels()
-    private val blockAdapter = FriendBlockAdapter(showBlockDialog = ::initBlockDialog)
+    private val blockAdapter = BlockAdapter(showUnblockDialog = ::initUnblockDialog)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = blockViewModel
         initAdapter()
         initBackBtnOnClickListener()
+        initIsDeletedObserve()
     }
 
     private fun initAdapter() {
         binding.rvBlock.adapter = blockAdapter
-        blockViewModel.blockData.observe(this) { blockData ->
+        blockViewModel.blockUser.observe(this) { blockData ->
             blockAdapter.submitList(blockData)
         }
     }
@@ -38,24 +36,15 @@ class BlockActivity : BindingActivity<ActivityBlockBinding>(R.layout.activity_bl
         }
     }
 
-    private fun initBlockDialog(user: User, friendId: Int) {
-        UnblockDialog().withArgs {
-            putString(
-                BlockDialog.FOLLOWER,
-                requireNotNull(user.nickname)
-            )
-            putParcelable(
-                WarningDialogFragment.CONFIRM_ACTION,
-                ConfirmClickListener(confirmAction = { blockViewModel.deleteBlock(friendId) })
-            )
-        }.show(supportFragmentManager, BlockDialog.TAG)
-        initIsDeletedObserve()
+    private fun initUnblockDialog(index: Int) {
+        UnblockDialog().withArgs { putInt(BLOCK_INDEX, index) }
+            .show(supportFragmentManager, UnblockDialog.TAG)
     }
 
     private fun initIsDeletedObserve() {
         blockViewModel.isDeleted.observe(this) { success ->
             if (success) {
-                blockViewModel.getBlock()
+                blockViewModel.getBlockList()
             }
         }
     }
