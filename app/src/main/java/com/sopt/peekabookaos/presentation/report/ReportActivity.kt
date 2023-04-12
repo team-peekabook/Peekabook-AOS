@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityReportBinding
-import com.sopt.peekabookaos.presentation.report.ReportConfirmDialog.Companion.TAG
+import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.DEFAULT
+import com.sopt.peekabookaos.presentation.report.ReportDialog.Companion.TAG
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,14 +16,13 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = reportViewModel
-        initReportBtnClickListener()
+        initFriendId()
         initReportRadioClickListener()
+        initIsReportObserve()
     }
 
-    private fun initReportBtnClickListener() {
-        binding.tvReportReport.setSingleOnClickListener {
-            ReportConfirmDialog().show(supportFragmentManager, TAG)
-        }
+    private fun initFriendId() {
+        reportViewModel.initFriendId(intent.getIntExtra(FRIEND_ID, DEFAULT))
     }
 
     private fun initReportRadioClickListener() {
@@ -40,5 +39,17 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
             R.id.rb_report_reason_nickname -> reportViewModel.setSelectedReasonId(4)
             R.id.rb_report_reason_etc -> reportViewModel.setSelectedReasonId(5)
         }
+    }
+
+    private fun initIsReportObserve() {
+        reportViewModel.isReport.observe(this) { success ->
+            if (success) {
+                ReportDialog().show(supportFragmentManager, TAG)
+            }
+        }
+    }
+
+    companion object {
+        const val FRIEND_ID = "friendId"
     }
 }
