@@ -11,7 +11,7 @@ class BlockRepositoryImpl @Inject constructor(
     override suspend fun getBlock(): Result<List<FriendProfile>> =
         kotlin.runCatching { blockDataSource.getBlock() }.map { response ->
             requireNotNull(response.data).map { blockEntity ->
-                blockEntity.toFriendList()
+                blockEntity.toFriendProfile()
             }
         }
 
