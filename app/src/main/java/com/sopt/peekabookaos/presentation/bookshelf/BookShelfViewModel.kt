@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Books
-import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.entity.Picks
+import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
 import com.sopt.peekabookaos.domain.usecase.GetMyShelfUseCase
