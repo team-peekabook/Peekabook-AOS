@@ -17,11 +17,11 @@ data class FriendShelfResponse(
     val books: List<BooksEntity>
 ) {
     fun toFriendShelf(): FriendShelf = FriendShelf(
-        myIntro = this.myIntro.toProfile(),
+        myIntro = this.myIntro.toUser(),
         user = this.friendList.map { friendListEntity ->
             friendListEntity.toFriendProfile()
         },
-        friendIntro = this.friendIntro.toProfile(),
+        friendIntro = this.friendIntro.toUser(),
         picks = this.picks.map { picksEntity ->
             picksEntity.toPicks()
         },

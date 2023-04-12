@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -39,7 +38,7 @@
 
             <ImageView
                 android:id="@+id/iv_my_page_image"
-                setImage="@{vm.userData.profileImage}"
+                setCircleImage="@{vm.userData.profileImage}"
                 android:layout_width="64dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="15dp"
@@ -155,7 +154,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_ask" />
 
         <TextView
-            android:id="@+id/tv_my_page_info"
+            android:id="@+id/tv_my_page_developer_info"
             style="@style/H2Md"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -174,7 +173,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/peeka_g_1"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_page_info" />
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_developer_info" />
 
         <TextView
             android:id="@+id/tv_my_page_logout"

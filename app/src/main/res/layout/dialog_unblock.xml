@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="com.sopt.peekabookaos.presentation.block.BlockViewModel" />
+            type="com.sopt.peekabookaos.presentation.block.BlockedUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -14,7 +14,7 @@ class UnblockDialog : DialogFragment() {
     private var _binding: DialogUnblockBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
 
-    private val blockViewModel by activityViewModels<BlockViewModel>()
+    private val blockedUserViewModel by activityViewModels<BlockedUserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +27,7 @@ class UnblockDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = blockViewModel
+        binding.vm = blockedUserViewModel
         binding.index = arguments?.getInt(BLOCK_INDEX) ?: DEFAULT
         isCancelable = true
         initLayout()
@@ -46,7 +46,7 @@ class UnblockDialog : DialogFragment() {
     private fun initConfirmBtnClickListener() {
         val index = arguments?.getInt(BLOCK_INDEX) ?: DEFAULT
         binding.btnBlockDeleteDialogConfirm.setOnClickListener {
-            blockViewModel.deleteBlock(requireNotNull(blockViewModel.blockUser.value)[index].id)
+            blockedUserViewModel.deleteBlock(requireNotNull(blockedUserViewModel.blockUser.value)[index].id)
             dismiss()
         }
     }

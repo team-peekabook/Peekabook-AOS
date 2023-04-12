@@ -10,7 +10,7 @@ data class ProfileEntity(
     val profileImage: String = "",
     val intro: String = ""
 ) {
-    fun toProfile(): User = User(
+    fun toUser(): User = User(
         id = this.id,
         nickname = this.nickname,
         profileImage = this.profileImage,
