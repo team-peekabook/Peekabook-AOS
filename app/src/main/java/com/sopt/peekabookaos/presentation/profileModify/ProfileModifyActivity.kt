@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -41,7 +40,6 @@ class ProfileModifyActivity :
         super.onCreate(savedInstanceState)
         binding.vm = profileModifyViewModel
         setPreviousInfo()
-        initBackPressedCallback()
         initBackClickListener()
         initEditTextClearFocus()
         initCheckClickListener()
@@ -54,23 +52,6 @@ class ProfileModifyActivity :
         binding.btnProfileModifyBack.setSingleOnClickListener {
             finish()
         }
-    }
-
-    private fun goToMyPageFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.cl_profile_modify, MyPageFragment())
-            .commit()
-    }
-
-    private fun initBackPressedCallback() {
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    goToMyPageFragment()
-                }
-            }
-        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
