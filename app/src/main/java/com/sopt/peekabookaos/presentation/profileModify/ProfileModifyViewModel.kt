@@ -4,8 +4,18 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.domain.entity.User
+import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class ProfileModifyViewModel : ViewModel() {
+@HiltViewModel
+class ProfileModifyViewModel @Inject constructor(
+    private val postDuplicateUseCase: PostDuplicateUseCase
+) : ViewModel() {
     private val _isNickname: MutableLiveData<Boolean> = MutableLiveData(true)
     val isNickname: LiveData<Boolean> = _isNickname
 
@@ -26,20 +36,25 @@ class ProfileModifyViewModel : ViewModel() {
     private val _profileImage: MutableLiveData<String> = MutableLiveData()
     val profileImage: LiveData<String> = _profileImage
 
-    val nickname = MutableLiveData<String>()
+    private val _userData = MutableLiveData<User>()
+    val userData: LiveData<User> = _userData
 
-    val modify = MutableLiveData<String>()
+    val nickname = MutableLiveData("")
 
-    val introduce = MutableLiveData<String>()
-
-    private var nicknameList = listOf("a", "박강희", "이영주", "김하정", "피카북")
+    val introduce = MutableLiveData("")
 
     private lateinit var profileImageUri: Uri
 
     fun getNickNameState() {
-        _isNickname.value = nicknameList.contains(nickname.value)
-        updateNicknameMessage(true)
-        updateDuplicateButtonState(requireNotNull(_isNickname.value))
+        viewModelScope.launch {
+            postDuplicateUseCase(requireNotNull(nickname.value)).onSuccess { check ->
+                _isNickname.value = (check == 1)
+                updateNicknameMessage(true)
+                updateDuplicateButtonState(requireNotNull(_isNickname.value))
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+            }
+        }
     }
 
     fun updateWritingState() {
@@ -67,6 +82,12 @@ class ProfileModifyViewModel : ViewModel() {
     }
 
     fun updateCheckButtonState() {
-        _isCheckButton.value = !(modify.value.isNullOrBlank() || nickname.value.isNullOrBlank())
+        _isCheckButton.value = !(introduce.value.isNullOrBlank() || nickname.value.isNullOrBlank())
+    }
+
+    fun setPreviousInfo(userData: User) {
+        _userData.value = userData
+        nickname.value = userData.nickname
+        introduce.value = userData.intro
     }
 }
