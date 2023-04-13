@@ -69,7 +69,9 @@ class ProfileModifyActivity :
                     0 -> launcher.launch("image/*")
                     1 -> if (checkPermission()) {
                         dispatchTakePictureIntentEx()
-                    } else {
+                    }
+                    // 2->TODO 프로필 사진 삭제
+                    else {
                         requestCameraPermission()
                     }
                 }
