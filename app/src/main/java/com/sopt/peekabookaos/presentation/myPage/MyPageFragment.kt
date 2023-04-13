@@ -49,7 +49,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initEditClickListener() {
         binding.ivMyPageEdit.setSingleOnClickListener {
-            startActivity(Intent(requireActivity(), ProfileModifyActivity::class.java))
+            Intent(requireActivity(), ProfileModifyActivity::class.java).apply {
+                putExtra(USER_INFO, myPageViewModel.userData.value)
+            }.also { intent ->
+                startActivity(intent)
+            }
         }
     }
 
@@ -70,5 +74,9 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                 Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.my_page_policy_link)))
             )
         }
+    }
+
+    companion object {
+        const val USER_INFO = "user_info"
     }
 }
