@@ -44,6 +44,7 @@
 
         <ImageView
             android:id="@+id/iv_profile_modify_image"
+            setCircleImage="@{vm.userData.profileImage}"
             android:layout_width="80dp"
             android:layout_height="0dp"
             android:layout_marginTop="39dp"
@@ -94,7 +95,6 @@
             android:paddingVertical="12dp"
             android:singleLine="true"
             android:text="@={vm.nickname}"
-
             android:textColor="@color/peeka_red"
             android:textColorHint="@color/peeka_g_1"
             app:layout_constraintDimensionRatio="8.0"
@@ -171,7 +171,7 @@
             android:maxLength="40"
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
-            android:text="@={vm.modify}"
+            android:text="@={vm.introduce}"
             android:textColor="@color/peeka_red"
             android:textColorHint="@color/peeka_g_1"
             app:layout_constraintDimensionRatio="5.0"
@@ -187,7 +187,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{@string/profile_modify_introduce_count(vm.modify.length())}"
+            android:text="@{@string/profile_modify_introduce_count(vm.introduce.length())}"
             android:textColor="@color/peeka_g_2"
             app:layout_constraintEnd_toEndOf="@id/et_profile_modify_introduce"
             app:layout_constraintTop_toBottomOf="@id/et_profile_modify_introduce"
