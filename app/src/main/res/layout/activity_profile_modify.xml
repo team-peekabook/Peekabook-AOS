@@ -206,6 +206,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_check" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
