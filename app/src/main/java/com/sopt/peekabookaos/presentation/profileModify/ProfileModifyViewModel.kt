@@ -36,9 +36,6 @@ class ProfileModifyViewModel @Inject constructor(
     private val _profileImage: MutableLiveData<String> = MutableLiveData()
     val profileImage: LiveData<String> = _profileImage
 
-    private val _userData = MutableLiveData<User>()
-    val userData: LiveData<User> = _userData
-
     val nickname = MutableLiveData("")
 
     val introduce = MutableLiveData("")
