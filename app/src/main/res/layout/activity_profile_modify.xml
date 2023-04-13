@@ -44,7 +44,7 @@
 
         <ImageView
             android:id="@+id/iv_profile_modify_image"
-            setCircleImage="@{vm.userData.profileImage}"
+            setCircleImage="@{vm.profileImage}"
             android:layout_width="80dp"
             android:layout_height="0dp"
             android:layout_marginTop="39dp"
