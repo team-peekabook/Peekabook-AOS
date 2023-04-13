@@ -86,7 +86,7 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     fun setPreviousInfo(userData: User) {
-        _userData.value = userData
+        _profileImage.value = userData.profileImage
         nickname.value = userData.nickname
         introduce.value = userData.intro
     }
