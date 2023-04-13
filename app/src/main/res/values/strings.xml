@@ -172,8 +172,6 @@
     <string name="profile_modify_introduce_count">%d/40</string>
     <string name="profile_modify_unavailable_nickname_message">이미 사용중인 닉네임 입니다</string>
     <string name="profile_modify_available_nickname_message">사용 가능한 닉네임 입니다</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_modify_album">앨범에서 선택</string>
     <string name="profile_modify_camera">카메라</string>
     <string name="profile_modify_delete">프로필 사진 삭제</string>
