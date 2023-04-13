@@ -1,6 +1,8 @@
 package com.sopt.peekabookaos.presentation.profileModify
 
-import android.Manifest.permission.*
+import android.Manifest.permission.CAMERA
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
@@ -23,7 +25,7 @@ import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 @AndroidEntryPoint
 class ProfileModifyActivity :
