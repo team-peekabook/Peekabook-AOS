@@ -39,7 +39,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
                     tvRecommendRecommending.setTextAppearance(R.style.H4)
                     tvRecommendRecommended.setTextAppearance(R.style.NameBd)
                 }
-                recommendedEmpty()
+                initRecommendedEmpty()
             }
         }
     }
@@ -54,12 +54,12 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
                     tvRecommendRecommending.setTextAppearance(R.style.NameBd)
                     tvRecommendRecommended.setTextAppearance(R.style.H4)
                 }
-                recommendingEmpty()
+                initRecommendingEmpty()
             }
         }
     }
 
-    private fun recommendedEmpty() {
+    private fun initRecommendedEmpty() {
         with(binding) {
             if (requireNotNull(recommendViewModel.recommendedBook.value).isEmpty()) {
                 tvRecommendRecommendedEmpty.visibility = View.VISIBLE
@@ -71,7 +71,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
         }
     }
 
-    private fun recommendingEmpty() {
+    private fun initRecommendingEmpty() {
         with(binding) {
             if (requireNotNull(recommendViewModel.recommendingBook.value).isEmpty()) {
                 tvRecommendRecommendingEmpty.visibility = View.VISIBLE
@@ -97,7 +97,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
     private fun initRecommendBookObserve() {
         recommendViewModel.recommendedBook.observe(viewLifecycleOwner) { book ->
             recommendAdapter?.submitList(book)
-            recommendedEmpty()
+            initRecommendedEmpty()
         }
     }
 }
