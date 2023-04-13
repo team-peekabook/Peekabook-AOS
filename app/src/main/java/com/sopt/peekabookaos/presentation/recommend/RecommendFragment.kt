@@ -39,13 +39,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
                     tvRecommendRecommending.setTextAppearance(R.style.H4)
                     tvRecommendRecommended.setTextAppearance(R.style.NameBd)
                 }
-                if (requireNotNull(recommendViewModel.recommendedBook.value).isEmpty()) {
-                    tvRecommendRecommendedEmpty.visibility = View.VISIBLE
-                    tvRecommendRecommendingEmpty.visibility = View.INVISIBLE
-                } else {
-                    tvRecommendRecommendedEmpty.visibility = View.GONE
-                    tvRecommendRecommendingEmpty.visibility = View.GONE
-                }
+                recommendedEmpty()
             }
         }
     }
@@ -60,13 +54,31 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
                     tvRecommendRecommending.setTextAppearance(R.style.NameBd)
                     tvRecommendRecommended.setTextAppearance(R.style.H4)
                 }
-                if (requireNotNull(recommendViewModel.recommendingBook.value).isEmpty()) {
-                    tvRecommendRecommendingEmpty.visibility = View.VISIBLE
-                    tvRecommendRecommendedEmpty.visibility = View.INVISIBLE
-                } else {
-                    tvRecommendRecommendingEmpty.visibility = View.GONE
-                    tvRecommendRecommendedEmpty.visibility = View.GONE
-                }
+                recommendingEmpty()
+            }
+        }
+    }
+
+    private fun recommendedEmpty() {
+        with(binding) {
+            if (requireNotNull(recommendViewModel.recommendedBook.value).isEmpty()) {
+                tvRecommendRecommendedEmpty.visibility = View.VISIBLE
+                tvRecommendRecommendingEmpty.visibility = View.INVISIBLE
+            } else {
+                tvRecommendRecommendedEmpty.visibility = View.GONE
+                tvRecommendRecommendingEmpty.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun recommendingEmpty() {
+        with(binding) {
+            if (requireNotNull(recommendViewModel.recommendingBook.value).isEmpty()) {
+                tvRecommendRecommendingEmpty.visibility = View.VISIBLE
+                tvRecommendRecommendedEmpty.visibility = View.INVISIBLE
+            } else {
+                tvRecommendRecommendingEmpty.visibility = View.GONE
+                tvRecommendRecommendedEmpty.visibility = View.GONE
             }
         }
     }
@@ -85,15 +97,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
     private fun initRecommendBookObserve() {
         recommendViewModel.recommendedBook.observe(viewLifecycleOwner) { book ->
             recommendAdapter?.submitList(book)
-            with(binding) {
-                if (requireNotNull(recommendViewModel.recommendedBook.value).isEmpty()) {
-                    tvRecommendRecommendedEmpty.visibility = View.VISIBLE
-                    tvRecommendRecommendingEmpty.visibility = View.INVISIBLE
-                } else {
-                    tvRecommendRecommendedEmpty.visibility = View.GONE
-                    tvRecommendRecommendingEmpty.visibility = View.GONE
-                }
-            }
+            recommendedEmpty()
         }
     }
 }
