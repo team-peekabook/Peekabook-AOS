@@ -14,10 +14,13 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityProfileModifyBinding
+import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.presentation.myPage.MyPageFragment
+import com.sopt.peekabookaos.presentation.myPage.MyPageFragment.Companion.USER_INFO
 import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -26,17 +29,18 @@ import java.util.*
 @AndroidEntryPoint
 class ProfileModifyActivity :
     BindingActivity<ActivityProfileModifyBinding>(R.layout.activity_profile_modify) {
-    private val viewModel: ProfileModifyViewModel by viewModels()
+    private val profileModifyViewModel: ProfileModifyViewModel by viewModels()
     private var launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
-            viewModel.updateProfileImage(uri)
+            profileModifyViewModel.updateProfileImage(uri)
         }
     }
     private var photoURI: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = viewModel
+        binding.vm = profileModifyViewModel
+        setPreviousInfo()
         initBackPressedCallback()
         initBackClickListener()
         initEditTextClearFocus()
@@ -167,37 +171,43 @@ class ProfileModifyActivity :
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CREATE_EX) {
-            photoURI?.let { viewModel.updateProfileImage(it) }
+            photoURI?.let { profileModifyViewModel.updateProfileImage(it) }
         }
     }
 
     private fun initCheckClickListener() {
         binding.btnProfileModifyCheck.setSingleOnClickListener {
-            if (viewModel.isNickname.value == true) {
+            if (profileModifyViewModel.isNickname.value == true) {
                 val toMyPageFragment = Intent(this, MyPageFragment::class.java)
                 startActivity(toMyPageFragment)
                 finish()
             } else {
-                viewModel.updateCheckMessage(requireNotNull(viewModel.isNickname.value))
+                profileModifyViewModel.updateCheckMessage(requireNotNull(profileModifyViewModel.isNickname.value))
             }
         }
     }
 
+    private fun setPreviousInfo() {
+        profileModifyViewModel.setPreviousInfo(
+            userData = intent.getParcelable(USER_INFO, User::class.java) ?: User()
+        )
+    }
+
     private fun initDuplicateClickListener() {
         binding.tvProfileModifyDuplicationCheck.setSingleOnClickListener {
-            viewModel.getNickNameState()
+            profileModifyViewModel.getNickNameState()
         }
     }
 
     private fun initObserver() {
-        viewModel.nickname.observe(this) {
-            viewModel.updateCheckButtonState()
-            viewModel.updateWritingState()
+        profileModifyViewModel.nickname.observe(this) {
+            profileModifyViewModel.updateCheckButtonState()
+            profileModifyViewModel.updateWritingState()
         }
-        viewModel.introduce.observe(this) {
-            viewModel.updateCheckButtonState()
+        profileModifyViewModel.introduce.observe(this) {
+            profileModifyViewModel.updateCheckButtonState()
         }
-        viewModel.isSignUpStatus.observe(this) { success ->
+        profileModifyViewModel.isSignUpStatus.observe(this) { success ->
             if (success) {
                 startActivity(Intent(this, ProfileModifyActivity::class.java))
                 finish()
