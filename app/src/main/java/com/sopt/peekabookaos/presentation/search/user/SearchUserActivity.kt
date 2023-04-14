@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySearchUserBinding
 import com.sopt.peekabookaos.util.KeyBoardUtil
-import com.sopt.peekabookaos.util.UiState
+import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -61,21 +61,21 @@ class SearchUserActivity :
 
     private fun collectSearchState() {
         repeatOnStarted {
-            searchUserViewModel.searchState.collect { uiState ->
-                when (uiState) {
-                    UiState.SUCCESS -> {
+            searchUserViewModel.uiEvent.collect { uiEvent ->
+                when (uiEvent) {
+                    UiEvent.SUCCESS -> {
                         with(binding) {
                             clSearchUserProfile.visibility = View.VISIBLE
                             llSearchUserError.visibility = View.INVISIBLE
                         }
                     }
-                    UiState.ERROR -> {
+                    UiEvent.ERROR -> {
                         with(binding) {
                             clSearchUserProfile.visibility = View.INVISIBLE
                             llSearchUserError.visibility = View.VISIBLE
                         }
                     }
-                    UiState.IDLE -> {
+                    UiEvent.IDLE -> {
                         return@collect
                     }
                 }

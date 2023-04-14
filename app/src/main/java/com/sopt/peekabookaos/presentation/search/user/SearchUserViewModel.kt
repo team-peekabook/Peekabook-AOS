@@ -7,9 +7,11 @@ import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetSearchUserUseCase
 import com.sopt.peekabookaos.domain.usecase.PostFollowUseCase
-import com.sopt.peekabookaos.util.UiState
+import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -25,20 +27,20 @@ class SearchUserViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(User())
     val uiState = _uiState.asStateFlow()
 
-    private val _searchState = MutableStateFlow<UiState>(UiState.IDLE)
-    val searchState = _searchState.asStateFlow()
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
 
     val nickname = MutableStateFlow("")
 
     fun searchBtnClickListener() {
         viewModelScope.launch {
-            _searchState.emit(UiState.IDLE)
+            _uiEvent.emit(UiEvent.IDLE)
             getSearchUserUseCase(nickname.value)
                 .onSuccess { response ->
                     _uiState.value = response
-                    _searchState.emit(UiState.SUCCESS)
+                    _uiEvent.emit(UiEvent.SUCCESS)
                 }.onFailure { throwable ->
-                    _searchState.emit(UiState.ERROR)
+                    _uiEvent.emit(UiEvent.ERROR)
                     Timber.e("$throwable")
                 }
         }
