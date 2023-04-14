@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.usecase.PostCreateBookUseCase
-import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,8 +20,8 @@ class CreateBookViewModel @Inject constructor(
     private val _bookInfo = MutableStateFlow(Book())
     val bookInfo = _bookInfo.asStateFlow()
 
-    private val _uiEvent = MutableSharedFlow<UiEvent>()
-    val uiEvent = _uiEvent.asSharedFlow()
+    private val _isPost = MutableSharedFlow<Boolean>()
+    val isPost = _isPost.asSharedFlow()
 
     val comment = MutableStateFlow("")
 
@@ -39,9 +38,9 @@ class CreateBookViewModel @Inject constructor(
                 memo = memo.value
             ).onSuccess { response ->
                 _bookInfo.value = _bookInfo.value.copy(id = response)
-                _uiEvent.emit(UiEvent.SUCCESS)
+                _isPost.emit(true)
             }.onFailure { throwable ->
-                _uiEvent.emit(UiEvent.ERROR)
+                _isPost.emit(false)
                 Timber.e("$throwable")
             }
         }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentCreateBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
@@ -12,10 +13,10 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
-import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.getParcelableCompat
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +29,8 @@ class CreateBookFragment :
         binding.vm = createBookViewModel
         initBookInfo()
         initEditTextClearFocus()
-        initCloseBtnOnClickListener()
+        initBackBtnOnClickListener()
+        initSaveBtnOnClickListener()
         collectUiEvent()
     }
 
@@ -51,30 +53,26 @@ class CreateBookFragment :
         )
     }
 
-    private fun initCloseBtnOnClickListener() {
-        binding.btnCreateBookClose.setOnClickListener {
-            activity?.finish()
+    private fun initBackBtnOnClickListener() {
+        binding.btnCreateBookBack.setOnClickListener { findNavController().popBackStack() }
+    }
+
+    private fun initSaveBtnOnClickListener() {
+        binding.btnCreateBookSave.setSingleOnClickListener {
+            createBookViewModel.postCreateBook()
         }
     }
 
     private fun collectUiEvent() {
         repeatOnStarted {
-            createBookViewModel.uiEvent.collect { uiEvent ->
-                when (uiEvent) {
-                    UiEvent.SUCCESS -> {
-                        startActivity(
-                            Intent(requireActivity(), DetailActivity::class.java).apply {
-                                putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
-                            }
-                        )
-                        activity?.finish()
-                    }
-                    UiEvent.ERROR -> {
-                        return@collect
-                    }
-                    UiEvent.IDLE -> {
-                        return@collect
-                    }
+            createBookViewModel.isPost.collect { success ->
+                if (success) {
+                    startActivity(
+                        Intent(requireActivity(), DetailActivity::class.java).apply {
+                            putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
+                        }
+                    )
+                    activity?.finish()
                 }
             }
         }
