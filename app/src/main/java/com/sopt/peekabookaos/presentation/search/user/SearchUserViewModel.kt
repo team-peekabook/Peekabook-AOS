@@ -32,7 +32,7 @@ class SearchUserViewModel @Inject constructor(
 
     val nickname = MutableStateFlow("")
 
-    fun searchBtnClickListener() {
+    fun searchOnClick() {
         viewModelScope.launch {
             _uiEvent.emit(UiEvent.IDLE)
             getSearchUserUseCase(nickname.value)
@@ -46,7 +46,7 @@ class SearchUserViewModel @Inject constructor(
         }
     }
 
-    fun followBtnClickListener() {
+    fun followOnClick() {
         if (_uiState.value.isBlocked) {
             blockUser()
         } else {
