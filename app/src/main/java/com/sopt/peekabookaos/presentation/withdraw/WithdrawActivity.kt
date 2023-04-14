@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityWithdrawBinding
+import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         super.onCreate(savedInstanceState)
         binding.vm = withDrawViewModel
         initBackBtnOnClickListener()
-        collectIsWithdraw()
+        collectUiEvent()
     }
 
     private fun initBackBtnOnClickListener() {
@@ -25,11 +26,20 @@ class WithdrawActivity : BindingActivity<ActivityWithdrawBinding>(R.layout.activ
         }
     }
 
-    private fun collectIsWithdraw() {
+    private fun collectUiEvent() {
         repeatOnStarted {
-            withDrawViewModel.isWithdraw.collect { success ->
-                if (success) {
-                    WithdrawDialog().show(supportFragmentManager, WithdrawDialog.TAG)
+            withDrawViewModel.uiEvent.collect { uiEvent ->
+                when (uiEvent) {
+                    UiEvent.IDLE -> {
+                        binding.btnWithdrawConfirm.isEnabled = false
+                    }
+                    UiEvent.SUCCESS -> {
+                        WithdrawDialog().show(supportFragmentManager, WithdrawDialog.TAG)
+                        binding.btnWithdrawConfirm.isEnabled = true
+                    }
+                    UiEvent.ERROR -> {
+                        binding.btnWithdrawConfirm.isEnabled = true
+                    }
                 }
             }
         }

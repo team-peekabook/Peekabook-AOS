@@ -2,9 +2,9 @@ package com.sopt.peekabookaos.presentation.search.user
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySearchUserBinding
 import com.sopt.peekabookaos.util.KeyBoardUtil
@@ -63,20 +63,22 @@ class SearchUserActivity :
         repeatOnStarted {
             searchUserViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
+                    UiEvent.IDLE -> {
+                        binding.btnSearchUser.isEnabled = false
+                    }
                     UiEvent.SUCCESS -> {
                         with(binding) {
-                            clSearchUserProfile.visibility = View.VISIBLE
-                            llSearchUserError.visibility = View.INVISIBLE
+                            clSearchUserProfile.isVisible = true
+                            llSearchUserError.isVisible = false
+                            binding.btnSearchUser.isEnabled = true
                         }
                     }
                     UiEvent.ERROR -> {
                         with(binding) {
-                            clSearchUserProfile.visibility = View.INVISIBLE
-                            llSearchUserError.visibility = View.VISIBLE
+                            clSearchUserProfile.isVisible = false
+                            llSearchUserError.isVisible = true
+                            binding.btnSearchUser.isEnabled = true
                         }
-                    }
-                    UiEvent.IDLE -> {
-                        return@collect
                     }
                 }
             }

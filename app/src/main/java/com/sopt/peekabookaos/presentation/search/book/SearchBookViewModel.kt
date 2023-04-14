@@ -29,13 +29,12 @@ class SearchBookViewModel @Inject constructor(
 
     fun searchOnClick() {
         viewModelScope.launch {
-            _uiEvent.emit(UiEvent.IDLE)
             getBookToTitleUseCase(bookTitle.value)
                 .onSuccess { response ->
                     if (response.isEmpty()) {
                         _uiEvent.emit(UiEvent.ERROR)
                     } else {
-                        _uiState.value = _uiState.value.copy(book = response)
+                        _uiState.emit(_uiState.value.copy(book = response))
                         _uiEvent.emit(UiEvent.SUCCESS)
                     }
                 }.onFailure { throwable ->

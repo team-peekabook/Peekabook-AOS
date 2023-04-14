@@ -24,8 +24,8 @@ class SearchUserViewModel @Inject constructor(
     private val postFollowUseCase: PostFollowUseCase,
     private val deleteBlockUseCase: DeleteBlockUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(User())
-    val uiState = _uiState.asStateFlow()
+    private val _userInfo = MutableStateFlow(User())
+    val userInfo = _userInfo.asStateFlow()
 
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
@@ -37,7 +37,7 @@ class SearchUserViewModel @Inject constructor(
             _uiEvent.emit(UiEvent.IDLE)
             getSearchUserUseCase(nickname.value)
                 .onSuccess { response ->
-                    _uiState.value = response
+                    _userInfo.emit(response)
                     _uiEvent.emit(UiEvent.SUCCESS)
                 }.onFailure { throwable ->
                     _uiEvent.emit(UiEvent.ERROR)
@@ -47,10 +47,10 @@ class SearchUserViewModel @Inject constructor(
     }
 
     fun followOnClick() {
-        if (_uiState.value.isBlocked) {
+        if (_userInfo.value.isBlocked) {
             blockUser()
         } else {
-            if (_uiState.value.isFollowed) {
+            if (_userInfo.value.isFollowed) {
                 deleteFollow()
             } else {
                 postFollow()
@@ -60,9 +60,9 @@ class SearchUserViewModel @Inject constructor(
 
     private fun blockUser() {
         viewModelScope.launch {
-            deleteBlockUseCase(_uiState.value.id)
+            deleteBlockUseCase(_userInfo.value.id)
                 .onSuccess { isBlocked ->
-                    _uiState.value = _uiState.value.copy(isBlocked = !isBlocked)
+                    _userInfo.emit(_userInfo.value.copy(isBlocked = !isBlocked))
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
@@ -71,11 +71,10 @@ class SearchUserViewModel @Inject constructor(
 
     private fun deleteFollow() {
         viewModelScope.launch {
-            deleteFollowUseCase(_uiState.value.id)
+            deleteFollowUseCase(_userInfo.value.id)
                 .onSuccess { isFollowed ->
-                    _uiState.value = _uiState.value.copy(isFollowed = !isFollowed)
+                    _userInfo.emit(_userInfo.value.copy(isFollowed = !isFollowed))
                 }.onFailure { throwable ->
-                    _uiState.value = _uiState.value.copy(isFollowed = true)
                     Timber.e("$throwable")
                 }
         }
@@ -83,11 +82,10 @@ class SearchUserViewModel @Inject constructor(
 
     private fun postFollow() {
         viewModelScope.launch {
-            postFollowUseCase(_uiState.value.id)
+            postFollowUseCase(_userInfo.value.id)
                 .onSuccess { isFollowed ->
-                    _uiState.value = _uiState.value.copy(isFollowed = isFollowed)
+                    _userInfo.emit(_userInfo.value.copy(isFollowed = isFollowed))
                 }.onFailure { throwable ->
-                    _uiState.value = _uiState.value.copy(isFollowed = false)
                     Timber.e("$throwable")
                 }
         }
