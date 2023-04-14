@@ -138,7 +138,7 @@ class SearchBookFragment :
 
     private fun initCloseBtnClickListener() {
         binding.btnSearchBookClose.setOnClickListener {
-            activity?.finish()
+            requireActivity().finish()
         }
     }
 
