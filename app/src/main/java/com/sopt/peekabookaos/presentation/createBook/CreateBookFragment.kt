@@ -13,10 +13,10 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
+import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.getParcelableCompat
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
-import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +30,6 @@ class CreateBookFragment :
         initBookInfo()
         initEditTextClearFocus()
         initBackBtnOnClickListener()
-        initSaveBtnOnClickListener()
         collectUiEvent()
     }
 
@@ -57,22 +56,24 @@ class CreateBookFragment :
         binding.btnCreateBookBack.setOnClickListener { findNavController().popBackStack() }
     }
 
-    private fun initSaveBtnOnClickListener() {
-        binding.btnCreateBookSave.setSingleOnClickListener {
-            createBookViewModel.postCreateBook()
-        }
-    }
-
     private fun collectUiEvent() {
         repeatOnStarted {
-            createBookViewModel.isPost.collect { success ->
-                if (success) {
-                    startActivity(
-                        Intent(requireActivity(), DetailActivity::class.java).apply {
-                            putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
-                        }
-                    )
-                    activity?.finish()
+            createBookViewModel.uiEvent.collect { uiEvent ->
+                when (uiEvent) {
+                    UiEvent.IDLE -> {
+                        binding.btnCreateBookSave.isEnabled = false
+                    }
+                    UiEvent.SUCCESS -> {
+                        startActivity(
+                            Intent(requireActivity(), DetailActivity::class.java).apply {
+                                putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
+                            }
+                        )
+                        requireActivity().finish()
+                    }
+                    UiEvent.ERROR -> {
+                        binding.btnCreateBookSave.isEnabled = true
+                    }
                 }
             }
         }
