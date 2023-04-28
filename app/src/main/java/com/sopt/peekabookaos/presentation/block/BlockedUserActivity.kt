@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.block
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityBlockedUserBinding
@@ -24,10 +25,19 @@ class BlockedUserActivity :
         initIsDeletedObserve()
     }
 
+    private fun initBlockedUserEmpty() {
+        with(binding) {
+            if (requireNotNull(blockedUserViewModel.blockUser.value).isEmpty()) {
+                tvBlockedUserEmpty.visibility = View.VISIBLE
+            }
+        }
+    }
+
     private fun initAdapter() {
         binding.rvBlock.adapter = blockedUserAdapter
         blockedUserViewModel.blockUser.observe(this) { blockData ->
             blockedUserAdapter.submitList(blockData)
+            initBlockedUserEmpty()
         }
     }
 
