@@ -192,4 +192,7 @@
     <!-- Logout -->
     <string name="logout_dialog_title">로그아웃 하시겠습니까?</string>
     <string name="logout_dialog_confirm">로그아웃</string>
+    <string name="profile_modify_toast_reject">휴대폰 앱 설정에서 카메라 권한을 허용해주세요!</string>
+    <string name="profile_modify_nickname_hint">닉네임은 6자까지 쓸 수 있어요!</string>
+    <string name="profile_modify_intoduce_hint">한 줄 소개는 40자까지 쓸 수 있어요!</string>
 </resources>
