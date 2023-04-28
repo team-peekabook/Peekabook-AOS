@@ -24,7 +24,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         initBlockBtnClickListener()
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
-        initEditClickListener()
+        initModifyClickListener()
         initLinkInfoClickListener()
         initLinkPolicyClickListener()
     }
@@ -47,7 +47,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         }
     }
 
-    private fun initEditClickListener() {
+    private fun initModifyClickListener() {
         binding.ivMyPageEdit.setSingleOnClickListener {
             Intent(requireActivity(), ProfileModifyActivity::class.java).apply {
                 putExtra(USER_INFO, myPageViewModel.userData.value)
