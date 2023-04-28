@@ -51,6 +51,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_block_title" />
 
+        <TextView
+            android:id="@+id/tv_blocked_user_empty"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/blocked_user_empty"
+            android:textColor="@color/peeka_red_60"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_block_line_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="차단된 사용자가 없어요." />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_block"
             android:layout_width="match_parent"
