@@ -128,9 +128,7 @@ class ProfileModifyActivity :
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            ToastMessageUtil.showToast(this, "권한 허용이 거부되었습니다.")
-        } else {
-            ToastMessageUtil.showToast(this, "권한 설정되었습니다.")
+            ToastMessageUtil.showToast(this, getString(R.string.profile_modify_toast_reject))
         }
     }
 
@@ -192,7 +190,7 @@ class ProfileModifyActivity :
         profileModifyViewModel.introduce.observe(this) {
             profileModifyViewModel.updateCheckButtonState()
         }
-        profileModifyViewModel.isSignUpStatus.observe(this) { success ->
+        profileModifyViewModel.isModifyStatus.observe(this) { success ->
             if (success) {
                 startActivity(Intent(this, ProfileModifyActivity::class.java))
                 finish()

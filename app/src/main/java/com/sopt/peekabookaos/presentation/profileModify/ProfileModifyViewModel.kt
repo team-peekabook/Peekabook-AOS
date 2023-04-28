@@ -22,8 +22,8 @@ class ProfileModifyViewModel @Inject constructor(
     private val _isNicknameMessage: MutableLiveData<Boolean> = MutableLiveData(false)
     val isNicknameMessage: LiveData<Boolean> = _isNicknameMessage
 
-    private val _isSignUpStatus = MutableLiveData<Boolean>()
-    val isSignUpStatus: LiveData<Boolean> = _isSignUpStatus
+    private val _isModifyStatus = MutableLiveData<Boolean>()
+    val isModifyStatus: LiveData<Boolean> = _isModifyStatus
 
     private val _isCheckMessage: MutableLiveData<Boolean> = MutableLiveData(false)
 
