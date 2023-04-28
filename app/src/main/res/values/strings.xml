@@ -178,4 +178,5 @@
     <!-- Logout -->
     <string name="logout_dialog_title">로그아웃 하시겠습니까?</string>
     <string name="logout_dialog_confirm">로그아웃</string>
+    <string name="blocked_user_empty">차단된 사용자가 없어요.</string>
 </resources>
