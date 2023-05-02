@@ -7,9 +7,11 @@ import com.sopt.peekabookaos.domain.usecase.DeleteBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetSearchUserUseCase
 import com.sopt.peekabookaos.domain.usecase.PostFollowUseCase
-import com.sopt.peekabookaos.util.UiState
+import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -22,33 +24,33 @@ class SearchUserViewModel @Inject constructor(
     private val postFollowUseCase: PostFollowUseCase,
     private val deleteBlockUseCase: DeleteBlockUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(User())
-    val uiState = _uiState.asStateFlow()
+    private val _userInfo = MutableStateFlow(User())
+    val userInfo = _userInfo.asStateFlow()
 
-    private val _searchState = MutableStateFlow<UiState>(UiState.IDLE)
-    val searchState = _searchState.asStateFlow()
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
 
     val nickname = MutableStateFlow("")
 
-    fun searchBtnClickListener() {
+    fun searchOnClick() {
         viewModelScope.launch {
-            _searchState.emit(UiState.IDLE)
+            _uiEvent.emit(UiEvent.IDLE)
             getSearchUserUseCase(nickname.value)
                 .onSuccess { response ->
-                    _uiState.value = response
-                    _searchState.emit(UiState.SUCCESS)
+                    _userInfo.emit(response)
+                    _uiEvent.emit(UiEvent.SUCCESS)
                 }.onFailure { throwable ->
-                    _searchState.emit(UiState.ERROR)
+                    _uiEvent.emit(UiEvent.ERROR)
                     Timber.e("$throwable")
                 }
         }
     }
 
-    fun followBtnClickListener() {
-        if (_uiState.value.isBlocked) {
+    fun followOnClick() {
+        if (_userInfo.value.isBlocked) {
             blockUser()
         } else {
-            if (_uiState.value.isFollowed) {
+            if (_userInfo.value.isFollowed) {
                 deleteFollow()
             } else {
                 postFollow()
@@ -58,9 +60,9 @@ class SearchUserViewModel @Inject constructor(
 
     private fun blockUser() {
         viewModelScope.launch {
-            deleteBlockUseCase(_uiState.value.id)
+            deleteBlockUseCase(_userInfo.value.id)
                 .onSuccess { isBlocked ->
-                    _uiState.value = _uiState.value.copy(isBlocked = !isBlocked)
+                    _userInfo.emit(_userInfo.value.copy(isBlocked = !isBlocked))
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
@@ -69,11 +71,10 @@ class SearchUserViewModel @Inject constructor(
 
     private fun deleteFollow() {
         viewModelScope.launch {
-            deleteFollowUseCase(_uiState.value.id)
+            deleteFollowUseCase(_userInfo.value.id)
                 .onSuccess { isFollowed ->
-                    _uiState.value = _uiState.value.copy(isFollowed = !isFollowed)
+                    _userInfo.emit(_userInfo.value.copy(isFollowed = !isFollowed))
                 }.onFailure { throwable ->
-                    _uiState.value = _uiState.value.copy(isFollowed = true)
                     Timber.e("$throwable")
                 }
         }
@@ -81,11 +82,10 @@ class SearchUserViewModel @Inject constructor(
 
     private fun postFollow() {
         viewModelScope.launch {
-            postFollowUseCase(_uiState.value.id)
+            postFollowUseCase(_userInfo.value.id)
                 .onSuccess { isFollowed ->
-                    _uiState.value = _uiState.value.copy(isFollowed = isFollowed)
+                    _userInfo.emit(_userInfo.value.copy(isFollowed = isFollowed))
                 }.onFailure { throwable ->
-                    _uiState.value = _uiState.value.copy(isFollowed = false)
                     Timber.e("$throwable")
                 }
         }

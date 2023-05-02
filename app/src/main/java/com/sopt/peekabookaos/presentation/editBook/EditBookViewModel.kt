@@ -31,6 +31,7 @@ class EditBookViewModel @Inject constructor(
 
     fun patchEditBook() {
         viewModelScope.launch {
+            _uiEvent.emit(UiEvent.IDLE)
             patchEditBookUseCase(
                 bookId = _bookInfo.value.id,
                 description = comment.value,

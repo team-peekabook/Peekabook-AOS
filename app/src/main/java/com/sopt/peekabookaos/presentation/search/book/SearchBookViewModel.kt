@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.GetBookToTitleUseCase
+import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,23 +22,23 @@ class SearchBookViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(SearchBookUiState())
     val uiState = _uiState.asStateFlow()
 
-    private val _isSearch = MutableSharedFlow<Boolean>()
-    val isSearch = _isSearch.asSharedFlow()
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
 
     val bookTitle = MutableStateFlow("")
 
-    fun searchBtnClickListener() {
+    fun searchOnClick() {
         viewModelScope.launch {
             getBookToTitleUseCase(bookTitle.value)
                 .onSuccess { response ->
                     if (response.isEmpty()) {
-                        _isSearch.emit(false)
+                        _uiEvent.emit(UiEvent.ERROR)
                     } else {
-                        _uiState.value = _uiState.value.copy(book = response)
-                        _isSearch.emit(true)
+                        _uiState.emit(_uiState.value.copy(book = response))
+                        _uiEvent.emit(UiEvent.SUCCESS)
                     }
                 }.onFailure { throwable ->
-                    _isSearch.emit(false)
+                    _uiEvent.emit(UiEvent.ERROR)
                     Timber.e("$throwable")
                 }
         }

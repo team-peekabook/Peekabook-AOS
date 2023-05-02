@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentCreateBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
@@ -28,7 +29,7 @@ class CreateBookFragment :
         binding.vm = createBookViewModel
         initBookInfo()
         initEditTextClearFocus()
-        initCloseBtnOnClickListener()
+        initBackBtnOnClickListener()
         collectUiEvent()
     }
 
@@ -51,29 +52,27 @@ class CreateBookFragment :
         )
     }
 
-    private fun initCloseBtnOnClickListener() {
-        binding.btnCreateBookClose.setOnClickListener {
-            activity?.finish()
-        }
+    private fun initBackBtnOnClickListener() {
+        binding.btnCreateBookBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun collectUiEvent() {
         repeatOnStarted {
             createBookViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
+                    UiEvent.IDLE -> {
+                        binding.btnCreateBookSave.isEnabled = false
+                    }
                     UiEvent.SUCCESS -> {
                         startActivity(
                             Intent(requireActivity(), DetailActivity::class.java).apply {
                                 putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
                             }
                         )
-                        activity?.finish()
+                        requireActivity().finish()
                     }
                     UiEvent.ERROR -> {
-                        return@collect
-                    }
-                    UiEvent.IDLE -> {
-                        return@collect
+                        binding.btnCreateBookSave.isEnabled = true
                     }
                 }
             }

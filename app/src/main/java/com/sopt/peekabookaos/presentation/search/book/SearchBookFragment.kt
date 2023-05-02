@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
@@ -16,6 +17,7 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INF
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.util.KeyBoardUtil
+import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
@@ -39,7 +41,7 @@ class SearchBookFragment :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
-        collectServerState()
+        collectUiEvent()
     }
 
     override fun onResume() {
@@ -138,21 +140,29 @@ class SearchBookFragment :
 
     private fun initCloseBtnClickListener() {
         binding.btnSearchBookClose.setOnClickListener {
-            activity?.finish()
+            requireActivity().finish()
         }
     }
 
-    private fun collectServerState() {
+    private fun collectUiEvent() {
         repeatOnStarted {
-            searchBookViewModel.isSearch.collect { success ->
-                if (success) {
-                    binding.llSearchBookError.visibility = View.INVISIBLE
-                    binding.rvSearchBook.visibility = View.VISIBLE
-                    searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
-                    loadedBooks = searchBookViewModel.uiState.value.book
-                } else {
-                    binding.llSearchBookError.visibility = View.VISIBLE
-                    binding.rvSearchBook.visibility = View.INVISIBLE
+            searchBookViewModel.uiEvent.collect { uiEvent ->
+                when (uiEvent) {
+                    UiEvent.IDLE -> {
+                        binding.btnSearchBook.isEnabled = false
+                    }
+                    UiEvent.SUCCESS -> {
+                        binding.llSearchBookError.isVisible = false
+                        binding.rvSearchBook.isVisible = true
+                        binding.btnSearchBook.isEnabled = true
+                        searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
+                        loadedBooks = searchBookViewModel.uiState.value.book
+                    }
+                    UiEvent.ERROR -> {
+                        binding.llSearchBookError.isVisible = true
+                        binding.rvSearchBook.isVisible = false
+                        binding.btnSearchBook.isEnabled = true
+                    }
                 }
             }
         }

@@ -61,14 +61,14 @@ class EditBookActivity :
         repeatOnStarted {
             editBookViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
+                    UiEvent.IDLE -> {
+                        binding.btnEditBookSave.isEnabled = false
+                    }
                     UiEvent.SUCCESS -> {
                         finish()
                     }
                     UiEvent.ERROR -> {
-                        return@collect
-                    }
-                    UiEvent.IDLE -> {
-                        return@collect
+                        binding.btnEditBookSave.isEnabled = true
                     }
                 }
             }
