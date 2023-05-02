@@ -21,6 +21,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = recommendViewModel
         initTextAppearance()
         initAdapter()
         initRecommendBookObserve()
@@ -38,6 +39,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
                     tvRecommendRecommending.setTextAppearance(R.style.H4)
                     tvRecommendRecommended.setTextAppearance(R.style.NameBd)
                 }
+                initRecommendedEmpty()
             }
         }
     }
@@ -52,6 +54,31 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
                     tvRecommendRecommending.setTextAppearance(R.style.NameBd)
                     tvRecommendRecommended.setTextAppearance(R.style.H4)
                 }
+                initRecommendingEmpty()
+            }
+        }
+    }
+
+    private fun initRecommendedEmpty() {
+        with(binding) {
+            if (requireNotNull(recommendViewModel.recommendedBook.value).isEmpty()) {
+                tvRecommendRecommendedEmpty.visibility = View.VISIBLE
+                tvRecommendRecommendingEmpty.visibility = View.INVISIBLE
+            } else {
+                tvRecommendRecommendedEmpty.visibility = View.GONE
+                tvRecommendRecommendingEmpty.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun initRecommendingEmpty() {
+        with(binding) {
+            if (requireNotNull(recommendViewModel.recommendingBook.value).isEmpty()) {
+                tvRecommendRecommendingEmpty.visibility = View.VISIBLE
+                tvRecommendRecommendedEmpty.visibility = View.INVISIBLE
+            } else {
+                tvRecommendRecommendingEmpty.visibility = View.GONE
+                tvRecommendRecommendedEmpty.visibility = View.GONE
             }
         }
     }
@@ -70,6 +97,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
     private fun initRecommendBookObserve() {
         recommendViewModel.recommendedBook.observe(viewLifecycleOwner) { book ->
             recommendAdapter?.submitList(book)
+            initRecommendedEmpty()
         }
     }
 }

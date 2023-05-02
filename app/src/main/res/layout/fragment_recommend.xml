@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.recommend.RecommendViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -68,6 +73,33 @@
             app:layout_constraintTop_toBottomOf="@id/tv_recommend_recommended"
             tools:listitem="@layout/item_recommend" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_recommend_recommended_empty"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="253dp"
+            android:gravity="center"
+            android:text="@string/recommend_recommended_empty"
+            android:textColor="@color/peeka_red_60"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_recommend_recommended"
+            tools:text="아직 친구가 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요." />
 
+        <TextView
+            android:id="@+id/tv_recommend_recommending_empty"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="253dp"
+            android:gravity="center"
+            android:text="@string/recommend_recommending_empty"
+            android:textColor="@color/peeka_red_60"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_recommend_recommended"
+            tools:text="친구에게 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
