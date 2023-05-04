@@ -20,10 +20,6 @@ class MyPageViewModel @Inject constructor(
     private val _userData = MutableLiveData<User>()
     val userData: LiveData<User> = _userData
 
-    init {
-        getMyPage()
-    }
-
     fun getMyPage() {
         viewModelScope.launch {
             getMyPageUseCase()
