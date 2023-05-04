@@ -7,6 +7,7 @@ import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
 import com.sopt.peekabookaos.data.repository.MyPageRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
+import com.sopt.peekabookaos.data.repository.ProfileModifyRepositoryImpl
 import com.sopt.peekabookaos.data.repository.RecommendRepositoryImpl
 import com.sopt.peekabookaos.data.repository.RefreshRepositoryImpl
 import com.sopt.peekabookaos.data.repository.ReportRepositoryImpl
@@ -20,6 +21,7 @@ import com.sopt.peekabookaos.domain.repository.DetailRepository
 import com.sopt.peekabookaos.domain.repository.MyPageRepository
 import com.sopt.peekabookaos.domain.repository.NaverRepository
 import com.sopt.peekabookaos.domain.repository.NotificationRepository
+import com.sopt.peekabookaos.domain.repository.ProfileModifyRepository
 import com.sopt.peekabookaos.domain.repository.RecommendRepository
 import com.sopt.peekabookaos.domain.repository.RefreshRepository
 import com.sopt.peekabookaos.domain.repository.ReportRepository
@@ -112,4 +114,10 @@ abstract class RepositoryModule {
     abstract fun bindToMyPageRepository(
         myPageRepositoryImpl: MyPageRepositoryImpl
     ): MyPageRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindToProfileModifyRepository(
+        profileModifyRepositoryImpl: ProfileModifyRepositoryImpl
+    ): ProfileModifyRepository
 }
