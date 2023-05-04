@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityProfileModifyBinding
 import com.sopt.peekabookaos.domain.entity.User
-import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.presentation.myPage.MyPageFragment.Companion.USER_INFO
 import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.ToastMessageUtil
@@ -161,8 +160,7 @@ class ProfileModifyActivity :
     private fun initCheckClickListener() {
         binding.btnProfileModifyCheck.setSingleOnClickListener {
             profileModifyViewModel.nickname.value = binding.etProfileModifyNickname.text.toString()
-            profileModifyViewModel.introduce.value =
-                binding.etProfileModifyIntroduce.text.toString()
+            profileModifyViewModel.introduce.value = binding.etProfileModifyIntroduce.text.toString()
             profileModifyViewModel.patchProfileModify()
         }
     }
@@ -189,7 +187,6 @@ class ProfileModifyActivity :
         }
         profileModifyViewModel.isModifyStatus.observe(this) { success ->
             if (success) {
-                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
