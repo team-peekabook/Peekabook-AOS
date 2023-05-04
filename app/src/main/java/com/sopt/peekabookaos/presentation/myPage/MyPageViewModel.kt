@@ -24,7 +24,7 @@ class MyPageViewModel @Inject constructor(
         getMyPage()
     }
 
-    private fun getMyPage() {
+    fun getMyPage() {
         viewModelScope.launch {
             getMyPageUseCase()
                 .onSuccess { response ->
