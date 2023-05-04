@@ -30,6 +30,7 @@ class CreateBookViewModel @Inject constructor(
 
     fun postCreateBook() {
         viewModelScope.launch {
+            _uiEvent.emit(UiEvent.IDLE)
             postCreateBookUseCase(
                 bookImage = _bookInfo.value.bookImage,
                 bookTitle = _bookInfo.value.bookTitle,
@@ -38,7 +39,7 @@ class CreateBookViewModel @Inject constructor(
                 description = comment.value,
                 memo = memo.value
             ).onSuccess { response ->
-                _bookInfo.value = _bookInfo.value.copy(id = response)
+                _bookInfo.emit(_bookInfo.value.copy(id = response))
                 _uiEvent.emit(UiEvent.SUCCESS)
             }.onFailure { throwable ->
                 _uiEvent.emit(UiEvent.ERROR)

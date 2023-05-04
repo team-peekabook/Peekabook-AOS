@@ -151,7 +151,7 @@ class BarcodeScannerFragment :
 
     private fun initCloseBtnClickListener() {
         binding.btnBarcodeClose.setOnClickListener {
-            activity?.finish()
+            requireActivity().finish()
         }
     }
 

@@ -20,8 +20,8 @@ class AuthRepositoryImpl @Inject constructor(
             requireNotNull(response.data).toToken()
         }
 
-    override suspend fun deleteUser(): Result<Boolean> =
-        kotlin.runCatching { authDataSource.deleteUser() }.map { response -> response.success }
+    override suspend fun deleteUser(): Result<Unit> =
+        kotlin.runCatching { authDataSource.deleteUser() }
 
     override fun initToken(accessToken: String, refreshToken: String) {
         localTokenDataSource.accessToken = accessToken

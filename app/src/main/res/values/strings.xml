@@ -70,6 +70,8 @@
     <string name="recommend_recommended">추천받은 책</string>
     <string name="recommend_recommending">추천한 책</string>
     <string name="recommend_item_peek">%s님의 책장 보러가기 →</string>
+    <string name="recommend_recommended_empty">아직 친구가 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요.</string>
+    <string name="recommend_recommending_empty">친구에게 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요.</string>
 
     <!-- MyPage -->
     <string name="my_page_name">북과픽</string>
@@ -145,7 +147,7 @@
     <string name="report_dialog_home">홈으로 돌아가기</string>
 
     <!--User Input-->
-    <string name="user_input_navigation_bar">회원 가입</string>
+    <string name="user_input_navigation_bar">회원 정보 입력</string>
     <string name="user_input_nickname">닉네임</string>
     <string name="user_input_nickname_hint">닉네임은 6자까지 쓸 수 있어요!</string>
     <string name="user_input_nickname_count">\%d\/6</string>
@@ -195,4 +197,5 @@
     <string name="profile_modify_toast_reject">휴대폰 앱 설정에서 카메라 권한을 허용해주세요!</string>
     <string name="profile_modify_nickname_hint">닉네임은 6자까지 쓸 수 있어요!</string>
     <string name="profile_modify_intoduce_hint">한 줄 소개는 40자까지 쓸 수 있어요!</string>
+    <string name="blocked_user_empty">차단된 사용자가 없어요.</string>
 </resources>

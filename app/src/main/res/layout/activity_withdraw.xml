@@ -69,13 +69,13 @@
             android:gravity="center"
             android:text="@string/withdraw_content"
             android:textColor="@color/peeka_red"
-            app:layout_constraintBottom_toTopOf="@id/tv_withdraw_confirm"
+            app:layout_constraintBottom_toTopOf="@id/btn_withdraw_confirm"
             app:layout_constraintEnd_toEndOf="@id/iv_withdraw_delete"
             app:layout_constraintStart_toStartOf="@id/iv_withdraw_delete"
             app:layout_constraintTop_toBottomOf="@id/iv_withdraw_delete" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tv_withdraw_confirm"
+            android:id="@+id/btn_withdraw_confirm"
             style="@style/NameBd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

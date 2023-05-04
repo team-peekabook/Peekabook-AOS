@@ -6,7 +6,7 @@ import com.sopt.peekabookaos.domain.entity.Token
 interface AuthRepository {
     suspend fun postLogin(socialPlatform: String): Result<Token>
 
-    suspend fun deleteUser(): Result<Boolean>
+    suspend fun deleteUser(): Result<Unit>
 
     fun initToken(accessToken: String, refreshToken: String)
 
