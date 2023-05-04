@@ -189,8 +189,7 @@ class ProfileModifyActivity :
         }
         profileModifyViewModel.isModifyStatus.observe(this) { success ->
             if (success) {
-                val toMainActivity = Intent(this, MainActivity::class.java)
-                startActivity(toMainActivity)
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
