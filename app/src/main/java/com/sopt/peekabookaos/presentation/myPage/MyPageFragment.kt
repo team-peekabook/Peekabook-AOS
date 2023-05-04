@@ -18,6 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val myPageViewModel: MyPageViewModel by viewModels()
 
+    override fun onResume() {
+        super.onResume()
+        myPageViewModel.getMyPage()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = myPageViewModel
