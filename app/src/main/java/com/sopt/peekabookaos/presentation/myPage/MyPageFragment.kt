@@ -24,6 +24,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
         initLinkInfoClickListener()
+        initLinkAskClickListener()
         initLinkPolicyClickListener()
     }
 
@@ -60,6 +61,14 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         binding.tvMyPagePolicy.setOnClickListener {
             startActivity(
                 Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.my_page_policy_link)))
+            )
+        }
+    }
+
+    private fun initLinkAskClickListener() {
+        binding.tvMyPageAsk.setOnClickListener {
+            startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.my_page_ask_link)))
             )
         }
     }
