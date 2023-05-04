@@ -72,8 +72,8 @@ class ProfileModifyActivity :
                     1 -> if (checkPermission()) {
                         dispatchTakePictureIntentEx()
                     }
-                    // 2->TODO 프로필 사진 삭제
-                    else {
+                    2 -> binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
+                    else -> {
                         requestCameraPermission()
                     }
                 }
