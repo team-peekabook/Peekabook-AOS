@@ -159,8 +159,6 @@ class ProfileModifyActivity :
 
     private fun initCheckClickListener() {
         binding.btnProfileModifyCheck.setSingleOnClickListener {
-            profileModifyViewModel.nickname.value = binding.etProfileModifyNickname.text.toString()
-            profileModifyViewModel.introduce.value = binding.etProfileModifyIntroduce.text.toString()
             profileModifyViewModel.patchProfileModify()
         }
     }
