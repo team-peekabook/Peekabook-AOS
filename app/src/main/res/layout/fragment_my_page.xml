@@ -66,13 +66,15 @@
                 android:id="@+id/iv_my_page_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:padding="5dp"
                 android:background="@null"
                 android:src="@drawable/ic_my_page_edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_name"
                 app:layout_constraintDimensionRatio="1"
-                app:layout_constraintStart_toStartOf="@id/tv_my_page_name"
-                app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
+                app:layout_constraintStart_toEndOf="@id/tv_my_page_name"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_name" />
 
             <TextView
                 android:id="@+id/tv_my_page_intro"

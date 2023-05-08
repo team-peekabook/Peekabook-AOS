@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_profile_modify_title"
-            tools:src="@color/black" />
+            tools:src="@color/peeka_red" />
 
         <ImageButton
             android:id="@+id/btn_profile_modify_add"
