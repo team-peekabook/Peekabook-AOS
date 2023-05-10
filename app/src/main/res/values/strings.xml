@@ -84,6 +84,7 @@
     <string name="my_page_withdraw">서비스 탈퇴하기</string>
     <string name="my_page_developer_info_link">https://interesting-door-b57.notion.site/About-Team-b25424073add46b9a186d69c17815bf2</string>
     <string name="my_page_policy_link">https://interesting-door-b57.notion.site/d00db57d23414511ad8ec1f2f24c230a</string>
+    <string name="my_page_ask_link">https://walla.my/survey/inPmakCKv1iE39DMrg8Z</string>
 
     <!-- Book Recommendation-->
     <string name="recommendation_book_comment_count">%d/200</string>
