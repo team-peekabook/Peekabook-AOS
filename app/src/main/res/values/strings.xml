@@ -199,4 +199,5 @@
     <string name="profile_modify_nickname_hint">닉네임은 6자까지 쓸 수 있어요!</string>
     <string name="profile_modify_intoduce_hint">한 줄 소개는 40자까지 쓸 수 있어요!</string>
     <string name="blocked_user_empty">차단된 사용자가 없어요.</string>
+    <string name="profile_modify_timeStamp">yyyyMMdd_HHmmss</string>
 </resources>
