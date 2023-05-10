@@ -77,8 +77,8 @@ class ProfileModifyViewModel @Inject constructor(
             patchProfileModifyUseCase(
                 file = imageMultipartBody,
                 requestBodyMap = hashMapOf(
-                    "nickname" to nickname.value!!.toRequestBody(),
-                    "intro" to introduce.value!!.toRequestBody()
+                    "nickname" to requireNotNull(nickname.value).toRequestBody(),
+                    "intro" to requireNotNull(introduce.value).toRequestBody()
                 )
             ).onSuccess { response ->
                 _isModifyStatus.value = response
