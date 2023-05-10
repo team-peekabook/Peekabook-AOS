@@ -99,11 +99,11 @@ class ProfileModifyActivity :
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions: Map<String, Boolean> ->
             val isCameraPermissionGranted =
-                permissions[CAMERA] != null && permissions[CAMERA]!!
+                permissions[CAMERA] != null && requireNotNull(permissions[CAMERA])
             val isWriteStoragePermissionGranted =
-                permissions[WRITE_EXTERNAL_STORAGE] != null && permissions[WRITE_EXTERNAL_STORAGE]!!
+                permissions[WRITE_EXTERNAL_STORAGE] != null && requireNotNull(permissions[WRITE_EXTERNAL_STORAGE])
             val isReadStoragePermissionGranted =
-                permissions[READ_EXTERNAL_STORAGE] != null && permissions[READ_EXTERNAL_STORAGE]!!
+                permissions[READ_EXTERNAL_STORAGE] != null && requireNotNull(permissions[READ_EXTERNAL_STORAGE])
             if (isCameraPermissionGranted && isWriteStoragePermissionGranted && isReadStoragePermissionGranted) {
                 dispatchTakePictureIntentEx()
             }
@@ -132,7 +132,7 @@ class ProfileModifyActivity :
     }
 
     private fun dispatchTakePictureIntentEx() {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val timeStamp: String = SimpleDateFormat(getString(R.string.profile_modify_timeStamp)).format(Date())
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val uri: Uri? = createImageUri("JPEG_${timeStamp}_", "image/jpeg")
         photoURI = uri
