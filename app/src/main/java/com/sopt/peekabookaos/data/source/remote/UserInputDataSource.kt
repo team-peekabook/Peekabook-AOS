@@ -21,7 +21,7 @@ data class UserInputDataSource @Inject constructor(
     )
 
     suspend fun patchSignUp(
-        file: MultipartBody.Part,
+        file: MultipartBody.Part?,
         requestBodyMap: HashMap<String, RequestBody>
     ): NoResponse = userInputService.patchSignUp(
         file,

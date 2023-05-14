@@ -44,8 +44,8 @@ class UserInputViewModel @Inject constructor(
     private val _isCheckButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val isCheckButton: LiveData<Boolean> = _isCheckButton
 
-    private val _profileImage: MutableLiveData<String> = MutableLiveData()
-    val profileImage: LiveData<String> = _profileImage
+    private val _profileImage: MutableLiveData<String?> = MutableLiveData(null)
+    val profileImage: MutableLiveData<String?> = _profileImage
 
     private val _isSignUpStatus = MutableLiveData<Boolean>()
     val isSignUpStatus: LiveData<Boolean> = _isSignUpStatus
@@ -70,15 +70,17 @@ class UserInputViewModel @Inject constructor(
 
     fun patchSignUp() {
         val imageMultipartBody =
-            if (::profileImageUri.isInitialized) {
-                ContentUriRequestBody(
-                    application.baseContext,
-                    "file",
-                    profileImageUri
-                ).compressBitmap()
-            } else {
-                basicProfileToMultiPart()
-            }
+            if (profileImage.value != null) {
+                if (::profileImageUri.isInitialized) {
+                    ContentUriRequestBody(
+                        application.baseContext,
+                        "file",
+                        profileImageUri
+                    ).compressBitmap()
+                } else {
+                    basicProfileToMultiPart()
+                }
+            } else null
 
         viewModelScope.launch {
             patchSignUpUseCase(
