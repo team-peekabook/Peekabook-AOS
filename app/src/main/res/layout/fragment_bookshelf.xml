@@ -248,7 +248,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/btn_bookshelf_recommend_top_margin"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/shape_white88fill_redline_0_rect"
+                    android:background="@{(vm.bookTotalNum == 0) ? @drawable/shape_white88fill_redline_0_rect: @color/peeka_g_1}"
+                    android:clickable="@{(vm.bookTotalNum == 0) ? true: false}"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:paddingHorizontal="9dp"
@@ -381,10 +382,10 @@
                     android:layout_marginBottom="14dp"
                     android:src="@drawable/ic_bookshelf_bottom_empty_friend"
                     android:visibility="@{(vm.bookTotalNum == 0) &amp;&amp; (vm.friendShelf == true) ? View.VISIBLE:View.INVISIBLE}"
+                    app:layout_constraintBottom_toTopOf="@id/tv_bookshelf_bottom_view_empty_friend"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/tv_bookshelf_bottom_view_empty_friend"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_bookshelf_bottom_view_empty_friend"
@@ -398,7 +399,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
