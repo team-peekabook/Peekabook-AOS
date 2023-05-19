@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.notification.NotificationViewModel" />
@@ -44,7 +46,7 @@
             android:layout_height="wrap_content"
             android:text="@string/notification_empty"
             android:textColor="@color/peeka_red_60"
-            android:visibility="@{vm.notificationData.isEmpty? true: false}"
+            android:visibility="@{vm.notificationData.isEmpty? View.VISIBLE: View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
