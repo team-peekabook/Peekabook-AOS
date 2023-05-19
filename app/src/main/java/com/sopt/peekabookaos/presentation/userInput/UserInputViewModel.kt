@@ -4,6 +4,7 @@ import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import android.text.InputFilter
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,6 +22,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,6 +57,13 @@ class UserInputViewModel @Inject constructor(
     val introduce = MutableLiveData<String>()
 
     private lateinit var profileImageUri: Uri
+
+    var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
+        val ps = Pattern.compile("^[ㄱ-ㅣ가-힣a-zA-Z0-9\\s]+$")
+        if (!ps.matcher(source).matches()) {
+            ""
+        } else source
+    }
 
     fun getNickNameState() {
         viewModelScope.launch {
@@ -118,6 +127,10 @@ class UserInputViewModel @Inject constructor(
     fun updateProfileImage(uri: Uri) {
         profileImageUri = uri
         _profileImage.value = uri.toString()
+    }
+
+    fun updateEditTextFilter(): Array<InputFilter> {
+        return arrayOf(filterAlphaNumSpace)
     }
 
     fun updateCheckButtonState() {
