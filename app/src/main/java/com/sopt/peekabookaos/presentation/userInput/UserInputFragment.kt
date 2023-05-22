@@ -177,7 +177,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         viewModel.nickname.observe(requireActivity()) {
             viewModel.updateCheckButtonState()
             viewModel.updateWritingState()
-            binding.etUserInputNickname.filters = viewModel.updateEditTextFilter()
+            checkRegularExpression()
         }
         viewModel.introduce.observe(requireActivity()) {
             viewModel.updateCheckButtonState()
