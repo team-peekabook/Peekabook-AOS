@@ -23,7 +23,7 @@ import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 @AndroidEntryPoint
 class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fragment_user_input) {
