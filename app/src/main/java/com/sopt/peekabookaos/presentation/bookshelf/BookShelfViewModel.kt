@@ -63,7 +63,7 @@ class BookShelfViewModel @Inject constructor(
     val isBlockStatus: LiveData<Boolean> = _isBlockStatus
 
     private lateinit var userNickname: String
-    private lateinit var userProfileImage: String
+    private var userProfileImage: String? = null
 
     init {
         getMyShelfData()
@@ -85,69 +85,65 @@ class BookShelfViewModel @Inject constructor(
 
     fun getMyShelfData() {
         viewModelScope.launch {
-            getMyShelfUseCase()
-                .onSuccess { response ->
-                    _pickData.value = response.picks
-                    _bookTotalNum.value = response.bookTotalNum
-                    _shelfData.value = response.books
-                    _friendUserData.value = response.user
-                    _userData.value = response.myIntro
-                    _isMyServerStatus.value = true
-                    _isFriendServerStatus.value = false
-                    _isUnfollowStatus.value = false
-                    _isBlockStatus.value = false
-                }.onFailure { throwable ->
-                    Timber.e("$throwable")
-                    _isMyServerStatus.value = false
-                    _isFriendServerStatus.value = false
-                }
+            getMyShelfUseCase().onSuccess { response ->
+                _pickData.value = response.picks
+                _bookTotalNum.value = response.bookTotalNum
+                _shelfData.value = response.books
+                _friendUserData.value = response.user
+                _userData.value = response.myIntro
+                _isMyServerStatus.value = true
+                _isFriendServerStatus.value = false
+                _isUnfollowStatus.value = false
+                _isBlockStatus.value = false
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+                _isMyServerStatus.value = false
+                _isFriendServerStatus.value = false
+            }
         }
     }
 
     fun getFriendShelfData() {
         viewModelScope.launch {
-            getFriendShelfUseCase(requireNotNull(userId.value))
-                .onSuccess { response ->
-                    _friendUserData.value = response.user
-                    if (updateFriendState()) {
-                        _friendData.value = response.friendIntro
-                        _pickData.value = response.picks
-                        _bookTotalNum.value = response.bookTotalNum
-                        _shelfData.value = response.books
-                        _isFriendServerStatus.value = true
-                        _isMyServerStatus.value = false
-                    } else {
-                        getMyShelfData()
-                    }
-                }.onFailure { throwable ->
-                    Timber.e("$throwable")
-                    _isFriendServerStatus.value = false
+            getFriendShelfUseCase(requireNotNull(userId.value)).onSuccess { response ->
+                _friendUserData.value = response.user
+                if (updateFriendState()) {
+                    _friendData.value = response.friendIntro
+                    _pickData.value = response.picks
+                    _bookTotalNum.value = response.bookTotalNum
+                    _shelfData.value = response.books
+                    _isFriendServerStatus.value = true
                     _isMyServerStatus.value = false
+                } else {
+                    getMyShelfData()
                 }
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+                _isFriendServerStatus.value = false
+                _isMyServerStatus.value = false
+            }
         }
     }
 
     fun postUnfollow() {
         viewModelScope.launch {
-            deleteFollowUseCase(requireNotNull(userId.value))
-                .onSuccess { response ->
-                    _isUnfollowStatus.value = response
-                }.onFailure { throwable ->
-                    Timber.e("$throwable")
-                    _isUnfollowStatus.value = false
-                }
+            deleteFollowUseCase(requireNotNull(userId.value)).onSuccess { response ->
+                _isUnfollowStatus.value = response
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+                _isUnfollowStatus.value = false
+            }
         }
     }
 
     fun postBlock() {
         viewModelScope.launch {
-            postBlockUseCase(requireNotNull(userId.value))
-                .onSuccess { response ->
-                    _isBlockStatus.value = response
-                }.onFailure { throwable ->
-                    Timber.e("$throwable")
-                    _isBlockStatus.value = false
-                }
+            postBlockUseCase(requireNotNull(userId.value)).onSuccess { response ->
+                _isBlockStatus.value = response
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+                _isBlockStatus.value = false
+            }
         }
     }
 

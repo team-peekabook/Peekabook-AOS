@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class User(
     val id: Int = -1,
     val nickname: String = "",
-    val profileImage: String = "",
+    val profileImage: String? = null,
     val intro: String = "",
     val isFollowed: Boolean = false,
     val isBlocked: Boolean = false

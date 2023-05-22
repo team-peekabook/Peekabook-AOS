@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class SearchUserResponse(
     val friendId: Int,
     val nickname: String,
-    val profileImage: String,
+    val profileImage: String?,
     val isFollowed: Boolean,
     val isBlocked: Boolean
 ) {
