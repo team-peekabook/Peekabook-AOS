@@ -255,7 +255,7 @@
                     android:paddingHorizontal="9dp"
                     android:paddingVertical="5dp"
                     android:text="@string/bookshelf_modify_pick"
-                    android:textCoㅐlor="@{(vm.bookTotalNum == 0) ? @color/white : @color/peeka_red }"
+                    android:textColor="@{(vm.bookTotalNum == 0) ? @color/white : @color/peeka_red }"
                     android:visibility="@{vm.friendShelf == true ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ll_bookshelf_self_intro" />
