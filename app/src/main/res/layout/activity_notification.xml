@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.sopt.peekabookaos.presentation.notification.NotificationViewModel" />
@@ -26,15 +28,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_notification_title"
             style="@style/H3Bd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
-            android:text="알림"
+            android:text="@string/notification_title"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_notification_empty"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notification_empty"
+            android:textColor="@color/peeka_red_60"
+            android:visibility="@{vm.notificationData.isEmpty? View.VISIBLE: View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_notification_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notification"
