@@ -18,6 +18,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -187,6 +188,11 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
                 val toMainActivity = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(toMainActivity)
                 activity?.finish()
+            }
+        }
+        viewModel.isExclamationMarkEntered.observe(requireActivity()) { exclamationMark ->
+            if (exclamationMark) {
+                ToastMessageUtil.showToast(requireContext(), "한글,영어,숫자만 입력할 수 있습니다.")
             }
         }
     }

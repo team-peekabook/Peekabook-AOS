@@ -56,13 +56,20 @@ class UserInputViewModel @Inject constructor(
 
     val introduce = MutableLiveData<String>()
 
+    private val _isExclamationMarkEntered = MutableLiveData<Boolean>()
+    val isExclamationMarkEntered: LiveData<Boolean> = _isExclamationMarkEntered
+
     private lateinit var profileImageUri: Uri
 
     var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
         val ps = Pattern.compile("^[ㄱ-ㅣ가-힣a-zA-Z0-9\\s]+$")
         if (!ps.matcher(source).matches()) {
+            _isExclamationMarkEntered.value = true
             ""
-        } else source
+        } else {
+            _isExclamationMarkEntered.value = false
+            source
+        }
     }
 
     fun getNickNameState() {
