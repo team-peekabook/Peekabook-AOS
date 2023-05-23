@@ -61,9 +61,9 @@ class UserInputViewModel @Inject constructor(
 
     private lateinit var profileImageUri: Uri
 
-    var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
-        val ps = Pattern.compile("^[ㄱ-ㅣ가-힣a-zA-Z0-9\\s]+$")
-        if (!ps.matcher(source).matches()) {
+    private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
+        val regularPattern = Pattern.compile(PATTERN)
+        if (!regularPattern.matcher(source).matches()) {
             _isExclamationMarkEntered.value = true
             ""
         } else {
@@ -177,5 +177,9 @@ class UserInputViewModel @Inject constructor(
             byteArrayOutputStream.toByteArray()
         )
         return MultipartBody.Part.createFormData(paramName, fileName, requestBody)
+    }
+
+    companion object {
+        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9]+$"
     }
 }

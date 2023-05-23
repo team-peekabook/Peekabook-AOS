@@ -1,8 +1,6 @@
 package com.sopt.peekabookaos.presentation.userInput
 
-import android.Manifest.permission.CAMERA
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.Manifest.permission.*
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
@@ -25,7 +23,7 @@ import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 @AndroidEntryPoint
 class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fragment_user_input) {
@@ -194,7 +192,10 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         }
         viewModel.isExclamationMarkEntered.observe(requireActivity()) { exclamationMark ->
             if (exclamationMark) {
-                ToastMessageUtil.showToast(requireContext(), "한글,영어,숫자만 입력할 수 있습니다.")
+                ToastMessageUtil.showToast(
+                    requireContext(),
+                    requireContext().resources.getString(R.string.user_input_regular_expression)
+                )
             }
         }
     }
