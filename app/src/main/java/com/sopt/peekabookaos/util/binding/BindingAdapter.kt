@@ -24,6 +24,11 @@ object BindingAdapter {
         this.let {
             Glide.with(context)
                 .load(imgUrl)
+                .apply {
+                    if (imgUrl == null) {
+                        placeholder(R.drawable.ic_profile_default)
+                    }
+                }
                 .circleCrop()
                 .into(this)
         }

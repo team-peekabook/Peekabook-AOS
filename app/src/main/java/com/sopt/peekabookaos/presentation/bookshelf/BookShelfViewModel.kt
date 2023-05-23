@@ -63,7 +63,7 @@ class BookShelfViewModel @Inject constructor(
     val isBlockStatus: LiveData<Boolean> = _isBlockStatus
 
     private lateinit var userNickname: String
-    private lateinit var userProfileImage: String
+    private var userProfileImage: String? = null
 
     init {
         getMyShelfData()
@@ -154,11 +154,7 @@ class BookShelfViewModel @Inject constructor(
     private fun updateFriendState(): Boolean {
         return requireNotNull(_friendUserData.value).contains(
             _userId.value?.let { userId ->
-                User(
-                    userId,
-                    userNickname,
-                    userProfileImage
-                )
+                User(userId, userNickname, userProfileImage)
             }
         )
     }
