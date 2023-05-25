@@ -6,9 +6,9 @@ data class Recommend(
     val createdAt: String,
     val friendId: Int,
     val friendNickname: String,
-    val friendImage: String,
     val bookId: Int,
     val bookTitle: String,
     val author: String,
     val bookImage: String
+    val friendImage: String? = null,
 )

@@ -9,7 +9,7 @@ data class NotificationEntity(
     val typeId: Int,
     val senderId: Int,
     val senderName: String,
-    val profileImage: String,
+    val profileImage: String?,
     val bookTitle: String = "",
     val createdAt: String
 ) {
