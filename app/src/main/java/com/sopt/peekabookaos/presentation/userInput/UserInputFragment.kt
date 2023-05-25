@@ -20,6 +20,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -127,6 +128,10 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
             )
     }
 
+    private fun checkRegularExpression() {
+        binding.etUserInputNickname.filters = viewModel.updateEditTextFilter()
+    }
+
     private fun dispatchTakePictureIntentEx() { // 카메라 호출 함수
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -175,6 +180,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         viewModel.nickname.observe(requireActivity()) {
             viewModel.updateCheckButtonState()
             viewModel.updateWritingState()
+            checkRegularExpression()
         }
         viewModel.introduce.observe(requireActivity()) {
             viewModel.updateCheckButtonState()
@@ -184,6 +190,14 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
                 val toMainActivity = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(toMainActivity)
                 activity?.finish()
+            }
+        }
+        viewModel.isExclamationMarkEntered.observe(requireActivity()) { exclamationMark ->
+            if (exclamationMark) {
+                ToastMessageUtil.showToast(
+                    requireContext(),
+                    requireContext().resources.getString(R.string.user_input_regular_expression)
+                )
             }
         }
     }
