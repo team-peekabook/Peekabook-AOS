@@ -2,7 +2,9 @@ package com.sopt.peekabookaos.presentation.recommend
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentRecommendBinding
 import com.sopt.peekabookaos.util.binding.BindingFragment
@@ -10,9 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fragment_recommend) {
-    private val recommendViewModel: RecommendViewModel by viewModels()
-    private val recommendAdapter: BookRecommendAdapter?
-        get() = binding.rvRecommend.adapter as? BookRecommendAdapter
+    private val recommendViewModel by activityViewModels<RecommendViewModel>()
+    private lateinit var viewPagerAdapter: RecommendPagerAdapter
 
     override fun onResume() {
         super.onResume()
@@ -22,82 +23,21 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = recommendViewModel
-        initTextAppearance()
         initAdapter()
-        initRecommendBookObserve()
-        initRecommendedClickListener()
-        initRecommendingClickListener()
-    }
-
-    private fun initRecommendedClickListener() {
-        binding.tvRecommendRecommended.setOnClickListener {
-            recommendAdapter?.submitList(recommendViewModel.recommendedBook.value)
-            with(binding) {
-                tvRecommendRecommended.isSelected = true
-                tvRecommendRecommending.isSelected = false
-                if (tvRecommendRecommended.isSelected) {
-                    tvRecommendRecommending.setTextAppearance(R.style.H4)
-                    tvRecommendRecommended.setTextAppearance(R.style.NameBd)
-                }
-                initRecommendedEmpty()
-            }
-        }
-    }
-
-    private fun initRecommendingClickListener() {
-        binding.tvRecommendRecommending.setOnClickListener {
-            recommendAdapter?.submitList(recommendViewModel.recommendingBook.value)
-            with(binding) {
-                tvRecommendRecommended.isSelected = false
-                tvRecommendRecommending.isSelected = true
-                if (tvRecommendRecommending.isSelected) {
-                    tvRecommendRecommending.setTextAppearance(R.style.NameBd)
-                    tvRecommendRecommended.setTextAppearance(R.style.H4)
-                }
-                initRecommendingEmpty()
-            }
-        }
-    }
-
-    private fun initRecommendedEmpty() {
-        with(binding) {
-            if (requireNotNull(recommendViewModel.recommendedBook.value).isEmpty()) {
-                tvRecommendRecommendedEmpty.visibility = View.VISIBLE
-                tvRecommendRecommendingEmpty.visibility = View.INVISIBLE
-            } else {
-                tvRecommendRecommendedEmpty.visibility = View.GONE
-                tvRecommendRecommendingEmpty.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun initRecommendingEmpty() {
-        with(binding) {
-            if (requireNotNull(recommendViewModel.recommendingBook.value).isEmpty()) {
-                tvRecommendRecommendingEmpty.visibility = View.VISIBLE
-                tvRecommendRecommendedEmpty.visibility = View.INVISIBLE
-            } else {
-                tvRecommendRecommendingEmpty.visibility = View.GONE
-                tvRecommendRecommendedEmpty.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun initTextAppearance() {
-        with(binding) {
-            tvRecommendRecommended.isSelected = true
-            tvRecommendRecommended.setTextAppearance(R.style.NameBd)
-        }
     }
 
     private fun initAdapter() {
-        binding.rvRecommend.adapter = BookRecommendAdapter()
-    }
+        viewPagerAdapter = RecommendPagerAdapter(requireActivity())
 
-    private fun initRecommendBookObserve() {
-        recommendViewModel.recommendedBook.observe(viewLifecycleOwner) { book ->
-            recommendAdapter?.submitList(book)
-            initRecommendedEmpty()
-        }
+        binding.vpRecommend.adapter = viewPagerAdapter
+
+        binding.vpRecommend.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+        TabLayoutMediator(binding.tlRecommend, binding.vpRecommend) { tab, position ->
+            when (position) {
+                0 -> tab.text = getString(R.string.recommend_recommended)
+                1 -> tab.text = getString(R.string.recommend_recommending)
+            }
+        }.attach()
     }
 }

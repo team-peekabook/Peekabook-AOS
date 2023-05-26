@@ -34,72 +34,46 @@
             android:background="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_recommend_logo" />
+            app:layout_constraintTop_toBottomOf="@id/iv_recommend_logo" />
 
-        <TextView
-            android:id="@+id/tv_recommend_recommended"
-            style="@style/H4"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_recommend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/recommend_recommended"
-            android:textColor="@drawable/selector_recommend_textview"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/peeka_beige"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_recommend_line" />
+            app:layout_constraintTop_toBottomOf="@id/view_recommend_line"
+            app:tabGravity="start"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabPaddingEnd="8dp"
+            app:tabPaddingStart="8dp"
+            app:tabSelectedTextColor="@color/peeka_red"
+            app:tabTextAppearance="@style/NameBd"
+            app:tabTextColor="@color/peeka_g_2">
 
-        <TextView
-            android:id="@+id/tv_recommend_recommending"
-            style="@style/H4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
-            android:text="@string/recommend_recommending"
-            android:textColor="@drawable/selector_recommend_textview"
-            app:layout_constraintBottom_toBottomOf="@id/tv_recommend_recommended"
-            app:layout_constraintStart_toEndOf="@id/tv_recommend_recommended"
-            app:layout_constraintTop_toTopOf="@id/tv_recommend_recommended" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_recommend_recommended"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="추천받은 책" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recommend"
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_recommend_recommending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="추천한 책" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_recommend"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recommend_recommended"
-            tools:listitem="@layout/item_recommend" />
-
-        <TextView
-            android:id="@+id/tv_recommend_recommended_empty"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="253dp"
-            android:gravity="center"
-            android:text="@string/recommend_recommended_empty"
-            android:textColor="@color/peeka_red_60"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recommend_recommended"
-            tools:text="아직 친구가 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요." />
-
-        <TextView
-            android:id="@+id/tv_recommend_recommending_empty"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="253dp"
-            android:gravity="center"
-            android:text="@string/recommend_recommending_empty"
-            android:textColor="@color/peeka_red_60"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recommend_recommended"
-            tools:text="친구에게 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요." />
+            app:layout_constraintTop_toBottomOf="@id/tl_recommend" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
