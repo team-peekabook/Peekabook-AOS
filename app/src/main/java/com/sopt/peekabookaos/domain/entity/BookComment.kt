@@ -5,6 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class BookComment(
-    val description: String? = "",
-    val memo: String? = ""
+    val description: String? = null,
+    val memo: String? = null
 ) : Parcelable
