@@ -1,7 +1,7 @@
 package com.sopt.peekabookaos.data.entity.response
 
 import com.sopt.peekabookaos.data.entity.BookEntity
-import com.sopt.peekabookaos.domain.entity.Detail
+import com.sopt.peekabookaos.domain.entity.BookDetail
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +12,7 @@ data class DetailResponse(
     @SerialName("Book")
     val book: BookEntity
 ) {
-    fun toDetail(): Detail = Detail(
+    fun toDetail(): BookDetail = BookDetail(
         description = this.description,
         memo = this.memo,
         book = this.book.toBook()

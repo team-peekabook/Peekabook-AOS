@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.domain.entity.BookComment
+import com.sopt.peekabookaos.domain.entity.BookDetail
 import com.sopt.peekabookaos.domain.usecase.DeleteDetailUseCase
 import com.sopt.peekabookaos.domain.usecase.GetDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +21,8 @@ class DetailViewModel @Inject constructor(
     private val _bookData = MutableLiveData<Book>()
     val bookData: LiveData<Book> = _bookData
 
-    private val _bookComment = MutableLiveData<BookComment>()
-    val bookComment: LiveData<BookComment> = _bookComment
+    private val _bookDetail = MutableLiveData<BookDetail>()
+    val bookDetail: LiveData<BookDetail> = _bookDetail
 
     private val _isMyDetailView = MutableLiveData<Boolean>()
     val isMyDetailView: LiveData<Boolean> = _isMyDetailView
@@ -45,7 +45,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             getDetailUseCase(requireNotNull(_bookId.value))
                 .onSuccess { response ->
-                    _bookComment.value = BookComment(
+                    _bookDetail.value = BookDetail(
                         response.description,
                         response.memo
                     )
