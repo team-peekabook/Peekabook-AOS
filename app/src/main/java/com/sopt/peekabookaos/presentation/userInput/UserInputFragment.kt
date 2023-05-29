@@ -75,22 +75,26 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
     }
 
     private fun initAddClickListener() {
-        binding.btnUserInputAdd.setOnClickListener {
-            val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
-                when (it) {
-                    0 -> launcher.launch("image/*")
-                    1 -> if (checkPermission()) {
-                        dispatchTakePictureIntentEx()
-                    } else {
-                        requestCameraPermission()
-                    }
+        binding.btnUserInputAdd.setSingleOnClickListener { profileBottomSheet() }
+        binding.ivUserInputProfile.setSingleOnClickListener { profileBottomSheet() }
+        binding.ivUserInputProfileBasic.setSingleOnClickListener { profileBottomSheet() }
+    }
+
+    private fun profileBottomSheet() {
+        val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
+            when (it) {
+                0 -> launcher.launch("image/*")
+                1 -> if (checkPermission()) {
+                    dispatchTakePictureIntentEx()
+                } else {
+                    requestCameraPermission()
                 }
             }
-            userInputBottomSheetFragment.show(
-                parentFragmentManager,
-                userInputBottomSheetFragment.tag
-            )
         }
+        userInputBottomSheetFragment.show(
+            parentFragmentManager,
+            userInputBottomSheetFragment.tag
+        )
     }
 
     private fun requestCameraPermission() {
