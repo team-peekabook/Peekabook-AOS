@@ -9,9 +9,7 @@ import com.sopt.peekabookaos.domain.entity.Recommend
 import com.sopt.peekabookaos.util.ItemDiffCallback
 
 class BookRecommendAdapter :
-    ListAdapter<Recommend, BookRecommendAdapter.BookRecommendationViewHolder>(
-        recommendationDiffUtil
-    ) {
+    ListAdapter<Recommend, BookRecommendAdapter.BookRecommendationViewHolder>(recommendationDiffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,8 +32,8 @@ class BookRecommendAdapter :
 
     class BookRecommendationViewHolder(private val binding: ItemRecommendBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(bookRecommendation: Recommend) {
-            binding.data = bookRecommendation
+        fun onBind(data: Recommend) {
+            binding.data = data
         }
     }
 
