@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.recommend
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ItemRecommendViewBinding
@@ -28,7 +29,15 @@ class RecommendedFragment :
 
     private fun initObserver() {
         recommendViewModel.recommendedBook.observe(viewLifecycleOwner) { books ->
-            recommendAdapter?.submitList(books)
+            if (books.isEmpty()) {
+                binding.tvRecommendEmpty.isVisible = true
+                binding.rvRecommend.isVisible = false
+                binding.tvRecommendEmpty.text = getString(R.string.recommend_recommended_empty)
+            } else {
+                binding.tvRecommendEmpty.isVisible = false
+                binding.rvRecommend.isVisible = true
+                recommendAdapter?.submitList(books)
+            }
         }
     }
 }
