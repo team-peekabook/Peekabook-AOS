@@ -9,6 +9,7 @@ import com.sopt.peekabookaos.databinding.ActivityDetailBinding
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.presentation.editBook.EditBookActivity
@@ -95,7 +96,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initDetailView() {
         when (intent.getStringExtra(LOCATION)) {
-            MY_SHELF -> {
+            MY_SHELF, CREATE -> {
                 detailViewModel.initIsMyDetailView(true)
                 detailViewModel.initBookId(
                     intent.getIntExtra(BOOK_ID, DEFAULT)

@@ -11,6 +11,8 @@ import com.sopt.peekabookaos.databinding.FragmentCreateBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.UiEvent
@@ -66,6 +68,7 @@ class CreateBookFragment :
                     UiEvent.SUCCESS -> {
                         startActivity(
                             Intent(requireActivity(), DetailActivity::class.java).apply {
+                                putExtra(LOCATION, CREATE)
                                 putExtra(BOOK_ID, createBookViewModel.bookInfo.value.id)
                             }
                         )

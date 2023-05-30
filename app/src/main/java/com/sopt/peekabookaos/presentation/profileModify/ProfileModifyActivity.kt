@@ -71,6 +71,7 @@ class ProfileModifyActivity :
                     1 -> if (checkPermission()) {
                         dispatchTakePictureIntentEx()
                     }
+
                     2 -> binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
                     else -> {
                         requestCameraPermission()
@@ -132,7 +133,8 @@ class ProfileModifyActivity :
     }
 
     private fun dispatchTakePictureIntentEx() {
-        val timeStamp: String = SimpleDateFormat(getString(R.string.profile_modify_timeStamp)).format(Date())
+        val timeStamp: String =
+            SimpleDateFormat(getString(R.string.profile_modify_timeStamp)).format(Date())
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val uri: Uri? = createImageUri("JPEG_${timeStamp}_", "image/jpeg")
         photoURI = uri

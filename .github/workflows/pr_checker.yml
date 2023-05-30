@@ -31,51 +31,31 @@ jobs:
     - name: Create Local Properties
       run: touch local.properties
 
-    - name: Access BASE_URI
+    - name: Access Local Properties
       env:
         HOST_URI: ${{ secrets.BASE_URI }}
+        NAVER_URL: ${{ secrets.NAVER_URL }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        KAKAO_NATIVE_APP_KEY: ${{ secrets.KAKAO_NATIVE_APP_KEY }}
+        KAKAO_REDIRECT_SCHEME: ${{ secrets.KAKAO_REDIRECT_SCHEME }}
       run: |
         echo BASE_URI=\"$BASE_URI\" >> local.properties
-        
-    - name: Access NAVER_URL
-      env:
-        NAVER_URL: ${{ secrets.NAVER_URL }}
-      run: |
         echo NAVER_URL=\"$NAVER_URL\" >> local.properties
-        
-    - name: Access CLIENT_ID
-      env:
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-      run: |
         echo CLIENT_ID=\"$CLIENT_ID\" >> local.properties
-                
-    - name: Access CLIENT_SECRET
-      env:
-        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-      run: |
         echo CLIENT_SECRET=\"$CLIENT_SECRET\" >> local.properties
-        
-    - name: Access KAKAO_NATIVE_APP_KEY
-      env:
-        CLIENT_SECRET: ${{ secrets.KAKAO_NATIVE_APP_KEY }}
-      run: |
         echo KAKAO_NATIVE_APP_KEY=\"KAKAO_NATIVE_APP_KEY\" >> local.properties
-
-    - name: Access KAKAO_REDIRECT_SCHEME
-      env:
-        CLIENT_SECRET: ${{ secrets.KAKAO_REDIRECT_SCHEME }}
-      run: |
         echo KAKAO_REDIRECT_SCHEME=\"KAKAO_REDIRECT_SCHEME\" >> local.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      
+
     - name: Lint Check
       run: ./gradlew ktlintCheck
-      
+
     - name: Build with Gradle
       run: ./gradlew build
-      
+
     - name: On Success!! Congratulations
       if: ${{ success() }}
       uses: rtCamp/action-slack-notify@v2
