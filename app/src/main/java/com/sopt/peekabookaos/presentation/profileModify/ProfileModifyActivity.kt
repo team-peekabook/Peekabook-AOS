@@ -179,6 +179,7 @@ class ProfileModifyActivity :
         profileModifyViewModel.nickname.observe(this) {
             profileModifyViewModel.updateCheckButtonState()
             profileModifyViewModel.updateWritingState()
+            checkRegularExpression()
         }
         profileModifyViewModel.introduce.observe(this) {
             profileModifyViewModel.updateCheckButtonState()
@@ -188,6 +189,18 @@ class ProfileModifyActivity :
                 finish()
             }
         }
+        profileModifyViewModel.isExclamationMarkEntered.observe(this) { exclamationMark ->
+            if (exclamationMark) {
+                ToastMessageUtil.showToast(
+                    this,
+                    this.resources.getString(R.string.user_input_regular_expression)
+                )
+            }
+        }
+    }
+
+    private fun checkRegularExpression() {
+        binding.etProfileModifyNickname.filters = profileModifyViewModel.updateEditTextFilter()
     }
 
     companion object {
