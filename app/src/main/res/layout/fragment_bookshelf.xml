@@ -157,7 +157,7 @@
                     android:textColor="@color/peeka_red_60"
                     android:visibility="@{vm.friendUserData.isEmpty ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@+id/view_bookshelf_friend_list_bottom"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/view_bookshelf_friend_list_bottom"
                     app:layout_constraintStart_toEndOf="@id/view_bookshelf_friend_list_vertical"
                     app:layout_constraintTop_toTopOf="@+id/view_bookshelf_friend_list_top" />
 

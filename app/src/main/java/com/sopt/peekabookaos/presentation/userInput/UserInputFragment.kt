@@ -20,6 +20,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentUserInputBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,22 +75,26 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
     }
 
     private fun initAddClickListener() {
-        binding.btnUserInputAdd.setOnClickListener {
-            val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
-                when (it) {
-                    0 -> launcher.launch("image/*")
-                    1 -> if (checkPermission()) {
-                        dispatchTakePictureIntentEx()
-                    } else {
-                        requestCameraPermission()
-                    }
+        binding.btnUserInputAdd.setSingleOnClickListener { profileBottomSheet() }
+        binding.ivUserInputProfile.setSingleOnClickListener { profileBottomSheet() }
+        binding.ivUserInputProfileBasic.setSingleOnClickListener { profileBottomSheet() }
+    }
+
+    private fun profileBottomSheet() {
+        val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
+            when (it) {
+                0 -> launcher.launch("image/*")
+                1 -> if (checkPermission()) {
+                    dispatchTakePictureIntentEx()
+                } else {
+                    requestCameraPermission()
                 }
             }
-            userInputBottomSheetFragment.show(
-                parentFragmentManager,
-                userInputBottomSheetFragment.tag
-            )
         }
+        userInputBottomSheetFragment.show(
+            parentFragmentManager,
+            userInputBottomSheetFragment.tag
+        )
     }
 
     private fun requestCameraPermission() {
@@ -125,6 +130,10 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
                 WRITE_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED
             )
+    }
+
+    private fun checkRegularExpression() {
+        binding.etUserInputNickname.filters = viewModel.updateEditTextFilter()
     }
 
     private fun dispatchTakePictureIntentEx() { // 카메라 호출 함수
@@ -175,6 +184,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         viewModel.nickname.observe(requireActivity()) {
             viewModel.updateCheckButtonState()
             viewModel.updateWritingState()
+            checkRegularExpression()
         }
         viewModel.introduce.observe(requireActivity()) {
             viewModel.updateCheckButtonState()
@@ -184,6 +194,14 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
                 val toMainActivity = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(toMainActivity)
                 activity?.finish()
+            }
+        }
+        viewModel.isExclamationMarkEntered.observe(requireActivity()) { exclamationMark ->
+            if (exclamationMark) {
+                ToastMessageUtil.showToast(
+                    requireContext(),
+                    requireContext().resources.getString(R.string.user_input_regular_expression)
+                )
             }
         }
     }
