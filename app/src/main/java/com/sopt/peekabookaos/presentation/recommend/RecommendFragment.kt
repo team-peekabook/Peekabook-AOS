@@ -22,8 +22,8 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = recommendViewModel
         initAdapter()
+        initTabLayout()
     }
 
     private fun initAdapter() {
@@ -32,7 +32,9 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
         binding.vpRecommend.adapter = viewPagerAdapter
 
         binding.vpRecommend.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+    }
 
+    private fun initTabLayout() {
         TabLayoutMediator(binding.tlRecommend, binding.vpRecommend) { tab, position ->
             when (position) {
                 0 -> tab.text = getString(R.string.recommend_recommended)

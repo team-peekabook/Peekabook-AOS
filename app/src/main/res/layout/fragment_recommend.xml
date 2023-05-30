@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="vm"
-            type="com.sopt.peekabookaos.presentation.recommend.RecommendViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,8 +47,10 @@
             app:tabMode="fixed"
             app:tabPaddingEnd="8dp"
             app:tabPaddingStart="8dp"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextAppearance="@style/NameBd"
             app:tabSelectedTextColor="@color/peeka_red"
-            app:tabTextAppearance="@style/NameBd"
+            app:tabTextAppearance="@style/H4"
             app:tabTextColor="@color/peeka_g_2">
 
             <com.google.android.material.tabs.TabItem
