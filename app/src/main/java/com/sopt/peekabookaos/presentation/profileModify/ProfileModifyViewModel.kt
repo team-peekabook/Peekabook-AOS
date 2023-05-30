@@ -2,6 +2,7 @@ package com.sopt.peekabookaos.presentation.profileModify
 
 import android.app.Application
 import android.net.Uri
+import android.text.InputFilter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -48,7 +50,21 @@ class ProfileModifyViewModel @Inject constructor(
 
     val introduce = MutableLiveData("")
 
+    private val _isExclamationMarkEntered = MutableLiveData<Boolean>()
+    val isExclamationMarkEntered: LiveData<Boolean> = _isExclamationMarkEntered
+
     private lateinit var profileImageUri: Uri
+
+    private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
+        val regularPattern = Pattern.compile(PATTERN)
+        if (!regularPattern.matcher(source).matches()) {
+            _isExclamationMarkEntered.value = true
+            ""
+        } else {
+            _isExclamationMarkEntered.value = false
+            source
+        }
+    }
 
     fun getNickNameState() {
         viewModelScope.launch {
@@ -88,6 +104,10 @@ class ProfileModifyViewModel @Inject constructor(
         }
     }
 
+    fun updateEditTextFilter(): Array<InputFilter> {
+        return arrayOf(filterAlphaNumSpace)
+    }
+
     fun updateWritingState() {
         _isNickname.value = true
         updateNicknameMessage(false)
@@ -124,5 +144,9 @@ class ProfileModifyViewModel @Inject constructor(
 
     private fun String.toRequestBody(): RequestBody {
         return this.toRequestBody("application/json".toMediaTypeOrNull())
+    }
+
+    companion object {
+        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9]+$"
     }
 }
