@@ -1,14 +1,14 @@
 package com.sopt.peekabookaos.data.repository
 
 import com.sopt.peekabookaos.data.source.remote.DetailDataSource
-import com.sopt.peekabookaos.domain.entity.Detail
+import com.sopt.peekabookaos.domain.entity.BookDetail
 import com.sopt.peekabookaos.domain.repository.DetailRepository
 import javax.inject.Inject
 
 class DetailRepositoryImpl @Inject constructor(
     private val detailDataSource: DetailDataSource
 ) : DetailRepository {
-    override suspend fun getDetail(bookId: Int): Result<Detail> =
+    override suspend fun getDetail(bookId: Int): Result<BookDetail> =
         kotlin.runCatching { detailDataSource.getDetail(bookId) }.map { response ->
             requireNotNull(response.data).toDetail()
         }

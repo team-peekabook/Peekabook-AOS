@@ -10,7 +10,7 @@ data class PicksEntity(
     val pickIndex: Int,
     @SerialName("Book")
     val book: BookEntity,
-    val description: String? = ""
+    val description: String? = null
 ) {
     fun toPicks(): Picks = Picks(
         id = this.id,

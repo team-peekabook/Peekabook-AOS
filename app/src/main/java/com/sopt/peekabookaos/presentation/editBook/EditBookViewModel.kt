@@ -3,7 +3,7 @@ package com.sopt.peekabookaos.presentation.editBook
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.domain.entity.BookComment
+import com.sopt.peekabookaos.domain.entity.BookDetail
 import com.sopt.peekabookaos.domain.usecase.PatchEditBookUseCase
 import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,9 +45,9 @@ class EditBookViewModel @Inject constructor(
         }
     }
 
-    fun setPreviousBook(bookInfo: Book, bookComment: BookComment) {
+    fun setPreviousBook(bookInfo: Book, bookDetail: BookDetail) {
         _bookInfo.value = bookInfo
-        comment.value = bookComment.description ?: ""
-        memo.value = bookComment.memo ?: ""
+        comment.value = bookDetail.description ?: ""
+        memo.value = bookDetail.memo ?: ""
     }
 }

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class ProfileEntity(
     val id: Int = -1,
     val nickname: String = "",
-    val profileImage: String = "",
+    val profileImage: String? = null,
     val intro: String = ""
 ) {
     fun toUser(): User = User(

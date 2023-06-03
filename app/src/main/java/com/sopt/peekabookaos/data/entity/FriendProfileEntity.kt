@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class FriendProfileEntity(
     val id: Int,
     val nickname: String,
-    val profileImage: String
+    val profileImage: String?
 ) {
     fun toFriendProfile(): User = User(
         id = this.id,
