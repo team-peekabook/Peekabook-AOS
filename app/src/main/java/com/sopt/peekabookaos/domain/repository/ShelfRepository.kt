@@ -1,7 +1,7 @@
 package com.sopt.peekabookaos.domain.repository
 
-import com.sopt.peekabookaos.domain.entity.Shelf
 import com.sopt.peekabookaos.domain.entity.Picks
+import com.sopt.peekabookaos.domain.entity.Shelf
 
 interface ShelfRepository {
     suspend fun getMyShelf(): Result<Shelf>
