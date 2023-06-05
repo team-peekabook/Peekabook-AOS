@@ -162,7 +162,7 @@
                     style="@style/H1Bd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:background="@color/peeka_red"
                     android:paddingVertical="8dp"
                     android:paddingStart="14dp"
