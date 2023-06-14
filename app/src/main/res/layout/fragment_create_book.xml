@@ -62,7 +62,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/iv_create_book_image"
@@ -149,11 +149,12 @@
                     style="@style/H2Md"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="@{@string/book_comment_count(vm.comment.length())}"
                     android:textColor="@color/peeka_g_2"
+                    app:layout_constraintBottom_toBottomOf="@id/et_create_book_comment"
                     app:layout_constraintEnd_toEndOf="@id/et_create_book_comment"
-                    app:layout_constraintTop_toBottomOf="@id/et_create_book_comment"
                     tools:text="0/200" />
 
                 <TextView
@@ -161,7 +162,7 @@
                     style="@style/H1Bd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:background="@color/peeka_red"
                     android:paddingVertical="8dp"
                     android:paddingStart="14dp"
@@ -169,13 +170,14 @@
                     android:textColor="@color/peeka_white"
                     app:layout_constraintEnd_toEndOf="@id/tv_create_book_comment"
                     app:layout_constraintStart_toStartOf="@id/tv_create_book_comment"
-                    app:layout_constraintTop_toBottomOf="@id/tv_create_book_comment_count" />
+                    app:layout_constraintTop_toBottomOf="@id/et_create_book_comment" />
 
                 <EditText
                     android:id="@+id/et_create_book_memo"
                     style="@style/H2Md"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/shape_whitefill_redline_0_rect"
                     android:gravity="top"
                     android:hint="@string/book_memo_hint"
@@ -187,6 +189,7 @@
                     android:text="@={vm.memo}"
                     android:textColor="@color/peeka_red"
                     android:textColorHint="@color/peeka_g_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="4"
                     app:layout_constraintEnd_toEndOf="@id/tv_create_book_memo"
                     app:layout_constraintStart_toStartOf="@id/tv_create_book_memo"
@@ -197,12 +200,12 @@
                     style="@style/H2Md"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="@{@string/book_memo_count(vm.memo.length())}"
                     android:textColor="@color/peeka_g_2"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/et_create_book_memo"
                     app:layout_constraintEnd_toEndOf="@id/et_create_book_memo"
-                    app:layout_constraintTop_toBottomOf="@id/et_create_book_memo"
                     tools:text="0/200" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

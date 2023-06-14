@@ -3,7 +3,7 @@
     <dimen name="iv_bookshelf_logo_top_margin">16dp</dimen>
     <dimen name="btn_bookshelf_notification_top_margin">5dp</dimen>
     <dimen name="sliding_up_panel_top_margin">13dp</dimen>
-    <dimen name="sliding_up_panel_height">160dp</dimen>
+    <dimen name="sliding_up_panel_height">140dp</dimen>
     <dimen name="iv_bookshelf_user_profile_top_margin">9dp</dimen>
     <dimen name="tv_bookshelf_user_profile_name_top_margin">3dp</dimen>
     <dimen name="view_bookshelf_friend_list_bottom_top_margin">6dp</dimen>

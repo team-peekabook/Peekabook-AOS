@@ -4,7 +4,7 @@ import com.sopt.peekabookaos.data.entity.BooksEntity
 import com.sopt.peekabookaos.data.entity.FriendProfileEntity
 import com.sopt.peekabookaos.data.entity.PicksEntity
 import com.sopt.peekabookaos.data.entity.ProfileEntity
-import com.sopt.peekabookaos.domain.entity.MyShelf
+import com.sopt.peekabookaos.domain.entity.Shelf
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,7 +15,7 @@ data class MyShelfResponse(
     val bookTotalNum: Int,
     val books: List<BooksEntity>
 ) {
-    fun toMyShelf(): MyShelf = MyShelf(
+    fun toShelf(): Shelf = Shelf(
         user = this.friendList.map { friendListEntity ->
             friendListEntity.toFriendProfile()
         },

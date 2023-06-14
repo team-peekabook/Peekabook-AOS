@@ -4,6 +4,7 @@ import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import android.text.InputFilter
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,6 +22,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,7 +56,21 @@ class UserInputViewModel @Inject constructor(
 
     val introduce = MutableLiveData<String>()
 
+    private val _isExclamationMarkEntered = MutableLiveData<Boolean>()
+    val isExclamationMarkEntered: LiveData<Boolean> = _isExclamationMarkEntered
+
     private lateinit var profileImageUri: Uri
+
+    private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
+        val regularPattern = Pattern.compile(PATTERN)
+        if (!regularPattern.matcher(source).matches()) {
+            _isExclamationMarkEntered.value = true
+            ""
+        } else {
+            _isExclamationMarkEntered.value = false
+            source
+        }
+    }
 
     fun getNickNameState() {
         viewModelScope.launch {
@@ -122,6 +138,10 @@ class UserInputViewModel @Inject constructor(
         _profileImage.value = uri.toString()
     }
 
+    fun updateEditTextFilter(): Array<InputFilter> {
+        return arrayOf(filterAlphaNumSpace)
+    }
+
     fun updateCheckButtonState() {
         _isCheckButton.value = !(introduce.value.isNullOrBlank() || nickname.value.isNullOrBlank())
     }
@@ -159,5 +179,9 @@ class UserInputViewModel @Inject constructor(
             byteArrayOutputStream.toByteArray()
         )
         return MultipartBody.Part.createFormData(paramName, fileName, requestBody)
+    }
+
+    companion object {
+        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9]+$"
     }
 }

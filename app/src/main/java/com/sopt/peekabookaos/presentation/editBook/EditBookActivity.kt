@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityEditBookBinding
 import com.sopt.peekabookaos.domain.entity.Book
-import com.sopt.peekabookaos.domain.entity.BookComment
+import com.sopt.peekabookaos.domain.entity.BookDetail
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
 import com.sopt.peekabookaos.util.KeyBoardUtil
@@ -46,8 +46,8 @@ class EditBookActivity :
     private fun setPreviousBook() {
         editBookViewModel.setPreviousBook(
             bookInfo = intent.getParcelable(BOOK_INFO, Book::class.java) ?: Book(),
-            bookComment = intent.getParcelable(BOOK_COMMENT, BookComment::class.java)
-                ?: BookComment()
+            bookDetail = intent.getParcelable(BOOK_COMMENT, BookDetail::class.java)
+                ?: BookDetail()
         )
     }
 

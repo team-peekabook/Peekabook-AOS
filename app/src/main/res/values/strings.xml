@@ -108,6 +108,8 @@
     <string name="notification_follow_name_long">\'%s\' 님이\n당신을 팔로우했어요!</string>
     <string name="notification_recommend">\'%s\'님이\n당신에게 책을 추천했어요!</string>
     <string name="notification_add">\'%s\'님의\n책장에 새로운 책이 추가되었어요!</string>
+    <string name="notification_title">알림</string>
+    <string name="notification_empty">새로운 알림이 없습니다.</string>
 
     <!-- Search User -->
     <string name="search_user_title">사용자 검색하기</string>
@@ -164,6 +166,7 @@
     <string name="user_input_camera">카메라</string>
     <string name="user_input_request_permission">휴대폰 앱 설정에서 카메라, 내부 저장소 권한을 허용해주세요!</string>
     <string name="user_input_permission">카메라, 내부 저장소 권한이 허용됐습니다.</string>
+    <string name="user_input_regular_expression">한글, 영어, 숫자만 입력 가능합니다.</string>
 
     <!-- Withdraw -->
     <string name="withdraw_title">서비스 탈퇴</string>

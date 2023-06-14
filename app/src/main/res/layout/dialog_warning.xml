@@ -23,6 +23,7 @@
             android:layout_marginHorizontal="70dp"
             android:layout_marginTop="19dp"
             android:gravity="center"
+            android:lineSpacingExtra="2dp"
             android:text="@{warning.title}"
             android:textColor="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"

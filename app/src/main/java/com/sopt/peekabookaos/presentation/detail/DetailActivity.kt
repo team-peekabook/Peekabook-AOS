@@ -9,6 +9,7 @@ import com.sopt.peekabookaos.databinding.ActivityDetailBinding
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_COMMENT
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.UPDATE
 import com.sopt.peekabookaos.presentation.editBook.EditBookActivity
@@ -46,7 +47,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initContentAppearance() {
-        detailViewModel.bookComment.observe(this) { bookComment ->
+        detailViewModel.bookDetail.observe(this) { bookComment ->
             if (bookComment.description.isNullOrBlank()) {
                 with(binding) {
                     tvDetailGetContent.text = getString(R.string.detail_description_empty)
@@ -95,7 +96,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
 
     private fun initDetailView() {
         when (intent.getStringExtra(LOCATION)) {
-            MY_SHELF -> {
+            MY_SHELF, CREATE -> {
                 detailViewModel.initIsMyDetailView(true)
                 detailViewModel.initBookId(
                     intent.getIntExtra(BOOK_ID, DEFAULT)
@@ -122,7 +123,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             Intent(this, EditBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
                 putExtra(BOOK_INFO, detailViewModel.bookData.value)
-                putExtra(BOOK_COMMENT, detailViewModel.bookComment.value)
+                putExtra(BOOK_COMMENT, detailViewModel.bookDetail.value)
             }.also { intent ->
                 startActivity(intent)
             }
