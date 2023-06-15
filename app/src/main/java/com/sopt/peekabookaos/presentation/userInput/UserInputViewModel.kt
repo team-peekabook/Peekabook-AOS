@@ -41,7 +41,7 @@ class UserInputViewModel @Inject constructor(
     val isCheckButton: LiveData<Boolean> = _isCheckButton
 
     private val _profileImage: MutableLiveData<String> = MutableLiveData()
-    val profileImage: MutableLiveData<String> = _profileImage
+    val profileImage: LiveData<String> = _profileImage
 
     private val _isSignUpStatus = MutableLiveData<Boolean>()
     val isSignUpStatus: LiveData<Boolean> = _isSignUpStatus
