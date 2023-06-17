@@ -57,12 +57,12 @@ class UserInputViewModel @Inject constructor(
 
     private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
         val regularPattern = Pattern.compile(PATTERN)
-        if (!regularPattern.matcher(source).matches()) {
-            _isExclamationMarkEntered.value = true
-            ""
-        } else {
+        if (source.isNullOrBlank() || regularPattern.matcher(source).matches()) {
             _isExclamationMarkEntered.value = false
             source
+        } else {
+            _isExclamationMarkEntered.value = true
+            ""
         }
     }
 
@@ -145,6 +145,6 @@ class UserInputViewModel @Inject constructor(
     }
 
     companion object {
-        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9]+$"
+        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9\\u318D\\u119E]+$"
     }
 }
