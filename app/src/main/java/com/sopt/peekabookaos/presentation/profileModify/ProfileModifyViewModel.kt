@@ -149,6 +149,6 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     companion object {
-        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9]+$"
+        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9\\u318D\\u119E]+$"
     }
 }
