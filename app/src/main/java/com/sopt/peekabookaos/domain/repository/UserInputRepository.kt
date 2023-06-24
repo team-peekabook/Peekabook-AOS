@@ -9,7 +9,7 @@ interface UserInputRepository {
     ): Result<Int>
 
     suspend fun patchSignUp(
-        file: MultipartBody.Part,
+        file: MultipartBody.Part?,
         requestBodyMap: HashMap<String, RequestBody>
     ): Result<Boolean>
 }

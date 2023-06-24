@@ -47,7 +47,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
     }
 
     private fun initContentAppearance() {
-        detailViewModel.bookComment.observe(this) { bookComment ->
+        detailViewModel.bookDetail.observe(this) { bookComment ->
             if (bookComment.description.isNullOrBlank()) {
                 with(binding) {
                     tvDetailGetContent.text = getString(R.string.detail_description_empty)
@@ -123,7 +123,7 @@ class DetailActivity : BindingActivity<ActivityDetailBinding>(R.layout.activity_
             Intent(this, EditBookActivity::class.java).apply {
                 putExtra(LOCATION, UPDATE)
                 putExtra(BOOK_INFO, detailViewModel.bookData.value)
-                putExtra(BOOK_COMMENT, detailViewModel.bookComment.value)
+                putExtra(BOOK_COMMENT, detailViewModel.bookDetail.value)
             }.also { intent ->
                 startActivity(intent)
             }

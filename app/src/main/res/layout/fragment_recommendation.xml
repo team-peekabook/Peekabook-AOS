@@ -63,7 +63,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/iv_recommendation_book_cover"
@@ -164,6 +164,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/shape_whitefill_redline_0_rect"
                     android:gravity="top"
                     android:hint="@string/recommendation_hint"
@@ -175,6 +176,7 @@
                     android:text="@={vm.comment}"
                     android:textColor="@color/peeka_red"
                     android:textColorHint="@color/peeka_g_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1.6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -185,11 +187,12 @@
                     style="@style/H2Md"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="@{@string/recommendation_book_comment_count(vm.comment.length())}"
                     android:textColor="@color/peeka_g_2"
+                    app:layout_constraintBottom_toBottomOf="@id/et_recommendation_get_content"
                     app:layout_constraintEnd_toEndOf="@id/et_recommendation_get_content"
-                    app:layout_constraintTop_toBottomOf="@id/et_recommendation_get_content"
                     tools:text="0/200" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@ class UserInputRepositoryImpl @Inject constructor(
         }.map { response -> requireNotNull(response.data).check }
 
     override suspend fun patchSignUp(
-        file: MultipartBody.Part,
+        file: MultipartBody.Part?,
         requestBodyMap: HashMap<String, RequestBody>
     ): Result<Boolean> =
         kotlin.runCatching { userInputDataSource.patchSignUp(file, requestBodyMap) }

@@ -52,110 +52,124 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/btn_detail_edit" />
 
-        <ImageView
-            android:id="@+id/iv_detail_book_cover"
-            setImage="@{vm.bookData.bookImage}"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/peeka_beige"
-            android:elevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_detail_delete"
-            tools:src="@color/black" />
-
-        <TextView
-            android:id="@+id/tv_detail_book_title"
-            style="@style/H3Bd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@{vm.bookData.bookTitle}"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_detail_book_cover"
-            tools:text="아무튼, 여름" />
-
-        <TextView
-            android:id="@+id/tv_detail_book_author"
-            style="@style/H2Md"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="80dp"
-            android:layout_marginTop="4dp"
-            android:text="@{vm.bookData.author}"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_book_title"
-            tools:text="김신회" />
-
-        <TextView
-            android:id="@+id/tv_detail_book_content"
-            style="@style/H2Md"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/peeka_red"
-            android:paddingVertical="8dp"
-            android:paddingStart="14dp"
-            android:text="@string/book_comment"
-            android:textColor="@color/peeka_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_book_author" />
-
-        <TextView
-            android:id="@+id/tv_detail_get_content"
-            style="@style/H2Md"
-            android:layout_width="0dp"
+        <ScrollView
+            android:id="@+id/sv_detail"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/shape_red_line_0_rect"
-            android:gravity="top"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="12dp"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintDimensionRatio="1.8"
-            app:layout_constraintEnd_toEndOf="@id/tv_detail_book_content"
-            app:layout_constraintStart_toStartOf="@id/tv_detail_book_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_book_content"
-            tools:text="한 마디 전체" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_detail_back">
 
-        <TextView
-            android:id="@+id/tv_detail_book_memo"
-            style="@style/H2Md"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@color/peeka_red"
-            android:paddingVertical="8dp"
-            android:paddingStart="14dp"
-            android:text="@string/book_memo"
-            android:textColor="@color/peeka_white"
-            app:layout_constraintEnd_toEndOf="@id/tv_detail_book_content"
-            app:layout_constraintStart_toStartOf="@id/tv_detail_book_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_get_content" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
 
-        <TextView
-            android:id="@+id/tv_detail_get_memo"
-            style="@style/H2Md"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/shape_red_line_0_rect"
-            android:maxLength="50"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="12dp"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintDimensionRatio="4"
-            app:layout_constraintEnd_toEndOf="@id/tv_detail_book_content"
-            app:layout_constraintStart_toStartOf="@id/tv_detail_book_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_book_memo" />
+                <ImageView
+                    android:id="@+id/iv_detail_book_cover"
+                    setImage="@{vm.bookData.bookImage}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/peeka_beige"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@color/black" />
 
+                <TextView
+                    android:id="@+id/tv_detail_book_title"
+                    style="@style/H3Bd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@{vm.bookData.bookTitle}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_detail_book_cover"
+                    tools:text="아무튼, 여름" />
+
+                <TextView
+                    android:id="@+id/tv_detail_book_author"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="80dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@{vm.bookData.author}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_book_title"
+                    tools:text="김신회" />
+
+                <TextView
+                    android:id="@+id/tv_detail_book_content"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/peeka_red"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="14dp"
+                    android:text="@string/book_comment"
+                    android:textColor="@color/peeka_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_book_author" />
+
+                <TextView
+                    android:id="@+id/tv_detail_get_content"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/shape_red_line_0_rect"
+                    android:gravity="top"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintDimensionRatio="1.8"
+                    app:layout_constraintEnd_toEndOf="@id/tv_detail_book_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_detail_book_content"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_book_content"
+                    tools:text="한 마디 전체" />
+
+                <TextView
+                    android:id="@+id/tv_detail_book_memo"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/peeka_red"
+                    android:paddingVertical="8dp"
+                    android:paddingStart="14dp"
+                    android:text="@string/book_memo"
+                    android:textColor="@color/peeka_white"
+                    app:layout_constraintEnd_toEndOf="@id/tv_detail_book_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_detail_book_content"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_get_content" />
+
+                <TextView
+                    android:id="@+id/tv_detail_get_memo"
+                    style="@style/H2Md"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/shape_red_line_0_rect"
+                    android:maxLength="50"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintDimensionRatio="4"
+                    app:layout_constraintEnd_toEndOf="@id/tv_detail_book_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_detail_book_content"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_book_memo" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

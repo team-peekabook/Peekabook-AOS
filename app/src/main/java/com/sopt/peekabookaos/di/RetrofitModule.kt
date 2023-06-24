@@ -39,6 +39,7 @@ object RetrofitModule {
     private const val APPLICATION_JSON = "application/json"
     private const val BEARER = "Bearer "
     private const val ACCESS_TOKEN = "accessToken"
+    private const val BAD_REQUEST = 400
     private const val EXPIRED_TOKEN = 401
     private const val SERVER_ERROR = 500
 
@@ -88,7 +89,7 @@ object RetrofitModule {
                             Timber.e("토큰 갱신 실패 ${throwable.message}")
                             if (throwable is HttpException) {
                                 when (throwable.code()) {
-                                    EXPIRED_TOKEN -> {
+                                    BAD_REQUEST, EXPIRED_TOKEN -> {
                                         with(localPref.edit()) {
                                             clear()
                                             commit()
