@@ -64,6 +64,10 @@ class ProfileModifyActivity :
     }
 
     private fun initAddClickListener() {
+        binding.btnProfileModifyAdd.setSingleOnClickListener { profileBottomSheet() }
+        binding.ivProfileModifyImage.setSingleOnClickListener { profileBottomSheet() }
+    }
+    private fun profileBottomSheet() {
         binding.btnProfileModifyAdd.setOnClickListener {
             val profileModifyBottomSheetFragment = ProfileModifyBottomSheetFragment.onItemClick {
                 when (it) {
@@ -71,7 +75,6 @@ class ProfileModifyActivity :
                     1 -> if (checkPermission()) {
                         dispatchTakePictureIntentEx()
                     }
-
                     2 -> binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
                     else -> {
                         requestCameraPermission()
