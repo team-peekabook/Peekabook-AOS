@@ -36,6 +36,7 @@ class ProfileModifyViewModel @Inject constructor(
     val isModifyStatus: LiveData<Boolean> = _isModifyStatus
 
     private val _isCheckMessage: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isCheckMessage: LiveData<Boolean> = _isCheckMessage
 
     private val _isDuplicateButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val isDuplicateButton: LiveData<Boolean> = _isDuplicateButton
