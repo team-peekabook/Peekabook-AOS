@@ -79,15 +79,17 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     fun patchProfileModify() {
-        val imageMultipartBody = if (::profileImageUri.isInitialized) {
-            ContentUriRequestBody(
-                application.baseContext,
-                "file",
-                profileImageUri
-            ).compressBitmap()
-        } else {
-            null
-        }
+        val imageMultipartBody = if (profileImage.value != null) {
+            if (::profileImageUri.isInitialized) {
+                ContentUriRequestBody(
+                    application.baseContext,
+                    "file",
+                    profileImageUri
+                ).compressBitmap()
+            } else {
+                null
+            }
+        } else null
 
         viewModelScope.launch {
             patchProfileModifyUseCase(
