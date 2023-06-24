@@ -113,7 +113,7 @@
             android:visibility="@{vm.isNicknameMessage == true ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/et_profile_modify_nickname"
             app:layout_constraintTop_toBottomOf="@+id/et_profile_modify_nickname"
-            tools:text="이미 사용중인 닉네임 입니다" />
+            tools:text="@string/user_input_unavailable_nickname_message" />
 
         <TextView
             android:id="@+id/tv_profile_modify_duplication_check"
@@ -192,6 +192,20 @@
             app:layout_constraintEnd_toEndOf="@id/et_profile_modify_introduce"
             app:layout_constraintTop_toBottomOf="@id/et_profile_modify_introduce"
             tools:text="0/40" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_duplicaiton_notify_message"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="@string/user_input_duplication_notify_message"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isCheckMessage == true? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/user_input_duplication_notify_message" />
 
         <ImageButton
             android:id="@+id/btn_profile_modify_check"
