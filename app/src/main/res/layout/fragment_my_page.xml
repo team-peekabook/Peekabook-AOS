@@ -169,7 +169,7 @@
             app:layout_constraintTop_toBottomOf="@id/view_my_page_ask" />
 
         <View
-            android:id="@+id/view_my_page_info"
+            android:id="@+id/view_my_page_developer_info"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginHorizontal="20dp"
@@ -177,6 +177,28 @@
             android:background="@color/peeka_g_1"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_developer_info" />
+
+        <TextView
+            android:id="@+id/tv_my_page_open_source_info"
+            style="@style/H2Md"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="오픈소스 라이브러리"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_developer_info" />
+
+        <View
+            android:id="@+id/view_my_page_open_source_info"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/peeka_g_1"
+            app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_open_source_info" />
 
         <TextView
             android:id="@+id/tv_my_page_logout"
@@ -188,7 +210,7 @@
             android:text="@string/my_page_logout"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
-            app:layout_constraintTop_toBottomOf="@id/view_my_page_info" />
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_open_source_info" />
 
         <View
             android:id="@+id/view_my_page_logout"
