@@ -74,9 +74,13 @@ class ProfileModifyActivity :
                 0 -> launcher.launch("image/*")
                 1 -> if (checkPermission()) {
                     dispatchTakePictureIntentEx()
+                } else {
+                    requestCameraPermission()
                 }
-
-                2 -> binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
+                2 -> {
+                    binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
+                    profileModifyViewModel._profileImage.value = null
+                }
                 else -> {
                     requestCameraPermission()
                 }
