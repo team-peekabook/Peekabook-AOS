@@ -67,25 +67,25 @@ class ProfileModifyActivity :
         binding.btnProfileModifyAdd.setSingleOnClickListener { profileBottomSheet() }
         binding.ivProfileModifyImage.setSingleOnClickListener { profileBottomSheet() }
     }
+
     private fun profileBottomSheet() {
-        binding.btnProfileModifyAdd.setOnClickListener {
-            val profileModifyBottomSheetFragment = ProfileModifyBottomSheetFragment.onItemClick {
-                when (it) {
-                    0 -> launcher.launch("image/*")
-                    1 -> if (checkPermission()) {
-                        dispatchTakePictureIntentEx()
-                    }
-                    2 -> binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
-                    else -> {
-                        requestCameraPermission()
-                    }
+        val profileModifyBottomSheetFragment = ProfileModifyBottomSheetFragment.onItemClick {
+            when (it) {
+                0 -> launcher.launch("image/*")
+                1 -> if (checkPermission()) {
+                    dispatchTakePictureIntentEx()
+                }
+
+                2 -> binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
+                else -> {
+                    requestCameraPermission()
                 }
             }
-            profileModifyBottomSheetFragment.show(
-                supportFragmentManager,
-                profileModifyBottomSheetFragment.tag
-            )
         }
+        profileModifyBottomSheetFragment.show(
+            supportFragmentManager,
+            profileModifyBottomSheetFragment.tag
+        )
     }
 
     private fun requestCameraPermission() {
