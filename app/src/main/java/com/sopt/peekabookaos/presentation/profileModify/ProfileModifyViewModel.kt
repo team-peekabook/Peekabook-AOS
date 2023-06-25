@@ -1,11 +1,7 @@
 package com.sopt.peekabookaos.presentation.profileModify
 
 import android.app.Application
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.provider.MediaStore
 import android.text.InputFilter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,17 +11,13 @@ import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.PatchProfileModifyUseCase
 import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
 import com.sopt.peekabookaos.util.ContentUriRequestBody
+import com.sopt.peekabookaos.util.ImageUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.net.URL
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -53,7 +45,7 @@ class ProfileModifyViewModel @Inject constructor(
     private val _isCheckButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val isCheckButton: LiveData<Boolean> = _isCheckButton
 
-    private val _profileImage: MutableLiveData<String?> = MutableLiveData()
+    val _profileImage: MutableLiveData<String?> = MutableLiveData()
     val profileImage: LiveData<String?> = _profileImage
 
     val nickname = MutableLiveData("")
@@ -98,8 +90,8 @@ class ProfileModifyViewModel @Inject constructor(
                         profileImageUri
                     ).compressBitmap()
                 } else {
-                    val bitmap = urlToBitmap(profileImage.value!!)
-                    val uri = getImageUri(application.baseContext, bitmap!!)
+                    val bitmap = ImageUtil.urlToBitmap(profileImage.value!!)
+                    val uri = ImageUtil.getImageUri(application.baseContext, bitmap!!)
                     ContentUriRequestBody(
                         application.baseContext,
                         "file",
@@ -120,27 +112,6 @@ class ProfileModifyViewModel @Inject constructor(
                 Timber.e("$throwable")
             }
         }
-    }
-
-    private suspend fun urlToBitmap(url: String): Bitmap? = withContext(Dispatchers.IO) {
-        return@withContext try {
-            val connection = URL(url).openConnection()
-            connection.doInput = true
-            connection.connect()
-            val input = connection.getInputStream()
-            BitmapFactory.decodeStream(input)
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
-        }
-    }
-
-    private fun getImageUri(context: Context, bitmap: Bitmap): Uri {
-        val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path =
-            MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
-        return Uri.parse(path)
     }
 
     fun updateEditTextFilter(): Array<InputFilter> {
