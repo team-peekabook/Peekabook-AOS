@@ -185,7 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
-            android:text="오픈소스 라이브러리"
+            android:text="@string/my_page_open_source"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
             app:layout_constraintTop_toBottomOf="@id/view_my_page_developer_info" />

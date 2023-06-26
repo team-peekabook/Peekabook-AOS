@@ -80,6 +80,7 @@
     <string name="my_page_policy"><![CDATA[개인정보 보호 정책 & 서비스 이용 약관]]></string>
     <string name="my_page_ask">문의하기</string>
     <string name="my_page_info">개발자 정보</string>
+    <string name="my_page_open_source">오픈소스 라이브러리</string>
     <string name="my_page_logout">로그아웃</string>
     <string name="my_page_withdraw">서비스 탈퇴하기</string>
     <string name="my_page_developer_info_link">https://interesting-door-b57.notion.site/About-Team-b25424073add46b9a186d69c17815bf2</string>
