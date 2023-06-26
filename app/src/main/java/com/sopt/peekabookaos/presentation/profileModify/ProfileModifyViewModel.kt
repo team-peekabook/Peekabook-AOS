@@ -27,8 +27,8 @@ class ProfileModifyViewModel @Inject constructor(
     private val postDuplicateUseCase: PostDuplicateUseCase,
     private val patchProfileModifyUseCase: PatchProfileModifyUseCase
 ) : ViewModel() {
-    private val _isNickname: MutableLiveData<Boolean> = MutableLiveData(true)
-    val isNickname: LiveData<Boolean> = _isNickname
+    private val _isNicknameInUse: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isNicknameInUse: LiveData<Boolean> = _isNicknameInUse
 
     private val _isNicknameMessage: MutableLiveData<Boolean> = MutableLiveData(false)
     val isNicknameMessage: LiveData<Boolean> = _isNicknameMessage
