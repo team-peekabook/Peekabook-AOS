@@ -134,7 +134,7 @@ class ProfileModifyActivity :
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             ToastMessageUtil.showToast(this, getString(R.string.profile_modify_toast_reject))
         }
     }
@@ -217,6 +217,7 @@ class ProfileModifyActivity :
     }
 
     companion object {
+        private const val PERMISSION_REQUEST_CODE = 1
         private const val REQUEST_CREATE_EX = 3
     }
 }
