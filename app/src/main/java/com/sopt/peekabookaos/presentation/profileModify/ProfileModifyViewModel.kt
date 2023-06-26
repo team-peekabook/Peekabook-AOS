@@ -126,7 +126,7 @@ class ProfileModifyViewModel @Inject constructor(
         updateDuplicateButtonState(!nickname.value.isNullOrBlank())
     }
 
-    private fun updateCheckMessage(state: Boolean) {
+    fun updateCheckMessage(state: Boolean) {
         _isCheckMessage.value = state
     }
 
