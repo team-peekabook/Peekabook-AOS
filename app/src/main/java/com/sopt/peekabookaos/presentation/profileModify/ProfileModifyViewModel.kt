@@ -90,8 +90,8 @@ class ProfileModifyViewModel @Inject constructor(
                         profileImageUri
                     ).compressBitmap()
                 } else {
-                    val bitmap = ImageUtil.urlToBitmap(profileImage.value!!)
-                    val uri = ImageUtil.getImageUri(application.baseContext, bitmap!!)
+                    val bitmap = ImageUtil.urlToBitmap(requireNotNull(profileImage.value))
+                    val uri = ImageUtil.getImageUri(application.baseContext, requireNotNull(bitmap))
                     ContentUriRequestBody(
                         application.baseContext,
                         "file",
