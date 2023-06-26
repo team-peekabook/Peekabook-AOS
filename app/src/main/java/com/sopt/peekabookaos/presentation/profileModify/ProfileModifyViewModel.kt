@@ -120,7 +120,7 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     fun updateWritingState() {
-        _isNickname.value = true
+        _isNicknameInUse.value = true
         updateNicknameMessage(false)
         updateCheckMessage(false)
         updateDuplicateButtonState(!nickname.value.isNullOrBlank())
