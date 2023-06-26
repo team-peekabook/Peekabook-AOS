@@ -168,7 +168,11 @@ class ProfileModifyActivity :
 
     private fun initCheckClickListener() {
         binding.btnProfileModifyCheck.setSingleOnClickListener {
-            profileModifyViewModel.patchProfileModify()
+            if (profileModifyViewModel.isNicknameInUse.value == false) {
+                profileModifyViewModel.patchProfileModify()
+            } else {
+                profileModifyViewModel.updateCheckMessage(requireNotNull(profileModifyViewModel.isNicknameInUse.value))
+            }
         }
     }
 
