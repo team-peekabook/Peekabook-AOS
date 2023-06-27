@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:text="@{vm.isNickname == true? @string/profile_modify_unavailable_nickname_message : @string/profile_modify_available_nickname_message}"
+            android:text="@{vm.isNicknameInUse == true? @string/profile_modify_unavailable_nickname_message : @string/profile_modify_available_nickname_message}"
             android:textColor="@color/peeka_red"
             android:visibility="@{vm.isNicknameMessage == true ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@id/et_profile_modify_nickname"
