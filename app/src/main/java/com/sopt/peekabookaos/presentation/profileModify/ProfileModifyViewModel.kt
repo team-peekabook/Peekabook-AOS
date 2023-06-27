@@ -57,6 +57,8 @@ class ProfileModifyViewModel @Inject constructor(
 
     private lateinit var profileImageUri: Uri
 
+    private var initNickname: String = ""
+
     private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
         val regularPattern = Pattern.compile(PATTERN)
         if (source.isNullOrBlank() || regularPattern.matcher(source).matches()) {
@@ -123,7 +125,16 @@ class ProfileModifyViewModel @Inject constructor(
         _isNicknameInUse.value = true
         updateNicknameMessage(false)
         updateCheckMessage(false)
-        updateDuplicateButtonState(!nickname.value.isNullOrBlank())
+        val previousNickname = getPreviousNickname()
+        if (nickname.value == previousNickname) {
+            updateDuplicateButtonState(false)
+        } else {
+            updateDuplicateButtonState(!nickname.value.isNullOrBlank())
+        }
+    }
+
+    private fun getPreviousNickname(): String {
+        return requireNotNull(initNickname)
     }
 
     fun updateCheckMessage(state: Boolean) {
@@ -148,6 +159,7 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     fun setPreviousInfo(userData: User) {
+        initNickname = userData.nickname
         _profileImage.value = userData.profileImage
         nickname.value = userData.nickname
         introduce.value = userData.intro
