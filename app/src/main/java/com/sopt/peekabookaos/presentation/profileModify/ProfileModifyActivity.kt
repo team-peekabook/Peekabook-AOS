@@ -194,14 +194,17 @@ class ProfileModifyActivity :
             profileModifyViewModel.updateWritingState()
             checkRegularExpression()
         }
+
         profileModifyViewModel.introduce.observe(this) {
             profileModifyViewModel.updateCheckButtonState()
         }
+
         profileModifyViewModel.isModifyStatus.observe(this) { success ->
             if (success) {
                 finish()
             }
         }
+
         profileModifyViewModel.isExclamationMarkEntered.observe(this) { exclamationMark ->
             if (exclamationMark) {
                 ToastMessageUtil.showToast(
