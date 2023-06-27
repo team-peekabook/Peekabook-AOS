@@ -77,6 +77,7 @@ class ProfileModifyViewModel @Inject constructor(
                     _isNicknameInUse.value = (check == 1)
                     updateNicknameMessage(true)
                     updateDuplicateButtonState(requireNotNull(_isNicknameInUse.value))
+                    updateCheckButtonState()
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
