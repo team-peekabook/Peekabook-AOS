@@ -185,6 +185,7 @@ class ProfileModifyActivity :
     private fun initDuplicateClickListener() {
         binding.tvProfileModifyDuplicationCheck.setSingleOnClickListener {
             profileModifyViewModel.getNickNameState()
+            profileModifyViewModel.removeCheckMessage()
         }
     }
 
