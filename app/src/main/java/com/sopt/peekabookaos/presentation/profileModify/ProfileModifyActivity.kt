@@ -168,6 +168,7 @@ class ProfileModifyActivity :
 
     private fun initCheckClickListener() {
         binding.btnProfileModifyCheck.setSingleOnClickListener {
+            KeyBoardUtil.hide(this)
             if (profileModifyViewModel.isNicknameInUse.value == false) {
                 profileModifyViewModel.patchProfileModify()
             } else {
