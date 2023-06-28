@@ -127,6 +127,13 @@ class UserInputViewModel @Inject constructor(
         _isDuplicateButton.value = state
     }
 
+    fun removeCheckMessage() {
+        if (_isNicknameMessage.value == false) {
+            _isCheckMessage.value = false
+            updateCheckMessage(false)
+        }
+    }
+
     fun updateProfileImage(uri: Uri) {
         profileImageUri = uri
         _profileImage.value = uri.toString()
