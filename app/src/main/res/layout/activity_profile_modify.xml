@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.profileModify.ProfileModifyActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.profileModify.ProfileModifyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_profile_modify"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/peeka_beige">
+
+        <ImageButton
+            android:id="@+id/btn_profile_modify_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:text="@string/profile_modify_title"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_profile_modify_image"
+            setCircleImage="@{vm.profileImage}"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="39dp"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_modify_title"
+            tools:src="@color/peeka_red" />
+
+        <ImageButton
+            android:id="@+id/btn_profile_modify_add"
+            android:layout_width="24dp"
+            android:layout_height="0dp"
+            android:layout_margin="65dp"
+            android:src="@drawable/ic_user_input_add"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="@id/iv_profile_modify_image"
+            app:layout_constraintTop_toTopOf="@id/iv_profile_modify_image" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_nickname"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="56dp"
+            android:background="@color/peeka_red"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="8dp"
+            android:text="@string/profile_modify_nickname"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_profile_modify_image" />
+
+        <EditText
+            android:id="@+id/et_profile_modify_nickname"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="@string/profile_modify_nickname_hint"
+            android:importantForAutofill="no"
+            android:maxLength="6"
+            android:nextFocusDown="@id/et_profile_modify_introduce"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:singleLine="true"
+            android:text="@={vm.nickname}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintDimensionRatio="8.0"
+            app:layout_constraintEnd_toEndOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintStart_toStartOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_modify_nickname" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_nickname_deplication_warning"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@{vm.isNicknameInUse == true? @string/profile_modify_unavailable_nickname_message : @string/profile_modify_available_nickname_message}"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isNicknameMessage == true ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/et_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/et_profile_modify_nickname"
+            tools:text="@string/user_input_unavailable_nickname_message" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_duplication_check"
+            style="@style/CBd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@{vm.isDuplicateButton == true? @color/peeka_red: @color/peeka_g_1}"
+            android:clickable="@{vm.isDuplicateButton == true? true: false}"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:text="@string/profile_modify_duplication"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintBottom_toBottomOf="@+id/et_profile_modify_nickname"
+            app:layout_constraintEnd_toEndOf="@id/et_profile_modify_nickname"
+            app:layout_constraintTop_toTopOf="@id/et_profile_modify_nickname" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_nickname_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/profile_modify_nickname_count(vm.nickname.length())}"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@id/et_profile_modify_nickname"
+            tools:text="0/6" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_introduce"
+            style="@style/H1Bd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:background="@color/peeka_red"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="8dp"
+            android:text="@string/profile_modify_introduce"
+            android:textColor="@color/peeka_white"
+            app:layout_constraintEnd_toEndOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintStart_toStartOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/et_profile_modify_nickname" />
+
+        <EditText
+            android:id="@+id/et_profile_modify_introduce"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shape_white60fill_redline_0_rect"
+            android:gravity="top"
+            android:hint="@string/profile_modify_intoduce_hint"
+            android:importantForAutofill="no"
+            android:maxLength="40"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="12dp"
+            android:text="@={vm.introduce}"
+            android:textColor="@color/peeka_red"
+            android:textColorHint="@color/peeka_g_1"
+            app:layout_constraintDimensionRatio="5.0"
+            app:layout_constraintEnd_toEndOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintStart_toStartOf="@id/tv_profile_modify_nickname"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_modify_introduce"
+            app:layout_constraintVertical_bias="0"
+            tools:text="40자까지만 들어갔으면 합니다. 이 텍스트는 글자수 체크를 위한 개발자용 줄글입니다." />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_introduce_count"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{@string/profile_modify_introduce_count(vm.introduce.length())}"
+            android:textColor="@color/peeka_g_2"
+            app:layout_constraintEnd_toEndOf="@id/et_profile_modify_introduce"
+            app:layout_constraintTop_toBottomOf="@id/et_profile_modify_introduce"
+            tools:text="0/40" />
+
+        <TextView
+            android:id="@+id/tv_profile_modify_duplicaiton_notify_message"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="@string/user_input_duplication_notify_message"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{vm.isCheckMessage == true? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/user_input_duplication_notify_message" />
+
+        <ImageButton
+            android:id="@+id/btn_profile_modify_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="3dp"
+            android:background="@null"
+            android:clickable="@{vm.isCheckButton == true? true: false}"
+            android:src="@{vm.isCheckButton == true? @drawable/ic_check: @drawable/ic_check_inactive}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_check" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

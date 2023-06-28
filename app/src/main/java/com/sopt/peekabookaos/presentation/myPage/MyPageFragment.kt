@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentMyPageBinding
 import com.sopt.peekabookaos.presentation.block.BlockedUserActivity
+import com.sopt.peekabookaos.presentation.profileModify.ProfileModifyActivity
 import com.sopt.peekabookaos.presentation.withdraw.WithdrawActivity
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
@@ -17,12 +18,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val myPageViewModel: MyPageViewModel by viewModels()
 
+    override fun onResume() {
+        super.onResume()
+        myPageViewModel.getMyPage()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = myPageViewModel
         initBlockBtnClickListener()
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
+        initModifyClickListener()
         initLinkInfoClickListener()
         initLinkAskClickListener()
         initLinkPolicyClickListener()
@@ -43,6 +50,16 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun initLogoutBtnClickListener() {
         binding.tvMyPageLogout.setSingleOnClickListener {
             LogoutDialog().show(childFragmentManager, LogoutDialog.TAG)
+        }
+    }
+
+    private fun initModifyClickListener() {
+        binding.ivMyPageEdit.setSingleOnClickListener {
+            Intent(requireActivity(), ProfileModifyActivity::class.java).apply {
+                putExtra(USER_INFO, myPageViewModel.userData.value)
+            }.also { intent ->
+                startActivity(intent)
+            }
         }
     }
 
@@ -72,9 +89,8 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
             )
         }
     }
-    /*private fun initModifyClickListener(){
-        binding.ivMyPageEdit.setSingleClickListener {
-            //프로필 수정하기가 머지되면 그 화면으로 넘어가기
-        }
-    }*/
+
+    companion object {
+        const val USER_INFO = "user_info"
+    }
 }

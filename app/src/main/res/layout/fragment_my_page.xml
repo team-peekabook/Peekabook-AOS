@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige">
@@ -65,13 +66,15 @@
                 android:id="@+id/iv_my_page_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:padding="5dp"
                 android:background="@null"
                 android:src="@drawable/ic_my_page_edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_page_name"
                 app:layout_constraintDimensionRatio="1"
-                app:layout_constraintStart_toStartOf="@id/tv_my_page_name"
-                app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
+                app:layout_constraintStart_toEndOf="@id/tv_my_page_name"
+                app:layout_constraintTop_toTopOf="@id/tv_my_page_name" />
 
             <TextView
                 android:id="@+id/tv_my_page_intro"
@@ -166,7 +169,7 @@
             app:layout_constraintTop_toBottomOf="@id/view_my_page_ask" />
 
         <View
-            android:id="@+id/view_my_page_info"
+            android:id="@+id/view_my_page_developer_info"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginHorizontal="20dp"
@@ -174,6 +177,28 @@
             android:background="@color/peeka_g_1"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
             app:layout_constraintTop_toBottomOf="@id/tv_my_page_developer_info" />
+
+        <TextView
+            android:id="@+id/tv_my_page_open_source_info"
+            style="@style/H2Md"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/my_page_open_source"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_developer_info" />
+
+        <View
+            android:id="@+id/view_my_page_open_source_info"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/peeka_g_1"
+            app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_open_source_info" />
 
         <TextView
             android:id="@+id/tv_my_page_logout"
@@ -185,7 +210,7 @@
             android:text="@string/my_page_logout"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/iv_my_page_rect"
-            app:layout_constraintTop_toBottomOf="@id/view_my_page_info" />
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_open_source_info" />
 
         <View
             android:id="@+id/view_my_page_logout"

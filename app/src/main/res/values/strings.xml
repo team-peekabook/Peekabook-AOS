@@ -80,6 +80,7 @@
     <string name="my_page_policy"><![CDATA[개인정보 보호 정책 & 서비스 이용 약관]]></string>
     <string name="my_page_ask">문의하기</string>
     <string name="my_page_info">개발자 정보</string>
+    <string name="my_page_open_source">오픈소스 라이브러리</string>
     <string name="my_page_logout">로그아웃</string>
     <string name="my_page_withdraw">서비스 탈퇴하기</string>
     <string name="my_page_developer_info_link">https://interesting-door-b57.notion.site/About-Team-b25424073add46b9a186d69c17815bf2</string>
@@ -168,6 +169,20 @@
     <string name="user_input_permission">카메라, 내부 저장소 권한이 허용됐습니다.</string>
     <string name="user_input_regular_expression">한글, 영어, 숫자만 입력 가능합니다.</string>
 
+    <!--Profile Modify-->
+    <string name="profile_modify_nickname">닉네임</string>
+    <string name="profile_modify_title">프로필 수정</string>
+    <string name="profile_modify_duplication">중복확인</string>
+    <string name="profile_modify_introduce">한 줄 소개</string>
+    <string name="profile_modify_check">확인</string>
+    <string name="profile_modify_nickname_count">%d/6</string>
+    <string name="profile_modify_introduce_count">%d/40</string>
+    <string name="profile_modify_unavailable_nickname_message">이미 사용중인 닉네임 입니다</string>
+    <string name="profile_modify_available_nickname_message">사용 가능한 닉네임 입니다</string>
+    <string name="profile_modify_album">앨범에서 선택</string>
+    <string name="profile_modify_camera">카메라</string>
+    <string name="profile_modify_delete">프로필 사진 삭제</string>
+
     <!-- Withdraw -->
     <string name="withdraw_title">서비스 탈퇴</string>
     <string name="withdraw_content">서비스 탈퇴 시,\n사용자의 데이터는 복구되지 않습니다.\n사용자의 개인 정보는 \‘개인정보 보호방침\'에 따라\n일정 기간 보관 후 파기됩니다. </string>
@@ -184,5 +199,9 @@
     <!-- Logout -->
     <string name="logout_dialog_title">로그아웃 하시겠습니까?</string>
     <string name="logout_dialog_confirm">로그아웃</string>
+    <string name="profile_modify_toast_reject">휴대폰 앱 설정에서 카메라 권한을 허용해주세요!</string>
+    <string name="profile_modify_nickname_hint">닉네임은 6자까지 쓸 수 있어요!</string>
+    <string name="profile_modify_intoduce_hint">한 줄 소개는 40자까지 쓸 수 있어요!</string>
     <string name="blocked_user_empty">차단된 사용자가 없어요.</string>
+    <string name="profile_modify_timeStamp">yyyyMMdd_HHmmss</string>
 </resources>
