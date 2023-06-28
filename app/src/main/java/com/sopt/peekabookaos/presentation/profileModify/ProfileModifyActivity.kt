@@ -169,7 +169,7 @@ class ProfileModifyActivity :
     private fun initCheckClickListener() {
         binding.btnProfileModifyCheck.setSingleOnClickListener {
             KeyBoardUtil.hide(this)
-            if (profileModifyViewModel.isNicknameInUse.value == false) {
+            if (profileModifyViewModel.isNicknameInUse.value == false || profileModifyViewModel.nickname.value == profileModifyViewModel.initNickname) {
                 profileModifyViewModel.patchProfileModify()
             } else {
                 profileModifyViewModel.updateCheckMessage(requireNotNull(profileModifyViewModel.isNicknameInUse.value))

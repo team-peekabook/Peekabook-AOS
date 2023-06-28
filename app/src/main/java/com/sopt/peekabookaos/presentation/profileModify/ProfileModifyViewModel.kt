@@ -57,7 +57,7 @@ class ProfileModifyViewModel @Inject constructor(
 
     private lateinit var profileImageUri: Uri
 
-    private var initNickname: String = ""
+    var initNickname: String = ""
 
     private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
         val regularPattern = Pattern.compile(PATTERN)
