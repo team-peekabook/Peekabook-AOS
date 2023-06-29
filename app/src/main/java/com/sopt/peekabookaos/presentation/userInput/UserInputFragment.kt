@@ -177,6 +177,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
     private fun initDuplicateClickListener() {
         binding.tvUserInputDuplicationCheck.setSingleOnClickListener {
             viewModel.getNickNameState()
+            viewModel.removeCheckMessage()
         }
     }
 
