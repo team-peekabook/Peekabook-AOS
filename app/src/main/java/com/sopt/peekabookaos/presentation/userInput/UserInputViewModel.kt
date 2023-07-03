@@ -55,7 +55,7 @@ class UserInputViewModel @Inject constructor(
 
     private lateinit var profileImageUri: Uri
 
-    private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
+    var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
         val regularPattern = Pattern.compile(PATTERN)
         if (source.isNullOrBlank() || regularPattern.matcher(source).matches()) {
             _isExclamationMarkEntered.value = false
@@ -137,10 +137,6 @@ class UserInputViewModel @Inject constructor(
     fun updateProfileImage(uri: Uri) {
         profileImageUri = uri
         _profileImage.value = uri.toString()
-    }
-
-    fun updateEditTextFilter(): Array<InputFilter> {
-        return arrayOf(filterAlphaNumSpace)
     }
 
     fun updateCheckButtonState() {
