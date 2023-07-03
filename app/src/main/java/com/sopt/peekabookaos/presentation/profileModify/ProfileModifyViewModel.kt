@@ -59,7 +59,7 @@ class ProfileModifyViewModel @Inject constructor(
 
     var initNickname: String = ""
 
-    private var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
+    var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
         val regularPattern = Pattern.compile(PATTERN)
         if (source.isNullOrBlank() || regularPattern.matcher(source).matches()) {
             _isExclamationMarkEntered.value = false
@@ -116,10 +116,6 @@ class ProfileModifyViewModel @Inject constructor(
                 Timber.e("$throwable")
             }
         }
-    }
-
-    fun updateEditTextFilter(): Array<InputFilter> {
-        return arrayOf(filterAlphaNumSpace)
     }
 
     fun updateWritingState() {

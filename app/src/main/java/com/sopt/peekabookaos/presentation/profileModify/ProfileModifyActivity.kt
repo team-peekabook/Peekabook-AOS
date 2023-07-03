@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputFilter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -218,7 +219,9 @@ class ProfileModifyActivity :
     }
 
     private fun checkRegularExpression() {
-        binding.etProfileModifyNickname.filters = profileModifyViewModel.updateEditTextFilter()
+        val maxLength = 6
+        val filters = arrayOf(InputFilter.LengthFilter(maxLength), profileModifyViewModel.filterAlphaNumSpace)
+        binding.etProfileModifyNickname.filters = filters
     }
 
     companion object {
