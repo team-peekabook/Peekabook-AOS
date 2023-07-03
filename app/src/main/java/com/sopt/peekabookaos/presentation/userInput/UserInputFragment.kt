@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputFilter
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -133,7 +134,9 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
     }
 
     private fun checkRegularExpression() {
-        binding.etUserInputNickname.filters = viewModel.updateEditTextFilter()
+        val maxLength = 6
+        val filters = arrayOf(InputFilter.LengthFilter(maxLength), viewModel.filterAlphaNumSpace)
+        binding.etUserInputNickname.filters = filters
     }
 
     private fun dispatchTakePictureIntentEx() { // 카메라 호출 함수
