@@ -55,7 +55,7 @@
             tools:src="@color/peeka_g_1" />
 
         <ImageButton
-            android:id="@+id/btn_user_input_add"
+            android:id="@+id/btn_profile_modify_add"
             android:layout_width="24dp"
             android:layout_height="0dp"
             android:layout_marginTop="70dp"
