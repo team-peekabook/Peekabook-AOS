@@ -30,6 +30,7 @@ import retrofit2.Retrofit
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Qualifier
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -48,6 +49,7 @@ object RetrofitModule {
     annotation class PeekaType
 
     @PeekaType
+    @Singleton
     @Provides
     fun providesPeekaInterceptor(
         @ApplicationContext context: Context,
@@ -125,6 +127,7 @@ object RetrofitModule {
     }
 
     @PeekaType
+    @Singleton
     @Provides
     fun providesPeekaOkHttpClient(@PeekaType interceptor: Interceptor): OkHttpClient =
         OkHttpClient.Builder()
@@ -139,6 +142,7 @@ object RetrofitModule {
             ).build()
 
     @PeekaType
+    @Singleton
     @Provides
     fun providesPeekaRetrofit(@PeekaType okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()

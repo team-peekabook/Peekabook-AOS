@@ -32,6 +32,7 @@ object RefreshRetrofitModule {
     annotation class RefreshType
 
     @Provides
+    @Singleton
     @RefreshType
     fun providesRefreshInterceptor(
         localTokenDataSource: LocalTokenDataSource
