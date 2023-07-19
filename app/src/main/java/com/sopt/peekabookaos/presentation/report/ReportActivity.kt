@@ -7,6 +7,7 @@ import com.sopt.peekabookaos.databinding.ActivityReportBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.DEFAULT
 import com.sopt.peekabookaos.presentation.report.ReportDialog.Companion.TAG
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,8 +18,15 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         super.onCreate(savedInstanceState)
         binding.vm = reportViewModel
         initFriendId()
+        initBackBtnOnClickListener()
         initReportRadioClickListener()
         initIsReportObserve()
+    }
+
+    private fun initBackBtnOnClickListener() {
+        binding.btnReportBack.setSingleOnClickListener {
+            finish()
+        }
     }
 
     private fun initFriendId() {
