@@ -10,6 +10,7 @@ import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import com.sopt.peekabookaos.R
@@ -52,6 +53,7 @@ class BarcodeGuideView @JvmOverloads constructor(
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
             setTextColor(Color.WHITE)
             setTextAppearance(R.style.H2Md)
+            gravity = Gravity.CENTER
         }
         textView.measure(0, 0)
         val xPos = (width - textView.measuredWidth) / 2
