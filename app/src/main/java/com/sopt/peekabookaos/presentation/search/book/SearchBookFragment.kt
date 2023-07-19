@@ -53,11 +53,17 @@ class SearchBookFragment :
                 searchBookAdapter?.submitList(loadedBooks)
             }
         }
+        initSearchFocus()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelableArrayList(LOADED_BOOKS, ArrayList(requireNotNull(loadedBooks)))
+    }
+
+    private fun initSearchFocus() {
+        binding.etSearchBook.requestFocus()
+        KeyBoardUtil.show(requireActivity())
     }
 
     private fun initLayout() {
