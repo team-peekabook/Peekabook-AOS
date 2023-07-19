@@ -22,10 +22,16 @@ class SearchUserActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = searchUserViewModel
+        initSearchFocus()
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
         collectSearchState()
+    }
+
+    private fun initSearchFocus() {
+        binding.etSearchUser.requestFocus()
+        KeyBoardUtil.show(this)
     }
 
     @SuppressLint("ClickableViewAccessibility")
