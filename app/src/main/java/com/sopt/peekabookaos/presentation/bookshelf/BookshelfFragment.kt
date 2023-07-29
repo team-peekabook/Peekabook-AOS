@@ -92,6 +92,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 friendAdapter?.submitList(viewModel.friendUserData.value)
             }
         }
+
         viewModel.isFriendServerStatus.observe(viewLifecycleOwner) {
             if (viewModel.isFriendServerStatus.value == false && viewModel.isMyServerStatus.value == false) {
                 updateToMyShelf()
