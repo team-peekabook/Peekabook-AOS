@@ -56,10 +56,10 @@ class BookShelfViewModel @Inject constructor(
     private val _isFriendServerStatus = MutableLiveData<Boolean>()
     val isFriendServerStatus: LiveData<Boolean> = _isFriendServerStatus
 
-    private val _isUnfollowStatus = MutableLiveData<Boolean>(false)
+    private val _isUnfollowStatus = MutableLiveData(false)
     val isUnfollowStatus: LiveData<Boolean> = _isUnfollowStatus
 
-    private val _isBlockStatus = MutableLiveData<Boolean>(false)
+    private val _isBlockStatus = MutableLiveData(false)
     val isBlockStatus: LiveData<Boolean> = _isBlockStatus
 
     private lateinit var userNickname: String
@@ -98,8 +98,6 @@ class BookShelfViewModel @Inject constructor(
                     _isBlockStatus.value = false
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
-                    _isMyServerStatus.value = false
-                    _isFriendServerStatus.value = false
                 }
         }
     }
@@ -121,8 +119,6 @@ class BookShelfViewModel @Inject constructor(
                     }
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
-                    _isFriendServerStatus.value = false
-                    _isMyServerStatus.value = false
                 }
         }
     }
@@ -134,7 +130,6 @@ class BookShelfViewModel @Inject constructor(
                     _isUnfollowStatus.value = response
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
-                    _isUnfollowStatus.value = false
                 }
         }
     }
@@ -146,7 +141,6 @@ class BookShelfViewModel @Inject constructor(
                     _isBlockStatus.value = response
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
-                    _isBlockStatus.value = false
                 }
         }
     }
