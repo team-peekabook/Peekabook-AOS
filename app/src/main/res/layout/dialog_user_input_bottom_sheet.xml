@@ -41,9 +41,35 @@
         android:gravity="center"
         android:text="@string/user_input_camera"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/view_user_input_bottom_sheet_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_user_input_bottom_sheet" />
+
+    <View
+        android:id="@+id/view_user_input_bottom_sheet_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/peeka_g_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_input_bottom_sheet_camera" />
+
+    <TextView
+        android:id="@+id/tv_user_input_bottom_sheet_basic_image"
+        style="@style/H2Md"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginVertical="18dp"
+        android:gravity="center"
+        android:text="@string/user_input_basic_image"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_user_input_bottom_sheet_2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

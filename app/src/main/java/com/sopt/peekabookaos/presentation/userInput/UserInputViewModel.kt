@@ -40,8 +40,8 @@ class UserInputViewModel @Inject constructor(
     private val _isCheckButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val isCheckButton: LiveData<Boolean> = _isCheckButton
 
-    private val _profileImage: MutableLiveData<String> = MutableLiveData()
-    val profileImage: LiveData<String> = _profileImage
+    private var _profileImage: MutableLiveData<String?> = MutableLiveData()
+    val profileImage: LiveData<String?> = _profileImage
 
     private val _isSignUpStatus = MutableLiveData<Boolean>()
     val isSignUpStatus: LiveData<Boolean> = _isSignUpStatus
@@ -76,6 +76,10 @@ class UserInputViewModel @Inject constructor(
                 Timber.e("$throwable")
             }
         }
+    }
+
+    fun removeProfileImage() {
+        _profileImage.value = null
     }
 
     fun patchSignUp() {
@@ -148,6 +152,7 @@ class UserInputViewModel @Inject constructor(
     }
 
     companion object {
-        private const val PATTERN = "^[ㄱ-ㅣ가-힣a-zA-Z0-9\\u318D\\u119E\\u11A2\\u2022\\u2025a\\u00B7\\uFE55]+$"
+        private const val PATTERN =
+            "^[ㄱ-ㅣ가-힣a-zA-Z0-9\\u318D\\u119E\\u11A2\\u2022\\u2025a\\u00B7\\uFE55]+$"
     }
 }

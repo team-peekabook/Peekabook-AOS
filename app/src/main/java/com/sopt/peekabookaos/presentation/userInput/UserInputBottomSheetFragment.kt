@@ -28,6 +28,10 @@ class UserInputBottomSheetFragment : BottomSheetDialogFragment() {
             itemClick(1)
             dialog?.dismiss()
         }
+        binding.tvUserInputBottomSheetBasicImage.setOnClickListener {
+            itemClick(2)
+            dialog?.dismiss()
+        }
     }
 
     companion object {
