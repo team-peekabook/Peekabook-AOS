@@ -48,7 +48,7 @@
     <string name="detail_memo_empty">작성된 메모가 없습니다</string>
 
     <!-- BookShelf-->
-    <string name="bookshelf_pick">PICK!</string>
+    <string name="bookshelf_pick">PICK !</string>
     <string name="bookshelf_modify_pick">픽 수정하기</string>
     <string name="bookshelf_recommend_book">책 추천하기</string>
     <string name="bookshelf_myshelf_title">%d Books</string>
