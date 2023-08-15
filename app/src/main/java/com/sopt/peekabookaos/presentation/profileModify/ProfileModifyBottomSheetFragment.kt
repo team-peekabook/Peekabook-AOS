@@ -5,30 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sopt.peekabookaos.databinding.DialogProfileModifyBottonSheetBinding
+import com.sopt.peekabookaos.databinding.DialogProfileBottomSheetBinding
 
 class ProfileModifyBottomSheetFragment : BottomSheetDialogFragment() {
-    private lateinit var binding: DialogProfileModifyBottonSheetBinding
+    private lateinit var binding: DialogProfileBottomSheetBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogProfileModifyBottonSheetBinding.inflate(inflater, container, false)
+        binding = DialogProfileBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvProfileModifyBottomSheetAlbum.setOnClickListener {
+        binding.tvProfileBottomSheetChooseAlbum.setOnClickListener {
             itemClick(0)
             dialog?.dismiss()
         }
-        binding.tvProfileModifyBottomSheetCamera.setOnClickListener {
+        binding.tvProfileBottomSheetCamera.setOnClickListener {
             itemClick(1)
             dialog?.dismiss()
         }
-        binding.tvProfileModifyBottomSheetBasic.setOnClickListener {
+        binding.tvProfileBottomSheetBasicImage.setOnClickListener {
             itemClick(2)
             dialog?.dismiss()
         }

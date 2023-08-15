@@ -25,7 +25,7 @@
             android:layout_marginTop="4dp"
             android:background="@color/peeka_beige"
             android:elevation="4dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1.6"
             app:layout_constraintEnd_toEndOf="parent"
