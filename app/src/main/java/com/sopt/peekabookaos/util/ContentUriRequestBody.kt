@@ -60,6 +60,7 @@ class ContentUriRequestBody(context: Context, private val name: String, private 
     }
 
     fun compressBitmap(): MultipartBody.Part {
+        bitmap = ImageUtil.getOrientationOfImage(uri, bitmap, contentResolver)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
         requestBody = create("image/jpg".toMediaTypeOrNull(), byteArrayOutputStream.toByteArray())
         uploadFile = MultipartBody.Part.createFormData(name, getFileName(), requestBody)
