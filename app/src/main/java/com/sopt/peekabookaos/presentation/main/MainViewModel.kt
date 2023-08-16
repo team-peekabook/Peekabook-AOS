@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val setSplashStateUseCase: SetSplashStateUseCase
+    setSplashStateUseCase: SetSplashStateUseCase
 ) : ViewModel() {
     init {
         setSplashStateUseCase(SplashState.MAIN)

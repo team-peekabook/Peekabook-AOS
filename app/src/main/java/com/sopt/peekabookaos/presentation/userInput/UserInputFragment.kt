@@ -90,6 +90,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
                 } else {
                     requestCameraPermission()
                 }
+                2 -> viewModel.removeProfileImage()
             }
         }
         userInputBottomSheetFragment.show(
