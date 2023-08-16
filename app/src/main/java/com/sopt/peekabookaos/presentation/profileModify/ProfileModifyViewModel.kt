@@ -57,7 +57,7 @@ class ProfileModifyViewModel @Inject constructor(
 
     private lateinit var profileImageUri: Uri
 
-    var initNickname: String = ""
+    private var previousNickname: String = ""
 
     var filterAlphaNumSpace = InputFilter { source, _, _, _, _, _ ->
         val regularPattern = Pattern.compile(PATTERN)
@@ -131,7 +131,7 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     private fun getPreviousNickname(): String {
-        return initNickname
+        return previousNickname
     }
 
     fun updateCheckMessage(state: Boolean) {
@@ -163,10 +163,14 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     fun setPreviousInfo(userData: User) {
-        initNickname = userData.nickname
+        previousNickname = userData.nickname
         _profileImage.value = userData.profileImage
         nickname.value = userData.nickname
         introduce.value = userData.intro
+    }
+
+    fun getInitialNickname(): String {
+        return previousNickname
     }
 
     private fun String.toRequestBody(): RequestBody {
