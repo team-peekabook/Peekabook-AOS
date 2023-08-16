@@ -131,7 +131,7 @@ class ProfileModifyViewModel @Inject constructor(
     }
 
     private fun getPreviousNickname(): String {
-        return requireNotNull(initNickname)
+        return initNickname
     }
 
     fun updateCheckMessage(state: Boolean) {
