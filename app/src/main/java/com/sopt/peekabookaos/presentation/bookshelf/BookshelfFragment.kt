@@ -110,10 +110,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
                 updateToMyShelf()
             }
         }
-
-        viewModel.userData.observe(viewLifecycleOwner) { user ->
-            binding.tvBookshelfUserProfileName.text = user.nickname
-        }
     }
 
     private fun initDataObserver() {
