@@ -21,14 +21,18 @@
 ## 📖 Foldering
 📁 data<br/>
 ┣ 📁 entity<br/>
+┃ ┣ 📁 request<br/>
+┃ ┣ 📁 response<br/>
 ┣ 📁 repository<br/>
 ┣ 📁 service<br/>
 ┣ 📁 source<br/>
 ┃ ┣ 📁 local<br/>
 ┃ ┣ 📁 remote<br/>
-┃ ┃ ┣ 📁 request<br/>
-┃ ┃ ┣ response<br/>
 📁 di<br/>
+📁 domain<br/>
+┣ 📁 entity<br/>
+┣ 📁 repository<br/>
+┣ 📁 usecase<br/>
 📁 presentation<br/>
 📁 util
 
