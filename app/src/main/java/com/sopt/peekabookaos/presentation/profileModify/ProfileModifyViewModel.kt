@@ -45,7 +45,7 @@ class ProfileModifyViewModel @Inject constructor(
     private val _isCheckButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val isCheckButton: LiveData<Boolean> = _isCheckButton
 
-    val _profileImage: MutableLiveData<String?> = MutableLiveData()
+    private val _profileImage: MutableLiveData<String?> = MutableLiveData()
     val profileImage: LiveData<String?> = _profileImage
 
     val nickname = MutableLiveData("")
