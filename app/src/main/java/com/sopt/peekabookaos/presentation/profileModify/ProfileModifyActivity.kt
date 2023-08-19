@@ -170,10 +170,14 @@ class ProfileModifyActivity :
     private fun initCheckClickListener() {
         binding.btnProfileModifyCheck.setSingleOnClickListener {
             KeyBoardUtil.hide(this)
-            if (profileModifyViewModel.isNicknameInUse.value == false || profileModifyViewModel.nickname.value == profileModifyViewModel.initNickname) {
+            val isNicknameInUse = profileModifyViewModel.isNicknameInUse.value
+            val currentNickname = profileModifyViewModel.nickname.value
+            val initialNickname = profileModifyViewModel.getInitialNickname()
+
+            if (isNicknameInUse == false || currentNickname == initialNickname) {
                 profileModifyViewModel.patchProfileModify()
             } else {
-                profileModifyViewModel.updateCheckMessage(requireNotNull(profileModifyViewModel.isNicknameInUse.value))
+                profileModifyViewModel.updateCheckMessage(requireNotNull(isNicknameInUse))
             }
         }
     }
