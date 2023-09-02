@@ -173,6 +173,10 @@ class ProfileModifyViewModel @Inject constructor(
         return previousNickname
     }
 
+    fun removeProfileImage() {
+        _profileImage.value = null
+    }
+
     private fun String.toRequestBody(): RequestBody {
         return this.toRequestBody("application/json".toMediaTypeOrNull())
     }
