@@ -1,11 +1,13 @@
 package com.sopt.peekabookaos.presentation.report
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityReportBinding
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.DEFAULT
 import com.sopt.peekabookaos.presentation.report.ReportDialog.Companion.TAG
+import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +23,20 @@ class ReportActivity : BindingActivity<ActivityReportBinding>(R.layout.activity_
         initBackBtnOnClickListener()
         initReportRadioClickListener()
         initIsReportObserve()
+        initEditTextClearFocus()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initEditTextClearFocus() {
+        binding.clReport.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
+
+        binding.svReport.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = this)
+            return@setOnTouchListener false
+        }
     }
 
     private fun initBackBtnOnClickListener() {

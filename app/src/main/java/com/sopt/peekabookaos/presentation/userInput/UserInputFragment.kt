@@ -78,7 +78,6 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
     private fun initAddClickListener() {
         binding.btnUserInputAdd.setSingleOnClickListener { profileBottomSheet() }
         binding.ivUserInputProfile.setSingleOnClickListener { profileBottomSheet() }
-        binding.ivUserInputProfileBasic.setSingleOnClickListener { profileBottomSheet() }
     }
 
     private fun profileBottomSheet() {

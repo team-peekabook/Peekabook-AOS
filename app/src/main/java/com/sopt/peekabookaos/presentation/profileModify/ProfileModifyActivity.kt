@@ -79,8 +79,7 @@ class ProfileModifyActivity :
                     requestCameraPermission()
                 }
                 2 -> {
-                    binding.ivProfileModifyImage.setImageResource(R.drawable.ic_user_input_profile)
-                    profileModifyViewModel._profileImage.value = null
+                    profileModifyViewModel.removeProfileImage()
                 }
                 else -> {
                     requestCameraPermission()

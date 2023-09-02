@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_report"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/peeka_beige">
@@ -48,170 +49,191 @@
             android:background="@color/peeka_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_report_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_report_title" />
 
-        <TextView
-            android:id="@+id/tv_report_reason"
-            style="@style/H3Bd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="46dp"
-            android:text="@string/report_reason"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintStart_toStartOf="@+id/view_report_line_top"
-            app:layout_constraintTop_toBottomOf="@+id/view_report_line_top" />
-
-        <RadioGroup
-            android:id="@+id/rg_report_radiogroup"
+        <ScrollView
+            android:id="@+id/sv_report"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="21dp"
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_report_reason">
-
-            <View
-                android:id="@+id/view_report_line_middle_first"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/peeka_g_1" />
-
-            <RadioButton
-                android:id="@+id/rb_report_reason_inadequate"
-                style="@style/H2Md"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:layoutDirection="rtl"
-                android:paddingVertical="16dp"
-                android:text="@string/report_inadequate" />
-
-            <View
-                android:id="@+id/view_report_line_middle_second"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/peeka_g_1" />
-
-            <RadioButton
-                android:id="@+id/rb_report_reason_curse"
-                style="@style/H2Md"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:paddingVertical="16dp"
-                android:text="@string/report_curse"
-                app:layout_constraintEnd_toEndOf="@id/view_report_line_middle_second"
-                app:layout_constraintStart_toStartOf="@id/view_report_line_middle_second"
-                app:layout_constraintTop_toBottomOf="@id/view_report_line_middle_second" />
-
-            <View
-                android:id="@+id/view_report_line_middle_third"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/peeka_g_1"
-                app:layout_constraintEnd_toEndOf="@+id/view_report_line_top"
-                app:layout_constraintStart_toStartOf="@+id/tv_report_reason"
-                app:layout_constraintTop_toBottomOf="@+id/rb_report_reason_curse" />
-
-            <RadioButton
-                android:id="@+id/rb_report_reason_promote"
-                style="@style/H2Md"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:paddingVertical="16dp"
-                android:text="@string/report_promote" />
-
-            <View
-                android:id="@+id/view_report_line_middle_fourth"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/peeka_g_1" />
-
-            <RadioButton
-                android:id="@+id/rb_report_reason_nickname"
-                style="@style/H2Md"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:paddingVertical="16dp"
-                android:text="@string/report_nickname"
-                app:layout_constraintEnd_toEndOf="@id/view_report_line_middle_fourth"
-                app:layout_constraintTop_toBottomOf="@id/view_report_line_middle_fourth" />
-
-            <View
-                android:id="@+id/view_report_line_middle_fifth"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/peeka_g_1" />
-
-            <RadioButton
-                android:id="@+id/rb_report_reason_etc"
-                style="@style/H2Md"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:paddingVertical="16dp"
-                android:text="@string/report_etc" />
-
-            <View
-                android:id="@+id/view_report_line_middle_sixth"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/peeka_g_1" />
-        </RadioGroup>
-
-        <EditText
-            android:id="@+id/et_report_detail_reason"
-            style="@style/H2Md"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="21dp"
-            android:layout_marginTop="21dp"
-            android:layout_marginBottom="42dp"
-            android:background="@drawable/shape_white88fill_redline_0_rect"
-            android:gravity="left"
-            android:hint="@string/report_detail_reason"
-            android:paddingHorizontal="13dp"
-            android:paddingVertical="14dp"
-            android:text="@={vm.reason}"
-            android:textColor="@color/peeka_red"
-            android:textColorHint="@color/peeka_g_1"
-            app:layout_constraintBottom_toTopOf="@+id/tv_report_confirm"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rg_report_radiogroup" />
-
-        <TextView
-            android:id="@+id/tv_report_confirm"
-            style="@style/H2Md"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="21dp"
-            android:layout_marginBottom="17dp"
-            android:gravity="center"
-            android:text="@string/report_confirm"
-            android:textColor="@color/peeka_red"
-            app:layout_constraintBottom_toTopOf="@+id/tv_report_report" />
-
-        <TextView
-            android:id="@+id/tv_report_report"
-            style="@style/NameBd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="32dp"
-            android:background="@color/peeka_red"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="@{() -> vm.postReport()}"
-            android:paddingVertical="21dp"
-            android:text="@string/report_report"
-            android:textColor="@color/peeka_white"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/view_report_line_top"
-            app:layout_constraintStart_toStartOf="@+id/view_report_line_top" />
+            app:layout_constraintTop_toBottomOf="@id/view_report_line_top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_report_reason"
+                    style="@style/H3Bd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="46dp"
+                    android:text="@string/report_reason"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rg_report_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="21dp"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_report_reason">
+
+                    <View
+                        android:id="@+id/view_report_line_middle_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/peeka_g_1" />
+
+                    <RadioButton
+                        android:id="@+id/rb_report_reason_inadequate"
+                        style="@style/H2Md"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layoutDirection="rtl"
+                        android:paddingVertical="16dp"
+                        android:text="@string/report_inadequate" />
+
+                    <View
+                        android:id="@+id/view_report_line_middle_second"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/peeka_g_1" />
+
+                    <RadioButton
+                        android:id="@+id/rb_report_reason_curse"
+                        style="@style/H2Md"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:paddingVertical="16dp"
+                        android:text="@string/report_curse"
+                        app:layout_constraintEnd_toEndOf="@id/view_report_line_middle_second"
+                        app:layout_constraintStart_toStartOf="@id/view_report_line_middle_second"
+                        app:layout_constraintTop_toBottomOf="@id/view_report_line_middle_second" />
+
+                    <View
+                        android:id="@+id/view_report_line_middle_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/peeka_g_1"
+                        app:layout_constraintEnd_toEndOf="@+id/view_report_line_top"
+                        app:layout_constraintStart_toStartOf="@id/tv_report_reason"
+                        app:layout_constraintTop_toBottomOf="@id/rb_report_reason_curse" />
+
+                    <RadioButton
+                        android:id="@+id/rb_report_reason_promote"
+                        style="@style/H2Md"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:paddingVertical="16dp"
+                        android:text="@string/report_promote" />
+
+                    <View
+                        android:id="@+id/view_report_line_middle_fourth"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/peeka_g_1" />
+
+                    <RadioButton
+                        android:id="@+id/rb_report_reason_nickname"
+                        style="@style/H2Md"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:paddingVertical="16dp"
+                        android:text="@string/report_nickname"
+                        app:layout_constraintEnd_toEndOf="@id/view_report_line_middle_fourth"
+                        app:layout_constraintTop_toBottomOf="@id/view_report_line_middle_fourth" />
+
+                    <View
+                        android:id="@+id/view_report_line_middle_fifth"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/peeka_g_1" />
+
+                    <RadioButton
+                        android:id="@+id/rb_report_reason_etc"
+                        style="@style/H2Md"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:paddingVertical="16dp"
+                        android:text="@string/report_etc" />
+
+                    <View
+                        android:id="@+id/view_report_line_middle_sixth"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/peeka_g_1" />
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/et_report_detail_reason"
+                    style="@style/H2Md"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="21dp"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginBottom="42dp"
+                    android:background="@drawable/shape_white88fill_redline_0_rect"
+                    android:gravity="start"
+                    android:hint="@string/report_detail_reason"
+                    android:maxLength="200"
+                    android:paddingHorizontal="13dp"
+                    android:paddingVertical="14dp"
+                    android:text="@={vm.reason}"
+                    android:textColor="@color/peeka_red"
+                    android:textColorHint="@color/peeka_g_1"
+                    app:layout_constraintDimensionRatio="2.2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rg_report_radiogroup" />
+
+                <TextView
+                    android:id="@+id/tv_report_confirm"
+                    style="@style/H2Md"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="21dp"
+                    android:layout_marginTop="42dp"
+                    android:gravity="center"
+                    android:text="@string/report_confirm"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintTop_toBottomOf="@id/et_report_detail_reason" />
+
+                <TextView
+                    android:id="@+id/tv_report_report"
+                    style="@style/NameBd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="21dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@color/peeka_red"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="@{() -> vm.postReport()}"
+                    android:paddingVertical="21dp"
+                    android:text="@string/report_report"
+                    android:textColor="@color/peeka_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_report_confirm" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
