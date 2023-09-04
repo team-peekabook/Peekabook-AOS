@@ -3,10 +3,12 @@ buildscript {
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
         classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.google.gms:google-services:4.4.0'
     }
 
     repositories {
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+        google()
     }
 }
 
