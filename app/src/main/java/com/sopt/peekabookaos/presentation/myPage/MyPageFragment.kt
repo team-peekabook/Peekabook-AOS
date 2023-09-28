@@ -5,13 +5,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentMyPageBinding
 import com.sopt.peekabookaos.presentation.block.BlockedUserActivity
 import com.sopt.peekabookaos.presentation.profileModify.ProfileModifyActivity
 import com.sopt.peekabookaos.presentation.withdraw.WithdrawActivity
+import com.sopt.peekabookaos.util.ToastMessageUtil.showToast
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,7 +58,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     private fun initModifyClickListener() {
         binding.ivMyPageEdit.setSingleOnClickListener {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                Toast.makeText(requireContext(), "기능 준비 중이에요.", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), getString(R.string.my_page_28_donot_modify))
             } else {
                 Intent(requireActivity(), ProfileModifyActivity::class.java).apply {
                     putExtra(USER_INFO, myPageViewModel.userData.value)
