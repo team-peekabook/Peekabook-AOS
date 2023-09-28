@@ -2,8 +2,10 @@ package com.sopt.peekabookaos.presentation.myPage
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentMyPageBinding
@@ -55,10 +57,14 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     private fun initModifyClickListener() {
         binding.ivMyPageEdit.setSingleOnClickListener {
-            Intent(requireActivity(), ProfileModifyActivity::class.java).apply {
-                putExtra(USER_INFO, myPageViewModel.userData.value)
-            }.also { intent ->
-                startActivity(intent)
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+                Toast.makeText(requireContext(), "기능 준비 중이에요.", Toast.LENGTH_SHORT).show()
+            } else {
+                Intent(requireActivity(), ProfileModifyActivity::class.java).apply {
+                    putExtra(USER_INFO, myPageViewModel.userData.value)
+                }.also { intent ->
+                    startActivity(intent)
+                }
             }
         }
     }
