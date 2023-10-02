@@ -24,12 +24,8 @@ class UserInputBottomSheetFragment : BottomSheetDialogFragment() {
             itemClick(0)
             dialog?.dismiss()
         }
-        binding.tvProfileBottomSheetCamera.setOnClickListener {
-            itemClick(1)
-            dialog?.dismiss()
-        }
         binding.tvProfileBottomSheetBasicImage.setOnClickListener {
-            itemClick(2)
+            itemClick(1)
             dialog?.dismiss()
         }
     }

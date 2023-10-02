@@ -1,19 +1,13 @@
 package com.sopt.peekabookaos.presentation.profileModify
 
-import android.Manifest.permission.CAMERA
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.InputFilter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityProfileModifyBinding
 import com.sopt.peekabookaos.domain.entity.User
@@ -24,8 +18,6 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.Date
 
 @AndroidEntryPoint
 class ProfileModifyActivity :
@@ -73,58 +65,14 @@ class ProfileModifyActivity :
         val profileModifyBottomSheetFragment = ProfileModifyBottomSheetFragment.onItemClick {
             when (it) {
                 0 -> launcher.launch("image/*")
-                1 -> if (checkPermission()) {
-                    dispatchTakePictureIntentEx()
-                } else {
-                    requestCameraPermission()
-                }
-                2 -> {
-                    profileModifyViewModel.removeProfileImage()
-                }
-                else -> {
-                    requestCameraPermission()
-                }
+                1 -> profileModifyViewModel.removeProfileImage()
+                else -> throw IndexOutOfBoundsException()
             }
         }
         profileModifyBottomSheetFragment.show(
             supportFragmentManager,
             profileModifyBottomSheetFragment.tag
         )
-    }
-
-    private fun requestCameraPermission() {
-        requestPermissionLauncher.launch(
-            arrayOf(
-                CAMERA,
-                WRITE_EXTERNAL_STORAGE,
-                READ_EXTERNAL_STORAGE
-            )
-        )
-    }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions: Map<String, Boolean> ->
-            val isCameraPermissionGranted =
-                permissions[CAMERA] != null && requireNotNull(permissions[CAMERA])
-            val isWriteStoragePermissionGranted =
-                permissions[WRITE_EXTERNAL_STORAGE] != null && requireNotNull(permissions[WRITE_EXTERNAL_STORAGE])
-            val isReadStoragePermissionGranted =
-                permissions[READ_EXTERNAL_STORAGE] != null && requireNotNull(permissions[READ_EXTERNAL_STORAGE])
-            if (isCameraPermissionGranted && isWriteStoragePermissionGranted && isReadStoragePermissionGranted) {
-                dispatchTakePictureIntentEx()
-            }
-        }
-
-    private fun checkPermission(): Boolean {
-        return (
-            ContextCompat.checkSelfPermission(this, CAMERA)
-                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                this,
-                WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-            )
     }
 
     @Override
@@ -137,26 +85,6 @@ class ProfileModifyActivity :
         if (requestCode == PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             ToastMessageUtil.showToast(this, getString(R.string.profile_modify_toast_reject))
         }
-    }
-
-    private fun dispatchTakePictureIntentEx() {
-        val timeStamp: String =
-            SimpleDateFormat(getString(R.string.profile_modify_timeStamp)).format(Date())
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val uri: Uri? = createImageUri("JPEG_${timeStamp}_", "image/jpeg")
-        photoURI = uri
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-        startActivityForResult(takePictureIntent, REQUEST_CREATE_EX)
-    }
-
-    private fun createImageUri(filename: String, mimeType: String): Uri? {
-        var values = ContentValues()
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, filename)
-        values.put(MediaStore.Images.Media.MIME_TYPE, mimeType)
-        return contentResolver?.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            values
-        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -223,7 +151,8 @@ class ProfileModifyActivity :
 
     private fun checkRegularExpression() {
         val maxLength = 6
-        val filters = arrayOf(InputFilter.LengthFilter(maxLength), profileModifyViewModel.filterAlphaNumSpace)
+        val filters =
+            arrayOf(InputFilter.LengthFilter(maxLength), profileModifyViewModel.filterAlphaNumSpace)
         binding.etProfileModifyNickname.filters = filters
     }
 

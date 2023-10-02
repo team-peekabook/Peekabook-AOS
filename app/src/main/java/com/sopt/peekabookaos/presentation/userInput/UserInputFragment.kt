@@ -1,20 +1,13 @@
 package com.sopt.peekabookaos.presentation.userInput
 
-import android.Manifest.permission.CAMERA
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.InputFilter
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
@@ -25,8 +18,6 @@ import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.Date
 
 @AndroidEntryPoint
 class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fragment_user_input) {
@@ -84,12 +75,8 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         val userInputBottomSheetFragment = UserInputBottomSheetFragment.onItemClick {
             when (it) {
                 0 -> launcher.launch("image/*")
-                1 -> if (checkPermission()) {
-                    dispatchTakePictureIntentEx()
-                } else {
-                    requestCameraPermission()
-                }
-                2 -> viewModel.removeProfileImage()
+                1 -> viewModel.removeProfileImage()
+                else -> throw IndexOutOfBoundsException()
             }
         }
         userInputBottomSheetFragment.show(
@@ -98,64 +85,10 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
         )
     }
 
-    private fun requestCameraPermission() {
-        requestPermissionLauncher.launch(
-            arrayOf(
-                CAMERA,
-                WRITE_EXTERNAL_STORAGE,
-                READ_EXTERNAL_STORAGE
-            )
-        )
-    }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions: Map<String, Boolean> ->
-            val isCameraPermissionGranted =
-                permissions[CAMERA] != null && permissions[CAMERA]!!
-            val isWriteStoragePermissionGranted =
-                permissions[WRITE_EXTERNAL_STORAGE] != null && permissions[WRITE_EXTERNAL_STORAGE]!!
-            val isReadStoragePermissionGranted =
-                permissions[READ_EXTERNAL_STORAGE] != null && permissions[READ_EXTERNAL_STORAGE]!!
-            if (isCameraPermissionGranted && isWriteStoragePermissionGranted && isReadStoragePermissionGranted) {
-                dispatchTakePictureIntentEx()
-            }
-        }
-
-    private fun checkPermission(): Boolean {
-        return (
-            ContextCompat.checkSelfPermission(requireActivity(), CAMERA)
-                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                requireContext(),
-                WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-            )
-    }
-
     private fun checkRegularExpression() {
         val maxLength = 6
         val filters = arrayOf(InputFilter.LengthFilter(maxLength), viewModel.filterAlphaNumSpace)
         binding.etUserInputNickname.filters = filters
-    }
-
-    private fun dispatchTakePictureIntentEx() { // 카메라 호출 함수
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val uri: Uri? = createImageUri("JPEG_${timeStamp}_", "image/jpeg")
-        photoURI = uri
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-        startActivityForResult(takePictureIntent, REQUEST_CREATE_EX)
-    }
-
-    private fun createImageUri(filename: String, mimeType: String): Uri? {
-        var values = ContentValues()
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, filename)
-        values.put(MediaStore.Images.Media.MIME_TYPE, mimeType)
-        return context?.contentResolver?.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            values
-        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
