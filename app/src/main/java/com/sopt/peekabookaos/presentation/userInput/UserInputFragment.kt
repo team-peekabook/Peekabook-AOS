@@ -76,6 +76,7 @@ class UserInputFragment : BindingFragment<FragmentUserInputBinding>(R.layout.fra
             when (it) {
                 0 -> launcher.launch("image/*")
                 1 -> viewModel.removeProfileImage()
+                else -> throw IndexOutOfBoundsException()
             }
         }
         userInputBottomSheetFragment.show(

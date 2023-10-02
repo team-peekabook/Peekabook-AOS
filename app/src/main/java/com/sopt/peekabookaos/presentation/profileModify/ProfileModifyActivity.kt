@@ -65,9 +65,8 @@ class ProfileModifyActivity :
         val profileModifyBottomSheetFragment = ProfileModifyBottomSheetFragment.onItemClick {
             when (it) {
                 0 -> launcher.launch("image/*")
-                1 -> {
-                    profileModifyViewModel.removeProfileImage()
-                }
+                1 -> profileModifyViewModel.removeProfileImage()
+                else -> throw IndexOutOfBoundsException()
             }
         }
         profileModifyBottomSheetFragment.show(
