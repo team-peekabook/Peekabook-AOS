@@ -105,7 +105,7 @@ dependencies {
     implementation 'androidx.camera:camera-view:1.2.0'
 
     // ML Kit
-    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0'
+    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0'
 
     // SlidingUpPanel
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
