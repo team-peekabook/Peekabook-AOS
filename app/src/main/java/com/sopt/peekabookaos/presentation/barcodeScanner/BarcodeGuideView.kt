@@ -35,9 +35,8 @@ class BarcodeGuideView @JvmOverloads constructor(
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (canvas == null) return
         setBackgroundColor(Color.argb(99, 0, 0, 0))
         drawHole(canvas)
         drawBorder(canvas)
