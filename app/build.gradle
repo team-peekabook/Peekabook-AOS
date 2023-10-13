@@ -64,8 +64,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
     // hilt
-    implementation 'com.google.dagger:hilt-android:2.44.2'
-    kapt 'com.google.dagger:hilt-compiler:2.44'
+    implementation 'com.google.dagger:hilt-android:2.46'
+    kapt 'com.google.dagger:hilt-compiler:2.46'
 
     // shared preference
     implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha04'
