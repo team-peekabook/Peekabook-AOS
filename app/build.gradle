@@ -96,8 +96,8 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     //navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
 
     // CameraX
     implementation 'androidx.camera:camera-core:1.2.1'
