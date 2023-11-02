@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.SplashState
-import com.sopt.peekabookaos.domain.entity.Version
 import com.sopt.peekabookaos.domain.usecase.GetSplashStateUseCase
 import com.sopt.peekabookaos.domain.usecase.GetVersionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
