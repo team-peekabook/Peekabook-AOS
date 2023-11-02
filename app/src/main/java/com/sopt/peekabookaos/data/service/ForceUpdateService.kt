@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ForceUpdateService {
     @GET("user/v1/version")
-    suspend fun getVersion() : BaseResponse<VersionResponse>
+    suspend fun getVersion(): BaseResponse<VersionResponse>
 }
