@@ -28,6 +28,9 @@
         android:theme="@style/Theme.PeekabookAOS"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity android:name=".presentation.forceUpdate.ForceUpdateActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.profileModify.ProfileModifyActivity"
             android:exported="false"
