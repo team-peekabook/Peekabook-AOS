@@ -14,7 +14,6 @@ data class VersionResponse(
 ) {
     fun toVersion(): Version = Version(
         imageUrl = this.imageUrl,
-        iosForceVersion = this.iosForceVersion,
         androidForceVersion = this.androidForceVersion,
         versionText = this.versionText
     )
