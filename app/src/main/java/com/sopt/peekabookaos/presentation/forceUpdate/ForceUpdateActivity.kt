@@ -9,7 +9,7 @@ import com.sopt.peekabookaos.util.binding.BindingActivity
 
 class ForceUpdateActivity :
     BindingActivity<ActivityForceUpdateBinding>(R.layout.activity_force_update) {
-    lateinit var intentToPlayStore: Intent
+    private lateinit var intentToPlayStore: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
