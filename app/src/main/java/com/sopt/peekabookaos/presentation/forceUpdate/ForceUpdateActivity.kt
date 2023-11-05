@@ -27,7 +27,7 @@ class ForceUpdateActivity :
         binding.btnForceUpdate.setOnClickListener {
             intentToPlayStore = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse(PEEKABOOKSTORE)
+                Uri.parse(getString(R.string.force_update_store_link))
             )
             startActivity(intentToPlayStore)
         }
@@ -36,10 +36,5 @@ class ForceUpdateActivity :
     private fun getLatestVersion() {
         intent.getParcelable(LATEST_VERSION, Version::class.java)
             ?.let { viewModel.getLatestVersion(it) }
-    }
-
-    companion object {
-        private const val PEEKABOOKSTORE =
-            "https://play.google.com/store/apps/details?id=com.sopt.peekabookaos&hl=ko-KR"
     }
 }
