@@ -24,8 +24,8 @@ class SplashViewModel @Inject constructor(
     var latestVersion = Version()
     private val _isForceUpdate = MutableLiveData(false)
     val isForceUpdate: LiveData<Boolean> = _isForceUpdate
-    lateinit var latestVersionDetail: VersionDetail
-    lateinit var appVersionDetail: VersionDetail
+    private lateinit var latestVersionDetail: VersionDetail
+    private lateinit var appVersionDetail: VersionDetail
 
     init {
         getVersion()
