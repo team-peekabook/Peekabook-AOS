@@ -43,7 +43,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
             VersionState.LATEST -> checkSplashState()
             VersionState.OUTDATED -> {
                 val intentToForceUpdate = Intent(this, ForceUpdateActivity::class.java).apply {
-                    putExtra(LATEST_VERSION, splashViewModel.latestVersion)
+                    putExtra(LATEST_VERSION, splashViewModel.latestVersion.value)
                     addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
                 }
                 startActivity(Intent(intentToForceUpdate))

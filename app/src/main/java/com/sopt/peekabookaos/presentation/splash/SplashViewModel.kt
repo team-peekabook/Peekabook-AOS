@@ -21,7 +21,8 @@ class SplashViewModel @Inject constructor(
     private val getSplashStateUseCase: GetSplashStateUseCase,
     private val getVersionUseCase: GetVersionUseCase
 ) : ViewModel() {
-    var latestVersion = Version()
+    private val _latestVersion: MutableLiveData<Version> = MutableLiveData()
+    val latestVersion: LiveData<Version> = _latestVersion
     private val _isForceUpdate = MutableLiveData(false)
     val isForceUpdate: LiveData<Boolean> = _isForceUpdate
     private lateinit var latestVersionDetail: VersionDetail
@@ -34,7 +35,7 @@ class SplashViewModel @Inject constructor(
     fun getSplashState(): SplashState = getSplashStateUseCase()
 
     fun checkUpdateVersion(): VersionState {
-        latestVersionDetail = spiltVersionToMajorMinor(latestVersion.androidForceVersion)
+        latestVersionDetail = spiltVersionToMajorMinor(requireNotNull(latestVersion.value?.androidForceVersion) { "version is null" })
         appVersionDetail = spiltVersionToMajorMinor(BuildConfig.VERSION_NAME)
         return if (appVersionDetail.major != latestVersionDetail.major || appVersionDetail.minor != latestVersionDetail.minor) VersionState.OUTDATED
         else VersionState.LATEST
@@ -51,7 +52,7 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             getVersionUseCase()
                 .onSuccess { response ->
-                    latestVersion = Version(
+                    _latestVersion.value = Version(
                         response.imageUrl,
                         response.androidForceVersion,
                         response.versionText
