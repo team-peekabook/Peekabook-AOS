@@ -29,7 +29,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun initObserver() {
-        splashViewModel.isVersionStatus.observe(this) { success ->
+        splashViewModel.isForceUpdateStatus.observe(this) { success ->
             if (success) {
                 splashViewModel.getSplitVersion()
                 checkVersionUpdate()

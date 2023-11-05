@@ -18,8 +18,8 @@ class SplashViewModel @Inject constructor(
     private val getVersionUseCase: GetVersionUseCase
 ) : ViewModel() {
     private val _versionName: MutableLiveData<String> = MutableLiveData()
-    private val _isVersionStatus = MutableLiveData(false)
-    val isVersionStatus: LiveData<Boolean> = _isVersionStatus
+    private val _isForceUpdateStatus = MutableLiveData(false)
+    val isForceUpdateStatus: LiveData<Boolean> = _isForceUpdateStatus
     lateinit var majorVersion: String
     lateinit var minorVersion: String
 
@@ -40,10 +40,10 @@ class SplashViewModel @Inject constructor(
             getVersionUseCase()
                 .onSuccess { response ->
                     _versionName.value = response.androidForceVersion
-                    _isVersionStatus.value = true
+                    _isForceUpdateStatus.value = true
                 }
                 .onFailure { throwable ->
-                    _isVersionStatus.value = false
+                    _isForceUpdateStatus.value = false
                     Timber.e("$throwable")
                 }
         }
