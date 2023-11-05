@@ -18,13 +18,24 @@ class SplashViewModel @Inject constructor(
     private val getVersionUseCase: GetVersionUseCase
 ) : ViewModel() {
     private val _versionName: MutableLiveData<String> = MutableLiveData()
-    val versionName: LiveData<String> = _versionName
     private val _isVersionStatus = MutableLiveData(false)
     val isVersionStatus: LiveData<Boolean> = _isVersionStatus
+    lateinit var majorVersion: String
+    lateinit var minorVersion: String
+
+    init {
+        getVersion()
+    }
 
     fun getSplashState(): SplashState = getSplashStateUseCase()
 
-    fun getVersion() {
+    fun getSplitVersion() = run {
+        val versionSpiltList = _versionName.value?.split(".")
+        majorVersion = versionSpiltList?.get(0) ?: ""
+        minorVersion = versionSpiltList?.get(1) ?: ""
+    }
+
+    private fun getVersion() {
         viewModelScope.launch {
             getVersionUseCase()
                 .onSuccess { response ->

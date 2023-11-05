@@ -24,26 +24,30 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initDataObserver()
         binding.lottieSplash.playAnimation()
-        splashViewModel.getVersion()
+        Handler(Looper.getMainLooper()).postDelayed({ initObserver() }, DURATION)
     }
 
-    private fun initDataObserver() {
+    private fun initObserver() {
         splashViewModel.isVersionStatus.observe(this) { success ->
             if (success) {
+                splashViewModel.getSplitVersion()
                 checkVersionUpdate()
             }
         }
     }
 
     private fun checkVersionUpdate() {
-        val isPreviousVersion = appVersionName != splashViewModel.versionName.value
-        if (isPreviousVersion) {
+        val appVersionList = appVersionName.split(".")
+        val previousMajor = appVersionList[0]
+        val previousMinor = appVersionList[1]
+        val isPreviousVersions =
+            previousMajor != splashViewModel.majorVersion || previousMinor != splashViewModel.minorVersion
+        if (isPreviousVersions) {
             startActivity(Intent(this, ForceUpdateActivity::class.java))
             finish()
         } else {
-            Handler(Looper.getMainLooper()).postDelayed({ checkSplashState() }, DURATION)
+            checkSplashState()
         }
     }
 
