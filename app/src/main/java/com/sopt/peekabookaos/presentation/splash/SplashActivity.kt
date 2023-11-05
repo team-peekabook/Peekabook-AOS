@@ -30,11 +30,9 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun initIsForceUpdateObserver() {
-        splashViewModel.isForceUpdate.observe(this) { success ->
-            if (success) {
-                splashViewModel.checkUpdateVersion()
-                checkVersionUpdate()
-            }
+        splashViewModel.latestVersion.observe(this) {
+            splashViewModel.checkUpdateVersion()
+            checkVersionUpdate()
         }
     }
 
