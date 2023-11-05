@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
-import com.sopt.peekabookaos.BuildConfig
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySplashBinding
 import com.sopt.peekabookaos.domain.entity.SplashState
+import com.sopt.peekabookaos.domain.entity.VersionState
 import com.sopt.peekabookaos.presentation.forceUpdate.ForceUpdateActivity
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
@@ -22,38 +22,33 @@ import dagger.hilt.android.AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     private val splashViewModel: SplashViewModel by viewModels()
-    private val appVersionName = BuildConfig.VERSION_NAME
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lottieSplash.playAnimation()
-        Handler(Looper.getMainLooper()).postDelayed({ initObserver() }, DURATION)
+        Handler(Looper.getMainLooper()).postDelayed({ initIsForceUpdateObserver() }, DURATION)
     }
 
-    private fun initObserver() {
-        splashViewModel.isForceUpdateStatus.observe(this) { success ->
+    private fun initIsForceUpdateObserver() {
+        splashViewModel.isForceUpdate.observe(this) { success ->
             if (success) {
-                splashViewModel.getSplitVersion()
+                splashViewModel.checkUpdateVersion()
                 checkVersionUpdate()
             }
         }
     }
 
     private fun checkVersionUpdate() {
-        val appVersionList = appVersionName.split(".")
-        val previousMajor = appVersionList[0]
-        val previousMinor = appVersionList[1]
-        val isPreviousVersions =
-            previousMajor != splashViewModel.majorVersion || previousMinor != splashViewModel.minorVersion
-        if (isPreviousVersions) {
-            val intentToForceUpdate = Intent(this, ForceUpdateActivity::class.java).apply {
-                putExtra(LATEST_VERSION, splashViewModel.latestVersion)
-                addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
+        when (splashViewModel.checkUpdateVersion()) {
+            VersionState.LATEST -> checkSplashState()
+            VersionState.OUTDATED -> {
+                val intentToForceUpdate = Intent(this, ForceUpdateActivity::class.java).apply {
+                    putExtra(LATEST_VERSION, splashViewModel.latestVersion)
+                    addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(Intent(intentToForceUpdate))
+                finish()
             }
-            startActivity(Intent(intentToForceUpdate))
-            finish()
-        } else {
-            checkSplashState()
         }
     }
 
