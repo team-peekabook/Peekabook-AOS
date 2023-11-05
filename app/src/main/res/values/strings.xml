@@ -209,6 +209,5 @@
 
     <!-- Force Update -->
     <string name="force_update_title">앗! 피카북이 달라졌어요</string>
-    <string name="force_update_content">어느 기능이 추가되었는지 알아볼까요?</string>
     <string name="force_update_button">업데이트 하러 가기</string>
 </resources>
