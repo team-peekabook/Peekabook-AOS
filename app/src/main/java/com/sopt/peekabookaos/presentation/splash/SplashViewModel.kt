@@ -36,7 +36,7 @@ class SplashViewModel @Inject constructor(
     fun checkUpdateVersion(): VersionState {
         latestVersionDetail = spiltVersionToMajorMinor(latestVersion.androidForceVersion)
         appVersionDetail = spiltVersionToMajorMinor(BuildConfig.VERSION_NAME)
-        return if (appVersionDetail.major != latestVersionDetail.major || appVersionDetail.minor != latestVersionDetail.minor) VersionState.OUTDATED
+        return if (appVersionDetail.major != latestVersionDetail.major || appVersionDetail.minor != latestVersionDetail.minor) VersionState.LATEST
         else VersionState.OUTDATED
     }
 
