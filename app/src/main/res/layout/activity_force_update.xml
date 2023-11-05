@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="vm"
+            name="viewModel"
             type="com.sopt.peekabookaos.presentation.forceUpdate.ForceUpdateViewModel" />
     </data>
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@{vm.latestVersion.versionText}"
+                android:text="@{viewModel.latestVersion.versionText}"
                 android:textColor="@color/peeka_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
