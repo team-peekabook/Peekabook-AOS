@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.BuildConfig
 import com.sopt.peekabookaos.domain.entity.SplashState
 import com.sopt.peekabookaos.domain.entity.Version
+import com.sopt.peekabookaos.domain.entity.VersionDetail
+import com.sopt.peekabookaos.domain.entity.VersionState
 import com.sopt.peekabookaos.domain.usecase.GetSplashStateUseCase
 import com.sopt.peekabookaos.domain.usecase.GetVersionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,10 +22,10 @@ class SplashViewModel @Inject constructor(
     private val getVersionUseCase: GetVersionUseCase
 ) : ViewModel() {
     var latestVersion = Version()
-    private val _isForceUpdateStatus = MutableLiveData(false)
-    val isForceUpdateStatus: LiveData<Boolean> = _isForceUpdateStatus
-    lateinit var majorVersion: String
-    lateinit var minorVersion: String
+    private val _isForceUpdate = MutableLiveData(false)
+    val isForceUpdate: LiveData<Boolean> = _isForceUpdate
+    lateinit var latestVersionDetail: VersionDetail
+    lateinit var appVersionDetail: VersionDetail
 
     init {
         getVersion()
@@ -30,10 +33,18 @@ class SplashViewModel @Inject constructor(
 
     fun getSplashState(): SplashState = getSplashStateUseCase()
 
-    fun getSplitVersion() = run {
-        val versionSpiltList = latestVersion.androidForceVersion.split(".")
-        majorVersion = versionSpiltList[0]
-        minorVersion = versionSpiltList[1]
+    fun checkUpdateVersion(): VersionState {
+        latestVersionDetail = spiltVersionToMajorMinor(latestVersion.androidForceVersion)
+        appVersionDetail = spiltVersionToMajorMinor(BuildConfig.VERSION_NAME)
+        return if (appVersionDetail.major != latestVersionDetail.major || appVersionDetail.minor != latestVersionDetail.minor) VersionState.OUTDATED
+        else VersionState.OUTDATED
+    }
+
+    private fun spiltVersionToMajorMinor(versionName: String): VersionDetail {
+        val versionSpiltList = versionName.split(".")
+        val major = versionSpiltList[0]
+        val minor = versionSpiltList[1]
+        return VersionDetail(major, minor)
     }
 
     private fun getVersion() {
@@ -45,10 +56,10 @@ class SplashViewModel @Inject constructor(
                         response.androidForceVersion,
                         response.versionText
                     )
-                    _isForceUpdateStatus.value = true
+                    _isForceUpdate.value = true
                 }
                 .onFailure { throwable ->
-                    _isForceUpdateStatus.value = false
+                    _isForceUpdate.value = false
                     Timber.e("$throwable")
                 }
         }
