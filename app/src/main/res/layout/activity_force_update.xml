@@ -5,13 +5,16 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.forceUpdate.ForceUpdateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/network_background"
-        tools:context=".presentation.splash.SplashActivity">
+        tools:context=".presentation.forceUpdate.ForceUpdateActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -44,11 +47,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@string/force_update_content"
+                android:text="@{vm.latestVersion.versionText}"
                 android:textColor="@color/peeka_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_force_update_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_force_update_title"
+                tools:text="서버통신한 내용이 들어갑니다." />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_force_update"
