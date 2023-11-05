@@ -2,6 +2,8 @@ package com.sopt.peekabookaos.presentation.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -44,7 +46,11 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
         val isPreviousVersions =
             previousMajor != splashViewModel.majorVersion || previousMinor != splashViewModel.minorVersion
         if (isPreviousVersions) {
-            startActivity(Intent(this, ForceUpdateActivity::class.java))
+            val intentToForceUpdate = Intent(this, ForceUpdateActivity::class.java).apply {
+                putExtra(LATEST_VERSION, splashViewModel.latestVersion)
+                addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(Intent(intentToForceUpdate))
             finish()
         } else {
             checkSplashState()
@@ -62,5 +68,6 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     companion object {
         private const val DURATION: Long = 2000
+        const val LATEST_VERSION = "latest version"
     }
 }
