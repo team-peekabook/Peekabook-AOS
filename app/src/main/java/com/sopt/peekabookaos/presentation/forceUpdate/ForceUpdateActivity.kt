@@ -18,12 +18,12 @@ class ForceUpdateActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = viewModel
+        binding.viewModel = viewModel
         getLatestVersion()
-        initClickListener()
+        initBtnClickListener()
     }
 
-    private fun initClickListener() {
+    private fun initBtnClickListener() {
         binding.btnForceUpdate.setOnClickListener {
             intentToPlayStore = Intent(
                 Intent.ACTION_VIEW,
