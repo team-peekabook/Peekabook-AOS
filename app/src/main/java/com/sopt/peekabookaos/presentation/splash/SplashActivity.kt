@@ -2,6 +2,8 @@ package com.sopt.peekabookaos.presentation.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +11,8 @@ import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySplashBinding
 import com.sopt.peekabookaos.domain.entity.SplashState
+import com.sopt.peekabookaos.domain.entity.VersionState
+import com.sopt.peekabookaos.presentation.forceUpdate.ForceUpdateActivity
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
@@ -22,7 +26,28 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lottieSplash.playAnimation()
-        Handler(Looper.getMainLooper()).postDelayed({ checkSplashState() }, DURATION)
+        Handler(Looper.getMainLooper()).postDelayed({ initIsForceUpdateObserver() }, DURATION)
+    }
+
+    private fun initIsForceUpdateObserver() {
+        splashViewModel.latestVersion.observe(this) {
+            splashViewModel.checkUpdateVersion()
+            checkVersionUpdate()
+        }
+    }
+
+    private fun checkVersionUpdate() {
+        when (splashViewModel.checkUpdateVersion()) {
+            VersionState.LATEST -> checkSplashState()
+            VersionState.OUTDATED -> {
+                val intentToForceUpdate = Intent(this, ForceUpdateActivity::class.java).apply {
+                    putExtra(LATEST_VERSION, splashViewModel.latestVersion.value)
+                    addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(Intent(intentToForceUpdate))
+                finish()
+            }
+        }
     }
 
     private fun checkSplashState() {
@@ -36,5 +61,6 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     companion object {
         private const val DURATION: Long = 2000
+        const val LATEST_VERSION = "latest version"
     }
 }

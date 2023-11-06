@@ -206,4 +206,9 @@
     <string name="profile_modify_intoduce_hint">한 줄 소개는 40자까지 쓸 수 있어요!</string>
     <string name="blocked_user_empty">차단된 사용자가 없어요.</string>
     <string name="profile_modify_timeStamp">yyyyMMdd_HHmmss</string>
+
+    <!-- Force Update -->
+    <string name="force_update_title">앗! 피카북이 달라졌어요</string>
+    <string name="force_update_button">업데이트 하러 가기</string>
+    <string name="force_update_store_link">https://play.google.com/store/apps/details?id=com.sopt.peekabookaos&amp;hl=ko-KR</string>
 </resources>
