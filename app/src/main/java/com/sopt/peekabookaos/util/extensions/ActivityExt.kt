@@ -7,6 +7,7 @@ fun Activity.activityTransition(transitionType: Int, enterAnim: Int, exitAnim: I
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
         overrideActivityTransition(transitionType, enterAnim, exitAnim)
     } else {
+        @Suppress("DEPRECATION")
         overridePendingTransition(enterAnim, exitAnim)
     }
 }
