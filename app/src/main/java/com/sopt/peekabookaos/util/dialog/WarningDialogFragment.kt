@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogWarningBinding
+import com.sopt.peekabookaos.util.extensions.getParcelableCompat
+import com.sopt.peekabookaos.util.extensions.getSerializableCompat
 import com.sopt.peekabookaos.util.extensions.initLayout
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import timber.log.Timber
@@ -34,17 +36,20 @@ class WarningDialogFragment : DialogFragment() {
     }
 
     private fun initWarningDialogContent() {
-        val warningType = arguments?.get(WARNING_TYPE)
+        val warningType = arguments?.getSerializableCompat(WARNING_TYPE) as? WarningType
             ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
         val follower = arguments?.getString(FOLLOWER) ?: DEFAULT
         with(binding) {
             warning = when (warningType as WarningType) {
                 WarningType.WARNING_RECOMMEND ->
                     WarningDialogContent().getWarningRecommendBook(requireContext(), follower)
+
                 WarningType.WARNING_DELETE_BOOK ->
                     WarningDialogContent().getWarningDeleteBook(requireContext())
+
                 WarningType.WARNING_DELETE_FOLLOWER ->
                     WarningDialogContent().getWarningDeleteFollow(requireContext(), follower)
+
                 WarningType.WARNING_UNFOLLOW ->
                     WarningDialogContent().getWarningUnfollow(requireContext(), follower)
             }
@@ -59,7 +64,7 @@ class WarningDialogFragment : DialogFragment() {
 
     private fun initConfirmClickListener() {
         binding.btnWarningDialogConfirm.setSingleOnClickListener {
-            arguments?.getParcelable<ConfirmClickListener>(CONFIRM_ACTION)
+            arguments?.getParcelableCompat<ConfirmClickListener>(CONFIRM_ACTION)
                 ?.onConfirmClick()
                 ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
             dismiss()
