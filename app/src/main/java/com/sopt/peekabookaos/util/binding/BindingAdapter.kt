@@ -4,7 +4,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
+import coil.imageLoader
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.sopt.peekabookaos.R
 
 object BindingAdapter {
@@ -12,9 +14,11 @@ object BindingAdapter {
     @BindingAdapter("setImage")
     fun ImageView.setImage(imgUrl: String?) {
         this.let {
-            Glide.with(context)
-                .load(imgUrl)
-                .into(this)
+            val request = ImageRequest.Builder(context)
+                .data(imgUrl)
+                .target(this)
+                .build()
+            context.imageLoader.enqueue(request)
         }
     }
 
@@ -22,15 +26,13 @@ object BindingAdapter {
     @BindingAdapter("setCircleImage")
     fun ImageView.setCircleImage(imgUrl: String?) {
         this.let {
-            Glide.with(context)
-                .load(imgUrl)
-                .apply {
-                    if (imgUrl == null) {
-                        placeholder(R.drawable.ic_profile_default)
-                    }
-                }
-                .circleCrop()
-                .into(this)
+            val request = ImageRequest.Builder(context)
+                .data(imgUrl)
+                .target(this)
+                .transformations(CircleCropTransformation())
+                .fallback(R.drawable.ic_profile_default)
+                .build()
+            context.imageLoader.enqueue(request)
         }
     }
 
