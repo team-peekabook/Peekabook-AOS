@@ -51,16 +51,10 @@ class RecommendationFragment :
     private fun initView() {
         recommendationViewModel.initRecommendData(
             requireNotNull(
-                arguments?.getParcelableCompat(
-                    BookActivity.BOOK_INFO,
-                    Book::class.java
-                )
+                arguments?.getParcelableCompat(BookActivity.BOOK_INFO) ?: Book()
             ),
             requireNotNull(
-                arguments?.getParcelableCompat(
-                    BookActivity.FRIEND_INFO,
-                    User::class.java
-                )
+                arguments?.getParcelableCompat(BookActivity.FRIEND_INFO) ?: User()
             )
         )
     }
