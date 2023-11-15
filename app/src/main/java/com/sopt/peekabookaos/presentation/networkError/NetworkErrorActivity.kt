@@ -11,6 +11,7 @@ import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.activityTransition
 import com.sopt.peekabookaos.util.extensions.isNetworkConnected
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.system.exitProcess
@@ -50,9 +51,10 @@ class NetworkErrorActivity :
                     SplashState.ONBOARDING -> startActivity(
                         Intent(this, OnboardingActivity::class.java)
                     )
+
                     SplashState.MAIN -> startActivity(Intent(this, MainActivity::class.java))
                 }
-                overridePendingTransition(0, 0)
+                activityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
                 finish()
             } else {
                 ToastMessageUtil.showToast(

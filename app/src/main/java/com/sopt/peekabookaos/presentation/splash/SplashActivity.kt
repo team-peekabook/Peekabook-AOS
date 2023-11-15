@@ -55,7 +55,7 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
             SplashState.ONBOARDING -> startActivity(Intent(this, OnboardingActivity::class.java))
             SplashState.MAIN -> startActivity(Intent(this, MainActivity::class.java))
         }
-        overridePendingTransition(0, 0)
+        activityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
         finish()
     }
 
