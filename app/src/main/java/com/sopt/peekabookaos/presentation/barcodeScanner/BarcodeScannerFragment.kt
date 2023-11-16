@@ -2,9 +2,13 @@ package com.sopt.peekabookaos.presentation.barcodeScanner
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Size
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraControl
@@ -77,10 +81,31 @@ class BarcodeScannerFragment :
     }
 
     private fun startCamera() {
-        @Suppress("DEPRECATION")
-        val metrics =
-            DisplayMetrics().also { binding.pvBarcode.display.getRealMetrics(it) }
-        val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
+
+        val screenAspectRatio: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val metrics =
+                requireContext().getSystemService(WindowManager::class.java).currentWindowMetrics
+            val windowInsets = metrics.windowInsets
+
+            val insets = windowInsets.getInsetsIgnoringVisibility(
+                WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout()
+            )
+            val insetsWidth = insets.right + insets.left
+            val insetsHeight = insets.top + insets.bottom
+
+            val legacySize = Size(
+                metrics.bounds.width() - insetsWidth,
+                metrics.bounds.height() - insetsHeight
+            )
+            aspectRatio(legacySize.width, legacySize.height)
+        } else {
+            val metrics = DisplayMetrics()
+            @Suppress("DEPRECATION")
+            requireContext().getSystemService(WindowManager::class.java)
+                .defaultDisplay.getRealMetrics(metrics)
+            aspectRatio(metrics.widthPixels, metrics.heightPixels)
+        }
+
         val rotation = binding.pvBarcode.display.rotation
 
         val cameraSelector =
@@ -90,8 +115,7 @@ class BarcodeScannerFragment :
             {
                 val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-                val preview = Preview.Builder().setTargetAspectRatio(screenAspectRatio)
-                    .setTargetRotation(rotation).build()
+                val preview = Preview.Builder().setTargetRotation(rotation).build()
 
                 preview.setSurfaceProvider(binding.pvBarcode.surfaceProvider)
 
@@ -129,7 +153,7 @@ class BarcodeScannerFragment :
     }
 
     private fun initAnalyzer(screenAspectRatio: Int, rotation: Int): UseCase {
-        return ImageAnalysis.Builder().setTargetAspectRatio(screenAspectRatio)
+        return ImageAnalysis.Builder().setTargetRotation(screenAspectRatio)
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .setTargetRotation(rotation).build().also {
                 it.setAnalyzer(
@@ -177,9 +201,11 @@ class BarcodeScannerFragment :
                             }
                         )
                     }
+
                     BarcodeState.ERROR -> {
                         BarcodeErrorDialog().show(childFragmentManager, BarcodeErrorDialog.TAG)
                     }
+
                     BarcodeState.IDLE -> {
                         return@collect
                     }
