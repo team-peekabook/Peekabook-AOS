@@ -16,6 +16,7 @@ import com.sopt.peekabookaos.presentation.forceUpdate.ForceUpdateActivity
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.activityTransition
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
