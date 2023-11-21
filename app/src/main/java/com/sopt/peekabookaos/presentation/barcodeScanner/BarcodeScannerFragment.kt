@@ -2,13 +2,8 @@ package com.sopt.peekabookaos.presentation.barcodeScanner
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Size
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraControl
@@ -29,6 +24,7 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
+import com.sopt.peekabookaos.util.extensions.getScreenSize
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,31 +77,8 @@ class BarcodeScannerFragment :
     }
 
     private fun startCamera() {
-
-        val screenAspectRatio: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val metrics =
-                requireContext().getSystemService(WindowManager::class.java).currentWindowMetrics
-            val windowInsets = metrics.windowInsets
-
-            val insets = windowInsets.getInsetsIgnoringVisibility(
-                WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout()
-            )
-            val insetsWidth = insets.right + insets.left
-            val insetsHeight = insets.top + insets.bottom
-
-            val legacySize = Size(
-                metrics.bounds.width() - insetsWidth,
-                metrics.bounds.height() - insetsHeight
-            )
-            aspectRatio(legacySize.width, legacySize.height)
-        } else {
-            val metrics = DisplayMetrics()
-            @Suppress("DEPRECATION")
-            requireContext().getSystemService(WindowManager::class.java)
-                .defaultDisplay.getRealMetrics(metrics)
-            aspectRatio(metrics.widthPixels, metrics.heightPixels)
-        }
-
+        val screenSize = requireContext().getScreenSize()
+        val screenAspectRatio = aspectRatio(screenSize.first, screenSize.second)
         val rotation = binding.pvBarcode.display.rotation
 
         val cameraSelector =
