@@ -34,7 +34,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+private val requiredPermissions = arrayOf(Manifest.permission.CAMERA)
 private const val RATIO_4_3_VALUE = 4.0 / 3.0
 private const val RATIO_16_9_VALUE = 16.0 / 9.0
 typealias BarcodeAnalyzerListener = (barcode: MutableList<Barcode>) -> Unit
@@ -113,7 +113,7 @@ class BarcodeScannerFragment :
         )
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+    private fun allPermissionsGranted() = requiredPermissions.all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
