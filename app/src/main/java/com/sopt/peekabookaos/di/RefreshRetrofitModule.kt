@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -64,6 +65,7 @@ object RefreshRetrofitModule {
             )
             .build()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
     @RefreshType
