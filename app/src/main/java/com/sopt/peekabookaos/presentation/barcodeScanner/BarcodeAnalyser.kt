@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.barcodeScanner
 
-import android.annotation.SuppressLint
+import androidx.annotation.OptIn
+import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -24,7 +25,7 @@ class BarcodeAnalyser(private val barcodeListener: BarcodeAnalyzerListener) :
 
     private val scanner by lazy { BarcodeScanning.getClient(options) }
 
-    @SuppressLint("UnsafeOptInUsageError")
+    @OptIn(ExperimentalGetImage::class)
     override fun analyze(imageProxy: ImageProxy) {
         val mediaImage = imageProxy.image
         if (mediaImage != null) {
