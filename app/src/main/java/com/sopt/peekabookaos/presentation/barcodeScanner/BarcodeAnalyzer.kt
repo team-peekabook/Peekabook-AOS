@@ -9,7 +9,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
-class BarcodeAnalyser(private val barcodeListener: BarcodeAnalyzerListener) :
+class BarcodeAnalyzer(private val barcodeListener: BarcodeAnalyzerListener) :
     ImageAnalysis.Analyzer {
     private val options = BarcodeScannerOptions.Builder().setBarcodeFormats(
         Barcode.FORMAT_CODE_39,

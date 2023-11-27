@@ -131,7 +131,7 @@ class BarcodeScannerFragment :
             .setTargetRotation(rotation).build().also {
                 it.setAnalyzer(
                     executor,
-                    BarcodeAnalyser { barcode ->
+                    BarcodeAnalyzer { barcode ->
                         if (processingBarcode.compareAndSet(false, false)) {
                             onBarcodeDetected(barcode)
                         }
