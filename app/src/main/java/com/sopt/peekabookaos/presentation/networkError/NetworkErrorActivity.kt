@@ -20,28 +20,11 @@ import kotlin.system.exitProcess
 class NetworkErrorActivity :
     BindingActivity<ActivityNetworkErrorBinding>(R.layout.activity_network_error) {
     private val networkErrorViewModel: NetworkErrorViewModel by viewModels()
-    private var onBackPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkNetworkConnect()
         initBackPressedCallback()
-    }
-
-    private fun initBackPressedCallback() {
-        onBackPressedDispatcher.addCallback {
-            if (System.currentTimeMillis() - onBackPressedTime >= WAITING_DEADLINE) {
-                onBackPressedTime = System.currentTimeMillis()
-                ToastMessageUtil.showToast(
-                    this@NetworkErrorActivity,
-                    getString(R.string.finish_app_toast_msg)
-                )
-            } else {
-                finishAffinity()
-                System.runFinalization()
-                exitProcess(0)
-            }
-        }
     }
 
     private fun checkNetworkConnect() {
@@ -66,6 +49,5 @@ class NetworkErrorActivity :
     }
 
     companion object {
-        private const val WAITING_DEADLINE = 2000L
     }
 }

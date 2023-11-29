@@ -5,29 +5,25 @@ import android.content.Intent.ACTION_VIEW
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.data.service.KakaoLoginService
 import com.sopt.peekabookaos.databinding.FragmentSocialLoginBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
-import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
+import com.sopt.peekabookaos.util.extensions.initBackPressedCallback
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
-import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class SocialLoginFragment :
     BindingFragment<FragmentSocialLoginBinding>(R.layout.fragment_social_login) {
     @Inject
     lateinit var kakaoLoginService: KakaoLoginService
-    private var onBackPressedTime = 0L
     private val socialLoginViewModel: SocialLoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,29 +34,6 @@ class SocialLoginFragment :
         initPrivacyPolicyClickListener()
         collectIsTokenAvailability()
         collectIsSignedUp()
-    }
-
-    private fun initBackPressedCallback() {
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    val curTime = System.currentTimeMillis()
-                    val gap = curTime - onBackPressedTime
-                    if (gap > WAITING_DEADLINE) {
-                        onBackPressedTime = curTime
-                        ToastMessageUtil.showToast(
-                            requireContext(),
-                            getString(R.string.finish_app_toast_msg)
-                        )
-                        return
-                    }
-                    finishAffinity(requireActivity())
-                    System.runFinalization()
-                    exitProcess(0)
-                }
-            }
-        )
     }
 
     private fun initKakaoLoginBtnClickListener() {
@@ -118,9 +91,5 @@ class SocialLoginFragment :
                 }
             }
         }
-    }
-
-    companion object {
-        private const val WAITING_DEADLINE = 2000L
     }
 }
