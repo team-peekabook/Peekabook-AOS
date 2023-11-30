@@ -4,7 +4,7 @@ import com.sopt.peekabookaos.data.repository.AuthRepositoryImpl
 import com.sopt.peekabookaos.data.repository.BlockRepositoryImpl
 import com.sopt.peekabookaos.data.repository.BookRepositoryImpl
 import com.sopt.peekabookaos.data.repository.DetailRepositoryImpl
-import com.sopt.peekabookaos.data.repository.ForceUpdateRepositoryImpl
+import com.sopt.peekabookaos.data.repository.ForcedUpdateRepositoryImpl
 import com.sopt.peekabookaos.data.repository.MyPageRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NaverRepositoryImpl
 import com.sopt.peekabookaos.data.repository.NotificationRepositoryImpl
@@ -18,7 +18,7 @@ import com.sopt.peekabookaos.domain.repository.AuthRepository
 import com.sopt.peekabookaos.domain.repository.BlockRepository
 import com.sopt.peekabookaos.domain.repository.BookRepository
 import com.sopt.peekabookaos.domain.repository.DetailRepository
-import com.sopt.peekabookaos.domain.repository.ForceUpdateRepository
+import com.sopt.peekabookaos.domain.repository.ForcedUpdateRepository
 import com.sopt.peekabookaos.domain.repository.MyPageRepository
 import com.sopt.peekabookaos.domain.repository.NaverRepository
 import com.sopt.peekabookaos.domain.repository.NotificationRepository
@@ -118,6 +118,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindToForceUpdateRepository(
-        forceUpdateRepositoryImpl: ForceUpdateRepositoryImpl
-    ): ForceUpdateRepository
+        forceUpdateRepositoryImpl: ForcedUpdateRepositoryImpl
+    ): ForcedUpdateRepository
 }

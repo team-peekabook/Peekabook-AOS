@@ -4,7 +4,7 @@ import com.sopt.peekabookaos.data.service.AuthService
 import com.sopt.peekabookaos.data.service.BlockService
 import com.sopt.peekabookaos.data.service.BookService
 import com.sopt.peekabookaos.data.service.DetailService
-import com.sopt.peekabookaos.data.service.ForceUpdateService
+import com.sopt.peekabookaos.data.service.ForcedUpdateService
 import com.sopt.peekabookaos.data.service.MyPageService
 import com.sopt.peekabookaos.data.service.NaverService
 import com.sopt.peekabookaos.data.service.NotificationService
@@ -22,7 +22,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.create
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -80,6 +79,6 @@ object RetrofitServiceModule {
         retrofit.create(ReportService::class.java)
 
     @Provides
-    fun providesForceUpdateService(@PeekaType retrofit: Retrofit): ForceUpdateService =
-        retrofit.create(ForceUpdateService::class.java)
+    fun providesForceUpdateService(@PeekaType retrofit: Retrofit): ForcedUpdateService =
+        retrofit.create(ForcedUpdateService::class.java)
 }
