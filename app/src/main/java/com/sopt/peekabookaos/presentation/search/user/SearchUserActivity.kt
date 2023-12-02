@@ -26,7 +26,7 @@ class SearchUserActivity :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
-        collectSearchState()
+        collectUiEvent()
     }
 
     private fun initSearchFocus() {
@@ -65,7 +65,7 @@ class SearchUserActivity :
         }
     }
 
-    private fun collectSearchState() {
+    private fun collectUiEvent() {
         repeatOnStarted {
             searchUserViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
