@@ -68,13 +68,14 @@ class UserInputViewModel @Inject constructor(
 
     fun getNickNameState() {
         viewModelScope.launch {
-            postDuplicateUseCase(requireNotNull(nickname.value)).onSuccess { check ->
-                _isNickname.value = (check == 1)
-                updateNicknameMessage(true)
-                updateDuplicateButtonState(requireNotNull(_isNickname.value))
-            }.onFailure { throwable ->
-                Timber.e("$throwable")
-            }
+            postDuplicateUseCase(requireNotNull(nickname.value))
+                .onSuccess { check ->
+                    _isNickname.value = (check == 1)
+                    updateNicknameMessage(true)
+                    updateDuplicateButtonState(requireNotNull(_isNickname.value))
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                }
         }
     }
 
