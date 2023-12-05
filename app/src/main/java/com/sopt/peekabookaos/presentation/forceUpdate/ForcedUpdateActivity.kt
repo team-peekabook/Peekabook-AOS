@@ -3,18 +3,15 @@ package com.sopt.peekabookaos.presentation.forceUpdate
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.addCallback
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityForcedUpdateBinding
 import com.sopt.peekabookaos.domain.entity.UpdateInformation
 import com.sopt.peekabookaos.presentation.splash.SplashActivity.Companion.UPDATE_INFORMATION
-import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
 import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.initBackPressedCallback
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
-import kotlin.system.exitProcess
 
 class ForcedUpdateActivity :
     BindingActivity<ActivityForcedUpdateBinding>(R.layout.activity_forced_update) {
