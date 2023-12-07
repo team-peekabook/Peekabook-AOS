@@ -34,5 +34,6 @@ fun Fragment.initBackPressedCallback() {
                     exitProcess(0)
                 }
             }
-        })
+        }
+    )
 }
