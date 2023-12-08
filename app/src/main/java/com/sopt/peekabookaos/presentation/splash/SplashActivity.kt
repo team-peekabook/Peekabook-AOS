@@ -16,7 +16,7 @@ import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity.Comp
 import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity.Companion.NETWORK_ERROR
 import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.activityTransition
+import com.sopt.peekabookaos.util.extensions.activityOpenTransition
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,29 +61,29 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
     }
 
     private fun startForcedUpdateActivity(updateInformation: UpdateInformation) {
-        startActivity(
-            Intent(this, ForcedUpdateActivity::class.java).apply {
-                putExtra(UPDATE_INFORMATION, updateInformation)
-            }
-        )
-        activityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
-        finishAffinity()
+        Intent(this, ForcedUpdateActivity::class.java).apply {
+            putExtra(UPDATE_INFORMATION, updateInformation)
+        }.also {
+            startActivityWithAnimation(it)
+        }
     }
 
     private fun startOnboardingActivity() {
-        startActivity(Intent(this, OnboardingActivity::class.java))
-        activityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
-        finishAffinity()
+        Intent(this, OnboardingActivity::class.java).also { startActivityWithAnimation(it) }
     }
 
     private fun startMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
-        activityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
+        Intent(this, MainActivity::class.java).also { startActivityWithAnimation(it) }
+    }
+
+    private fun startActivityWithAnimation(intent: Intent) {
+        startActivity(intent)
+        activityOpenTransition(0, 0)
         finishAffinity()
     }
 
     companion object {
-        private const val DURATION: Long = 2000
+        private const val DURATION: Long = 2000L
         const val UPDATE_INFORMATION = "update information"
     }
 }

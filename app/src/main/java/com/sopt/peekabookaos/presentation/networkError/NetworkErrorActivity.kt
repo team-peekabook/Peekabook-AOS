@@ -7,7 +7,7 @@ import com.sopt.peekabookaos.databinding.ActivityNetworkErrorBinding
 import com.sopt.peekabookaos.presentation.splash.SplashActivity
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
-import com.sopt.peekabookaos.util.extensions.activityTransition
+import com.sopt.peekabookaos.util.extensions.activityOpenTransition
 import com.sopt.peekabookaos.util.extensions.initBackPressedCallback
 import com.sopt.peekabookaos.util.extensions.isNetworkConnected
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ class NetworkErrorActivity :
                     Intent(this, SplashActivity::class.java)
                         .putExtra(LOCATION, NETWORK_ERROR)
                 )
-                activityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
+                activityOpenTransition(0, 0)
                 finishAffinity()
             } else {
                 ToastMessageUtil.showToast(
