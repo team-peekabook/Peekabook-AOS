@@ -7,6 +7,7 @@ plugins {
     id "org.jlleitschuh.gradle.ktlint" version "10.3.0"
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.0'
     id 'com.google.gms.google-services'
+    id 'com.google.android.gms.oss-licenses-plugin'
 }
 
 Properties properties = new Properties()
@@ -58,6 +59,8 @@ android {
 }
 
 dependencies {
+    // open source
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.1'
 
     // hilt
     implementation 'com.google.dagger:hilt-android:2.48.1'
