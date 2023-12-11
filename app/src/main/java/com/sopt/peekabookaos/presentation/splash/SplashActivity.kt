@@ -10,7 +10,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySplashBinding
 import com.sopt.peekabookaos.domain.entity.SplashUiState
 import com.sopt.peekabookaos.domain.entity.UpdateInformation
-import com.sopt.peekabookaos.presentation.forceUpdate.ForcedUpdateActivity
+import com.sopt.peekabookaos.presentation.forcedUpdate.ForcedUpdateActivity
 import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity.Companion.NETWORK_ERROR
