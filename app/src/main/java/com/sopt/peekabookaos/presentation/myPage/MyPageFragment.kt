@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentMyPageBinding
 import com.sopt.peekabookaos.presentation.block.BlockedUserActivity
@@ -94,6 +95,11 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                 Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.my_page_ask_link)))
             )
         }
+    }
+
+    private fun initOpenSourceClickListener() {
+        startActivity(Intent(requireActivity(), OssLicensesMenuActivity::class.java))
+        OssLicensesMenuActivity.setActivityTitle(getString(R.string.my_page_open_source))
     }
 
     companion object {
