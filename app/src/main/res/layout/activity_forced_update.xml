@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@{viewModel.latestVersion.versionText}"
+                android:text="@{viewModel.updateInformation.text}"
                 android:textColor="@color/peeka_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
