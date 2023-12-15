@@ -41,7 +41,12 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFile 'proguard-rules.pro'
+            proguardFile 'proguard-retrofit2.pro'
+            proguardFile 'proguard-okhttp3.pro'
+            proguardFile 'proguard-glide.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
