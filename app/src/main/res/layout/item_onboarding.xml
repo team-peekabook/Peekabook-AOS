@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/iv_item_onboarding"
-            setImageResource="@{data.image}"
+            imageResource="@{data.image}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="62dp"
@@ -30,7 +30,7 @@
 
         <ImageView
             android:id="@+id/iv_item_onboarding_content"
-            setImageResource="@{data.content}"
+            imageResource="@{data.content}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"

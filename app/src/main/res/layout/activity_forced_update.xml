@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.sopt.peekabookaos.presentation.forceUpdate.ForceUpdateViewModel" />
+            type="com.sopt.peekabookaos.presentation.forceUpdate.ForcedUpdateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/network_background"
-        tools:context=".presentation.forceUpdate.ForceUpdateActivity">
+        tools:context=".presentation.forceUpdate.ForcedUpdateActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@{viewModel.latestVersion.versionText}"
+                android:text="@{viewModel.updateInformation.text}"
                 android:textColor="@color/peeka_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

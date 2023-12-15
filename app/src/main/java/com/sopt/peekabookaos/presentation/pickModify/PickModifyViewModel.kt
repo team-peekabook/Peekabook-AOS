@@ -30,7 +30,7 @@ class PickModifyViewModel @Inject constructor(
     private val _overListState: MutableLiveData<Boolean> = MutableLiveData()
     val overListState: LiveData<Boolean> = _overListState
 
-    var preListState = _overListState.value
+    private var preListState = _overListState.value
 
     private val _isGetPickServerStatus = MutableLiveData<Boolean>()
     val isGetPickServerStatus: LiveData<Boolean> = _isGetPickServerStatus
@@ -38,7 +38,7 @@ class PickModifyViewModel @Inject constructor(
     private val _isPatchPickServerStatus = MutableLiveData<Boolean>()
     val isPatchPickServerStatus: LiveData<Boolean> = _isPatchPickServerStatus
 
-    var selectItemIdList = arrayOfNulls<Int>(3)
+    private var selectItemIdList = arrayOfNulls<Int>(3)
 
     init {
         getPick()

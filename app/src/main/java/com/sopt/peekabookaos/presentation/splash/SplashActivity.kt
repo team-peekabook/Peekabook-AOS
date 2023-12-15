@@ -2,20 +2,22 @@ package com.sopt.peekabookaos.presentation.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivitySplashBinding
-import com.sopt.peekabookaos.domain.entity.SplashState
-import com.sopt.peekabookaos.domain.entity.VersionState
-import com.sopt.peekabookaos.presentation.forceUpdate.ForceUpdateActivity
+import com.sopt.peekabookaos.domain.entity.SplashUiState
+import com.sopt.peekabookaos.domain.entity.UpdateInformation
+import com.sopt.peekabookaos.presentation.forceUpdate.ForcedUpdateActivity
 import com.sopt.peekabookaos.presentation.main.MainActivity
+import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.networkError.NetworkErrorActivity.Companion.NETWORK_ERROR
 import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.activityOpenTransition
+import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,42 +27,63 @@ class SplashActivity : BindingActivity<ActivitySplashBinding>(R.layout.activity_
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.lottieSplash.playAnimation()
-        Handler(Looper.getMainLooper()).postDelayed({ initIsForceUpdateObserver() }, DURATION)
+        checkLocation()
     }
 
-    private fun initIsForceUpdateObserver() {
-        splashViewModel.latestVersion.observe(this) {
-            splashViewModel.checkUpdateVersion()
-            checkVersionUpdate()
-        }
-    }
+    private fun checkLocation() {
+        when (intent.getStringExtra(LOCATION)) {
+            NETWORK_ERROR -> {
+                collectUiState()
+            }
 
-    private fun checkVersionUpdate() {
-        when (splashViewModel.checkUpdateVersion()) {
-            VersionState.LATEST -> checkSplashState()
-            VersionState.OUTDATED -> {
-                val intentToForceUpdate = Intent(this, ForceUpdateActivity::class.java).apply {
-                    putExtra(LATEST_VERSION, splashViewModel.latestVersion.value)
-                    addFlags(FLAG_ACTIVITY_CLEAR_TASK or FLAG_ACTIVITY_NEW_TASK)
-                }
-                startActivity(Intent(intentToForceUpdate))
-                finish()
+            else -> {
+                binding.lottieSplash.playAnimation()
+                Handler(Looper.getMainLooper()).postDelayed({ collectUiState() }, DURATION)
             }
         }
     }
 
-    private fun checkSplashState() {
-        when (splashViewModel.getSplashState()) {
-            SplashState.ONBOARDING -> startActivity(Intent(this, OnboardingActivity::class.java))
-            SplashState.MAIN -> startActivity(Intent(this, MainActivity::class.java))
+    private fun collectUiState() {
+        repeatOnStarted {
+            splashViewModel.uiState.collect { uiState ->
+                when (uiState) {
+                    is SplashUiState.Idle -> {}
+                    is SplashUiState.Error -> {}
+                    is SplashUiState.ShowSplash -> {}
+                    is SplashUiState.CanStartOnboarding -> startOnboardingActivity()
+                    is SplashUiState.CanStartMain -> startMainActivity()
+                    is SplashUiState.ForceUpdate -> {
+                        startForcedUpdateActivity(uiState.data)
+                    }
+                }
+            }
         }
-        overridePendingTransition(0, 0)
-        finish()
+    }
+
+    private fun startForcedUpdateActivity(updateInformation: UpdateInformation) {
+        Intent(this, ForcedUpdateActivity::class.java).apply {
+            putExtra(UPDATE_INFORMATION, updateInformation)
+        }.also {
+            startActivityWithAnimation(it)
+        }
+    }
+
+    private fun startOnboardingActivity() {
+        Intent(this, OnboardingActivity::class.java).also { startActivityWithAnimation(it) }
+    }
+
+    private fun startMainActivity() {
+        Intent(this, MainActivity::class.java).also { startActivityWithAnimation(it) }
+    }
+
+    private fun startActivityWithAnimation(intent: Intent) {
+        startActivity(intent)
+        activityOpenTransition(0, 0)
+        finishAffinity()
     }
 
     companion object {
-        private const val DURATION: Long = 2000
-        const val LATEST_VERSION = "latest version"
+        private const val DURATION: Long = 2000L
+        const val UPDATE_INFORMATION = "update information"
     }
 }

@@ -50,7 +50,7 @@ class CreateBookFragment :
 
     private fun initBookInfo() {
         createBookViewModel.initBookInfo(
-            arguments?.getParcelableCompat(BOOK_INFO, Book::class.java) ?: Book()
+            arguments?.getParcelableCompat(BOOK_INFO) ?: Book()
         )
     }
 

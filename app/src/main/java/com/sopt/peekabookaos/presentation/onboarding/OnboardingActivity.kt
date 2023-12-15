@@ -2,22 +2,19 @@ package com.sopt.peekabookaos.presentation.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.addCallback
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityOnboardingBinding
 import com.sopt.peekabookaos.domain.entity.Onboarding
 import com.sopt.peekabookaos.presentation.login.LoginActivity
-import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.initBackPressedCallback
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
-import kotlin.system.exitProcess
 
 class OnboardingActivity :
     BindingActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding) {
     private val onboardingAdapter: OnboardingAdapter?
         get() = binding.vpOnboarding.adapter as? OnboardingAdapter
-    private var onBackPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,22 +42,6 @@ class OnboardingActivity :
         }
     }
 
-    private fun initBackPressedCallback() {
-        onBackPressedDispatcher.addCallback {
-            if (System.currentTimeMillis() - onBackPressedTime >= WAITING_DEADLINE) {
-                onBackPressedTime = System.currentTimeMillis()
-                ToastMessageUtil.showToast(
-                    this@OnboardingActivity,
-                    getString(R.string.finish_app_toast_msg)
-                )
-            } else {
-                finishAffinity()
-                System.runFinalization()
-                exitProcess(0)
-            }
-        }
-    }
-
     companion object {
         private val onboardingList = listOf(
             Onboarding(R.drawable.ic_onboarding_1, R.drawable.ic_onboarding_content_1),
@@ -68,6 +49,5 @@ class OnboardingActivity :
             Onboarding(R.drawable.ic_onboarding_3, R.drawable.ic_onboarding_content_3),
             Onboarding(R.drawable.ic_onboarding_4, R.drawable.ic_onboarding_content_4)
         )
-        private const val WAITING_DEADLINE = 2000L
     }
 }

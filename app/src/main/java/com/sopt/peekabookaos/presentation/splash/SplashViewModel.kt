@@ -1,65 +1,53 @@
 package com.sopt.peekabookaos.presentation.splash
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.BuildConfig
-import com.sopt.peekabookaos.domain.entity.SplashState
-import com.sopt.peekabookaos.domain.entity.Version
-import com.sopt.peekabookaos.domain.entity.VersionDetail
-import com.sopt.peekabookaos.domain.entity.VersionState
-import com.sopt.peekabookaos.domain.usecase.GetSplashStateUseCase
-import com.sopt.peekabookaos.domain.usecase.GetVersionUseCase
+import com.sopt.peekabookaos.domain.entity.ForcedUpdate
+import com.sopt.peekabookaos.domain.entity.SplashUiState
+import com.sopt.peekabookaos.domain.usecase.GetSignedUpUseCase
+import com.sopt.peekabookaos.domain.usecase.HasUpdateVersionCheckUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val getSplashStateUseCase: GetSplashStateUseCase,
-    private val getVersionUseCase: GetVersionUseCase
+    private val hasUpdateVersionCheckUseCase: HasUpdateVersionCheckUseCase,
+    private val getSignedUpUseCase: GetSignedUpUseCase
 ) : ViewModel() {
-    private val _latestVersion: MutableLiveData<Version> = MutableLiveData()
-    val latestVersion: LiveData<Version> = _latestVersion
-    private lateinit var latestVersionDetail: VersionDetail
-    private lateinit var appVersionDetail: VersionDetail
+    private val _uiState = MutableStateFlow<SplashUiState>(SplashUiState.Idle)
+    val uiState = _uiState.asSharedFlow()
 
     init {
-        getVersion()
+        checkHasUpdate()
     }
 
-    fun getSplashState(): SplashState = getSplashStateUseCase()
+    private fun isSignedUp(): Boolean = getSignedUpUseCase()
 
-    fun checkUpdateVersion(): VersionState {
-        latestVersionDetail =
-            spiltVersionToMajorMinor(requireNotNull(latestVersion.value?.androidForceVersion) { "version is null" })
-        appVersionDetail = spiltVersionToMajorMinor(BuildConfig.VERSION_NAME)
-        return if (appVersionDetail.major != latestVersionDetail.major || appVersionDetail.minor != latestVersionDetail.minor) VersionState.OUTDATED
-        else VersionState.LATEST
-    }
+    private fun checkHasUpdate() = viewModelScope.launch {
+        _uiState.emit(SplashUiState.Idle)
+        hasUpdateVersionCheckUseCase(BuildConfig.VERSION_NAME)
+            .onSuccess { update ->
+                when (update) {
+                    is ForcedUpdate.None -> {
+                        if (isSignedUp()) {
+                            _uiState.emit(SplashUiState.CanStartMain)
+                        } else {
+                            _uiState.emit(SplashUiState.CanStartOnboarding)
+                        }
+                    }
 
-    private fun spiltVersionToMajorMinor(versionName: String): VersionDetail {
-        val versionSpiltList = versionName.split(".")
-        val major = versionSpiltList[0]
-        val minor = versionSpiltList[1]
-        return VersionDetail(major, minor)
-    }
-
-    private fun getVersion() {
-        viewModelScope.launch {
-            getVersionUseCase()
-                .onSuccess { response ->
-                    _latestVersion.value = Version(
-                        response.imageUrl,
-                        response.androidForceVersion,
-                        response.versionText
-                    )
+                    is ForcedUpdate.Need -> {
+                        _uiState.emit(SplashUiState.ForceUpdate(update.updateInformation))
+                    }
                 }
-                .onFailure { throwable ->
-                    Timber.e("$throwable")
-                }
-        }
+            }.onFailure { throwable ->
+                _uiState.emit(SplashUiState.Error)
+                Timber.e("$throwable")
+            }
     }
 }

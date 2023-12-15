@@ -10,6 +10,7 @@ import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogBlockBinding
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
 import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
+import com.sopt.peekabookaos.util.extensions.getParcelableCompat
 import timber.log.Timber
 
 class BlockDialog : DialogFragment() {
@@ -49,7 +50,7 @@ class BlockDialog : DialogFragment() {
 
     private fun initConfirmBtnClickListener() {
         binding.btnBlockDialogConfirm.setOnClickListener {
-            arguments?.getParcelable<ConfirmClickListener>(WarningDialogFragment.CONFIRM_ACTION)
+            arguments?.getParcelableCompat<ConfirmClickListener>(WarningDialogFragment.CONFIRM_ACTION)
                 ?.onConfirmClick()
                 ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
             dismiss()

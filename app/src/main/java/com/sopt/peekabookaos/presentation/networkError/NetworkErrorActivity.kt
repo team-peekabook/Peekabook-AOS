@@ -2,24 +2,19 @@ package com.sopt.peekabookaos.presentation.networkError
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.addCallback
-import androidx.activity.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityNetworkErrorBinding
-import com.sopt.peekabookaos.domain.entity.SplashState
-import com.sopt.peekabookaos.presentation.main.MainActivity
-import com.sopt.peekabookaos.presentation.onboarding.OnboardingActivity
+import com.sopt.peekabookaos.presentation.splash.SplashActivity
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.activityOpenTransition
+import com.sopt.peekabookaos.util.extensions.initBackPressedCallback
 import com.sopt.peekabookaos.util.extensions.isNetworkConnected
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class NetworkErrorActivity :
     BindingActivity<ActivityNetworkErrorBinding>(R.layout.activity_network_error) {
-    private val networkErrorViewModel: NetworkErrorViewModel by viewModels()
-    private var onBackPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,33 +22,15 @@ class NetworkErrorActivity :
         initBackPressedCallback()
     }
 
-    private fun initBackPressedCallback() {
-        onBackPressedDispatcher.addCallback {
-            if (System.currentTimeMillis() - onBackPressedTime >= WAITING_DEADLINE) {
-                onBackPressedTime = System.currentTimeMillis()
-                ToastMessageUtil.showToast(
-                    this@NetworkErrorActivity,
-                    getString(R.string.finish_app_toast_msg)
-                )
-            } else {
-                finishAffinity()
-                System.runFinalization()
-                exitProcess(0)
-            }
-        }
-    }
-
     private fun checkNetworkConnect() {
         binding.btnNetworkErrorRetry.setOnClickListener {
             if (isNetworkConnected()) {
-                when (networkErrorViewModel.getSplashState()) {
-                    SplashState.ONBOARDING -> startActivity(
-                        Intent(this, OnboardingActivity::class.java)
-                    )
-                    SplashState.MAIN -> startActivity(Intent(this, MainActivity::class.java))
-                }
-                overridePendingTransition(0, 0)
-                finish()
+                startActivity(
+                    Intent(this, SplashActivity::class.java)
+                        .putExtra(LOCATION, NETWORK_ERROR)
+                )
+                activityOpenTransition(0, 0)
+                finishAffinity()
             } else {
                 ToastMessageUtil.showToast(
                     this@NetworkErrorActivity,
@@ -64,6 +41,7 @@ class NetworkErrorActivity :
     }
 
     companion object {
-        private const val WAITING_DEADLINE = 2000L
+        const val LOCATION = "location"
+        const val NETWORK_ERROR = "network error"
     }
 }

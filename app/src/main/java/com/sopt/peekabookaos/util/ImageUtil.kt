@@ -7,9 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
-import android.os.Build
 import android.provider.MediaStore
-import androidx.annotation.RequiresApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
@@ -38,7 +36,6 @@ object ImageUtil {
         return Uri.parse(path)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     fun getOrientationOfImage(uri: Uri, bitmap: Bitmap, cr: ContentResolver): Bitmap {
         val inputStream = cr.openInputStream(uri)
         val matrix = Matrix()

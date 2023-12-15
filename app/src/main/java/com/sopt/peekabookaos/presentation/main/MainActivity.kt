@@ -9,21 +9,20 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ActivityMainBinding
-import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingActivity
+import com.sopt.peekabookaos.util.extensions.initBackPressedCallback
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mainViewModel: MainViewModel by viewModels()
-    private var onBackPressedTime = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = mainViewModel
         initBottomNavigationView()
-        initBackPressedCallback()
+        clickBackPressedButton()
     }
 
     private fun initBottomNavigationView() {
@@ -37,30 +36,14 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         return navHostFragment.navController
     }
 
-    private fun initBackPressedCallback() {
+    private fun clickBackPressedButton() {
         onBackPressedDispatcher.addCallback {
             val fragmentId: Int? = findNavController(R.id.fcv_main).currentDestination?.id
             fragmentId?.also { id ->
                 if (id == R.id.bookshelfFragment) {
-                    val curTime = System.currentTimeMillis()
-                    val gap = curTime - onBackPressedTime
-                    if (gap > WAITING_DEADLINE) {
-                        onBackPressedTime = curTime
-                        ToastMessageUtil.showToast(
-                            this@MainActivity,
-                            getString(R.string.finish_app_toast_msg)
-                        )
-                        return@addCallback
-                    }
-                    finishAffinity()
-                    System.runFinalization()
-                    exitProcess(0)
+                    initBackPressedCallback()
                 }
             } ?: Timber.e(getString(R.string.null_point_exception))
         }
-    }
-
-    companion object {
-        private const val WAITING_DEADLINE = 2000L
     }
 }
