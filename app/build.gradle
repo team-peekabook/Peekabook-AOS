@@ -37,6 +37,15 @@ android {
         abortOnError false
     }
 
+    signingConfigs {
+        release {
+            storeFile file(properties["STORE_FILE"])
+            keyAlias properties["KEY_ALIAS"]
+            keyPassword properties["KEY_PASSWORD"]
+            storePassword properties["STORE_PASSWORD"]
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
