@@ -61,7 +61,10 @@ object RefreshRetrofitModule {
             .readTimeout(5, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .addInterceptor(
-                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+                HttpLoggingInterceptor().apply {
+                    level =
+                        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+                }
             )
             .build()
 
