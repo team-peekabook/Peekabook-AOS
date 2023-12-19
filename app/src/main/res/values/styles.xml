@@ -6,4 +6,15 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">10dp</item>
     </style>
+
+    <style name="OpenSourceItemAnimation">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_to_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_from_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_to_right</item>
+    </style>
+
+    <style name="OpenSourceItemTheme" parent="OpenSourceMenuTheme">
+        <item name="android:windowAnimationStyle">@style/OpenSourceItemAnimation</item>
+    </style>
 </resources>
