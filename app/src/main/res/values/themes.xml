@@ -13,6 +13,8 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:navigationBarDividerColor">@color/peeka_g_1</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialogTheme</item>
@@ -27,5 +29,22 @@
     </style>
     <style name="CustomRoundedBackgroundBottomSheet" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="OpenSourceMenuTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryDark">@color/peeka_red</item>
+        <item name="colorPrimary">@color/peeka_red</item>
+        <item name="colorPrimaryVariant">@color/peeka_red</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here. -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowBackground">@color/peeka_beige</item>
+        <item name="android:navigationBarColor">@color/peeka_beige</item>
+        <item name="android:navigationBarDividerColor">@color/peeka_g_1</item>
     </style>
 </resources>
