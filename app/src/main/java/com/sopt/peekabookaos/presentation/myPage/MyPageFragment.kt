@@ -36,6 +36,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         initLinkInfoClickListener()
         initLinkAskClickListener()
         initLinkPolicyClickListener()
+        initOpenSourceClickListener()
     }
 
     private fun initBlockBtnClickListener() {
@@ -98,8 +99,10 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initOpenSourceClickListener() {
-        startActivity(Intent(requireActivity(), OssLicensesMenuActivity::class.java))
-        OssLicensesMenuActivity.setActivityTitle(getString(R.string.my_page_open_source))
+        binding.tvMyPageOpenSourceInfo.setSingleOnClickListener {
+            startActivity(Intent(requireActivity(), OssLicensesMenuActivity::class.java))
+            OssLicensesMenuActivity.setActivityTitle(getString(R.string.my_page_open_source))
+        }
     }
 
     companion object {
