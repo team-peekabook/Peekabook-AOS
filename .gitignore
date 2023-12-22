@@ -5,6 +5,10 @@
 # Compiled class file
 *.class
 
+# Keystore files
+*.jks
+*.keystore
+
 # Log file
 *.log
 
