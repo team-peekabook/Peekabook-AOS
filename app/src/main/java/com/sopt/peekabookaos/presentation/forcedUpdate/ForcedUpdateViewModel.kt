@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.forceUpdate
+package com.sopt.peekabookaos.presentation.forcedUpdate
 
 import androidx.lifecycle.ViewModel
 import com.sopt.peekabookaos.domain.entity.UpdateInformation

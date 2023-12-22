@@ -35,9 +35,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PeekabookAOS"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
-            android:name=".presentation.forceUpdate.ForcedUpdateActivity"
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/OpenSourceItemTheme" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/OpenSourceItemTheme" />
+        <activity
+            android:name=".presentation.forcedUpdate.ForcedUpdateActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

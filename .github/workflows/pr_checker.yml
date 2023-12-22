@@ -47,6 +47,10 @@ jobs:
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           KAKAO_NATIVE_APP_KEY: ${{ secrets.KAKAO_NATIVE_APP_KEY }}
           KAKAO_REDIRECT_SCHEME: ${{ secrets.KAKAO_REDIRECT_SCHEME }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          STORE_FILE: ${{ secrets.STORE_FILE }}
         run: |
           echo BASE_URI=\"$BASE_URI\" >> local.properties
           echo NAVER_URL=\"$NAVER_URL\" >> local.properties
@@ -54,9 +58,21 @@ jobs:
           echo CLIENT_SECRET=\"$CLIENT_SECRET\" >> local.properties
           echo KAKAO_NATIVE_APP_KEY=\"KAKAO_NATIVE_APP_KEY\" >> local.properties
           echo KAKAO_REDIRECT_SCHEME=\"KAKAO_REDIRECT_SCHEME\" >> local.properties
+          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
+          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
+          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
+          echo STORE_FILE= $STORE_FILE >> local.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Create keystore
+        run: |
+          mkdir -p app/keystore
+          touch app/keystore/peeka_key.jks
+
+      - name: decode release keystore
+        run: echo "${{ secrets.RELEASE_KEYSTORE_FILE_BASE_64 }}" | base64 -d > app/keystore/peeka_key.jks
 
       - name: Lint Check
         run: ./gradlew ktlintCheck

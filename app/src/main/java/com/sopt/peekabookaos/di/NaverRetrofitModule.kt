@@ -45,9 +45,11 @@ object NaverRetrofitModule {
     fun providesNaverOkHttpClient(@NaverType interceptor: Interceptor): OkHttpClient =
         OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS)
-            .addInterceptor(interceptor).addInterceptor(
+            .addInterceptor(interceptor)
+            .addInterceptor(
                 HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
+                    level =
+                        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
                 }
             ).build()
 

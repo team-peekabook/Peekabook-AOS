@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.forceUpdate
+package com.sopt.peekabookaos.presentation.forcedUpdate
 
 import android.content.Intent
 import android.net.Uri

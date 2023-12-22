@@ -115,6 +115,7 @@ object RetrofitModule {
                         }
                 }
             }
+
             SERVER_ERROR -> {
                 Handler(Looper.getMainLooper()).post {
                     ToastMessageUtil.showToast(
@@ -138,7 +139,8 @@ object RetrofitModule {
             .addInterceptor(interceptor)
             .addInterceptor(
                 HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
+                    level =
+                        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
                 }
             ).build()
 
