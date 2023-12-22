@@ -72,7 +72,7 @@ jobs:
           touch app/keystore/peeka_key.jks
 
       - name: decode release keystore
-        run: echo "${{ secrets.RELEASE_KEYSTORE_FILE_BASE_64 }}" | base64 -d > app/keystore/peeka_key
+        run: echo "${{ secrets.RELEASE_KEYSTORE_FILE_BASE_64 }}" | base64 -d > app/keystore/peeka_key.jks
 
       - name: Lint Check
         run: ./gradlew ktlintCheck
