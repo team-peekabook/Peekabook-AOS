@@ -23,7 +23,7 @@ class BookActivity : BindingActivity<ActivityBookBinding>(R.layout.activity_book
 
         when (intent.getStringExtra(LOCATION) ?: CREATE) {
             RECOMMEND -> {
-                navController.navigate(R.id.action_barcodeScannerFragment_to_searchBookFragment)
+                navController.navigate(R.id.searchBookFragment)
                 activityOpenTransition(R.anim.anim_from_right, R.anim.anim_to_left)
             }
 

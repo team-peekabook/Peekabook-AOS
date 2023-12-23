@@ -166,25 +166,26 @@ class BarcodeScannerFragment :
         repeatOnStarted {
             barcodeViewModel.barcodeState.collect { uiState ->
                 when (uiState) {
-                    BarcodeState.SUCCESS -> {
-                        findNavController().navigate(
-                            R.id.action_barcodeScannerFragment_to_createBookFragment,
-                            bundle.apply {
-                                putParcelable(BOOK_INFO, barcodeViewModel.uiState.value[0])
-                            }
-                        )
-                    }
+                    BarcodeState.SUCCESS -> goToCreateBook()
 
-                    BarcodeState.ERROR -> {
-                        BarcodeErrorDialog().show(childFragmentManager, BarcodeErrorDialog.TAG)
-                    }
+                    BarcodeState.ERROR -> showErrorDialog()
 
-                    BarcodeState.IDLE -> {
-                        return@collect
-                    }
+                    BarcodeState.IDLE -> return@collect
                 }
             }
         }
+    }
+
+    private fun showErrorDialog() =
+        BarcodeErrorDialog().show(childFragmentManager, BarcodeErrorDialog.TAG)
+
+    private fun goToCreateBook() {
+        findNavController().navigate(
+            R.id.action_barcodeScannerFragment_to_createBookFragment,
+            bundle.apply {
+                putParcelable(BOOK_INFO, barcodeViewModel.uiState.value[0])
+            }
+        )
     }
 
     private fun initBackPressedCallback() {
