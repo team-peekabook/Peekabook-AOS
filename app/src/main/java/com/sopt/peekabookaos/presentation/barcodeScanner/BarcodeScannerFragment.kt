@@ -179,7 +179,6 @@ class BarcodeScannerFragment :
     private fun showErrorDialog() =
         BarcodeErrorDialog().show(childFragmentManager, BarcodeErrorDialog.TAG)
 
-
     private fun goToCreateBook() {
         findNavController().navigate(
             R.id.action_barcodeScannerFragment_to_createBookFragment,
