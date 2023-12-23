@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,7 @@ class SearchBookFragment :
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
         collectUiEvent()
+        initBackPressedCallback()
     }
 
     override fun onResume() {
@@ -76,6 +78,7 @@ class SearchBookFragment :
                     isCreateView = false
                 )
             }
+
             else -> {
                 searchBookViewModel.updateUiState(friendInfo = User(), isCreateView = true)
             }
@@ -150,6 +153,17 @@ class SearchBookFragment :
         }
     }
 
+    private fun initBackPressedCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            }
+        )
+    }
+
     private fun collectUiEvent() {
         repeatOnStarted {
             searchBookViewModel.uiEvent.collect { uiEvent ->
@@ -157,6 +171,7 @@ class SearchBookFragment :
                     UiEvent.IDLE -> {
                         binding.btnSearchBook.isEnabled = false
                     }
+
                     UiEvent.SUCCESS -> {
                         binding.llSearchBookError.isVisible = false
                         binding.rvSearchBook.isVisible = true
@@ -164,6 +179,7 @@ class SearchBookFragment :
                         searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
                         loadedBooks = searchBookViewModel.uiState.value.book
                     }
+
                     UiEvent.ERROR -> {
                         binding.llSearchBookError.isVisible = true
                         binding.rvSearchBook.isVisible = false
