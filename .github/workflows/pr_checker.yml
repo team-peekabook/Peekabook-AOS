@@ -102,6 +102,13 @@ jobs:
           SLACK_USERNAME: Peekabook-AOS
           SLACK_MESSAGE: '에러를 확인해주세요'
 
+      - name: Upload APK
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: app/build/outputs/apk/release/app-release.apk/
+
   upload:
     needs: [ build ]
     name: upload to Slack
@@ -115,8 +122,8 @@ jobs:
       - name: Update Release apk name
         if: ${{ success() }}
         run: |
-          mv app-debug.apk 피카북-Debug.apk
-          echo 'apk=피카북-Debug.apk' >> $GITHUB_ENV
+          mv app-release.apk 피카북-Release.apk
+          echo 'apk=피카북-Release.apk' >> $GITHUB_ENV
 
       - name: Upload APK at Slack
         if: ${{ success() }}
