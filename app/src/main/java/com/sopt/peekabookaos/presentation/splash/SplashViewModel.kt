@@ -42,11 +42,7 @@ class SplashViewModel @Inject constructor(
                     }
 
                     is ForcedUpdate.Need -> {
-                        if (isSignedUp()) {
-                            _uiState.emit(SplashUiState.CanStartMain)
-                        } else {
-                            _uiState.emit(SplashUiState.CanStartOnboarding)
-                        }
+                        _uiState.emit(SplashUiState.ForceUpdate(update.updateInformation))
                     }
                 }
             }.onFailure { throwable ->
