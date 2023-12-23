@@ -101,3 +101,50 @@ jobs:
           MSG_MINIMAL: true
           SLACK_USERNAME: Peekabook-AOS
           SLACK_MESSAGE: '에러를 확인해주세요'
+
+  upload:
+    needs: [ build ]
+    name: upload to Slack
+    runs-on: ubuntu-latest
+    steps:
+      - name: download Article
+        uses: actions/download-artifact@v2
+        with:
+          name: apk
+
+      - name: Update Release apk name
+        if: ${{ success() }}
+        run: |
+          mv app-debug.apk 피카북-Debug.apk
+          echo 'apk=피카북-Debug.apk' >> $GITHUB_ENV
+
+      - name: Upload APK at Slack
+        if: ${{ success() }}
+        run: |
+          curl -X POST \
+          -F file=@$apk \
+          -F channels=${{secrets.SLACK_CHANNEL_ID}} \
+          -H "Authorization: Bearer ${{secrets.SLACK_BOT_TOKEN}}" \
+          https://slack.com/api/files.upload
+
+      - name: On Success
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: 'peekabook/Anroid apk upload S.U.C.C.E.S.S 🎉🎉🎉'
+          SLACK_COLOR: '#5BFF33'
+          MSG_MINIMAL: true
+          SLACK_USERNAME: Peekabook-AOS
+          SLACK_MESSAGE: 'apk 생성 완료! '
+
+      - name: On Success but Fail
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: 'peekabook/Anroid apk upload Fail❌'
+          SLACK_COLOR: '#FFF233'
+          MSG_MINIMAL: true
+          SLACK_USERNAME: Peekabook-AOS
+          SLACK_MESSAGE: '빌드는 완료 되었으나 apk업로드 에러'
