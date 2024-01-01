@@ -2,7 +2,7 @@ name: Peekabook Delivery
 
 on:
   push:
-    branches: [ "feature/#288-fix-cd" ] # 추후 develop으로 변경
+    branches: [ "develop" ]
 
 jobs:
   build:
