@@ -109,7 +109,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: apk
-          path: app/build/outputs/apk/release/app-release.apk/
+          path: app/build/outputs/apk/release/
 
   upload:
     needs: [ build ]
