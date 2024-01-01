@@ -100,7 +100,6 @@ jobs:
         if: ${{ success() }}
         run: |
           mv app-release.apk 피카북-Release.apk
-          echo 'apk=피카북-Release.apk' >> $GITHUB_ENV
 
       - name: Upload APK at Slack
         if: ${{ success() }}
