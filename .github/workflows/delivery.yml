@@ -79,11 +79,19 @@ jobs:
       - name: AssembleRelease with Gradle
         run: ./gradlew assembleRelease
 
+      - name: Upload APK
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: app/build/outputs/apk/release/
+          retention-days: 1
+
       - name: send apk
         uses: MeilCli/slack-upload-file@v3
         with:
-          slack_token: ${{ secrets.SLACK_TOKEN }}
-          channel_id: ${{ secrets.SLACK_CHANNEL }}
+          slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
           initial_comment: 'Peekabook Release APK ! ! !'
           file_type: 'apk'
           file_name: '피카북.apk'
