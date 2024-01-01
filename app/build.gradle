@@ -24,7 +24,6 @@ android {
         versionCode 5
         versionName "1.0.2"
 
-        buildConfigField "String", "BASE_URI", properties["BASE_URI"]
         buildConfigField "String", "NAVER_URL", properties["NAVER_URL"]
         buildConfigField "String", "CLIENT_ID", properties["CLIENT_ID"]
         buildConfigField "String", "CLIENT_SECRET", properties["CLIENT_SECRET"]
@@ -56,6 +55,10 @@ android {
             proguardFile 'proguard-okhttp3.pro'
             proguardFile 'proguard-glide.pro'
             signingConfig signingConfigs.release
+            buildConfigField "String", "BASE_URI", properties["PROD_URI"]
+        }
+        debug {
+            buildConfigField "String", "BASE_URI", properties["BASE_URI"]
         }
     }
     compileOptions {
