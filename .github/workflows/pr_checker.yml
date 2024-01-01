@@ -42,6 +42,7 @@ jobs:
       - name: Access Local Properties
         env:
           HOST_URI: ${{ secrets.BASE_URI }}
+          PROD_URI: ${{ secrets.PROD_URI }}
           NAVER_URL: ${{ secrets.NAVER_URL }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
@@ -53,6 +54,7 @@ jobs:
           STORE_FILE: ${{ secrets.STORE_FILE }}
         run: |
           echo BASE_URI=\"$BASE_URI\" >> local.properties
+          echo PROD_URI=\"PROD_URI\" >> local.properties
           echo NAVER_URL=\"$NAVER_URL\" >> local.properties
           echo CLIENT_ID=\"$CLIENT_ID\" >> local.properties
           echo CLIENT_SECRET=\"$CLIENT_SECRET\" >> local.properties
