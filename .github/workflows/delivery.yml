@@ -1,7 +1,7 @@
-name: Peekabook PR Builder
+name: Peekabook Delivery
 
 on:
-  pull_request:
+  push:
     branches: [ "develop" ]
 
 jobs:
@@ -68,30 +68,32 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Lint Check
-        run: ./gradlew ktlintCheck
+      - name: Create keystore
+        run: |
+          mkdir -p app/keystore
+          touch app/keystore/peeka_key.jks
 
-      - name: AssembleDebug with Gradle
-        run: ./gradlew assembleDebug
+      - name: decode release keystore
+        run: echo "${{ secrets.RELEASE_KEYSTORE_FILE_BASE_64 }}" | base64 -d > app/keystore/peeka_key.jks
 
-      - name: On Success!! Congratulations
+      - name: AssembleRelease with Gradle
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK
         if: ${{ success() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_COLOR: '#53A551'
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: 'Peekabook/PR Check S.U.C.C.E.S.S 🎉🎉🎉'
-          MSG_MINIMAL: true
-          SLACK_USERNAME: Peekabook-AOS
-          SLACK_MESSAGE: 'PR이 완료되었습니다!!! 🎉🎉🎉'
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: app/build/outputs/apk/release/
+          retention-days: 1
 
-      - name: On Failed, Notify in Slack
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_COLOR: '#ff0000'
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: 'Peekabook/Android Debug build Fail❌'
-          MSG_MINIMAL: true
-          SLACK_USERNAME: Peekabook-AOS
-          SLACK_MESSAGE: '에러를 확인해주세요'
+      - name: send apk
+        uses: MeilCli/slack-upload-file@v3
+        with:
+          slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel_id: ${{ secrets.SLACK_CHANNEL_ID }}
+          initial_comment: 'Peekabook Release APK ! ! !'
+          file_type: 'apk'
+          file_name: '피카북.apk'
+          file_path: './app/build/outputs/apk/release/app-release.apk'
+          retries: 1
