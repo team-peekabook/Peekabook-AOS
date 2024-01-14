@@ -62,18 +62,18 @@
                 app:layout_constraintStart_toEndOf="@id/iv_my_page_image"
                 app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
 
-            <ImageView
-                android:id="@+id/iv_my_page_edit"
+            <ImageButton
+                android:id="@+id/btn_my_page_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
-                android:padding="5dp"
+                android:layout_marginEnd="-36dp"
                 android:background="@null"
+                android:padding="16dp"
                 android:src="@drawable/ic_my_page_edit"
                 app:layout_constraintBottom_toBottomOf="@id/tv_my_page_name"
                 app:layout_constraintDimensionRatio="1"
-                app:layout_constraintStart_toEndOf="@id/tv_my_page_name"
+                app:layout_constraintEnd_toEndOf="@id/tv_my_page_name"
                 app:layout_constraintTop_toTopOf="@id/tv_my_page_name" />
 
             <TextView

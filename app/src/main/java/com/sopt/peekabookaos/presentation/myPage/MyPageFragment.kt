@@ -58,7 +58,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     }
 
     private fun initModifyClickListener() {
-        binding.ivMyPageEdit.setSingleOnClickListener {
+        binding.btnMyPageEdit.setSingleOnClickListener {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
                 showToast(requireContext(), getString(R.string.my_page_28_donot_modify))
             } else {
