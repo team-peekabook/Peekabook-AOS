@@ -7,7 +7,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="vm"
+            name="viewModel"
             type="com.sopt.peekabookaos.presentation.myPage.MyPageViewModel" />
     </data>
 
@@ -39,7 +39,7 @@
 
             <ImageView
                 android:id="@+id/iv_my_page_image"
-                setCircleImage="@{vm.userData.profileImage}"
+                setCircleImage="@{viewModel.userData.profileImage}"
                 android:layout_width="64dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="15dp"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="21dp"
-                android:text="@{vm.userData.nickname}"
+                android:text="@{viewModel.userData.nickname}"
                 android:textColor="@color/peeka_red"
                 app:layout_constraintStart_toEndOf="@id/iv_my_page_image"
                 app:layout_constraintTop_toTopOf="@id/iv_my_page_rect" />
@@ -84,7 +84,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="15dp"
                 android:maxLines="2"
-                android:text="@{vm.userData.intro}"
+                android:text="@{viewModel.userData.intro}"
                 android:textColor="@color/peeka_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_my_page_name"
