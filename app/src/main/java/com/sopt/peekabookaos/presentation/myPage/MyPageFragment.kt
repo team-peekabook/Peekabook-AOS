@@ -28,7 +28,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = myPageViewModel
+        binding.viewModel = myPageViewModel
         initBlockBtnClickListener()
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
@@ -63,7 +63,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
                 showToast(requireContext(), getString(R.string.my_page_28_donot_modify))
             } else {
                 Intent(requireActivity(), ProfileModifyActivity::class.java).apply {
-                    putExtra(USER_INFO, myPageViewModel.userData.value)
+                    putExtra(USER_INFO, myPageViewModel.user.value)
                 }.also { intent ->
                     startActivity(intent)
                 }
