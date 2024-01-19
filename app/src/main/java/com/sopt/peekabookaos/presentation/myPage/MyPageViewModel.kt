@@ -17,14 +17,14 @@ class MyPageViewModel @Inject constructor(
     private val getMyPageUseCase: GetMyPageUseCase,
     private val clearLocalPrefUseCase: ClearLocalPrefUseCase
 ) : ViewModel() {
-    private val _userData = MutableLiveData<User>()
-    val userData: LiveData<User> = _userData
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
     fun getMyPage() {
         viewModelScope.launch {
             getMyPageUseCase()
                 .onSuccess { response ->
-                    _userData.value = response
+                    _user.value = response
                 }
                 .onFailure { throwable ->
                     Timber.e("$throwable")
