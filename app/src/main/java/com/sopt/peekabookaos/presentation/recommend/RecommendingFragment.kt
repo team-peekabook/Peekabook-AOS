@@ -15,8 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecommendingFragment :
     BindingFragment<ItemRecommendViewBinding>(R.layout.item_recommend_view) {
     private val recommendViewModel by activityViewModels<RecommendViewModel>()
-    private val recommendAdapter: BookRecommendAdapter?
-        get() = binding.rvRecommend.adapter as? BookRecommendAdapter
+    private val recommendAdapter: RecommendAdapter?
+        get() = binding.rvRecommend.adapter as? RecommendAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,7 +26,7 @@ class RecommendingFragment :
     }
 
     private fun initAdapter() {
-        binding.rvRecommend.adapter = BookRecommendAdapter(::onClickDelete)
+        binding.rvRecommend.adapter = RecommendAdapter(::onClickDelete)
     }
 
     private fun onClickDelete(recommendId: Int) {
