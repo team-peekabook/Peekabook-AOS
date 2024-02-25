@@ -35,8 +35,8 @@
     <!-- Create Book & Edit Book & Book Detail-->
     <string name="book_comment">한 마디</string>
     <string name="book_memo">메모</string>
-    <string name="book_comment_hint">한 마디를 남겨주세요.</string>
-    <string name="book_memo_hint">메모를 남겨주세요.</string>
+    <string name="book_comment_hint">책을 읽고 느낀 점, 좋았던 구절을 적어보세요.</string>
+    <string name="book_memo_hint">메모에 적은 내용은 나만 볼 수 있어요.\nex) 7/3~7/10 완독, 두두에게 선물 받음</string>
     <string name="book_comment_count">%d/200</string>
     <string name="book_memo_count">%d/50</string>
 
