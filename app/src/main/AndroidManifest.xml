@@ -94,7 +94,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.book.BookActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
