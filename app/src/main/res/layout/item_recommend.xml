@@ -74,7 +74,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_whitefill_redline_0_rect"
+            android:background="@drawable/shape_whitefill_redline_rect"
             app:layout_constraintEnd_toEndOf="@id/cl_item_recommend_redRect"
             app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
             app:layout_constraintTop_toBottomOf="@+id/cl_item_recommend_redRect">

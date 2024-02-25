@@ -165,7 +165,7 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/shape_whitefill_redline_0_rect"
+                    android:background="@drawable/shape_whitefill_redline_rect"
                     android:gravity="top"
                     android:hint="@string/recommendation_hint"
                     android:importantForAutofill="no"
