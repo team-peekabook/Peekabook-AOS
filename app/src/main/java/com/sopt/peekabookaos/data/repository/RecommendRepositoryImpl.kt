@@ -31,4 +31,9 @@ class RecommendRepositoryImpl @Inject constructor(
                 friendId
             )
         }.map { response -> response.success }
+
+    override suspend fun deleteRecommend(recommendId: Int): Result<Unit> =
+        kotlin.runCatching {
+            recommendDataSource.deleteRecommend(recommendId)
+        }
 }

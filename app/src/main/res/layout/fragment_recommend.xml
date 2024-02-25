@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.sopt.peekabookaos.presentation.recommend.RecommendViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,6 +71,25 @@
                 tools:text="추천한 책" />
 
         </com.google.android.material.tabs.TabLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_recommend_edit"
+            style="@style/CBd"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape_white40fill_redline_rect"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:onClick="@{() -> viewModel.toggleEditMode()}"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="4dp"
+            android:text="@{viewModel.isEditMode ? @string/recommend_complete : @string/recommend_edit}"
+            android:textColor="@color/peeka_red"
+            android:visibility="@{viewModel.recommendingBook.isEmpty() &amp;&amp; viewModel.recommendedBook.isEmpty() ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/tl_recommend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tl_recommend" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_recommend"

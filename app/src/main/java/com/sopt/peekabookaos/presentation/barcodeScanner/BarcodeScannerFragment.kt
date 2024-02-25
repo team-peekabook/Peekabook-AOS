@@ -153,7 +153,7 @@ class BarcodeScannerFragment :
     }
 
     private fun initHardDetectedClickListener() {
-        binding.llBarcodeHardDetected.setSingleOnClickListener {
+        binding.btnBarcodeTextSearch.setSingleOnClickListener {
             bundle.putString(LOCATION, CREATE)
             findNavController().navigate(
                 R.id.action_barcodeScannerFragment_to_searchBookFragment,

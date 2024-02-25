@@ -10,5 +10,6 @@ data class Recommend(
     val bookId: Int = -1,
     val bookTitle: String = "",
     val author: String = "",
-    val bookImage: String = ""
+    val bookImage: String = "",
+    val isEditMode: Boolean = false
 )

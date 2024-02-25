@@ -13,4 +13,6 @@ interface RecommendRepository {
         publisher: String,
         friendId: Int
     ): Result<Boolean>
+
+    suspend fun deleteRecommend(recommendId: Int): Result<Unit>
 }

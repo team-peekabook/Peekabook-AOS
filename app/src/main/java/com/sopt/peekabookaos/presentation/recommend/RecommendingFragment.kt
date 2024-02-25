@@ -6,7 +6,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ItemRecommendViewBinding
+import com.sopt.peekabookaos.presentation.recommend.RecommendDeleteDialog.Companion.DIALOG_TYPE
 import com.sopt.peekabookaos.util.binding.BindingFragment
+import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +26,17 @@ class RecommendingFragment :
     }
 
     private fun initAdapter() {
-        binding.rvRecommend.adapter = BookRecommendAdapter()
+        binding.rvRecommend.adapter = BookRecommendAdapter(::onClickDelete)
+    }
+
+    private fun onClickDelete(recommendId: Int) {
+        recommendViewModel.setRecommendId(recommendId)
+        RecommendDeleteDialog().withArgs {
+            putSerializable(
+                RecommendDeleteDialog.RECOMMEND_TYPE,
+                RecommendType.RECOMMENDING
+            )
+        }.show(childFragmentManager, DIALOG_TYPE)
     }
 
     private fun initObserver() {

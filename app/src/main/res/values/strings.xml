@@ -23,7 +23,6 @@
     <!-- Barcode -->
     <string name="barcode_permission">휴대폰 앱 설정에서 카메라 권한을 허용해주세요!</string>
     <string name="barcode_title">책 검색하기</string>
-    <string name="barcode_hard_detected">바코드 인식이 어려우신가요?</string>
     <string name="barcode_guide">책의 뒷면에 있는 ISBN 바코드가\n사각형 안에 들어오게 해주세요.</string>
     <string name="barcode_error">존재하지 않는 책입니다</string>
     <string name="barcode_error_search">텍스트로 검색하기</string>
@@ -36,8 +35,8 @@
     <!-- Create Book & Edit Book & Book Detail-->
     <string name="book_comment">한 마디</string>
     <string name="book_memo">메모</string>
-    <string name="book_comment_hint">한 마디를 남겨주세요.</string>
-    <string name="book_memo_hint">메모를 남겨주세요.</string>
+    <string name="book_comment_hint">책을 읽고 느낀 점, 좋았던 구절을 적어보세요.</string>
+    <string name="book_memo_hint">메모에 적은 내용은 나만 볼 수 있어요.\nex) 7/3~7/10 완독, 두두에게 선물 받음</string>
     <string name="book_comment_count">%d/200</string>
     <string name="book_memo_count">%d/50</string>
 
@@ -69,9 +68,15 @@
     <!-- BookRecommend-->
     <string name="recommend_recommended">추천받은 책</string>
     <string name="recommend_recommending">추천한 책</string>
+    <string name="recommend_edit">수정하기</string>
+    <string name="recommend_complete">완료</string>
     <string name="recommend_item_peek">%s님의 책장 보러가기 →</string>
     <string name="recommend_recommended_empty">아직 친구가 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요.</string>
     <string name="recommend_recommending_empty">친구에게 추천해준 책이 없네요.\n친구와 함께 읽을 책을 공유해보세요.</string>
+    <string name="recommend_recommended_delete_dialog_title">추천받은 책을 삭제하시겠어요?</string>
+    <string name="recommend_recommending_delete_dialog_title">추천한 책을 삭제하시겠어요?</string>
+    <string name="recommend_recommended_delete_dialog_content">나에게 추천해준 사용자의 추천 내역에서도 사라지며,\n삭제 후에는 되돌릴 수 없어요.</string>
+    <string name="recommend_recommending_delete_dialog_content">추천받은 사용자의 추천 내역에서도 사라지며,\n삭제 후에는 되돌릴 수 없어요.</string>
 
     <!-- MyPage -->
     <string name="my_page_name">북과픽</string>
