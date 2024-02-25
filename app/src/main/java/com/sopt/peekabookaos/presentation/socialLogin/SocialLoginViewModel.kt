@@ -3,6 +3,7 @@ package com.sopt.peekabookaos.presentation.socialLogin
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakao.sdk.auth.model.OAuthToken
+import com.sopt.peekabookaos.domain.usecase.GetFcmTokenUseCase
 import com.sopt.peekabookaos.domain.usecase.InitTokenUseCase
 import com.sopt.peekabookaos.domain.usecase.PostLoginUseCase
 import com.sopt.peekabookaos.util.KakaoLoginCallback
@@ -18,8 +19,15 @@ import javax.inject.Inject
 @HiltViewModel
 class SocialLoginViewModel @Inject constructor(
     private val postLoginUseCase: PostLoginUseCase,
-    private val initTokenUseCase: InitTokenUseCase
+    private val initTokenUseCase: InitTokenUseCase,
+    private val getFcmTokenUseCase: GetFcmTokenUseCase
 ) : ViewModel() {
+    init {
+        getFcmToken()
+    }
+
+    private var fcmToken: String = ""
+
     private val _isKakaoLogin = MutableStateFlow(false)
     val isKakaoLogin = _isKakaoLogin.asStateFlow()
 
@@ -29,19 +37,25 @@ class SocialLoginViewModel @Inject constructor(
     val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         KakaoLoginCallback { accessToken ->
             _isKakaoLogin.value = true
-            initTokenUseCase(accessToken = accessToken, refreshToken = "")
+            initTokenUseCase(accessToken = accessToken, refreshToken = "", fcmToken)
         }.handleResult(token, error)
     }
 
     fun postLogin() {
         viewModelScope.launch {
-            postLoginUseCase(SOCIAL_TYPE)
+            postLoginUseCase(SOCIAL_TYPE, fcmToken)
                 .onSuccess { response ->
-                    initTokenUseCase(response.accessToken, response.refreshToken)
+                    initTokenUseCase(response.accessToken, response.refreshToken, fcmToken)
                     _isSignedUp.emit(response.isSignedUp)
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
+        }
+    }
+
+    private fun getFcmToken() {
+        viewModelScope.launch {
+            getFcmTokenUseCase { getFcmToken -> fcmToken = getFcmToken }
         }
     }
 
