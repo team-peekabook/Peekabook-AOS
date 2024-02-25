@@ -52,6 +52,9 @@ class WarningDialogFragment : DialogFragment() {
 
                 WarningType.WARNING_UNFOLLOW ->
                     WarningDialogContent().getWarningUnfollow(requireContext(), follower)
+
+                WarningType.WARNING_DUPLICATE_BOOK ->
+                    WarningDialogContent().getWarningDuplicateBook(requireContext())
             }
         }
     }

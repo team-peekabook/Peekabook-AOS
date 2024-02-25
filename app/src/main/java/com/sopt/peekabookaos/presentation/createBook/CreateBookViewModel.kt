@@ -1,9 +1,15 @@
 package com.sopt.peekabookaos.presentation.createBook
 
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.usecase.PostCreateBookUseCase
+import com.sopt.peekabookaos.presentation.login.LoginActivity
+import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -11,6 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import timber.log.Timber
 import javax.inject.Inject
 

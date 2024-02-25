@@ -125,10 +125,12 @@
     <string name="warning_dialog_delete_follower_title">%s님을\n정말 삭제하시겠어요?</string>
     <string name="warning_dialog_delete_book_title">해당 책을\n정말 삭제하시겠습니까?</string>
     <string name="warning_dialog_unfollow_title">%s님을\n 언팔로우 하시겠어요?</string>
+    <string name="warning_dialog_duplicate_book">이미 내 책장에 있는 도서에요.\n하나 더 추가하시겠어요?</string>
     <string name="warning_dialog_cancel">취소하기</string>
     <string name="warning_dialog_recommend">추천하기</string>
     <string name="warning_dialog_delete">삭제하기</string>
     <string name="warning_dialog_unfollow">언팔로우</string>
+    <string name="warning_dialog_add">추가하기</string>
 
     <!-- block -->
     <string name="block_title">차단된 계정</string>
