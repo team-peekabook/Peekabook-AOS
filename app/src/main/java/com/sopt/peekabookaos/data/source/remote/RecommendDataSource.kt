@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.data.source.remote
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
+import com.sopt.peekabookaos.data.entity.NoResponse
 import com.sopt.peekabookaos.data.entity.request.RecommendationRequest
 import com.sopt.peekabookaos.data.entity.response.RecommendResponse
 import com.sopt.peekabookaos.data.entity.response.RecommendationResponse
@@ -31,4 +32,7 @@ data class RecommendDataSource @Inject constructor(
             ),
             friendId
         )
+
+    suspend fun deleteRecommend(recommendId: Int): BaseResponse<NoResponse> =
+        recommendService.deleteRecommend(recommendId)
 }

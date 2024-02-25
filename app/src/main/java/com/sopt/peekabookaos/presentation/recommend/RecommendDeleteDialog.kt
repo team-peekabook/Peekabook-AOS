@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogRecommendDeleteBinding
+import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.extensions.getSerializableCompat
+import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import timber.log.Timber
 
 class RecommendDeleteDialog : DialogFragment() {
@@ -34,6 +37,23 @@ class RecommendDeleteDialog : DialogFragment() {
         initWarningDialogContent()
         initConfirmBtnClickListener()
         initCancelBtnClickListener()
+        collectUiEvent()
+    }
+
+    private fun collectUiEvent() {
+        repeatOnStarted {
+            recommendViewModel.uiEvent.collect { uiEvent ->
+                when (uiEvent) {
+                    UiEvent.IDLE -> {}
+                    UiEvent.SUCCESS -> {
+                        dismiss()
+                    }
+                    UiEvent.ERROR -> {
+                        dismiss()
+                    }
+                }
+            }
+        }
     }
 
     private fun initLayout() {
