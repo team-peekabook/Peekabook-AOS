@@ -186,7 +186,7 @@
                     android:layout_marginHorizontal="21dp"
                     android:layout_marginTop="21dp"
                     android:layout_marginBottom="42dp"
-                    android:background="@drawable/shape_white88fill_redline_0_rect"
+                    android:background="@drawable/shape_white80fill_redline_rect"
                     android:gravity="start"
                     android:hint="@string/report_detail_reason"
                     android:maxLength="200"

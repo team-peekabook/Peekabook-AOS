@@ -22,6 +22,7 @@ class RecommendFragment : BindingFragment<FragmentRecommendBinding>(R.layout.fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = recommendViewModel
         initAdapter()
         initTabLayout()
     }

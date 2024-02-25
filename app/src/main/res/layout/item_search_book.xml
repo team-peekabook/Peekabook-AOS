@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/shape_whitefill_redline_0_rect">
+        android:background="@drawable/shape_whitefill_redline_rect">
 
         <ImageView
             android:id="@+id/iv_item_search_book"

@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="data"
             type="com.sopt.peekabookaos.domain.entity.Recommend" />
@@ -74,7 +76,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_whitefill_redline_0_rect"
+            android:background="@drawable/shape_whitefill_redline_rect"
             app:layout_constraintEnd_toEndOf="@id/cl_item_recommend_redRect"
             app:layout_constraintStart_toStartOf="@id/cl_item_recommend_redRect"
             app:layout_constraintTop_toBottomOf="@+id/cl_item_recommend_redRect">
@@ -94,8 +96,7 @@
                 app:layout_constraintDimensionRatio="1:1.6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_width="92dp"
-                tools:src="@color/black" />
+                tools:layout_width="92dp" />
 
             <View
                 android:id="@+id/view_item_recommend_line_middle"
@@ -106,6 +107,32 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_item_recommend_cover"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_item_recommend_delete"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="2dp"
+                android:layout_marginStart="2dp"
+                android:background="@color/peeka_white_90"
+                android:translationZ="4dp"
+                android:visibility="@{data.isEditMode==true ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/view_item_recommend_line_middle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_item_recommend_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/iv_item_recommend_profile"

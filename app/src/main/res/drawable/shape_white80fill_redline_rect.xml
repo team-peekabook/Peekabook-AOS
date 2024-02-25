@@ -9,7 +9,7 @@
             <stroke
                 android:width="2dp"
                 android:color="@color/peeka_red" />
-            <solid android:color="#E0FFFFFF" />
+            <solid android:color="@color/peeka_white_80" />
         </shape>
     </item>
 
