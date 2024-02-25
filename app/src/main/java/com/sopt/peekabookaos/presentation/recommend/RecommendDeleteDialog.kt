@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.peekabookaos.R
@@ -46,8 +45,10 @@ class RecommendDeleteDialog : DialogFragment() {
                 when (uiEvent) {
                     UiEvent.IDLE -> {}
                     UiEvent.SUCCESS -> {
+                        recommendViewModel.getRecommend()
                         dismiss()
                     }
+
                     UiEvent.ERROR -> {
                         dismiss()
                     }

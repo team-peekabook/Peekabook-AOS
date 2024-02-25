@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.recommend
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,11 +30,30 @@ class RecommendViewModel @Inject constructor(
     private val _recommendingBook = MutableLiveData<List<Recommend>>()
     val recommendingBook: LiveData<List<Recommend>> = _recommendingBook
 
-    private val _isEditMode = MutableLiveData(false)
-    val isEditMode: LiveData<Boolean> = _isEditMode
+//    private val _isEditMode = MutableLiveData(false)
+//    val isEditMode: LiveData<Boolean> = _isEditMode
 
     private val _recommendId = MutableLiveData(-1)
     val recommendId: LiveData<Int> = _recommendId
+
+    private val _isEditMode = MediatorLiveData<Boolean>().apply {
+        value = false
+
+        addSource(_recommendedBook) { value = checkEditMode(it, _recommendingBook.value) }
+        addSource(_recommendingBook) { value = checkEditMode(_recommendedBook.value, it) }
+    }
+    val isEditMode: LiveData<Boolean> = _isEditMode
+
+    private fun checkEditMode(
+        recommendedBooks: List<Recommend>?,
+        recommendingBooks: List<Recommend>?
+    ): Boolean {
+        val recommendedBooksEmpty = recommendedBooks.isNullOrEmpty()
+        val recommendingBooksEmpty = recommendingBooks.isNullOrEmpty()
+
+        return if (recommendedBooksEmpty && recommendingBooksEmpty) false else _isEditMode.value
+            ?: false
+    }
 
     fun toggleEditMode() {
         _isEditMode.value = _isEditMode.value?.not()
@@ -67,8 +87,11 @@ class RecommendViewModel @Inject constructor(
         viewModelScope.launch {
             getRecommendUseCase()
                 .onSuccess { response ->
-                    _recommendingBook.value = response.recommendingBook
-                    _recommendedBook.value = response.recommendedBook
+                    _recommendingBook.value =
+                        response.recommendingBook.map { it.copy(isEditMode = _isEditMode.value!!) }
+                    _recommendedBook.value =
+                        response.recommendedBook.map { it.copy(isEditMode = _isEditMode.value!!) }
+                    checkEditMode(_recommendingBook.value, _recommendedBook.value)
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
