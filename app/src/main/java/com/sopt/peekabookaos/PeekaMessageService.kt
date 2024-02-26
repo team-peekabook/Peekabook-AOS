@@ -41,9 +41,9 @@ class PeekaMessageService : FirebaseMessagingService() {
             .setContentText(body)
             .setAutoCancel(true)
 
-        with(NotificationManagerCompat.from(this)) {
-            notify(NOTIFICATION_ID, notificationBuilder.build())
-        }
+        val notificationManager = getSystemService (NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 
     private fun createNotificationChannel() {
