@@ -28,6 +28,7 @@ data class WarningDialogContent(
             cancel = context.getString(R.string.warning_dialog_cancel),
             confirm = context.getString(R.string.warning_dialog_delete)
         )
+
     fun getWarningUnfollow(context: Context, follower: String): WarningDialogContent =
         WarningDialogContent(
             title = context.getString(R.string.warning_dialog_unfollow_title, follower),
@@ -35,7 +36,7 @@ data class WarningDialogContent(
             confirm = context.getString(R.string.warning_dialog_unfollow)
         )
 
-    fun getWarningDuplicateBook(context: Context) : WarningDialogContent =
+    fun getWarningDuplicateBook(context: Context): WarningDialogContent =
         WarningDialogContent(
             title = context.getString(R.string.warning_dialog_duplicate_book),
             cancel = context.getString(R.string.warning_dialog_cancel),
