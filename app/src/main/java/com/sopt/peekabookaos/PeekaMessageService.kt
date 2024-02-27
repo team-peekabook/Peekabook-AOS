@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.sopt.peekabookaos.presentation.splash.SplashActivity
@@ -41,7 +40,7 @@ class PeekaMessageService : FirebaseMessagingService() {
             .setContentText(body)
             .setAutoCancel(true)
 
-        val notificationManager = getSystemService (NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
