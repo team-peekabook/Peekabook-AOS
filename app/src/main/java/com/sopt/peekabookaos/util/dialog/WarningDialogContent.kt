@@ -39,6 +39,6 @@ data class WarningDialogContent(
         WarningDialogContent(
             title = context.getString(R.string.warning_dialog_duplicate_book),
             cancel = context.getString(R.string.warning_dialog_cancel),
-            confirm = context.getString(R.string.warning_dialog_unfollow)
+            confirm = context.getString(R.string.warning_dialog_add)
         )
 }

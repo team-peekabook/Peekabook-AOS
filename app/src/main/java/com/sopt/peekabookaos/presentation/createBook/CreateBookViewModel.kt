@@ -1,15 +1,10 @@
 package com.sopt.peekabookaos.presentation.createBook
 
-import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.domain.entity.Book
+import com.sopt.peekabookaos.domain.usecase.PostBookDuplicateUseCase
 import com.sopt.peekabookaos.domain.usecase.PostCreateBookUseCase
-import com.sopt.peekabookaos.presentation.login.LoginActivity
-import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,19 +12,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateBookViewModel @Inject constructor(
-    private val postCreateBookUseCase: PostCreateBookUseCase
+    private val postCreateBookUseCase: PostCreateBookUseCase,
+    private val postBookDuplicateUseCase: PostBookDuplicateUseCase
 ) : ViewModel() {
     private val _bookInfo = MutableStateFlow(Book())
     val bookInfo = _bookInfo.asStateFlow()
 
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
+
+    private val _isBookDuplicated = MutableSharedFlow<Boolean>()
+    val isBookDuplicated = _isBookDuplicated.asSharedFlow()
 
     val comment = MutableStateFlow("")
 
@@ -57,5 +55,19 @@ class CreateBookViewModel @Inject constructor(
 
     fun initBookInfo(bookInfo: Book) {
         _bookInfo.value = bookInfo
+    }
+
+    fun postBookDuplicate() {
+        viewModelScope.launch {
+            postBookDuplicateUseCase(
+                bookTitle = _bookInfo.value.bookTitle,
+                author = _bookInfo.value.author,
+                publisher = _bookInfo.value.publisher
+            ).onSuccess { isDuplicated ->
+                _isBookDuplicated.emit(isDuplicated)
+            }.onFailure { throwable ->
+                Timber.e("$throwable")
+            }
+        }
     }
 }

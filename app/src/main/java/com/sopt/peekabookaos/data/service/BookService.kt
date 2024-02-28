@@ -2,8 +2,10 @@ package com.sopt.peekabookaos.data.service
 
 import com.sopt.peekabookaos.data.entity.BaseResponse
 import com.sopt.peekabookaos.data.entity.NoResponse
+import com.sopt.peekabookaos.data.entity.request.BookDuplicateRequest
 import com.sopt.peekabookaos.data.entity.request.CreateBookRequest
 import com.sopt.peekabookaos.data.entity.request.EditBookRequest
+import com.sopt.peekabookaos.data.entity.response.BookDuplicateResponse
 import com.sopt.peekabookaos.data.entity.response.CreateBookResponse
 import retrofit2.http.Body
 import retrofit2.http.PATCH
@@ -23,5 +25,7 @@ interface BookService {
     ): NoResponse
 
     @POST("/bookshelf/duplicate")
-    suspend fun postBookDuplicate()
+    suspend fun postBookDuplicate(
+        @Body bookDuplicateRequest: BookDuplicateRequest
+    ): BaseResponse<BookDuplicateResponse>
 }
