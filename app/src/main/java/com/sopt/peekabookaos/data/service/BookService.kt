@@ -21,4 +21,7 @@ interface BookService {
         @Path("bookshelfId") bookId: Int,
         @Body bookComment: EditBookRequest
     ): NoResponse
+
+    @POST("/bookshelf/duplicate")
+    suspend fun postBookDuplicate()
 }

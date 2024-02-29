@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.usecase.PatchSignUpUseCase
-import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
+import com.sopt.peekabookaos.domain.usecase.PostNicknameDuplicateUseCase
 import com.sopt.peekabookaos.util.ContentUriRequestBody
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UserInputViewModel @Inject constructor(
     private val application: Application,
-    private val postDuplicateUseCase: PostDuplicateUseCase,
+    private val postNicknameDuplicateUseCase: PostNicknameDuplicateUseCase,
     private val patchSignUpUseCase: PatchSignUpUseCase
 ) : ViewModel() {
     private val _isNickname: MutableLiveData<Boolean> = MutableLiveData(true)
@@ -68,7 +68,7 @@ class UserInputViewModel @Inject constructor(
 
     fun getNickNameState() {
         viewModelScope.launch {
-            postDuplicateUseCase(requireNotNull(nickname.value))
+            postNicknameDuplicateUseCase(requireNotNull(nickname.value))
                 .onSuccess { check ->
                     _isNickname.value = (check == 1)
                     updateNicknameMessage(true)
