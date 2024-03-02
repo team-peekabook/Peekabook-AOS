@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.BuildConfig
 import com.sopt.peekabookaos.domain.entity.ForcedUpdate
 import com.sopt.peekabookaos.domain.entity.SplashUiState
-import com.sopt.peekabookaos.domain.usecase.GetFcmTokenUseCase
 import com.sopt.peekabookaos.domain.usecase.GetSignedUpUseCase
 import com.sopt.peekabookaos.domain.usecase.HasUpdateVersionCheckUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,25 +18,12 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val hasUpdateVersionCheckUseCase: HasUpdateVersionCheckUseCase,
     private val getSignedUpUseCase: GetSignedUpUseCase,
-    /** 지울 것 */
-    private val getFcmTokenUseCase: GetFcmTokenUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<SplashUiState>(SplashUiState.Idle)
     val uiState = _uiState.asSharedFlow()
 
     init {
         checkHasUpdate()
-        /** 지울 것 */
-        getFcmToken()
-    }
-
-    /** 지울 것 */
-    private fun getFcmToken() {
-        viewModelScope.launch {
-            var fcmToken = ""
-            getFcmTokenUseCase { getFcmToken -> fcmToken = getFcmToken }
-            Timber.tag("asdf").d("$fcmToken")
-        }
     }
 
     private fun isSignedUp(): Boolean = getSignedUpUseCase()

@@ -46,4 +46,5 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
             } ?: Timber.e(getString(R.string.null_point_exception))
         }
     }
+
 }

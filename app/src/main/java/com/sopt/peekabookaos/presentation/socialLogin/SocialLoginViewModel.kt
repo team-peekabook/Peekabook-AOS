@@ -26,8 +26,6 @@ class SocialLoginViewModel @Inject constructor(
         getFcmToken()
     }
 
-    private var fcmToken: String = ""
-
     private val _isKakaoLogin = MutableStateFlow(false)
     val isKakaoLogin = _isKakaoLogin.asStateFlow()
 
@@ -37,15 +35,17 @@ class SocialLoginViewModel @Inject constructor(
     val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         KakaoLoginCallback { accessToken ->
             _isKakaoLogin.value = true
-            initTokenUseCase(accessToken = accessToken, refreshToken = "", fcmToken)
+            initTokenUseCase(accessToken = accessToken, refreshToken = "")
         }.handleResult(token, error)
     }
+
+    private var fcmToken = ""
 
     fun postLogin() {
         viewModelScope.launch {
             postLoginUseCase(SOCIAL_TYPE, fcmToken)
                 .onSuccess { response ->
-                    initTokenUseCase(response.accessToken, response.refreshToken, fcmToken)
+                    initTokenUseCase(response.accessToken, response.refreshToken)
                     _isSignedUp.emit(response.isSignedUp)
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
@@ -54,9 +54,7 @@ class SocialLoginViewModel @Inject constructor(
     }
 
     private fun getFcmToken() {
-        viewModelScope.launch {
-            getFcmTokenUseCase { getFcmToken -> fcmToken = getFcmToken }
-        }
+        getFcmTokenUseCase { getFcmToken -> fcmToken = getFcmToken }
     }
 
     companion object {

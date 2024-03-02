@@ -7,7 +7,7 @@ interface AuthRepository {
 
     suspend fun deleteUser(): Result<Unit>
 
-    fun initToken(accessToken: String, refreshToken: String, fcmToken: String)
+    fun initToken(accessToken: String, refreshToken: String)
 
     fun clearLocalPref()
 
