@@ -17,8 +17,12 @@ import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.UiEvent
 import com.sopt.peekabookaos.util.binding.BindingFragment
+import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
+import com.sopt.peekabookaos.util.dialog.WarningDialogFragment
+import com.sopt.peekabookaos.util.dialog.WarningType
 import com.sopt.peekabookaos.util.extensions.getParcelableCompat
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
+import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,9 +34,36 @@ class CreateBookFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.vm = createBookViewModel
         initBookInfo()
+        checkBookDuplicate()
+        collectBookDuplicate()
         initEditTextClearFocus()
         initBackBtnOnClickListener()
         collectUiEvent()
+    }
+
+    private fun checkBookDuplicate() = createBookViewModel.postBookDuplicate()
+
+    private fun collectBookDuplicate() {
+        repeatOnStarted {
+            createBookViewModel.isBookDuplicated.collect { isDuplicated ->
+                if (isDuplicated) {
+                    showBookDuplicateDialog()
+                }
+            }
+        }
+    }
+
+    private fun showBookDuplicateDialog() {
+        WarningDialogFragment().withArgs {
+            putSerializable(
+                WarningDialogFragment.WARNING_TYPE,
+                WarningType.WARNING_BOOK_DUPLICATE
+            )
+            putParcelable(
+                WarningDialogFragment.CONFIRM_ACTION,
+                ConfirmClickListener(confirmAction = { requireActivity().finish() })
+            )
+        }.show(childFragmentManager, WarningDialogFragment.DIALOG_WARNING)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -65,6 +96,7 @@ class CreateBookFragment :
                     UiEvent.IDLE -> {
                         binding.btnCreateBookSave.isEnabled = false
                     }
+
                     UiEvent.SUCCESS -> {
                         startActivity(
                             Intent(requireActivity(), DetailActivity::class.java).apply {
@@ -74,6 +106,7 @@ class CreateBookFragment :
                         )
                         requireActivity().finish()
                     }
+
                     UiEvent.ERROR -> {
                         binding.btnCreateBookSave.isEnabled = true
                     }

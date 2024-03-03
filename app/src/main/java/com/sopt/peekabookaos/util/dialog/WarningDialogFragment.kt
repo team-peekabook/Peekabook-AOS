@@ -52,21 +52,42 @@ class WarningDialogFragment : DialogFragment() {
 
                 WarningType.WARNING_UNFOLLOW ->
                     WarningDialogContent().getWarningUnfollow(requireContext(), follower)
+
+                WarningType.WARNING_BOOK_DUPLICATE ->
+                    WarningDialogContent().getWarningDuplicateBook(requireContext())
             }
         }
     }
 
     private fun initCancelBtnClickListener() {
         binding.btnWarningDialogCancel.setSingleOnClickListener {
+            val warningType = arguments?.getSerializableCompat(WARNING_TYPE) as? WarningType
+                ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
+            when (warningType as WarningType) {
+                WarningType.WARNING_RECOMMEND, WarningType.WARNING_DELETE_BOOK, WarningType.WARNING_DELETE_FOLLOWER, WarningType.WARNING_UNFOLLOW -> {}
+                WarningType.WARNING_BOOK_DUPLICATE -> {
+                    arguments?.getParcelableCompat<ConfirmClickListener>(CONFIRM_ACTION)
+                        ?.onConfirmClick()
+                        ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
+                }
+            }
             dismiss()
         }
     }
 
     private fun initConfirmClickListener() {
         binding.btnWarningDialogConfirm.setSingleOnClickListener {
-            arguments?.getParcelableCompat<ConfirmClickListener>(CONFIRM_ACTION)
-                ?.onConfirmClick()
+            val warningType = arguments?.getSerializableCompat(WARNING_TYPE) as? WarningType
                 ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
+            when (warningType as WarningType) {
+                WarningType.WARNING_RECOMMEND, WarningType.WARNING_DELETE_BOOK, WarningType.WARNING_DELETE_FOLLOWER, WarningType.WARNING_UNFOLLOW -> {
+                    arguments?.getParcelableCompat<ConfirmClickListener>(CONFIRM_ACTION)
+                        ?.onConfirmClick()
+                        ?: Timber.e(getString(R.string.null_point_exception_warning_dialog_argument))
+                }
+
+                WarningType.WARNING_BOOK_DUPLICATE -> {}
+            }
             dismiss()
         }
     }

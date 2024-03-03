@@ -32,4 +32,14 @@ class BookRepositoryImpl @Inject constructor(
         description: String?,
         memo: String?
     ): Result<Unit> = kotlin.runCatching { bookDataSource.patchEditBook(bookId, description, memo) }
+
+    override suspend fun postBookDuplicate(
+        bookTitle: String,
+        author: String,
+        publisher: String
+    ): Result<Boolean> =
+        kotlin.runCatching { bookDataSource.postBookDuplicate(bookTitle, author, publisher) }
+            .map { response ->
+                requireNotNull(response.data).isDuplicate
+            }
 }

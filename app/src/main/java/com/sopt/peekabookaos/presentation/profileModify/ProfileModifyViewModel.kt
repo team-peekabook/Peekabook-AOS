@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.PatchProfileModifyUseCase
-import com.sopt.peekabookaos.domain.usecase.PostDuplicateUseCase
+import com.sopt.peekabookaos.domain.usecase.PostNicknameDuplicateUseCase
 import com.sopt.peekabookaos.util.ContentUriRequestBody
 import com.sopt.peekabookaos.util.ImageUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileModifyViewModel @Inject constructor(
     private val application: Application,
-    private val postDuplicateUseCase: PostDuplicateUseCase,
+    private val postNicknameDuplicateUseCase: PostNicknameDuplicateUseCase,
     private val patchProfileModifyUseCase: PatchProfileModifyUseCase
 ) : ViewModel() {
     private val _isNicknameInUse: MutableLiveData<Boolean> = MutableLiveData(true)
@@ -72,7 +72,7 @@ class ProfileModifyViewModel @Inject constructor(
 
     fun getNickNameState() {
         viewModelScope.launch {
-            postDuplicateUseCase(requireNotNull(nickname.value))
+            postNicknameDuplicateUseCase(requireNotNull(nickname.value))
                 .onSuccess { check ->
                     _isNicknameInUse.value = (check == 1)
                     updateNicknameMessage(true)
