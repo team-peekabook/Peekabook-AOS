@@ -11,4 +11,10 @@ interface BookRepository {
     ): Result<Int>
 
     suspend fun patchEditBook(bookId: Int, description: String?, memo: String?): Result<Unit>
+
+    suspend fun postBookDuplicate(
+        bookTitle: String,
+        author: String,
+        publisher: String
+    ): Result<Boolean>
 }

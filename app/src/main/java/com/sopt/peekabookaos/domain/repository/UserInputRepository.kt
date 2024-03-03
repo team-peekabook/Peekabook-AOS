@@ -4,7 +4,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 interface UserInputRepository {
-    suspend fun postDuplicate(
+    suspend fun postNicknameDuplicate(
         nickname: String
     ): Result<Int>
 

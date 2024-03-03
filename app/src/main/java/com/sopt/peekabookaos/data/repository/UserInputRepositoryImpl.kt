@@ -9,11 +9,11 @@ import javax.inject.Inject
 class UserInputRepositoryImpl @Inject constructor(
     private val userInputDataSource: UserInputDataSource
 ) : UserInputRepository {
-    override suspend fun postDuplicate(
+    override suspend fun postNicknameDuplicate(
         nickname: String
     ): Result<Int> =
         kotlin.runCatching {
-            userInputDataSource.postDuplicate(
+            userInputDataSource.postNicknameDuplicate(
                 nickname
             )
         }.map { response -> requireNotNull(response.data).check }
