@@ -8,8 +8,9 @@ import com.sopt.peekabookaos.databinding.ItemRecommendBinding
 import com.sopt.peekabookaos.domain.entity.Recommend
 import com.sopt.peekabookaos.util.ItemDiffCallback
 
-class BookRecommendAdapter :
-    ListAdapter<Recommend, BookRecommendAdapter.BookRecommendationViewHolder>(recommendationDiffUtil) {
+class BookRecommendAdapter(
+    private val onClickDelete: (Int) -> Unit
+) : ListAdapter<Recommend, BookRecommendAdapter.BookRecommendationViewHolder>(recommendationDiffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -22,7 +23,8 @@ class BookRecommendAdapter :
                 false
             )
         return BookRecommendationViewHolder(
-            itemRecommendRecommendedBinding
+            itemRecommendRecommendedBinding,
+            onClickDelete
         )
     }
 
@@ -30,10 +32,16 @@ class BookRecommendAdapter :
         holder.onBind(getItem(position))
     }
 
-    class BookRecommendationViewHolder(private val binding: ItemRecommendBinding) :
+    class BookRecommendationViewHolder(
+        private val binding: ItemRecommendBinding,
+        private val onClickDelete: (Int) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Recommend) {
             binding.data = data
+            binding.ivItemRecommendDelete.setOnClickListener {
+                onClickDelete(data.recommendId)
+            }
         }
     }
 
