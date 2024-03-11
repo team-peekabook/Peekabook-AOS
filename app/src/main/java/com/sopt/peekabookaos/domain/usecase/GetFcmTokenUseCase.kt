@@ -3,9 +3,9 @@ package com.sopt.peekabookaos.domain.usecase
 import com.sopt.peekabookaos.domain.repository.AuthRepository
 import javax.inject.Inject
 
-class PostLoginUseCase @Inject constructor(
+class GetFcmTokenUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    suspend operator fun invoke(socialPlatform: String, fcmToken: String) =
-        authRepository.postLogin(socialPlatform, fcmToken)
+    operator fun invoke(setFcmToken: (String) -> Unit) =
+        authRepository.getFcmToken(setFcmToken)
 }

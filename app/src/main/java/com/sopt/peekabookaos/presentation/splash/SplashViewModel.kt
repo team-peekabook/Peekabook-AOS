@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val hasUpdateVersionCheckUseCase: HasUpdateVersionCheckUseCase,
-    private val getSignedUpUseCase: GetSignedUpUseCase
+    private val getSignedUpUseCase: GetSignedUpUseCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<SplashUiState>(SplashUiState.Idle)
     val uiState = _uiState.asSharedFlow()

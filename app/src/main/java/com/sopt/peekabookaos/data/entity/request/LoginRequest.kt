@@ -4,5 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LoginRequest(
-    val socialPlatform: String
+    val socialPlatform: String,
+    val fcmToken: String
 )

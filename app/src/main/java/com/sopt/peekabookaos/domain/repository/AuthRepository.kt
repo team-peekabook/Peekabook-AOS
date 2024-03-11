@@ -3,7 +3,7 @@ package com.sopt.peekabookaos.domain.repository
 import com.sopt.peekabookaos.domain.entity.Token
 
 interface AuthRepository {
-    suspend fun postLogin(socialPlatform: String): Result<Token>
+    suspend fun postLogin(socialPlatform: String, fcmToken: String): Result<Token>
 
     suspend fun deleteUser(): Result<Unit>
 
@@ -14,4 +14,6 @@ interface AuthRepository {
     fun getSignedUp(): Boolean
 
     fun setSignedUp()
+
+    fun getFcmToken(setFcmToken: (String) -> Unit)
 }
