@@ -8,31 +8,31 @@ import com.sopt.peekabookaos.databinding.ItemRecommendBinding
 import com.sopt.peekabookaos.domain.entity.Recommend
 import com.sopt.peekabookaos.util.ItemDiffCallback
 
-class BookRecommendAdapter(
+class RecommendAdapter(
     private val onClickDelete: (Int) -> Unit
-) : ListAdapter<Recommend, BookRecommendAdapter.BookRecommendationViewHolder>(recommendationDiffUtil) {
+) : ListAdapter<Recommend, RecommendAdapter.RecommendViewHolder>(recommendDiffUtil) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BookRecommendationViewHolder {
-        val itemRecommendRecommendedBinding =
+    ): RecommendViewHolder {
+        val itemRecommendBinding =
             ItemRecommendBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-        return BookRecommendationViewHolder(
-            itemRecommendRecommendedBinding,
+        return RecommendViewHolder(
+            itemRecommendBinding,
             onClickDelete
         )
     }
 
-    override fun onBindViewHolder(holder: BookRecommendationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecommendViewHolder, position: Int) {
         holder.onBind(getItem(position))
     }
 
-    class BookRecommendationViewHolder(
+    class RecommendViewHolder(
         private val binding: ItemRecommendBinding,
         private val onClickDelete: (Int) -> Unit
     ) :
@@ -46,7 +46,7 @@ class BookRecommendAdapter(
     }
 
     companion object {
-        private val recommendationDiffUtil = ItemDiffCallback<Recommend>(
+        private val recommendDiffUtil = ItemDiffCallback<Recommend>(
             onItemsTheSame = { old, new -> old.bookTitle == new.bookTitle },
             onContentsTheSame = { old, new -> old == new }
         )
