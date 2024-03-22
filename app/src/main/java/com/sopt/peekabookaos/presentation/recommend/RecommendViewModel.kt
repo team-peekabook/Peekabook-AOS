@@ -88,18 +88,9 @@ class RecommendViewModel @Inject constructor(
         viewModelScope.launch {
             getRecommendUseCase()
                 .onSuccess { response ->
-                    _recommendingBook.value =
-                        response.recommendingBook.map { recommendingBook ->
-                            recommendingBook.copy(isEditMode = requireNotNull(_isEditMode.value))
-                        }
-                    _recommendedBook.value =
-                        response.recommendedBook.map { recommendedBook ->
-                            recommendedBook.copy(isEditMode = requireNotNull(_isEditMode.value))
-                        }
-                    checkEditMode(
-                        requireNotNull(_recommendingBook.value),
-                        requireNotNull(_recommendedBook.value)
-                    )
+                    _isEditMode.value = false
+                    _recommendingBook.value = response.recommendingBook
+                    _recommendedBook.value = response.recommendedBook
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
