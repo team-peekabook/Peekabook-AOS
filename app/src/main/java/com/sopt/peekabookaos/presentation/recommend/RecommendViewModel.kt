@@ -36,11 +36,11 @@ class RecommendViewModel @Inject constructor(
     private val _isEditMode = MediatorLiveData<Boolean>().apply {
         value = false
 
-        addSource(_recommendedBook) {
-            value = checkEditMode(it, requireNotNull(_recommendingBook.value))
+        addSource(_recommendedBook) { recommendedBooks ->
+            value = checkEditMode(recommendedBooks, _recommendingBook.value ?: emptyList())
         }
-        addSource(_recommendingBook) {
-            value = checkEditMode(requireNotNull(_recommendedBook.value), it)
+        addSource(_recommendingBook) { recommendingBooks ->
+            value = checkEditMode(_recommendedBook.value ?: emptyList(), recommendingBooks)
         }
     }
     val isEditMode: LiveData<Boolean> = _isEditMode
@@ -57,14 +57,14 @@ class RecommendViewModel @Inject constructor(
     }
 
     fun toggleEditMode() {
-        _isEditMode.value = requireNotNull(_isEditMode.value).not()
+        _isEditMode.value = _isEditMode.value?.not() ?: false
         val updatedRecommendedBooks =
-            _recommendedBook.value?.map { it.copy(isEditMode = requireNotNull(_isEditMode.value)) }
-        _recommendedBook.value = requireNotNull(updatedRecommendedBooks)
+            _recommendedBook.value?.map { it.copy(isEditMode = _isEditMode.value ?: false) }
+        _recommendedBook.value = updatedRecommendedBooks ?: emptyList()
 
         val updatedRecommendingBooks =
-            _recommendingBook.value?.map { it.copy(isEditMode = requireNotNull(_isEditMode.value)) }
-        _recommendingBook.value = requireNotNull(updatedRecommendingBooks)
+            _recommendingBook.value?.map { it.copy(isEditMode = _isEditMode.value ?: false) }
+        _recommendingBook.value = updatedRecommendingBooks ?: emptyList()
     }
 
     fun deleteRecommend() {
@@ -88,18 +88,9 @@ class RecommendViewModel @Inject constructor(
         viewModelScope.launch {
             getRecommendUseCase()
                 .onSuccess { response ->
-                    _recommendingBook.value =
-                        response.recommendingBook.map { recommendingBook ->
-                            recommendingBook.copy(isEditMode = requireNotNull(_isEditMode.value))
-                        }
-                    _recommendedBook.value =
-                        response.recommendedBook.map { recommendedBook ->
-                            recommendedBook.copy(isEditMode = requireNotNull(_isEditMode.value))
-                        }
-                    checkEditMode(
-                        requireNotNull(_recommendingBook.value),
-                        requireNotNull(_recommendedBook.value)
-                    )
+                    _isEditMode.value = false
+                    _recommendingBook.value = response.recommendingBook
+                    _recommendedBook.value = response.recommendedBook
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }
