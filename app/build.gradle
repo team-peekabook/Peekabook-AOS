@@ -21,8 +21,8 @@ android {
         applicationId "com.sopt.peekabookaos"
         minSdk 28
         targetSdk 34
-        versionCode 9
-        versionName "1.2.0"
+        versionCode 10
+        versionName "1.2.1"
 
         buildConfigField "String", "NAVER_URL", properties["NAVER_URL"]
         buildConfigField "String", "CLIENT_ID", properties["CLIENT_ID"]
