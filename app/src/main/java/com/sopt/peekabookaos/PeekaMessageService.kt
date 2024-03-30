@@ -59,10 +59,10 @@ class PeekaMessageService : FirebaseMessagingService() {
     }
 
     companion object {
-        const val CHANNEL_ID = "peeka_channel"
-        const val NOTIFICATION_ID = 1
-        const val CHANNEL_NAME = "peeka_channel_name"
-        const val TITLE = "title"
-        const val BODY = "body"
+        private const val CHANNEL_ID = "peeka_channel"
+        private const val NOTIFICATION_ID = 1
+        private const val CHANNEL_NAME = "peeka_channel_name"
+        private const val TITLE = "title"
+        private const val BODY = "body"
     }
 }
