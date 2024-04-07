@@ -18,6 +18,5 @@ class LocalTokenDataSource @Inject constructor(
     companion object {
         private const val ACCESS_TOKEN = "access_token"
         private const val REFRESH_TOKEN = "refresh_token"
-        private const val FCM_TOKEN = "fcm_token"
     }
 }
