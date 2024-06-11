@@ -92,18 +92,40 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/tv_my_page_block"
+            android:id="@+id/tv_my_page_notification"
             style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="9dp"
             android:paddingVertical="16dp"
-            android:text="@string/my_page_block"
+            android:text="@string/my_page_notification"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_my_page_rect" />
+
+        <View
+            android:id="@+id/view_my_page_notification"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/peeka_g_1"
+            app:layout_constraintEnd_toEndOf="@id/tv_my_page_notification"
+            app:layout_constraintStart_toStartOf="@id/tv_my_page_notification"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_notification" />
+
+        <TextView
+            android:id="@+id/tv_my_page_block"
+            style="@style/H2Md"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:paddingVertical="16dp"
+            android:text="@string/my_page_block"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_notification" />
 
         <View
             android:id="@+id/view_my_page_block"

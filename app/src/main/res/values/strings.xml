@@ -81,6 +81,7 @@
     <!-- MyPage -->
     <string name="my_page_name">북과픽</string>
     <string name="my_page_intro">안녕하세요. 저는 북과픽입니다.</string>
+    <string name="my_page_notification">알림 설정</string>
     <string name="my_page_block">차단사용자 관리하기</string>
     <string name="my_page_policy"><![CDATA[개인정보 보호 정책 & 서비스 이용 약관]]></string>
     <string name="my_page_ask">문의하기</string>
