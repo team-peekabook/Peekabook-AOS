@@ -1,10 +1,14 @@
 package com.sopt.peekabookaos.presentation.myPage
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.sopt.peekabookaos.R
@@ -20,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     private val myPageViewModel: MyPageViewModel by viewModels()
+    private val notificationPermissionRequestCode = 101
 
     override fun onResume() {
         super.onResume()
@@ -29,6 +34,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = myPageViewModel
+        initNotificationBtnClickListener()
         initBlockBtnClickListener()
         initWithdrawBtnClickListener()
         initLogoutBtnClickListener()
@@ -37,6 +43,23 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_
         initLinkAskClickListener()
         initLinkPolicyClickListener()
         initOpenSourceClickListener()
+    }
+
+    private fun initNotificationBtnClickListener() {
+        binding.tvMyPageNotification.setSingleOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.POST_NOTIFICATIONS
+                    ) == PackageManager.PERMISSION_DENIED
+                ) {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                        data = Uri.fromParts("package", requireContext().packageName, null)
+                    }
+                    requireContext().startActivity(intent)
+                }
+            }
+        }
     }
 
     private fun initBlockBtnClickListener() {
