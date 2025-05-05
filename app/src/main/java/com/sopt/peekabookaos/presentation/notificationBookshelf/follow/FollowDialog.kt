@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.report
+package com.sopt.peekabookaos.presentation.notificationBookshelf.follow
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,27 +9,33 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sopt.peekabookaos.R
-import com.sopt.peekabookaos.databinding.DialogReportBinding
+import com.sopt.peekabookaos.databinding.DialogFollowBinding
 import com.sopt.peekabookaos.presentation.main.MainActivity
 
-class ReportDialog : DialogFragment() {
-    private var _binding: DialogReportBinding? = null
+class FollowDialog : DialogFragment() {
+    private var _binding: DialogFollowBinding? = null
     private val binding get() = _binding ?: error(getString(R.string.binding_error))
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding =
-            DataBindingUtil.inflate(inflater, R.layout.dialog_report, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.dialog_follow, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLayout()
-        initReportBtnClickListener()
+        initFollowDialogContent()
+        initFollowBtnClickListener()
+    }
+
+    private fun initFollowDialogContent() {
+        val nickname = arguments?.getString(NICKNAME) ?: ""
+        binding.tvDialogFollowTitle.text =
+            getString(R.string.notification_bookshelf_dialog_follow_content, nickname)
     }
 
     private fun initLayout() {
@@ -41,8 +47,8 @@ class ReportDialog : DialogFragment() {
         isCancelable = true
     }
 
-    private fun initReportBtnClickListener() {
-        binding.btnDialogReportHome.setOnClickListener {
+    private fun initFollowBtnClickListener() {
+        binding.btnDialogFollowConfirm.setOnClickListener {
             moveToMain()
         }
     }
@@ -60,6 +66,7 @@ class ReportDialog : DialogFragment() {
     }
 
     companion object {
-        const val TAG = "ReportDialogFragment"
+        const val TAG = "FollowDialogFragment"
+        const val NICKNAME = "nickname"
     }
 }

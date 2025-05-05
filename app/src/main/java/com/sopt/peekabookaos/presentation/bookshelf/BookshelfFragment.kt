@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
+import com.sopt.peekabookaos.presentation.block.BlockDialog
 import com.sopt.peekabookaos.presentation.book.BookActivity
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
@@ -196,7 +197,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initKebabClickListener() {
         binding.btnBookshelfMore.setSingleOnClickListener {
             val bookShelfBottomSheetFragment =
-                BookShelfBottomSheetFragment.onItemClick { itemClick ->
+                FollowBookShelfBottomSheetFragment.onItemClick { itemClick ->
                     when (itemClick) {
                         0 -> initUnfollowDialog()
                         1 -> initReport()

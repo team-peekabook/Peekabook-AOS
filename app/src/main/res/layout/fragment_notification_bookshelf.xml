@@ -1,22 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.notificationBookshelf.NotificationBookShelfViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/peeka_beige"
-        tools:context=".presentation.notification.NotificationBookshelfFragment">
+        android:background="@color/peeka_beige">
 
-        <TextView
+        <ImageButton
+            android:id="@+id/btn_notification_bookshelf_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.sothree.slidinguppanel.SlidingUpPanelLayout
+            android:id="@+id/sliding_up_panel_notification_bookshelf"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="NotificationBookshelfFragment" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_notification_bookshelf_back"
+            app:umanoDragView="@id/cl_notification_bookshelf_bottom_view"
+            app:umanoFadeColor="@android:color/transparent"
+            app:umanoOverlay="true"
+            app:umanoPanelHeight="350dp"
+            app:umanoParallaxOffset="0dp"
+            app:umanoScrollableView="@id/rv_notification_bookshelf_bottom_view_shelf"
+            app:umanoShadowHeight="0dp">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_notification_bookshelf_top_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_notification_bookshelf_self_intro"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="23dp"
+                    android:background="@drawable/shape_white30fill_redlines_rect"
+                    android:gravity="center|start"
+                    android:orientation="horizontal"
+                    app:layout_constraintDimensionRatio="1:0.24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cl_notification_bookshelf_top_view">
+
+                    <TextView
+                        android:id="@+id/tv_notification_bookshelf_self_intro_name"
+                        style="@style/NameBd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="11dp"
+                        android:layout_marginStart="16dp"
+                        android:maxEms="2"
+                        android:maxLines="2"
+                        android:minEms="2"
+                        android:text="@{vm.friendData.nickname}"
+                        android:textAlignment="center"
+                        android:textColor="@color/peeka_red"
+                        tools:text="수빈은문수빈" />
+
+                    <TextView
+                        android:id="@+id/tv_notification_bookshelf_self_intro_name_comment"
+                        style="@style/H2Md"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="11dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="23dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{vm.friendData.intro}"
+                        android:textColor="@color/peeka_red"
+                        tools:text="안녕하세요, 저는 한줄소개 입니다! " />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btn_notification_bookshelf_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_bookshelf_more"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ll_notification_bookshelf_self_intro" />
+
+                <TextView
+                    android:id="@+id/tv_notification_bookshelf_pick"
+                    style="@style/EngSb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/bookshelf_pick"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_notification_bookshelf_self_intro" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_notification_bookshelf_follow"
+                    style="@style/CBd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/shape_red_fill_rect"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingHorizontal="9dp"
+                    android:paddingVertical="5dp"
+                    android:text="@string/notification_bookshelf_follow"
+                    android:textColor="@color/peeka_beige"
+                    android:visibility="@{vm.isFollow == true ? View.INVISIBLE : View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_notification_bookshelf_pick"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_notification_bookshelf_pick" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_notification_bookshelf_recommend"
+                    style="@style/CBd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/shape_white40fill_redline_rect"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingHorizontal="9dp"
+                    android:paddingVertical="5dp"
+                    android:text="@string/notification_bookshelf_recommend_book"
+                    android:textColor="@color/peeka_red"
+                    android:visibility="@{vm.isFollow == true ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_notification_bookshelf_pick"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_notification_bookshelf_pick"
+                    tools:visibility="invisible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_notification_bookshelf_pick"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_notification_bookshelf_pick"
+                    tools:listitem="@layout/item_bookshelf_pick" />
+
+                <TextView
+                    android:id="@+id/tv_notification_bookshelf_pick_empty"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:gravity="center"
+                    android:text="@string/bookshelf_pick_empty_friend"
+                    android:textColor="@color/peeka_red_60"
+                    android:visibility="@{vm.pickData.isEmpty? View.VISIBLE: View.INVISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_notification_bookshelf_pick"
+                    tools:text="앗! 친구가 Pick한 책이 없어요.\n책 추천하기 버튼을 눌러 \n친구에게 책을 추천 해보세요!" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_notification_bookshelf_bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_light_beige_fill_top15_rect">
+
+                <ImageView
+                    android:id="@+id/iv_notification_bookshelf_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_bookshelf_indicator"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_notification_bookshelf_bottom_view_title"
+                    style="@style/EngSb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="35dp"
+                    android:text="@{@string/bookshelf_myshelf_title(vm.bookTotalNum)}"
+                    android:textColor="@color/peeka_red"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_notification_bookshelf_bottom_view_shelf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="114dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_notification_bookshelf_bottom_view_title"
+                    app:spanCount="3"
+                    tools:listitem="@layout/item_bookshelf_shelf" />
+
+                <ImageView
+                    android:id="@+id/iv_notification_bookshelf_bottom_empty_friend"
+                    android:layout_width="48dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="14dp"
+                    android:src="@drawable/ic_bookshelf_bottom_empty_friend"
+                    android:visibility="@{vm.bookTotalNum == 0? View.VISIBLE:View.INVISIBLE}"
+                    app:layout_constraintBottom_toTopOf="@id/tv_notification_bookshelf_bottom_view_empty_friend"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_notification_bookshelf_bottom_view_empty_friend"
+                    style="@style/H2Md"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/notification_bookshelf_bottom_view_empty_friend"
+                    android:textColor="@color/peeka_red_60"
+                    android:visibility="@{vm.bookTotalNum == 0? View.VISIBLE:View.INVISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.sothree.slidinguppanel.SlidingUpPanelLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sopt.peekabookaos.databinding.DialogBookshelfBottomSheetBinding
+import com.sopt.peekabookaos.databinding.DialogFollowBookshelfBottomSheetBinding
 
-class BookShelfBottomSheetFragment : BottomSheetDialogFragment() {
-    private lateinit var binding: DialogBookshelfBottomSheetBinding
+class FollowBookShelfBottomSheetFragment : BottomSheetDialogFragment() {
+    private lateinit var binding: DialogFollowBookshelfBottomSheetBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DialogBookshelfBottomSheetBinding.inflate(inflater, container, false)
+    ): View {
+        binding = DialogFollowBookshelfBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,9 +42,9 @@ class BookShelfBottomSheetFragment : BottomSheetDialogFragment() {
         lateinit var itemClick: (Int) -> Unit
         fun onItemClick(
             itemClick: (Int) -> Unit
-        ): BookShelfBottomSheetFragment {
+        ): FollowBookShelfBottomSheetFragment {
             this.itemClick = itemClick
-            return BookShelfBottomSheetFragment()
+            return FollowBookShelfBottomSheetFragment()
         }
     }
 }

@@ -12,12 +12,14 @@ import com.sopt.peekabookaos.util.ItemDiffCallback
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
 class NotificationAdapter(
-    private val onNotificationClicked: (Int) -> Unit
+    private val onNotificationClicked: (Notification) -> Unit
 ) : ListAdapter<Notification, NotificationAdapter.NotificationViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val binding = ItemNotificationBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return NotificationViewHolder(binding)
     }
@@ -27,7 +29,7 @@ class NotificationAdapter(
         holder.bind(item)
 
         holder.binding.clItemNotification.setSingleOnClickListener {
-            onNotificationClicked(item.typeId)
+            onNotificationClicked(item)
         }
     }
 
@@ -40,7 +42,7 @@ class NotificationAdapter(
 
             val commentText = buildComment(item)
             when (item.typeId) {
-                1 -> {
+                1, 4 -> {
                     tvNotificationMentionType1.text = commentText
                     tvNotificationMentionType1.isVisible = true
                     tvNotificationMention.isVisible = false
@@ -60,10 +62,11 @@ class NotificationAdapter(
             val ctx = binding.root.context
             return when (item.typeId) {
                 1 -> {
-                    val resId = if (item.senderName.length <= 5)
+                    val resId = if (item.senderName.length <= 5) {
                         R.string.notification_follow_name_short
-                    else
+                    } else {
                         R.string.notification_follow_name_long
+                    }
                     ctx.getString(resId, item.senderName)
                 }
 

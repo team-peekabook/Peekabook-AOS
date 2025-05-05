@@ -1,6 +1,7 @@
 package com.sopt.peekabookaos.presentation.recommendation
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import com.sopt.peekabookaos.databinding.FragmentRecommendationBinding
 import com.sopt.peekabookaos.domain.entity.Book
 import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.presentation.book.BookActivity
+import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.util.KeyBoardUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.dialog.ConfirmClickListener
@@ -88,8 +90,15 @@ class RecommendationFragment :
     private fun initIsRecommendationObserve() {
         recommendationViewModel.isRecommendation.observe(viewLifecycleOwner) { success ->
             if (success) {
-                activity?.finish()
+                moveToMain()
             }
         }
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        startActivity(intent)
     }
 }

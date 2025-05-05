@@ -1,4 +1,4 @@
-package com.sopt.peekabookaos.presentation.bookshelf
+package com.sopt.peekabookaos.presentation.block
 
 import android.content.Context
 import com.sopt.peekabookaos.R
