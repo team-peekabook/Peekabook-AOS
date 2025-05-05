@@ -12,7 +12,7 @@ import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
 class NotificationAdapter(
     private val itemStringListener: ItemStringListener<Notification>,
-    private val onNotificationClicked: (Int) -> Unit
+    private val onNotificationClicked: (Notification) -> Unit
 ) : ListAdapter<Notification, NotificationAdapter.NotificationViewHolder>(DIFF_CALLBACK) {
 
     private val commentList = mutableListOf<String>()
@@ -59,7 +59,7 @@ class NotificationAdapter(
             tvNotificationDate.text =
                 getItem(position).createdAt
             clItemNotification.setSingleOnClickListener {
-                onNotificationClicked(getItem(position).typeId)
+                onNotificationClicked(getItem(position))
             }
         }
     }
