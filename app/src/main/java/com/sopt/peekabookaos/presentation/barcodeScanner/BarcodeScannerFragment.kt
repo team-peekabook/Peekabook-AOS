@@ -20,13 +20,10 @@ import com.google.mlkit.vision.barcode.common.Barcode
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBarcodeScannerBinding
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_INFO
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.util.ToastMessageUtil
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.getScreenSize
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
-import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
@@ -55,7 +52,6 @@ class BarcodeScannerFragment :
         initPermissionCallBack()
         collectServerState()
         initCloseBtnClickListener()
-        initHardDetectedClickListener()
         initBackPressedCallback()
     }
 
@@ -149,16 +145,6 @@ class BarcodeScannerFragment :
     private fun initCloseBtnClickListener() {
         binding.btnBarcodeClose.setOnClickListener {
             requireActivity().finish()
-        }
-    }
-
-    private fun initHardDetectedClickListener() {
-        binding.btnBarcodeTextSearch.setSingleOnClickListener {
-            bundle.putString(LOCATION, CREATE)
-            findNavController().navigate(
-                R.id.action_barcodeScannerFragment_to_searchBookFragment,
-                bundle
-            )
         }
     }
 

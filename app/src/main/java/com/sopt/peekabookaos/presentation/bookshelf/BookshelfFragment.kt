@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentBookshelfBinding
@@ -13,7 +12,6 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND_SHELF
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHELF
@@ -43,15 +41,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private lateinit var shelfItemDeco: BookshelfShelfDecoration
     private lateinit var pickItemDeco: BookshelfPickDecoration
     private val viewModel by viewModels<BookShelfViewModel>()
-
-    private val multiPermissionCallback =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
-            if (map.entries.isEmpty()) {
-                requestAllPermissions()
-            } else {
-                startActivity(Intent(requireActivity(), BookActivity::class.java))
-            }
-        }
 
     override fun onResume() {
         super.onResume()
@@ -187,7 +176,6 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
         binding.btnBookshelfRecommend.setSingleOnClickListener {
             val toSearchBook = Intent(requireActivity(), BookActivity::class.java).apply {
                 putExtra(FRIEND_INFO, viewModel.friendData.value)
-                putExtra(LOCATION, RECOMMEND)
             }
             startActivity(toSearchBook)
         }
@@ -202,12 +190,8 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
 
     private fun initCreateBookClickListener() {
         binding.btnBookshelfAddBook.setSingleOnClickListener {
-            requestAllPermissions()
+            startActivity(Intent(requireActivity(), BookActivity::class.java))
         }
-    }
-
-    private fun requestAllPermissions() {
-        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
     }
 
     private fun initKebabClickListener() {

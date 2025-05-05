@@ -63,16 +63,5 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.65" />
-
-        <ImageButton
-            android:id="@+id/btn_barcode_text_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:src="@drawable/ic_barcode_text_search"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline_barcode_horizental" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
