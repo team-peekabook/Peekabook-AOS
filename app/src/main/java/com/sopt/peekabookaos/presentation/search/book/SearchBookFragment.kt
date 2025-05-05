@@ -42,6 +42,7 @@ class SearchBookFragment :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
+        initBarcodeClickListener()
         collectUiEvent()
         initBackPressedCallback()
     }
@@ -129,7 +130,7 @@ class SearchBookFragment :
             return@setOnTouchListener false
         }
 
-        binding.btnSearchBook.setOnTouchListener { _, _ ->
+        binding.btnSearchBookBarcodeScanner.setOnTouchListener { _, _ ->
             KeyBoardUtil.hide(activity = requireActivity())
             return@setOnTouchListener false
         }
@@ -139,7 +140,7 @@ class SearchBookFragment :
         binding.etSearchBook.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                binding.btnSearchBook.performClick()
+                searchBookViewModel.searchOnClick()
                 handled = true
             }
             KeyBoardUtil.hide(activity = requireActivity())
@@ -164,18 +165,24 @@ class SearchBookFragment :
         )
     }
 
+    private fun initBarcodeClickListener() {
+        binding.btnSearchBookBarcodeScanner.setOnClickListener {
+            goToBarcodeScanner()
+        }
+    }
+
     private fun collectUiEvent() {
         repeatOnStarted {
             searchBookViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
                     UiEvent.IDLE -> {
-                        binding.btnSearchBook.isEnabled = false
+                        // binding.btnSearchBook.isEnabled = false
                     }
 
                     UiEvent.SUCCESS -> {
                         binding.llSearchBookError.isVisible = false
                         binding.rvSearchBook.isVisible = true
-                        binding.btnSearchBook.isEnabled = true
+                        // binding.btnSearchBook.isEnabled = true
                         searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
                         loadedBooks = searchBookViewModel.uiState.value.book
                     }
@@ -183,11 +190,15 @@ class SearchBookFragment :
                     UiEvent.ERROR -> {
                         binding.llSearchBookError.isVisible = true
                         binding.rvSearchBook.isVisible = false
-                        binding.btnSearchBook.isEnabled = true
+                        // binding.btnSearchBook.isEnabled = true
                     }
                 }
             }
         }
+    }
+
+    private fun goToBarcodeScanner() {
+        findNavController().navigate(R.id.action_searchBookFragment_to_barcodeScannerFragment)
     }
 
     override fun onDestroyView() {

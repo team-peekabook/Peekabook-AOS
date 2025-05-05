@@ -52,6 +52,13 @@
             app:exitAnim="@anim/anim_to_left"
             app:popEnterAnim="@anim/anim_from_left"
             app:popExitAnim="@anim/anim_to_right" />
+        <action
+            android:id="@+id/action_searchBookFragment_to_barcodeScannerFragment"
+            app:destination="@id/barcodeScannerFragment"
+            app:enterAnim="@anim/anim_from_bottom"
+            app:exitAnim="@anim/anim_to_top"
+            app:popEnterAnim="@anim/anim_from_top"
+            app:popExitAnim="@anim/anim_to_bottom" />
     </fragment>
 
     <fragment

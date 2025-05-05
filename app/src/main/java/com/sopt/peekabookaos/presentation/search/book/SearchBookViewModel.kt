@@ -44,6 +44,10 @@ class SearchBookViewModel @Inject constructor(
         }
     }
 
+    fun clearBookTitle() {
+        bookTitle.value = ""
+    }
+
     fun updateUiState(friendInfo: User, isCreateView: Boolean) {
         _uiState.value = _uiState.value.copy(
             friendInfo = friendInfo,
