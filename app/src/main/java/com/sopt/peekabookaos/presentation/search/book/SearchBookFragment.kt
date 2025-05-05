@@ -188,14 +188,11 @@ class SearchBookFragment :
         repeatOnStarted {
             searchBookViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
-                    UiEvent.IDLE -> {
-                        // binding.btnSearchBook.isEnabled = false
-                    }
+                    UiEvent.IDLE -> {}
 
                     UiEvent.SUCCESS -> {
                         binding.llSearchBookError.isVisible = false
                         binding.rvSearchBook.isVisible = true
-                        // binding.btnSearchBook.isEnabled = true
                         searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
                         loadedBooks = searchBookViewModel.uiState.value.book
                     }
@@ -203,7 +200,6 @@ class SearchBookFragment :
                     UiEvent.ERROR -> {
                         binding.llSearchBookError.isVisible = true
                         binding.rvSearchBook.isVisible = false
-                        // binding.btnSearchBook.isEnabled = true
                     }
                 }
             }

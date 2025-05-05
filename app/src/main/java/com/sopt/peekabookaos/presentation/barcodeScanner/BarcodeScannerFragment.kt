@@ -51,7 +51,7 @@ class BarcodeScannerFragment :
         super.onViewCreated(view, savedInstanceState)
         initPermissionCallBack()
         collectServerState()
-        initCloseBtnClickListener()
+        initBackBtnClickListener()
         initBackPressedCallback()
     }
 
@@ -142,9 +142,9 @@ class BarcodeScannerFragment :
         }
     }
 
-    private fun initCloseBtnClickListener() {
-        binding.btnBarcodeClose.setOnClickListener {
-            requireActivity().finish()
+    private fun initBackBtnClickListener() {
+        binding.btnBarcodeBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -179,7 +179,7 @@ class BarcodeScannerFragment :
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    activity?.finish()
+                    findNavController().popBackStack()
                 }
             }
         )
