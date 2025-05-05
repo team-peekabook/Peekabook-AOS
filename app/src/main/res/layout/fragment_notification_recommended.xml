@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="vm"
+            type="com.sopt.peekabookaos.presentation.recommend.RecommendViewModel" />
 
     </data>
 
@@ -10,11 +16,54 @@
         android:layout_height="match_parent"
         android:background="@color/peeka_beige">
 
+        <ImageView
+            android:id="@+id/iv_notification_recommended_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
+            android:id="@+id/tv_notification_recommended_title"
+            style="@style/H3Bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:text="@string/recommend_recommended"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_notification_recommended"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="true"
+            android:overScrollMode="never"
+            android:paddingBottom="12dp"
+            android:visibility="invisible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_notification_recommended_title"
+            tools:listitem="@layout/item_recommend" />
+
+        <TextView
+            android:id="@+id/tv_notification_recommended_empty"
+            style="@style/H2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="NotificatioRecommendedFragment" />
+            android:textColor="@color/peeka_red_60"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="엠티뷰" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
