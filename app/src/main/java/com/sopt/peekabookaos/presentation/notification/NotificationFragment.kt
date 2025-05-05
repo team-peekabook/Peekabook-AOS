@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentNotificationBinding
-import com.sopt.peekabookaos.domain.entity.Notification
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,9 +43,6 @@ class NotificationFragment :
 
     private fun initAdapter() {
         notifyAdapter = NotificationAdapter(
-            itemStringListener = { _, item ->
-                notifyAdapter.setComment(initCommentString(item))
-            },
             onNotificationClicked = { typeId ->
                 initNotificationItemClickListener(typeId)
             }
@@ -59,19 +55,6 @@ class NotificationFragment :
             activity?.finish()
         }
     }
-
-    private fun initCommentString(item: Notification): String =
-        when (item.typeId) {
-            1 -> if (item.senderName.length <= 5) {
-                getString(R.string.notification_follow_name_short)
-            } else {
-                getString(R.string.notification_follow_name_long)
-            }
-
-            2 -> getString(R.string.notification_recommend)
-            3 -> getString(R.string.notification_add)
-            else -> ""
-        }
 
     private fun initNotificationItemClickListener(typeId: Int) {
         when (typeId) {
