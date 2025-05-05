@@ -2,11 +2,13 @@ package com.sopt.peekabookaos.presentation.search.book
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -57,6 +59,7 @@ class SearchBookFragment :
         initCloseBtnClickListener()
         initBarcodeClickListener()
         collectUiEvent()
+        initNoBookClickListener()
         initBackPressedCallback()
     }
 
@@ -194,6 +197,7 @@ class SearchBookFragment :
 
                     UiEvent.SUCCESS -> {
                         binding.llSearchBookError.isVisible = false
+                        binding.clSearchBookNoBook.isVisible = false
                         binding.rvSearchBook.isVisible = true
                         searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book) {
                             searchBookAdapter?.showFooter = true
@@ -204,11 +208,24 @@ class SearchBookFragment :
 
                     UiEvent.ERROR -> {
                         binding.llSearchBookError.isVisible = true
+                        binding.clSearchBookNoBook.isVisible = true
                         binding.rvSearchBook.isVisible = false
                     }
                 }
             }
         }
+    }
+
+    private fun initNoBookClickListener() {
+        binding.clSearchBookNoBook.setOnClickListener {
+            goToWalla()
+        }
+    }
+
+    private fun goToWalla() {
+        val url = "https://walla.my/v/1g1JvcCRxDwmAeTM6xZw"
+        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+        startActivity(intent)
     }
 
     private fun goToBarcodeScanner() {
