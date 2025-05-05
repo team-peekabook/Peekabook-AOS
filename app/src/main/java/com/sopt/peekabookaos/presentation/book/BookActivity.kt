@@ -21,17 +21,8 @@ class BookActivity : BindingActivity<ActivityBookBinding>(R.layout.activity_book
             supportFragmentManager.findFragmentById(R.id.fcv_book) as NavHostFragment
         val navController = navHostFragment.navController
 
-        when (intent.getStringExtra(LOCATION) ?: CREATE) {
-            RECOMMEND -> {
-                navController.navigate(R.id.searchBookFragment)
-                activityOpenTransition(R.anim.anim_from_right, R.anim.anim_to_left)
-            }
-
-            else -> {
-                navController.navigate(R.id.barcodeScannerFragment)
-                activityOpenTransition(R.anim.anim_from_bottom, R.anim.anim_to_top)
-            }
-        }
+        navController.navigate(R.id.searchBookFragment)
+        activityOpenTransition(R.anim.anim_from_right, R.anim.anim_to_left)
     }
 
     override fun finish() {

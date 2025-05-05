@@ -5,74 +5,72 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.ItemNotificationBinding
 import com.sopt.peekabookaos.domain.entity.Notification
 import com.sopt.peekabookaos.util.ItemDiffCallback
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 
 class NotificationAdapter(
-    private val itemStringListener: ItemStringListener<Notification>,
-    private val onNotificationClicked: (Notification) -> Unit
+    private val onNotificationClicked: (Int) -> Unit
 ) : ListAdapter<Notification, NotificationAdapter.NotificationViewHolder>(DIFF_CALLBACK) {
 
-    private val commentList = mutableListOf<String>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-        val itemNotificationBinding =
-            ItemNotificationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NotificationViewHolder(itemNotificationBinding)
+        val binding = ItemNotificationBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return NotificationViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
-        holder.onBind(getItem(position), itemStringListener)
-        when (getItem(position).typeId) {
-            1 -> {
-                with(holder.binding) {
-                    tvNotificationMentionType1.text = String.format(
-                        commentList[position],
-                        getItem(position).senderName
-                    )
+        val item = getItem(position)
+        holder.bind(item)
+
+        holder.binding.clItemNotification.setSingleOnClickListener {
+            onNotificationClicked(item.typeId)
+        }
+    }
+
+    inner class NotificationViewHolder(val binding: ItemNotificationBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: Notification) = with(binding) {
+            data = item
+            tvNotificationDate.text = item.createdAt
+
+            val commentText = buildComment(item)
+            when (item.typeId) {
+                1 -> {
+                    tvNotificationMentionType1.text = commentText
                     tvNotificationMentionType1.isVisible = true
                     tvNotificationMention.isVisible = false
                     tvNotificationBookTitle.isVisible = false
                 }
-            }
-            2 -> {
-                with(holder.binding) {
-                    tvNotificationMentionType1.isVisible = false
-                    tvNotificationMention.isVisible = true
-                    tvNotificationBookTitle.isVisible = true
-                }
-            }
-            3 -> {
-                with(holder.binding) {
+
+                2, 3 -> {
+                    tvNotificationMention.text = commentText
                     tvNotificationMentionType1.isVisible = false
                     tvNotificationMention.isVisible = true
                     tvNotificationBookTitle.isVisible = true
                 }
             }
         }
-        with(holder.binding) {
-            tvNotificationMention.text = String.format(
-                commentList[position],
-                getItem(position).senderName
-            )
-            tvNotificationDate.text =
-                getItem(position).createdAt
-            clItemNotification.setSingleOnClickListener {
-                onNotificationClicked(getItem(position))
+
+        private fun buildComment(item: Notification): String {
+            val ctx = binding.root.context
+            return when (item.typeId) {
+                1 -> {
+                    val resId = if (item.senderName.length <= 5)
+                        R.string.notification_follow_name_short
+                    else
+                        R.string.notification_follow_name_long
+                    ctx.getString(resId, item.senderName)
+                }
+
+                2 -> ctx.getString(R.string.notification_recommend, item.senderName)
+                3 -> ctx.getString(R.string.notification_add, item.senderName)
+                else -> ""
             }
-        }
-    }
-
-    fun setComment(comment: String) {
-        commentList.add(comment)
-    }
-
-    class NotificationViewHolder(val binding: ItemNotificationBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Notification, itemStringListener: ItemStringListener<Notification>) {
-            binding.data = data
-            itemStringListener.getStringResource(absoluteAdapterPosition, data)
         }
     }
 
@@ -82,8 +80,4 @@ class NotificationAdapter(
             onContentsTheSame = { old, new -> old == new }
         )
     }
-}
-
-fun interface ItemStringListener<T> {
-    fun getStringResource(pos: Int, item: T)
 }

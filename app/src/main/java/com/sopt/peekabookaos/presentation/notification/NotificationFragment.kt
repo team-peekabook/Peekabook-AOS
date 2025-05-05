@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentNotificationBinding
 import com.sopt.peekabookaos.domain.entity.Notification
-import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.NOTIFICATION
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,9 +45,6 @@ class NotificationFragment :
 
     private fun initAdapter() {
         notifyAdapter = NotificationAdapter(
-            itemStringListener = { _, item ->
-                notifyAdapter.setComment(initCommentString(item))
-            },
             onNotificationClicked = { item ->
                 initNotificationItemClickListener(item)
             }
@@ -61,19 +57,6 @@ class NotificationFragment :
             activity?.finish()
         }
     }
-
-    private fun initCommentString(item: Notification): String =
-        when (item.typeId) {
-            FOLLOW_EACH_OTHER, FOLLOWER_ONLY -> if (item.senderName.length <= 5) {
-                getString(R.string.notification_follow_name_short)
-            } else {
-                getString(R.string.notification_follow_name_long)
-            }
-
-            BOOK_RECOMMENDED -> getString(R.string.notification_recommend)
-            BOOK_ADDED -> getString(R.string.notification_add)
-            else -> ""
-        }
 
     private fun initNotificationItemClickListener(item: Notification) {
         when (item.typeId) {

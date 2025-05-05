@@ -55,7 +55,7 @@ class BarcodeErrorDialog : DialogFragment() {
 
     private fun initSearchBtnClickListener() {
         binding.btnBarcodeErrorSearch.setSingleOnClickListener {
-            findNavController().navigate(R.id.action_barcodeScannerFragment_to_searchBookFragment)
+            findNavController().popBackStack()
         }
     }
 

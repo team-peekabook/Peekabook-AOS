@@ -53,12 +53,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_search_book_title" />
 
+        <ImageView
+            android:id="@+id/iv_search_book_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:background="@color/peeka_white_40"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/et_search_book"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_search_book"
+            app:tint="@color/peeka_g_2" />
+
         <EditText
             android:id="@+id/et_search_book"
             style="@style/H2Md"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:background="@color/peeka_white_40"
             android:hint="@string/search_book_hint"
@@ -67,24 +79,37 @@
             android:inputType="text"
             android:maxLines="1"
             android:paddingVertical="10dp"
-            android:paddingStart="16dp"
             android:text="@={vm.bookTitle}"
             android:textColor="@color/peeka_red"
             android:textColorHint="@color/peeka_g_1"
-            app:layout_constraintEnd_toStartOf="@id/btn_search_book"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_search_book_barcode_scanner"
+            app:layout_constraintStart_toEndOf="@id/iv_search_book_search"
             app:layout_constraintTop_toBottomOf="@id/view_search_top" />
 
         <ImageButton
-            android:id="@+id/btn_search_book"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_search_book_barcode_scanner"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="20dp"
             android:background="@color/peeka_white_40"
-            android:enabled="@{vm.bookTitle.length==0 ? false : true}"
-            android:onClick="@{() -> vm.searchOnClick()}"
-            android:src="@drawable/ic_search"
+            android:src="@drawable/ic_barcode_scanner"
+            android:visibility="@{vm.bookTitle.isEmpty() ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/et_search_book"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_search_book" />
+
+        <ImageButton
+            android:id="@+id/btn_search_book_cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/peeka_white_40"
+            android:onClick='@{() -> vm.clearBookTitle()}'
+            android:src="@drawable/ic_search_book_cancel"
+            android:visibility="@{vm.bookTitle.isEmpty() ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/et_search_book"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_search_book" />
 
@@ -116,6 +141,42 @@
                 android:text="@string/search_book_error"
                 android:textColor="@color/peeka_red_60" />
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_book_no_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_search_book_no_book"
+                style="@style/C2Md"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:text="@string/search_book_no_book"
+                android:textColor="@color/peeka_red"
+                app:layout_constraintBottom_toTopOf="@id/view_search_book_no_book"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:id="@+id/view_search_book_no_book"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/peeka_red"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tv_search_book_no_book"
+                app:layout_constraintStart_toStartOf="@id/tv_search_book_no_book" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_book"

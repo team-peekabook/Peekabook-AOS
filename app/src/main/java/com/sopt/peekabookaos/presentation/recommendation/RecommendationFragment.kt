@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentRecommendationBinding
 import com.sopt.peekabookaos.domain.entity.Book
@@ -32,7 +33,7 @@ class RecommendationFragment :
         initView()
         initEditTextClearFocus()
         initIsRecommendationObserve()
-        initCloseBtnOnClickListener()
+        initBackBtnOnClickListener()
         initCheckBtnOnClickListener()
         initIsRecommendationObserve()
     }
@@ -61,9 +62,9 @@ class RecommendationFragment :
         )
     }
 
-    private fun initCloseBtnOnClickListener() {
-        binding.btnRecommendationClose.setOnClickListener {
-            activity?.finish()
+    private fun initBackBtnOnClickListener() {
+        binding.btnRecommendationBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
