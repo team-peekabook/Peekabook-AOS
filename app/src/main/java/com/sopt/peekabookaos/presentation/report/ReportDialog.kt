@@ -1,5 +1,6 @@
 package com.sopt.peekabookaos.presentation.report
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.DialogReportBinding
+import com.sopt.peekabookaos.presentation.main.MainActivity
 
 class ReportDialog : DialogFragment() {
     private var _binding: DialogReportBinding? = null
@@ -41,8 +43,15 @@ class ReportDialog : DialogFragment() {
 
     private fun initReportBtnClickListener() {
         binding.btnDialogReportHome.setOnClickListener {
-            requireActivity().finish()
+            moveToMain()
         }
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

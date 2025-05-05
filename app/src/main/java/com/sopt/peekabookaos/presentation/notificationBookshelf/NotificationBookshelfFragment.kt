@@ -17,6 +17,7 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.NOTIFICATI
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.bookshelf.FollowBookShelfBottomSheetFragment
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
+import com.sopt.peekabookaos.presentation.main.MainActivity
 import com.sopt.peekabookaos.presentation.report.ReportActivity
 import com.sopt.peekabookaos.presentation.report.ReportActivity.Companion.FRIEND_ID
 import com.sopt.peekabookaos.util.binding.BindingFragment
@@ -62,15 +63,22 @@ class NotificationBookshelfFragment :
     private fun initIsServerObserver() {
         viewModel.isBlockStatus.observe(viewLifecycleOwner) { success ->
             if (success) {
-                // TODO 블락 하면 메인으로 돌아가기
+                moveToMain()
             }
         }
 
         viewModel.isUnfollowStatus.observe(viewLifecycleOwner) { success ->
             if (success) {
-                // TODO 블락 하면 메인으로 돌아가기
+                moveToMain()
             }
         }
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        startActivity(intent)
     }
 
     private fun initDataObserver() {
