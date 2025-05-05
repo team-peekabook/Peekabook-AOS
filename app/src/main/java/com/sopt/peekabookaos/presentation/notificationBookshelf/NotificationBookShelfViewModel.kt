@@ -11,6 +11,7 @@ import com.sopt.peekabookaos.domain.entity.User
 import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
 import com.sopt.peekabookaos.domain.usecase.PostBlockUseCase
+import com.sopt.peekabookaos.domain.usecase.PostFollowUseCase
 import com.sopt.peekabookaos.presentation.notification.NotificationFragment.Companion.FOLLOWER_ONLY
 import com.sopt.peekabookaos.presentation.notification.NotificationFragment.Companion.FOLLOW_EACH_OTHER
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class NotificationBookShelfViewModel @Inject constructor(
     private val getFriendShelfUseCase: GetFriendShelfUseCase,
     private val postBlockUseCase: PostBlockUseCase,
-    private val deleteFollowUseCase: DeleteFollowUseCase
+    private val deleteFollowUseCase: DeleteFollowUseCase,
+    private val postFollowUseCase: PostFollowUseCase
 ) : ViewModel() {
     private val _pickData: MutableLiveData<List<Picks>> = MutableLiveData()
     val pickData: LiveData<List<Picks>> = _pickData
@@ -44,6 +46,9 @@ class NotificationBookShelfViewModel @Inject constructor(
 
     private val _isUnfollowStatus = MutableLiveData(false)
     val isUnfollowStatus: LiveData<Boolean> = _isUnfollowStatus
+
+    private val _isFollowSuccess = MutableLiveData(false)
+    val isFollowSuccess: LiveData<Boolean> = _isFollowSuccess
 
     private val _isBlockStatus = MutableLiveData(false)
     val isBlockStatus: LiveData<Boolean> = _isBlockStatus
@@ -85,6 +90,17 @@ class NotificationBookShelfViewModel @Inject constructor(
             deleteFollowUseCase(requireNotNull(userId.value))
                 .onSuccess { response ->
                     _isUnfollowStatus.value = response
+                }.onFailure { throwable ->
+                    Timber.e("$throwable")
+                }
+        }
+    }
+
+    fun postFollow() {
+        viewModelScope.launch {
+            postFollowUseCase(requireNotNull(userId.value))
+                .onSuccess { response ->
+                    _isFollowSuccess.value = response
                 }.onFailure { throwable ->
                     Timber.e("$throwable")
                 }

@@ -18,6 +18,8 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.bookshelf.FollowBookShelfBottomSheetFragment
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.main.MainActivity
+import com.sopt.peekabookaos.presentation.notificationBookshelf.follow.FollowDialog
+import com.sopt.peekabookaos.presentation.notificationBookshelf.follow.FollowDialog.Companion.NICKNAME
 import com.sopt.peekabookaos.presentation.report.ReportActivity
 import com.sopt.peekabookaos.presentation.report.ReportActivity.Companion.FRIEND_ID
 import com.sopt.peekabookaos.util.binding.BindingFragment
@@ -72,6 +74,17 @@ class NotificationBookshelfFragment :
                 moveToMain()
             }
         }
+
+        viewModel.isFollowSuccess.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                val dialog = FollowDialog().apply {
+                    arguments = Bundle().apply {
+                        putString(NICKNAME, viewModel.friendData.value?.nickname)
+                    }
+                }
+                dialog.show(parentFragmentManager, FollowDialog.TAG)
+            }
+        }
     }
 
     private fun moveToMain() {
@@ -123,7 +136,7 @@ class NotificationBookshelfFragment :
 
     private fun initFollowClickListener() {
         binding.btnNotificationBookshelfFollow.setSingleOnClickListener {
-            // TODO 팔로우 하기 이름만 바꿔둔 상태 -> 팔로우 팝업 뜨고 팔로 한 뒤에는 메인 뷰
+            viewModel.postFollow()
         }
     }
 
