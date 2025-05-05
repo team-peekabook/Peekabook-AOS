@@ -12,6 +12,7 @@ import com.sopt.peekabookaos.domain.usecase.DeleteFollowUseCase
 import com.sopt.peekabookaos.domain.usecase.GetFriendShelfUseCase
 import com.sopt.peekabookaos.domain.usecase.PostBlockUseCase
 import com.sopt.peekabookaos.domain.usecase.PostFollowUseCase
+import com.sopt.peekabookaos.presentation.notification.NotificationFragment.Companion.BOOK_ADDED
 import com.sopt.peekabookaos.presentation.notification.NotificationFragment.Companion.FOLLOWER_ONLY
 import com.sopt.peekabookaos.presentation.notification.NotificationFragment.Companion.FOLLOW_EACH_OTHER
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -60,7 +61,7 @@ class NotificationBookShelfViewModel @Inject constructor(
     fun initUserInfo(notification: Notification) {
         _userId.value = notification.senderId
         when (notification.typeId) {
-            FOLLOW_EACH_OTHER -> {
+            FOLLOW_EACH_OTHER, BOOK_ADDED -> {
                 _isFollow.value = true
             }
 

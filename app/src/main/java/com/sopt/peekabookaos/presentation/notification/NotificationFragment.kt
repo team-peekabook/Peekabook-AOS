@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.sopt.peekabookaos.R
 import com.sopt.peekabookaos.databinding.FragmentNotificationBinding
 import com.sopt.peekabookaos.domain.entity.Notification
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.NOTIFICATION
 import com.sopt.peekabookaos.util.binding.BindingFragment
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
