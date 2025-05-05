@@ -1,6 +1,5 @@
 package com.sopt.peekabookaos.presentation.bookshelf
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -27,8 +26,6 @@ import com.sopt.peekabookaos.util.dialog.WarningType
 import com.sopt.peekabookaos.util.extensions.setSingleOnClickListener
 import com.sopt.peekabookaos.util.extensions.withArgs
 import dagger.hilt.android.AndroidEntryPoint
-
-private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
 @AndroidEntryPoint
 class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fragment_bookshelf) {

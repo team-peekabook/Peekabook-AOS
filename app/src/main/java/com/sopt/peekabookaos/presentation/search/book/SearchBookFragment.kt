@@ -1,10 +1,12 @@
 package com.sopt.peekabookaos.presentation.search.book
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -24,6 +26,8 @@ import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
+private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+
 @AndroidEntryPoint
 class SearchBookFragment :
     BindingFragment<FragmentSearchBookBinding>(R.layout.fragment_search_book) {
@@ -32,6 +36,15 @@ class SearchBookFragment :
     private val bundle = Bundle()
     private var loadedBooks: List<Book>? = null
     private var isViewCreated = false
+
+    private val multiPermissionCallback =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
+            if (map.entries.isEmpty()) {
+                requestAllPermissions()
+            } else {
+                goToBarcodeScanner()
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -167,7 +180,7 @@ class SearchBookFragment :
 
     private fun initBarcodeClickListener() {
         binding.btnSearchBookBarcodeScanner.setOnClickListener {
-            goToBarcodeScanner()
+            requestAllPermissions()
         }
     }
 
@@ -199,6 +212,10 @@ class SearchBookFragment :
 
     private fun goToBarcodeScanner() {
         findNavController().navigate(R.id.action_searchBookFragment_to_barcodeScannerFragment)
+    }
+
+    private fun requestAllPermissions() {
+        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
     }
 
     override fun onDestroyView() {
