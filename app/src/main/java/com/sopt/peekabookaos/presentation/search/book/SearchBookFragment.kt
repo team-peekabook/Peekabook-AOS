@@ -74,7 +74,9 @@ class SearchBookFragment :
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList(LOADED_BOOKS, ArrayList(requireNotNull(loadedBooks)))
+        loadedBooks?.let {
+            outState.putParcelableArrayList(LOADED_BOOKS, ArrayList(it))
+        }
     }
 
     private fun initSearchFocus() {
@@ -193,7 +195,10 @@ class SearchBookFragment :
                     UiEvent.SUCCESS -> {
                         binding.llSearchBookError.isVisible = false
                         binding.rvSearchBook.isVisible = true
-                        searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
+                        searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book) {
+                            searchBookAdapter?.showFooter = true
+                            binding.rvSearchBook.scrollToPosition(0)
+                        }
                         loadedBooks = searchBookViewModel.uiState.value.book
                     }
 

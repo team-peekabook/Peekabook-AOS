@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:id="@+id/tv_item_search_book_no_book"
+            style="@style/C2Md"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:text="@string/search_book_no_book"
+            android:textColor="@color/peeka_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/peeka_red"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_item_search_book_no_book"
+            app:layout_constraintStart_toStartOf="@id/tv_item_search_book_no_book"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_search_book_no_book" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
