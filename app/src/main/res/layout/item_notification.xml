@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/cl_item_notification"
         android:background="@color/peeka_white_40">
 
         <ImageView
