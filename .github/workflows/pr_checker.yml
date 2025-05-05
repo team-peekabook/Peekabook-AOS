@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Gradle cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -74,24 +74,24 @@ jobs:
       - name: AssembleDebug with Gradle
         run: ./gradlew assembleDebug
 
-      - name: On Success!! Congratulations
-        if: ${{ success() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_COLOR: '#53A551'
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: 'Peekabook/PR Check S.U.C.C.E.S.S 🎉🎉🎉'
-          MSG_MINIMAL: true
-          SLACK_USERNAME: Peekabook-AOS
-          SLACK_MESSAGE: 'PR이 완료되었습니다!!! 🎉🎉🎉'
-
-      - name: On Failed, Notify in Slack
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_COLOR: '#ff0000'
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: 'Peekabook/Android Debug build Fail❌'
-          MSG_MINIMAL: true
-          SLACK_USERNAME: Peekabook-AOS
-          SLACK_MESSAGE: '에러를 확인해주세요'
+#      - name: On Success!! Congratulations
+#        if: ${{ success() }}
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_COLOR: '#53A551'
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          SLACK_TITLE: 'Peekabook/PR Check S.U.C.C.E.S.S 🎉🎉🎉'
+#          MSG_MINIMAL: true
+#          SLACK_USERNAME: Peekabook-AOS
+#          SLACK_MESSAGE: 'PR이 완료되었습니다!!! 🎉🎉🎉'
+#
+#      - name: On Failed, Notify in Slack
+#        if: ${{ failure() }}
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_COLOR: '#ff0000'
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          SLACK_TITLE: 'Peekabook/Android Debug build Fail❌'
+#          MSG_MINIMAL: true
+#          SLACK_USERNAME: Peekabook-AOS
+#          SLACK_MESSAGE: '에러를 확인해주세요'
