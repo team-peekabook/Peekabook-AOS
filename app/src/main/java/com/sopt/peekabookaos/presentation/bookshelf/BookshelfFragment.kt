@@ -11,6 +11,7 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.BOOK_ID
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.CREATE
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INFO
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
+import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.FRIEND_SHELF
 import com.sopt.peekabookaos.presentation.detail.DetailActivity.Companion.MY_SHELF
@@ -172,6 +173,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initRecommendClickListener() {
         binding.btnBookshelfRecommend.setSingleOnClickListener {
             val toSearchBook = Intent(requireActivity(), BookActivity::class.java).apply {
+                putExtra(LOCATION, RECOMMEND)
                 putExtra(FRIEND_INFO, viewModel.friendData.value)
             }
             startActivity(toSearchBook)
