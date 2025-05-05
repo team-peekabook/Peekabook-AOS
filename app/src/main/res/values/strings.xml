@@ -106,10 +106,11 @@
 
     <!-- Search Book -->
     <string name="search_book_title">책 검색하기</string>
-    <string name="search_book_hint">책 제목을 입력해주세요.</string>
+    <string name="search_book_hint">책 제목 또는 작가명을 입력해 주세요.</string>
     <string name="search_book_add">내 책장에 추가하기</string>
     <string name="search_book_recommend">친구에게 추천하기</string>
     <string name="search_book_error">앗! 검색어에 해당되는 책이 없는 것 같아요.\n다른 검색어를 입력해 보세요.</string>
+    <string name="search_book_no_book">찾으시는 책이 없으신가요?</string>
 
     <!-- Notification -->
     <string name="notification_follow_name_short">\'%s\' 님이 당신을 팔로우했어요!</string>
@@ -219,6 +220,4 @@
     <string name="force_update_title">앗! 피카북이 달라졌어요</string>
     <string name="force_update_button">업데이트 하러 가기</string>
     <string name="force_update_store_link">https://play.google.com/store/apps/details?id=com.sopt.peekabookaos&amp;hl=ko-KR</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

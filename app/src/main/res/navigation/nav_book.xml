@@ -6,31 +6,6 @@
     app:startDestination="@id/searchBookFragment">
 
     <fragment
-        android:id="@+id/barcodeScannerFragment"
-        android:name="com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerFragment"
-        android:label="BarcodeScannerFragment"
-        tools:layout="@layout/fragment_barcode_scanner">
-        <action
-            android:id="@+id/action_barcodeScannerFragment_to_searchBookFragment"
-            app:destination="@id/searchBookFragment"
-            app:enterAnim="@anim/anim_from_right"
-            app:exitAnim="@anim/anim_to_left"
-            app:popEnterAnim="@anim/anim_from_left"
-            app:popExitAnim="@anim/anim_to_right"
-            app:popUpTo="@id/nav_book" />
-
-        <action
-            android:id="@+id/action_barcodeScannerFragment_to_createBookFragment"
-            app:destination="@id/createBookFragment"
-            app:enterAnim="@anim/anim_from_right"
-            app:exitAnim="@anim/anim_to_left"
-            app:popEnterAnim="@anim/anim_from_left"
-            app:popExitAnim="@anim/anim_to_right"
-            app:popUpTo="@id/barcodeScannerFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-
-    <fragment
         android:id="@+id/searchBookFragment"
         android:name="com.sopt.peekabookaos.presentation.search.book.SearchBookFragment"
         android:label="SearchBookFragment"
@@ -41,13 +16,40 @@
             app:enterAnim="@anim/anim_from_right"
             app:exitAnim="@anim/anim_to_left"
             app:popEnterAnim="@anim/anim_from_left"
-            app:popExitAnim="@anim/anim_to_right"
-            app:popUpTo="@id/searchBookFragment"
-            app:popUpToInclusive="false" />
+            app:popExitAnim="@anim/anim_to_right" />
 
         <action
             android:id="@+id/action_searchBookFragment_to_recommendationFragment"
             app:destination="@id/recommendationFragment"
+            app:enterAnim="@anim/anim_from_right"
+            app:exitAnim="@anim/anim_to_left"
+            app:popEnterAnim="@anim/anim_from_left"
+            app:popExitAnim="@anim/anim_to_right" />
+        <action
+            android:id="@+id/action_searchBookFragment_to_barcodeScannerFragment"
+            app:destination="@id/barcodeScannerFragment"
+            app:enterAnim="@anim/anim_from_bottom"
+            app:exitAnim="@anim/anim_to_top"
+            app:popEnterAnim="@anim/anim_from_top"
+            app:popExitAnim="@anim/anim_to_bottom" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/barcodeScannerFragment"
+        android:name="com.sopt.peekabookaos.presentation.barcodeScanner.BarcodeScannerFragment"
+        android:label="BarcodeScannerFragment"
+        tools:layout="@layout/fragment_barcode_scanner">
+        <action
+            android:id="@+id/action_barcodeScannerFragment_to_searchBookFragment"
+            app:destination="@id/searchBookFragment"
+            app:enterAnim="@anim/anim_from_right"
+            app:exitAnim="@anim/anim_to_left"
+            app:popEnterAnim="@anim/anim_from_left"
+            app:popExitAnim="@anim/anim_to_right" />
+
+        <action
+            android:id="@+id/action_barcodeScannerFragment_to_createBookFragment"
+            app:destination="@id/createBookFragment"
             app:enterAnim="@anim/anim_from_right"
             app:exitAnim="@anim/anim_to_left"
             app:popEnterAnim="@anim/anim_from_left"

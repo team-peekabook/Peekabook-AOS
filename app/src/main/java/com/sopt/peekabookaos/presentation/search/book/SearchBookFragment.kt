@@ -1,10 +1,14 @@
 package com.sopt.peekabookaos.presentation.search.book
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -24,6 +28,8 @@ import com.sopt.peekabookaos.util.extensions.getParcelable
 import com.sopt.peekabookaos.util.extensions.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
+private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+
 @AndroidEntryPoint
 class SearchBookFragment :
     BindingFragment<FragmentSearchBookBinding>(R.layout.fragment_search_book) {
@@ -32,6 +38,15 @@ class SearchBookFragment :
     private val bundle = Bundle()
     private var loadedBooks: List<Book>? = null
     private var isViewCreated = false
+
+    private val multiPermissionCallback =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
+            if (map.entries.isEmpty()) {
+                requestAllPermissions()
+            } else {
+                goToBarcodeScanner()
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +57,9 @@ class SearchBookFragment :
         initEditTextClearFocus()
         initKeyboardDoneClickListener()
         initCloseBtnClickListener()
+        initBarcodeClickListener()
         collectUiEvent()
+        initNoBookClickListener()
         initBackPressedCallback()
     }
 
@@ -60,7 +77,9 @@ class SearchBookFragment :
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList(LOADED_BOOKS, ArrayList(requireNotNull(loadedBooks)))
+        loadedBooks?.let {
+            outState.putParcelableArrayList(LOADED_BOOKS, ArrayList(it))
+        }
     }
 
     private fun initSearchFocus() {
@@ -129,7 +148,7 @@ class SearchBookFragment :
             return@setOnTouchListener false
         }
 
-        binding.btnSearchBook.setOnTouchListener { _, _ ->
+        binding.btnSearchBookBarcodeScanner.setOnTouchListener { _, _ ->
             KeyBoardUtil.hide(activity = requireActivity())
             return@setOnTouchListener false
         }
@@ -139,7 +158,7 @@ class SearchBookFragment :
         binding.etSearchBook.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                binding.btnSearchBook.performClick()
+                searchBookViewModel.searchOnClick()
                 handled = true
             }
             KeyBoardUtil.hide(activity = requireActivity())
@@ -164,30 +183,57 @@ class SearchBookFragment :
         )
     }
 
+    private fun initBarcodeClickListener() {
+        binding.btnSearchBookBarcodeScanner.setOnClickListener {
+            requestAllPermissions()
+        }
+    }
+
     private fun collectUiEvent() {
         repeatOnStarted {
             searchBookViewModel.uiEvent.collect { uiEvent ->
                 when (uiEvent) {
-                    UiEvent.IDLE -> {
-                        binding.btnSearchBook.isEnabled = false
-                    }
+                    UiEvent.IDLE -> {}
 
                     UiEvent.SUCCESS -> {
                         binding.llSearchBookError.isVisible = false
+                        binding.clSearchBookNoBook.isVisible = false
                         binding.rvSearchBook.isVisible = true
-                        binding.btnSearchBook.isEnabled = true
-                        searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book)
+                        searchBookAdapter?.submitList(searchBookViewModel.uiState.value.book) {
+                            searchBookAdapter?.showFooter = true
+                            binding.rvSearchBook.scrollToPosition(0)
+                        }
                         loadedBooks = searchBookViewModel.uiState.value.book
                     }
 
                     UiEvent.ERROR -> {
                         binding.llSearchBookError.isVisible = true
+                        binding.clSearchBookNoBook.isVisible = true
                         binding.rvSearchBook.isVisible = false
-                        binding.btnSearchBook.isEnabled = true
                     }
                 }
             }
         }
+    }
+
+    private fun initNoBookClickListener() {
+        binding.clSearchBookNoBook.setOnClickListener {
+            goToWalla()
+        }
+    }
+
+    private fun goToWalla() {
+        val url = "https://walla.my/v/1g1JvcCRxDwmAeTM6xZw"
+        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+        startActivity(intent)
+    }
+
+    private fun goToBarcodeScanner() {
+        findNavController().navigate(R.id.action_searchBookFragment_to_barcodeScannerFragment)
+    }
+
+    private fun requestAllPermissions() {
+        multiPermissionCallback.launch(REQUIRED_PERMISSIONS)
     }
 
     override fun onDestroyView() {

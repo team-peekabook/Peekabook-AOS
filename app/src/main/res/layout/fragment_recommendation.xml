@@ -20,13 +20,13 @@
         tools:context=".presentation.detail.DetailActivity">
 
         <ImageButton
-            android:id="@+id/btn_recommendation_close"
+            android:id="@+id/btn_recommendation_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginTop="12dp"
             android:background="@null"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,10 +37,10 @@
             android:layout_height="wrap_content"
             android:text="@string/tv_recommendation_title"
             android:textColor="@color/peeka_red"
-            app:layout_constraintBottom_toBottomOf="@id/btn_recommendation_close"
+            app:layout_constraintBottom_toBottomOf="@id/btn_recommendation_back"
             app:layout_constraintEnd_toStartOf="@id/btn_recommendation_check"
-            app:layout_constraintStart_toEndOf="@id/btn_recommendation_close"
-            app:layout_constraintTop_toTopOf="@id/btn_recommendation_close" />
+            app:layout_constraintStart_toEndOf="@id/btn_recommendation_back"
+            app:layout_constraintTop_toTopOf="@id/btn_recommendation_back" />
 
         <ImageButton
             android:id="@+id/btn_recommendation_check"
