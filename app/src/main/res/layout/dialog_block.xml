@@ -6,7 +6,7 @@
 
         <variable
             name="block"
-            type="com.sopt.peekabookaos.presentation.bookshelf.BlockDialogContent" />
+            type="com.sopt.peekabookaos.presentation.block.BlockDialogContent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
