@@ -214,7 +214,7 @@ class BookshelfFragment : BindingFragment<FragmentBookshelfBinding>(R.layout.fra
     private fun initKebabClickListener() {
         binding.btnBookshelfMore.setSingleOnClickListener {
             val bookShelfBottomSheetFragment =
-                BookShelfBottomSheetFragment.onItemClick { itemClick ->
+                FollowBookShelfBottomSheetFragment.onItemClick { itemClick ->
                     when (itemClick) {
                         0 -> initUnfollowDialog()
                         1 -> initReport()

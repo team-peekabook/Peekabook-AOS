@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sopt.peekabookaos.databinding.DialogBookshelfBottomSheetBinding
+import com.sopt.peekabookaos.databinding.DialogUnfollowBookshelfBottomSheetBinding
 
-class NotificationBookShelfBottomSheetFragment : BottomSheetDialogFragment() {
-    private lateinit var binding: DialogBookshelfBottomSheetBinding
+class UnfollowBookShelfBottomSheetFragment : BottomSheetDialogFragment() {
+    private lateinit var binding: DialogUnfollowBookshelfBottomSheetBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogBookshelfBottomSheetBinding.inflate(inflater, container, false)
+        binding = DialogUnfollowBookshelfBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -24,10 +24,6 @@ class NotificationBookShelfBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun bottomSheetClickListener() {
-        binding.tvBookshelfBottomSheetUnfollow.setOnClickListener {
-            itemClick(0)
-            dialog?.dismiss()
-        }
         binding.tvBookshelfBottomSheetReport.setOnClickListener {
             itemClick(1)
             dialog?.dismiss()
@@ -42,9 +38,9 @@ class NotificationBookShelfBottomSheetFragment : BottomSheetDialogFragment() {
         lateinit var itemClick: (Int) -> Unit
         fun onItemClick(
             itemClick: (Int) -> Unit
-        ): NotificationBookShelfBottomSheetFragment {
+        ): UnfollowBookShelfBottomSheetFragment {
             this.itemClick = itemClick
-            return NotificationBookShelfBottomSheetFragment()
+            return UnfollowBookShelfBottomSheetFragment()
         }
     }
 }

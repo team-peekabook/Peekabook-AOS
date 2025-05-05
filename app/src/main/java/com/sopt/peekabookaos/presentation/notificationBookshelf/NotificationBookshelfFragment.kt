@@ -15,6 +15,7 @@ import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.FRIEND_INF
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.LOCATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.NOTIFICATION
 import com.sopt.peekabookaos.presentation.book.BookActivity.Companion.RECOMMEND
+import com.sopt.peekabookaos.presentation.bookshelf.FollowBookShelfBottomSheetFragment
 import com.sopt.peekabookaos.presentation.detail.DetailActivity
 import com.sopt.peekabookaos.presentation.report.ReportActivity
 import com.sopt.peekabookaos.presentation.report.ReportActivity.Companion.FRIEND_ID
@@ -120,14 +121,23 @@ class NotificationBookshelfFragment :
 
     private fun initKebabClickListener() {
         binding.btnNotificationBookshelfMore.setSingleOnClickListener {
-            val bookShelfBottomSheetFragment =
-                NotificationBookShelfBottomSheetFragment.onItemClick { itemClick ->
+            val bookShelfBottomSheetFragment = if (viewModel.isFollow.value == true) {
+                FollowBookShelfBottomSheetFragment.onItemClick { itemClick ->
                     when (itemClick) {
                         0 -> initUnfollowDialog()
                         1 -> initReport()
                         2 -> initBlockDialog()
                     }
                 }
+            } else {
+                UnfollowBookShelfBottomSheetFragment.onItemClick { itemClick ->
+                    when (itemClick) {
+                        1 -> initReport()
+                        2 -> initBlockDialog()
+                    }
+                }
+            }
+
             bookShelfBottomSheetFragment.show(
                 parentFragmentManager,
                 bookShelfBottomSheetFragment.tag
