@@ -5,9 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NaverService {
-    @GET("search/book_adv.json")
+    @GET("search/book.json")
     suspend fun getBookToTitle(
-        @Query("d_titl") title: String
+        @Query("query") title: String
     ): NaverBookResponse
 
     @GET("search/book_adv.json")
