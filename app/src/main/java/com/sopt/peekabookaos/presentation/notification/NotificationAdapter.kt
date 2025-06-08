@@ -61,7 +61,7 @@ class NotificationAdapter(
         private fun buildComment(item: Notification): String {
             val ctx = binding.root.context
             return when (item.typeId) {
-                1 -> {
+                1, 4 -> {
                     val resId = if (item.senderName.length <= 5) {
                         R.string.notification_follow_name_short
                     } else {
