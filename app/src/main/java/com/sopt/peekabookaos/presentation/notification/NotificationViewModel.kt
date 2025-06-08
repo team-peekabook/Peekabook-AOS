@@ -14,8 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NotificationViewModel @Inject constructor(
     private val notificationRepository: NotificationRepository
-) :
-    ViewModel() {
+) : ViewModel() {
     private val _notificationData: MutableLiveData<List<Notification>> = MutableLiveData()
     val notificationData: LiveData<List<Notification>> = _notificationData
 
