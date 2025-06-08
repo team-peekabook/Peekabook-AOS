@@ -54,10 +54,6 @@ class NotificationBookShelfViewModel @Inject constructor(
     private val _isBlockStatus = MutableLiveData(false)
     val isBlockStatus: LiveData<Boolean> = _isBlockStatus
 
-    init {
-        getFriendShelfData()
-    }
-
     fun initUserInfo(notification: Notification) {
         _userId.value = notification.senderId
         when (notification.typeId) {
