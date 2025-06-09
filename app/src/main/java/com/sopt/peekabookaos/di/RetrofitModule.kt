@@ -86,7 +86,7 @@ object RetrofitModule {
                     return@Interceptor response
                 }
 
-                response.close()   // ★ 이전 응답 확실히 닫기
+                response.close() // ★ 이전 응답 확실히 닫기
 
                 val refreshResult = runBlocking { refreshRepository.getRefreshToken() }
 
