@@ -48,7 +48,7 @@ class BarcodeErrorDialog : DialogFragment() {
 
     private fun initCloseBtnClickListener() {
         binding.btnBarcodeErrorClose.setSingleOnClickListener {
-            barcodeViewModel.updateServerState()
+            barcodeViewModel.resetToIdle()
             dismiss()
         }
     }

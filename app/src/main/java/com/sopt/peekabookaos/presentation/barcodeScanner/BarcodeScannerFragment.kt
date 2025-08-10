@@ -53,6 +53,7 @@ class BarcodeScannerFragment :
         collectServerState()
         initBackBtnClickListener()
         initBackPressedCallback()
+        barcodeViewModel.resetToIdle()
     }
 
     private fun initPermissionCallBack() {
