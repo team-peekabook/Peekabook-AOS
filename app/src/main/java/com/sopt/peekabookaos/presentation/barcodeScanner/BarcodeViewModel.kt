@@ -39,7 +39,7 @@ class BarcodeViewModel @Inject constructor(
         }
     }
 
-    fun updateServerState() {
+    fun resetToIdle() {
         _barcodeState.value = BarcodeState.IDLE
     }
 }
