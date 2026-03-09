@@ -58,13 +58,13 @@ object RefreshRetrofitModule {
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
             .readTimeout(5, TimeUnit.SECONDS)
-            .addInterceptor(interceptor)
             .addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level =
                         if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
                 }
             )
+            .addInterceptor(interceptor)
             .build()
 
     @Provides

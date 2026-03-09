@@ -85,12 +85,11 @@ object RetrofitModule {
                 if (originalRequest.header(RETRY_HEADER) != null) {
                     return@Interceptor response
                 }
-
-                response.close() // ★ 이전 응답 확실히 닫기
-
                 val refreshResult = runBlocking { refreshRepository.getRefreshToken() }
 
                 if (refreshResult.isSuccess) {
+                    response.close() // 이전 응답 확실히 닫기
+
                     // 새 토큰으로 다시 요청 — 재시도 플래그 달기
                     val newRequest = originalRequest.newBuilder()
                         .addHeader(CONTENT_TYPE, APPLICATION_JSON)
@@ -126,13 +125,14 @@ object RetrofitModule {
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
-            .addInterceptor(interceptor)
             .addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level =
                         if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
                 }
-            ).build()
+            )
+            .addInterceptor(interceptor)
+            .build()
 
     /** ------------------------------------------------------------------
      *  Retrofit
