@@ -73,6 +73,11 @@ class CreateBookFragment :
             return@setOnTouchListener false
         }
 
+        binding.svCreateBook.setOnTouchListener { _, _ ->
+            KeyBoardUtil.hide(activity = requireActivity())
+            return@setOnTouchListener false
+        }
+
         binding.btnCreateBookSave.setOnTouchListener { _, _ ->
             KeyBoardUtil.hide(activity = requireActivity())
             return@setOnTouchListener false
