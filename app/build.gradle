@@ -15,14 +15,14 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 android {
     namespace 'com.sopt.peekabookaos'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.sopt.peekabookaos"
         minSdk 28
-        targetSdk 34
-        versionCode 13
-        versionName "1.4.0"
+        targetSdk 36
+        versionCode 14
+        versionName "1.4.1"
 
         buildConfigField "String", "NAVER_URL", properties["NAVER_URL"]
         buildConfigField "String", "CLIENT_ID", properties["CLIENT_ID"]
